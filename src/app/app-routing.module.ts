@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'transport', loadChildren: './ingreso/transport/transport.module#TransportPageModule' },
   { path: 'newvehicle', loadChildren: './ingreso/newvehicle/newvehicle.module#NewvehiclePageModule' },
   { path: 'tipeofvisit', loadChildren: './ingreso/tipeofvisit/tipeofvisit.module#TipeofvisitPageModule' },
+  { path: 'company', loadChildren: './ingreso/company/company.module#CompanyPageModule' },
 ];
 
 @NgModule({
