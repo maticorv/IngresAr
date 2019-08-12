@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'qringress', loadChildren: './ingreso/qringress/qringress.module#QringressPageModule' },
   { path: 'dniserch', loadChildren: './ingreso/dniserch/dniserch.module#DniserchPageModule' },
   { path: 'newperson', loadChildren: './ingreso/newperson/newperson.module#NewpersonPageModule' },
+  { path: 'transport', loadChildren: './ingreso/transport/transport.module#TransportPageModule' },
 ];
 
 @NgModule({
