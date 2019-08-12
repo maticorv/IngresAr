@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'singin', loadChildren: './security/singin/singin.module#SinginPageModule' },
   { path: 'startmenu', loadChildren: './startmenu/startmenu.module#StartmenuPageModule' },
   { path: 'tipeofingress', loadChildren: './ingreso/tipeofingress/tipeofingress.module#TipeofingressPageModule' },
+  { path: 'qringress', loadChildren: './ingreso/qringress/qringress.module#QringressPageModule' },
 ];
 
 @NgModule({
