@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'forgot', loadChildren: './security/forgot/forgot.module#ForgotPageModule' },
   { path: 'singin', loadChildren: './security/singin/singin.module#SinginPageModule' },
   { path: 'startmenu', loadChildren: './startmenu/startmenu.module#StartmenuPageModule' },
+  { path: 'tipeofingress', loadChildren: './ingreso/tipeofingress/tipeofingress.module#TipeofingressPageModule' },
 ];
 
 @NgModule({
