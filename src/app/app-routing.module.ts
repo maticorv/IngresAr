@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'tipeofingress', loadChildren: './ingreso/tipeofingress/tipeofingress.module#TipeofingressPageModule' },
   { path: 'qringress', loadChildren: './ingreso/qringress/qringress.module#QringressPageModule' },
   { path: 'dniserch', loadChildren: './ingreso/dniserch/dniserch.module#DniserchPageModule' },
+  { path: 'newperson', loadChildren: './ingreso/newperson/newperson.module#NewpersonPageModule' },
 ];
 
 @NgModule({
