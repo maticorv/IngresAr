@@ -1,9 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+    <img [src]="image" class="img-fluid" alt="Responsive image">
+    <div class="card text-center" style="width: 18rem;">
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <input [(ngModel)]="user.email" type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Email">
+                </div>
+            </form>
+            <form>
+                <div class="form-group">
+                    <input [(ngModel)]="user.password" type="password" name="password" class="form-control" aria-describedby="emailHelp" placeholder="Contraseña">
+                </div>
+            </form>
+            <p>Olvidaste tus datos de inicio de sesión?
+                <b routerLink="/forgot">
+                              Obtene ayuda.
+                          </b>
+            </p>
+            <button type="button" class="btn btn-primary btn-lg btn-block" (click)="onLogin()" [disabled]="!(user.email && user.password)">Login</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block" routerLink="/signin">Registrarse</button>
+        </div>
+    </div>
 </ion-content>

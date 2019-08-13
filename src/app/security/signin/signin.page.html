@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Registro</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="card text-center">
+        <div class="card-body">
+            <h4 class="card-title">Regístrate</h4>
+            <form>
+                <div class="form-group mt-4">
+                    <input [(ngModel)]="user.email" type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Email">
+                </div>
+            </form>
+            <form>
+                <div class="form-group">
+                    <input [(ngModel)]="user.password" type="password" name="password" class="form-control" aria-describedby="emailHelp" placeholder="Contraseña">
+                </div>
+            </form>
+            <button type="button" class="btn btn-primary btn-lg btn-block" (click)="onRegister()">Registrarte</button>
+            <p class="font-weight-normal mt-3">Ya tengo una cuenta <span class="font-weight-bold" routerLink="/login">Ingresa acá</span></p>
+        </div>
+    </div>
