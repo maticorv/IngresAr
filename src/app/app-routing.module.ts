@@ -16,6 +16,8 @@ const routes: Routes = [
   { path: 'company', loadChildren: './ingreso/company/company.module#CompanyPageModule' },
   { path: 'newcompany', loadChildren: './ingreso/newcompany/newcompany.module#NewcompanyPageModule' },
   { path: 'signin', loadChildren: './security/signin/signin.module#SigninPageModule' },
+  { path: 'destination', loadChildren: './ingreso/destination/destination.module#DestinationPageModule' },
+
 ];
 
 @NgModule({
