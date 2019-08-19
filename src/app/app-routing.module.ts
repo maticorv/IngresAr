@@ -15,9 +15,13 @@ const routes: Routes = [
   { path: 'newcompany', loadChildren: './ingreso/newcompany/newcompany.module#NewcompanyPageModule' },
   { path: 'signin', loadChildren: './security/signin/signin.module#SigninPageModule' },
   { path: 'destination', loadChildren: './ingreso/destination/destination.module#DestinationPageModule' },
+<<<<<<< HEAD
   { path: 'typeofingress', loadChildren: './ingreso/typeofingress/typeofingress.module#TypeofingressPageModule' },
   { path: 'servicio', loadChildren: './ingreso/servicio/servicio.module#ServicioPageModule' },
 
+=======
+  { path: 'servicio', loadChildren: './ingreso/servicio/servicio.module#ServicioPageModule' },
+>>>>>>> master
 
 
 ];
