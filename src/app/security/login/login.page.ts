@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController, AlertController } from '@ionic/angular';
+import { ToastController, AlertController, MenuController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../user.class';
 
@@ -14,9 +14,10 @@ export class LoginPage implements OnInit {
   error = '';
   image = '../assets/logo.png';
   // tslint:disable-next-line:max-line-length
-  constructor(private router: Router,  private fireauth: AngularFireAuth, private toastController: ToastController, private alertContrller: AlertController) { }
+  constructor(private router: Router,  private fireauth: AngularFireAuth, private toastController: ToastController, private alertContrller: AlertController, private menuCtrl: MenuController) { }
 
   ngOnInit() {
+    this.menuCtrl.enable(true);
   }
   async onLogin() {
     this.fireauth.auth.signInWithEmailAndPassword(this.user.email, this.user.password)
