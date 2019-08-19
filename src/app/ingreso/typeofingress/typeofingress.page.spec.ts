@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TipeofingressPage } from './tipeofingress.page';
+import { TypeofingressPage } from './typeofingress.page';
 
-describe('TipeofingressPage', () => {
-  let component: TipeofingressPage;
-  let fixture: ComponentFixture<TipeofingressPage>;
+describe('TypeofingressPage', () => {
+  let component: TypeofingressPage;
+  let fixture: ComponentFixture<TypeofingressPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TipeofingressPage ],
+      declarations: [ TypeofingressPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TipeofingressPage);
+    fixture = TestBed.createComponent(TypeofingressPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
