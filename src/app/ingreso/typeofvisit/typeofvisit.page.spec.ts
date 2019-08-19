@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TipeofvisitPage } from './tipeofvisit.page';
+import { TypeofvisitPage } from './typeofvisit.page';
 
-describe('TipeofvisitPage', () => {
-  let component: TipeofvisitPage;
-  let fixture: ComponentFixture<TipeofvisitPage>;
+describe('TypeofvisitPage', () => {
+  let component: TypeofvisitPage;
+  let fixture: ComponentFixture<TypeofvisitPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TipeofvisitPage ],
+      declarations: [ TypeofvisitPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TipeofvisitPage);
+    fixture = TestBed.createComponent(TypeofvisitPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

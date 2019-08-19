@@ -7,7 +7,6 @@ const routes: Routes = [
   { path: 'forgot', loadChildren: './security/forgot/forgot.module#ForgotPageModule' },
   { path: 'startmenu', loadChildren: './startmenu/startmenu.module#StartmenuPageModule' },
   { path: 'qringress', loadChildren: './ingreso/qringress/qringress.module#QringressPageModule' },
-  { path: 'dniserch', loadChildren: './ingreso/dniserch/dniserch.module#DniserchPageModule' },
   { path: 'newperson', loadChildren: './ingreso/newperson/newperson.module#NewpersonPageModule' },
   { path: 'transport', loadChildren: './ingreso/transport/transport.module#TransportPageModule' },
   { path: 'newvehicle', loadChildren: './ingreso/newvehicle/newvehicle.module#NewvehiclePageModule' },
@@ -15,11 +14,14 @@ const routes: Routes = [
   { path: 'newcompany', loadChildren: './ingreso/newcompany/newcompany.module#NewcompanyPageModule' },
   { path: 'signin', loadChildren: './security/signin/signin.module#SigninPageModule' },
   { path: 'destination', loadChildren: './ingreso/destination/destination.module#DestinationPageModule' },
+  { path: 'servicio', loadChildren: './ingreso/servicio/servicio.module#ServicioPageModule' },
   { path: 'typeofingress', loadChildren: './ingreso/typeofingress/typeofingress.module#TypeofingressPageModule' },
+  { path: 'typeofvisit', loadChildren: './ingreso/typeofvisit/typeofvisit.module#TypeofvisitPageModule' },
+  { path: 'dnisearch', loadChildren: './ingreso/dnisearch/dnisearch.module#DnisearchPageModule' },
 
 
 
-];
+  ];
 
 @NgModule({
   imports: [
