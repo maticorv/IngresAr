@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
   constructor(private router: Router,  private fireauth: AngularFireAuth, private toastController: ToastController, private alertContrller: AlertController, private menuCtrl: MenuController) { }
 
   ngOnInit() {
-    this.menuCtrl.enable(true);
+    this.menuCtrl.enable(false);
   }
   async onLogin() {
     this.fireauth.auth.signInWithEmailAndPassword(this.user.email, this.user.password)

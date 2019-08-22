@@ -11,7 +11,7 @@ export class StartmenuPage implements OnInit {
   constructor( private menuCtrl: MenuController) {}
 
   ngOnInit() {
-    this.menuCtrl.enable(false);
+    this.menuCtrl.enable(true);
   }
 
 }
