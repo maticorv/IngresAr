@@ -12,4 +12,8 @@ export class AuthorizationPage implements OnInit {
   ngOnInit() {
   }
 
+  mostrar() {
+    console.log('mostrar');
+  }
+
 }

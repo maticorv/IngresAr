@@ -1,9 +1,43 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>authorization</ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+           <ion-back-button defaultHref='/transport'></ion-back-button>
+        </ion-buttons>
+        <ion-title text-capitalize class="ion-text-center">IngresAr</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content>
+<ion-content padding>
+
+<ion-row>
+    <h3>¿Quien autoriza el ingreso?</h3>
+    <ion-list>
+        <ion-item>
+            <ion-select class="select-people-size" placeholder="¿Quien autoriza?" okText="Seleccionar">
+                <ion-select-option value="1">Jose</ion-select-option>
+                <ion-select-option value="2">Pedro</ion-select-option>
+                <ion-select-option value="3">Daniel</ion-select-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+</ion-row>
+
+<ion-row>
+    <h3 class="text-center">Acompañantes</h3>
+    <ion-item>
+        <ion-select class="select-DNI-size" placeholder="DNI" value="dni" okText="Seleccionar">DNI
+            <ion-select-option value="DNI">DNI</ion-select-option>
+        </ion-select>
+    <ion-input type="text" placeholder="Ingrese DNI"></ion-input>
+    <ion-icon name="add" color="black" (click)="mostrar()"></ion-icon>
+    </ion-item>
+</ion-row>
+
 
 </ion-content>
+
+<ion-footer no-border>
+    <ion-button routerLink="/startmenu">
+        Procesar Ingreso
+    </ion-button>
+</ion-footer>
