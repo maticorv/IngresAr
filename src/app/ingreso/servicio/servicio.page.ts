@@ -7,6 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServicioPage implements OnInit {
 
+  empresa = [
+    {
+      nombre: 'Supercanal'
+    },
+    {
+      nombre: 'Direct TV'
+    },
+    {
+      nombre: 'Edemsa'
+    },
+  ]
+
   constructor() { }
 
   ngOnInit() {
