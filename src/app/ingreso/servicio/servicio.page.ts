@@ -16,8 +16,7 @@ export class ServicioPage implements OnInit {
     },
     {
       nombre: 'Edemsa'
-    },
-  ]
+    }];
 
   constructor() { }
 
