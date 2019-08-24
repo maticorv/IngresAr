@@ -1,9 +1,70 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>servicio</ion-title>
+ 
   </ion-toolbar>
+<style>
+.hola {
+    position: relative;
+    margin-top: 100%;
+    margin-left:100%;
+}
+</style>
 </ion-header>
 
+<!--<ion-content>
+<h2>Complete los datos requeridos</h2>
+<div  class="row h-100 justify-content-center align-items-center">
+  <ion-row >
+  <ion-row >
+    <h3>Empresa de Servicio</h3>
+  </ion-row>
+  <ion-row >
+    <ion-select placeholder="seleccionEmpresa" value="seleccionEmpresa" okText="seleccionEmpresa">Selecciona una Empresa
+      <ion-select-option *ngFor="let item of empresa">{{item.nombre}}</ion-select-option>
+    </ion-select>
+    <ion-button>Agregar Empresa</ion-button>
+  </ion-row>
+
+</ion-row>
+</div>
+</ion-content>
+-->
+
 <ion-content>
+
+  <div class="row h-100 justify-content-center align-items-center">
+      <div>
+          <h2>Empresa de Servicio</h2>
+          <ion-item>
+
+              <div class="form-group">
+                  <label for="sel1">Seleccione una empresa de la lista:</label>
+                  <select class="form-control" id="sel1">
+                    <option  *ngFor="let item of empresa">{{item.nombre}}</option>
+                    
+                  </select>
+                </div>
+            
+          </ion-item>
+          <div class="container-fluid h-100">
+              <div class="row w-100">
+                <div class="col">
+                  <button type="button" class="btn btn-primary" [routerLink]="['/routePath']" > Agregar Nueva Empresa </button>
+                </div>
+              </div>
+          <div class="container-fluid h-100">
+              <div class="row w-100">
+                <div class="col">
+                  <button type="button" class="hola btn btn-primary" [routerLink]="['/transport']" > Siguiente </button>
+                </div>
+              </div>
+      </div>
+      
+  </div>
+
+</div>
+
+</div>
 
 </ion-content>
