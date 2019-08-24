@@ -12,7 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ComponentsModule } from './components/components.module';
-
+import { Calendar } from '@ionic-native/calendar/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -25,7 +25,8 @@ import { ComponentsModule } from './components/components.module';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Calendar
   ],
   bootstrap: [AppComponent]
 })

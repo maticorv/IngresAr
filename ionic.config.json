@@ -1,5 +1,7 @@
 {
   "name": "IngresAr",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

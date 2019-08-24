@@ -2,8 +2,99 @@
   <ion-toolbar>
     <ion-title>newvehicle</ion-title>
   </ion-toolbar>
+  <style>
+  @media (min-width: 100px) {
+    
+    h2 {
+      text-align: center;
+} 
+    h6 {
+      padding-left: 30px;
+      padding-top: 20px;
+    }
+    ion-row {
+      padding-left: 10px;
+    }
+    ion-button{
+      padding-top: 20px;
+    }
+    .boton {
+     position: relative;
+      margin-left: 70%;
+      padding-top: 10%;
+     
+    }
+}
+ @media (max-width: 1000px) {
+    
+      h2 {
+        text-align: center;
+  }
+      h6 {
+        padding-left: 30px;
+      padding-top: 20px;
+  }
+  ion-row {
+      padding-left: 10px;
+    }
+    ion-button{
+      padding-top: 20px;
+    }
+    
+}
+ 
+  </style>
 </ion-header>
 
 <ion-content>
+    <h2>Informacion del Vehiculo</h2>
+    <h6>Dominio*</h6>
+    <ion-row>
+        <ion-item>
+            <ion-input placeholder="ingrese dominio"></ion-input>
+          </ion-item>
+    </ion-row> 
+           
+    <h6>Tipo Vehiculo*</h6>
+    <ion-row>
+        <ion-item>
+            <select class="form-control" id="sel1">
+                <option  *ngFor="let item of tipo">{{item.nombre}}</option>
+                
+              </select>
+          </ion-item>
+    </ion-row> 
+    <h6>Marca Vehiculo*</h6>
+    <ion-row>
+        <ion-item>
+            <select class="form-control" id="sel1">
+                <option  *ngFor="let item of marca">{{item.nombre}}</option>
+                
+              </select>
+          </ion-item>
+    </ion-row> 
+    <h6>Color*</h6>
+    <h6>Aseguradora*</h6>
+    <ion-row>
+        <ion-item>
+            <select class="form-control" id="sel1">
+                <option  *ngFor="let item of aseguradora">{{item.nombre}}</option>
+                
+              </select>
+          </ion-item>
+    </ion-row> 
+    <h6>Vencimiento de seguro*</h6>
+    <ion-row>
+        <ion-item>
+            <ion-label>Mes/Dia/Año</ion-label>
+            <ion-datetime displayFormat="MM DD YY" placeholder="Select Date"></ion-datetime>
+          </ion-item>
+          
+    </ion-row> 
 
+        <div class="boton">
+            <ion-button color="primary" >Aceptar</ion-button>
+          </div>
+          
+    
 </ion-content>
