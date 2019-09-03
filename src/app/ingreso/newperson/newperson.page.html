@@ -1,9 +1,51 @@
+<html lang="en">
 <ion-header>
-  <ion-toolbar>
-    <ion-title>newperson</ion-title>
-  </ion-toolbar>
+    <ion-toolbar translucent color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/typeofingress'></ion-back-button>
+        </ion-buttons>
+        <ion-title text-capitalize class="ion-text-center">Nueva Persona</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content fullscreen>
+    <form onsubmit="processForm(event)">
+        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+            <ion-item>
+                <ion-label position="stacked">Nombre
+                    <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Apellido
+                    <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input required type="text" oninput="handleLastNameValue(event)"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Numero de DNI
+                    <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input required type="number" oninput="handleLastNameValue(event)"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="stacked">Numero de teléfono
+                    <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input required type="tel" oninput="handleLastNameValue(event)"></ion-input>
+            </ion-item>
+
+
+            <div class="ion-padding">
+                <ion-button expand="block" type="submit" class="ion-no-margin">Crear persona</ion-button>
+            </div>
+        </ion-list>
+    </form>
 </ion-content>
+
+</html>
