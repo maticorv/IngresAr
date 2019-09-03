@@ -8,6 +8,8 @@ import { MenuController } from '@ionic/angular';
 })
 export class StartmenuPage implements OnInit {
 
+  image = '../assets/logo.png';
+
   constructor( private menuCtrl: MenuController) {}
 
   ngOnInit() {
