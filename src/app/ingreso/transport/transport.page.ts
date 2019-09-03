@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
 })
 export class TransportPage implements OnInit {
 
-  index;
+  auto: number;
 
   vehiculos = [
     {
@@ -34,7 +34,12 @@ export class TransportPage implements OnInit {
   }
 
   siguiente(form: NgForm) {
-    console.log(this.index);
+    console.log(form);
+  }
+  selected(value: string) {
+    // console.log( value[`detail`].value);
+    this.auto = value[`detail`].value;
+    console.log(this.vehiculos[this.auto]);
 
   }
 

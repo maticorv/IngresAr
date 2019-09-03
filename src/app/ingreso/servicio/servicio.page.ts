@@ -6,8 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./servicio.page.scss'],
 })
 export class ServicioPage implements OnInit {
+  empresa;
 
-  empresa = [
+  empresas = [
     {
       nombre: 'Supercanal'
     },
@@ -21,6 +22,12 @@ export class ServicioPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+  selected(value: string) {
+    console.log(value);
+    // this.empresa = value[`detail`].value;
+    // console.log(this.vehiculos[this.auto]);
+
   }
 
 }
