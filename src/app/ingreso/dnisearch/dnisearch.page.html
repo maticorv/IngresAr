@@ -9,7 +9,7 @@
 
 <ion-content>
 
-    <div class="row h-100 justify-content-center align-items-center">
+    <!-- <div class="row h-100 justify-content-center align-items-center">
         <div>
             <h2>Porfavor ingrese el documento</h2>
             <ion-item>
@@ -22,6 +22,17 @@
     </div>
     <div class="fondo">
         <ion-button color="success" routerLink="/destination">Aceptar</ion-button>
-    </div>
+    </div> -->
+
+    <ion-row class="ion-justify-content-around">
+        <h3>Por favor ingrese el numero</h3>
+        <ion-item>
+            <ion-select class="select-DNI-size" placeholder="DNI" value="dni" okText="Seleccionar">DNI
+                <ion-select-option value="DNI">DNI</ion-select-option>
+            </ion-select>
+        <ion-input type="text" placeholder="Ingrese DNI"></ion-input>
+        </ion-item>
+    </ion-row>
+    <ion-button class="mt-4 ion-align-self-end" routerLink="/destination">Aceptar</ion-button>
 
 </ion-content>
