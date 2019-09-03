@@ -10,14 +10,15 @@ const routes: Routes = [
   { path: 'newperson', loadChildren: './ingreso/newperson/newperson.module#NewpersonPageModule' },
   { path: 'transport', loadChildren: './ingreso/transport/transport.module#TransportPageModule' },
   { path: 'newvehicle', loadChildren: './ingreso/newvehicle/newvehicle.module#NewvehiclePageModule' },
-  { path: 'company', loadChildren: './ingreso/company/company.module#CompanyPageModule' },
   { path: 'newcompany', loadChildren: './ingreso/newcompany/newcompany.module#NewcompanyPageModule' },
   { path: 'signin', loadChildren: './security/signin/signin.module#SigninPageModule' },
   { path: 'destination', loadChildren: './ingreso/destination/destination.module#DestinationPageModule' },
   { path: 'servicio', loadChildren: './ingreso/servicio/servicio.module#ServicioPageModule' },
   { path: 'typeofingress', loadChildren: './ingreso/typeofingress/typeofingress.module#TypeofingressPageModule' },
   { path: 'typeofvisit', loadChildren: './ingreso/typeofvisit/typeofvisit.module#TypeofvisitPageModule' },
-  { path: 'dnisearch', loadChildren: './ingreso/dnisearch/dnisearch.module#DnisearchPageModule' },  { path: 'authorization', loadChildren: './ingreso/authorization/authorization.module#AuthorizationPageModule' },
+  { path: 'dnisearch', loadChildren: './ingreso/dnisearch/dnisearch.module#DnisearchPageModule' },
+  { path: 'authorization', loadChildren: './ingreso/authorization/authorization.module#AuthorizationPageModule' },  { path: 'egress', loadChildren: './egreso/egress/egress.module#EgressPageModule' },
+
 
 
 

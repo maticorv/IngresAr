@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-back-button defaultHref='/'></ion-back-button>
+      </ion-buttons>
+      <ion-title text-capitalize class="ion-text-center">IngresAr</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="ion-wrap" style="position: relative;">
+
+  <!-- <div class="ion-justify-content-center">
+    <ion-row>
+        <h2 class="ion-text-center">¿Quien egresa?</h2>
+        <ion-item>
+            <ion-select class="mt-4" placeholder="DNI" value="dni" okText="Seleccionar">DNI
+                <ion-select-option value="DNI">DNI</ion-select-option>
+            </ion-select>
+            <ion-input type="text" placeholder="Ingrese DNI"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-button class="mt-4 ion-align-self-end" color="primary" routerLink="/">Aceptar</ion-button>
+  </div> -->
+
+  <ion-row class="ion-justify-content-around">
+      <h3>¿Quien egresa?</h3>
+      <ion-item>
+          <ion-select class="select-DNI-size" placeholder="DNI" value="dni" okText="Seleccionar">DNI
+              <ion-select-option value="DNI">DNI</ion-select-option>
+          </ion-select>
+      <ion-input type="text" placeholder="Ingrese DNI"></ion-input>
+      </ion-item>
+  </ion-row>
+  <ion-button class="mt-4 ion-align-self-end" routerLink="/">Aceptar</ion-button>
+
+</ion-content>
