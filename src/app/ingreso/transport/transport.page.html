@@ -11,8 +11,8 @@
 <form #f="ngForm">
   <ion-list>
     <ion-radio-group>
-      <ion-item *ngFor="let v of vehiculos">
-        <ion-radio slot="start" name="patente" ></ion-radio>
+      <ion-item *ngFor="let v of vehiculos, let i = index">
+        <ion-radio slot="start" name="patente" [value]="i" (ionSelect)="selected($event)"></ion-radio>
         <ion-label>{{v.marca}} {{v.modelo}} {{v.patente}}</ion-label>
       </ion-item>
     </ion-radio-group>
