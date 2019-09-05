@@ -26,22 +26,22 @@
 </ion-content>
 -->
 
-<ion-content>
-
+<ion-content fullscreen>
+    <ion-list>
+      <ion-item >
+          <ion-label>Empresa de Servicio</ion-label>
+          <ion-select>
+            <div *ngFor="let empresa of empresas, let i = index">
+              <ion-select-option class="select-people-size" [value]="i" (ionSelect)="selected($event)"> {{empresa.nombre}}</ion-select-option>
+            </div>
+            </ion-select>
+      </ion-item>
+    </ion-list>
+<ion-button (click)="selected()">
+  Click me
+</ion-button>
   <div class="row h-100 justify-content-center align-items-center">
       <div>
-          <h2>Empresa de Servicio</h2>
-          <ion-item>
-
-              <div class="form-group">
-                  <label for="sel1">Seleccione una empresa de la lista:</label>
-                  <select class="form-control" id="sel1">
-                    <option  *ngFor="let item of empresa">{{item.nombre}}</option>
-                    
-                  </select>
-                </div>
-            
-          </ion-item>
           <div class="container-fluid h-100">
               <div class="row w-100">
                 <div class="col">
