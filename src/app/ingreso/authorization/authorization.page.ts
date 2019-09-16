@@ -9,11 +9,27 @@ export class AuthorizationPage implements OnInit {
 
   constructor() { }
 
+  i: string;
+  dni: string;
+
+  persona = [
+    {
+      nombre: 'Pedro'
+    },
+    {
+      nombre: 'Jose'
+    },
+    {
+      nombre: 'Silvia'
+    }
+  ];
+
   ngOnInit() {
   }
 
-  mostrar() {
-    console.log('mostrar');
+  imprimir() {
+    console.log(this.i);
+    console.log(this.dni);
   }
 
 }
