@@ -30,4 +30,8 @@ export class ServicioPage implements OnInit {
 
   }
 
+  Imprimir() {
+    console.log(this.empresa);
+  }
+
 }
