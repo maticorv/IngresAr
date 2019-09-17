@@ -1,4 +1,4 @@
-export class Acompañante {
+export class Autorizador {
     nombre: string;
     apellido: string;
     dni: number;
