@@ -6,16 +6,15 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ServiceService {
-  url: 'http://192.168.0.101:8080/api/';
+  url: 'http://192.168.0.1:8080/api/';
 
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string) {
-    console.log('login');
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     const params = {password, username};
     // tslint:disable-next-line: max-line-length
-    return this.http.post( 'http://192.168.0.101:8080/api/authenticate', params, {headers} ).pipe(map(data => this.guardarToken(data[`id_token`])));
+    return this.http.post( 'http://192.168.0.1:8080/api/authenticate', params, {headers} ).pipe(map(data => this.guardarToken(data[`id_token`])));
 
   }
 
