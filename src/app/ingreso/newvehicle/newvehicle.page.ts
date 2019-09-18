@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Calendar } from '@ionic-native/calendar/ngx';
+import { ServiceService } from '../../services/service.service';
 
 
 @Component({
@@ -32,13 +33,13 @@ export class NewvehiclePage implements OnInit {
       aseguradora = [
         {
         nombre: 'Sancor Seguros'
-        },{
+        }, {
           nombre: 'Federacion Patronal'
-          },{
+          }, {
             nombre: 'Rivadavia Seguros'
             },
-      ]
-  constructor(private calendar: Calendar) { 
+      ];
+  constructor(private calendar: Calendar, private service: ServiceService) {
     this.calendar.createCalendar('MyCalendar').then(
       (msg) => { console.log(msg); },
       (err) => { console.log(err); }
@@ -46,6 +47,11 @@ export class NewvehiclePage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  postVehiculo() {
+    this.service.postVehiculo('SSSaaa', null, null, null, null, null, null).subscribe(data => console.log(data));
+    console.log('1');
   }
 
 }
