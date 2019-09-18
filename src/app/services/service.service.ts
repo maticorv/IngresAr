@@ -61,13 +61,13 @@ export class ServiceService {
      Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU2ODg0OTE2OH0.SletExcJDn3-EblkLhWGmH2VMxPi5Jhgf_Qo7hvbKRywJnqBKHvv-zSkRrcY89Th5h9u9RZe9DCkkVc0yol0BQ' });
     const body = JSON.stringify({
       personavehiculo: {
-        "id": 10,
-        "dominio": "moratorium moratorium",
-        "planillaIngresoEgreso": null,
-        "detalleEvento": null,
-        "vehiculomarca": null,
-        "vehiculocolor": null,
-        "vehiculotipo": null
+        id: 10,
+         dominio : ' moratorium moratorium' ,
+         planillaIngresoEgreso : null,
+         detalleEvento : null,
+         vehiculomarca : null,
+         vehiculocolor : null,
+         vehiculotipo : null
       },
   });
     // tslint:disable-next-line:max-line-length
@@ -85,7 +85,7 @@ export class ServiceService {
 
       },
       body: JSON.stringify({
-        "dominio": "LNF553asdasd"
+         dominio :  'LNF553asdasd',
       })
     })
       .then(data => data.json())
