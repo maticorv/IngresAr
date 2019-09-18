@@ -57,40 +57,20 @@ export class ServiceService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Accept: 'application/json',
-     // tslint:disable-next-line: max-line-length
-     Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU2ODg0OTE2OH0.SletExcJDn3-EblkLhWGmH2VMxPi5Jhgf_Qo7hvbKRywJnqBKHvv-zSkRrcY89Th5h9u9RZe9DCkkVc0yol0BQ' });
+      Authorization: 'Bearer ' + token });
     const body = JSON.stringify({
       personavehiculo: {
         id: 10,
-         dominio : ' moratorium moratorium' ,
-         planillaIngresoEgreso : null,
-         detalleEvento : null,
-         vehiculomarca : null,
-         vehiculocolor : null,
-         vehiculotipo : null
+        dominio : ' moratorium moratorium' ,
+        planillaIngresoEgreso : null,
+        detalleEvento : null,
+        vehiculomarca : null,
+        vehiculocolor : null,
+        vehiculotipo : null
       },
   });
     // tslint:disable-next-line:max-line-length
     return this.http.post('http://192.168.0.101:8080/api/personas', body, {headers}).pipe(map(data => data));
-  }
-  postVel() {
-    console.log('getAl init');
-    return fetch('http://192.168.0.101:8080/api/vehiculos', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        // tslint:disable-next-line:max-line-length
-        Authorization : 'Bearer ' + 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU2ODg0OTE2OH0.SletExcJDn3-EblkLhWGmH2VMxPi5Jhgf_Qo7hvbKRywJnqBKHvv-zSkRrcY89Th5h9u9RZe9DCkkVc0yol0BQ'
-
-      },
-      body: JSON.stringify({
-         dominio :  'LNF553asdasd',
-      })
-    })
-      .then(data => data.json())
-      .then(result => result.token)
-      .catch(error => console.error(error));
   }
 
 }
