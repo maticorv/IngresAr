@@ -1,30 +1,30 @@
 <ion-header>
     <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref='/dnisearch'></ion-back-button>
-      </ion-buttons>
-      <ion-title text-capitalize class="ion-text-center">IngresAr</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/dnisearch'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">IngresAr</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
 
-<div class="row h-100 justify-content-center align-items-center">
-  <div>
-      <h2 class="text-center">¿Donde se dirige?</h2>
-      <h3>Ingrese lote o apellido de la familia</h3>
-    <ion-item>
-      <ion-select placeholder="Apellido" value="dni" okText="Seleccionar">Apellido
-        <ion-select-option  value="LOTE">LOTE</ion-select-option>
-        <ion-select-option  value="APELLIDO">APELLIDO</ion-select-option>
-      </ion-select>
-      
-      <ion-input type="text" placeholder="Ingrese lote o apellido"></ion-input>
-    </ion-item>
-    <div style="text-align-last: right">
-      <ion-button class="mt-4" routerLink="/typeofvisit">Siguiente</ion-button>
+    <div class="row h-100 justify-content-center align-items-center">
+        <div>
+            <h2 class="text-center">¿Donde se dirige?</h2>
+            <h3>Ingrese lote o apellido de la familia</h3>
+            <ion-item>
+                <ion-select placeholder="Apellido" value="dni" okText="Seleccionar">Apellido
+                    <ion-select-option value="LOTE">LOTE</ion-select-option>
+                    <ion-select-option value="APELLIDO">APELLIDO</ion-select-option>
+                </ion-select>
+
+                <ion-input type="text" placeholder="Ingrese lote o apellido"></ion-input>
+            </ion-item>
+            <div style="text-align-last: right">
+                <ion-button class="mt-4" routerLink="/typeofvisit">Siguiente</ion-button>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 </ion-content>

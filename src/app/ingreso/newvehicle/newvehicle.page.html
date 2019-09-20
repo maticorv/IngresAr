@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar>
-      <ion-buttons slot="start">
-         <ion-back-button defaultHref='/typeofvisit'></ion-back-button>
-      </ion-buttons>
-      <ion-title text-capitalize class="ion-text-center">IngresAr</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/typeofvisit'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">IngresAr</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 
@@ -14,24 +14,24 @@
     <ion-row>
         <ion-item>
             <ion-input placeholder="ingrese dominio"></ion-input>
-          </ion-item>
-    </ion-row> 
+        </ion-item>
+    </ion-row>
     <h6>Tipo Vehiculo*</h6>
     <ion-row>
         <ion-item>
             <select class="form-control" id="sel1">
                 <option  *ngFor="let item of tipo">{{item.nombre}}</option>
               </select>
-          </ion-item>
-    </ion-row> 
+        </ion-item>
+    </ion-row>
     <h6>Marca Vehiculo*</h6>
     <ion-row>
         <ion-item>
             <select class="form-control" id="sel1">
                 <option  *ngFor="let item of marca">{{item.nombre}}</option>
               </select>
-          </ion-item>
-    </ion-row> 
+        </ion-item>
+    </ion-row>
     <h6>Color*</h6>
     <h6>Aseguradora*</h6>
     <ion-row>
@@ -40,18 +40,18 @@
                 <option  *ngFor="let item of aseguradora">{{item.nombre}}</option>
                 
               </select>
-          </ion-item>
-    </ion-row> 
+        </ion-item>
+    </ion-row>
     <h6>Vencimiento de seguro*</h6>
     <ion-row>
         <ion-item>
             <ion-label>Mes/Dia/Año</ion-label>
             <ion-datetime displayFormat="MM DD YY" placeholder="Select Date"></ion-datetime>
-          </ion-item>
-          
-    </ion-row> 
-    <ion-button color="primary" routerLink="/authorization" routerLinkActive="router-link-active" >Aceptar</ion-button>
-    <ion-button color="primary" (click)="postVehiculo()" >Crear</ion-button>
-          
-    
+        </ion-item>
+
+    </ion-row>
+    <ion-button color="primary" routerLink="/authorization" routerLinkActive="router-link-active">Aceptar</ion-button>
+    <ion-button color="primary" (click)="postVehiculo()">Crear</ion-button>
+
+
 </ion-content>

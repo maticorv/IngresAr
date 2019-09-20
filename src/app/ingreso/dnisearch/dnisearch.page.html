@@ -1,9 +1,9 @@
 <ion-header>
     <ion-toolbar>
-       <ion-buttons slot="start">
-         <ion-back-button defaultHref='/typeofingress'></ion-back-button>
-       </ion-buttons>
-       <ion-title text-capitalize class="ion-text-center">IngresAr</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/typeofingress'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">IngresAr</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -30,11 +30,11 @@
             <ion-select class="select-DNI-size" placeholder="DNI" value="dni" okText="Seleccionar">DNI
                 <ion-select-option value="DNI">DNI</ion-select-option>
             </ion-select>
-        <ion-input type="text" placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
+            <ion-input type="text" placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
         </ion-item>
     </ion-row>
     <div style="text-align-last: right">
-        <ion-button  class="mt-4 ion-align-self-end" (click)="getpersona()">Aceptar</ion-button>
+        <ion-button class="mt-4 ion-align-self-end" (click)="getpersona()">Aceptar</ion-button>
     </div>
 
 </ion-content>
