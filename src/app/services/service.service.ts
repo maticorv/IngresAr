@@ -7,12 +7,11 @@ import { Persona } from '../interfaces/persona';
   providedIn: 'root'
 })
 export class ServiceService {
-  url: 'http://192.168.0.101:8080/api/';
+  url: 'http://192.168.0.1:8080/api/';
 
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string) {
-    console.log('login');
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     const params = {password, username};
     // tslint:disable-next-line: max-line-length
