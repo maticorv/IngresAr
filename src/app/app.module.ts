@@ -14,6 +14,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ComponentsModule } from './components/components.module';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { HttpClientModule } from '@angular/common/http';
+import { Personas } from 'src/app/classes/persona';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Calendar
+    Calendar,
+    Personas
   ],
   bootstrap: [AppComponent]
 })
