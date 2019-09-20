@@ -1,9 +1,9 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-           <ion-back-button defaultHref='/dnisearch'></ion-back-button>
+            <ion-back-button defaultHref='/dnisearch'></ion-back-button>
         </ion-buttons>
-        <ion-title text-capitalize class="ion-text-center">IngresAr</ion-title>
+        <ion-title class="ion-text-capitalize ion-text-center">IngresAr</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -26,7 +26,7 @@
 </ion-content>
 -->
 
-<ion-content padding>
+<ion-content class="ion-padding">
     <!-- <ion-list>
       <ion-item >
           <ion-label>Empresa de Servicio</ion-label>
@@ -62,26 +62,26 @@
 
 </div> -->
 
-<ion-row>
-  <div>
-    <h3>Empresa de servicio</h3>
-  </div>
-  <ion-list>
-      <ion-item>
-          <ion-select class="select-people-size" placeholder="Seleccione empresa" okText="Seleccionar" [(ngModel)]="empresa">
-                  <ion-select-option [value]=e.nombre *ngFor="let e of empresas; let i = index"> {{e.nombre}}</ion-select-option>
-          </ion-select>
-      </ion-item>
-  </ion-list>
-</ion-row>
-<div>
-  <ion-button routerLink="/newcompany"> Agregar Empresa</ion-button>
-</div>
-<div class="mt-5" style="text-align-last: right">
-  <ion-button routerLink="/transport"> Siguiente</ion-button>
-</div>
-<div>
-  <ion-button color="medium" (click)="Imprimir()">Imprimir nombre</ion-button>
-</div>
+    <ion-row>
+        <div>
+            <h3>Empresa de servicio</h3>
+        </div>
+        <ion-list>
+            <ion-item>
+                <ion-select class="select-people-size" placeholder="Seleccione empresa" okText="Seleccionar" [(ngModel)]="empresa">
+                    <ion-select-option [value]=e.nombre *ngFor="let e of empresas; let i = index"> {{e.nombre}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+    </ion-row>
+    <div>
+        <ion-button routerLink="/newcompany"> Agregar Empresa</ion-button>
+    </div>
+    <div class="mt-5" style="text-align-last: right">
+        <ion-button routerLink="/transport"> Siguiente</ion-button>
+    </div>
+    <div>
+        <ion-button color="medium" (click)="Imprimir()">Imprimir nombre</ion-button>
+    </div>
 
 </ion-content>
