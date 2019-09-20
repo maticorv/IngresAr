@@ -1,6 +1,6 @@
 import { Vehiculo } from './vehiculo';
 
-export class Persona {
+export interface Persona {
     id: number;
     nombrePersona: string;
     apellidoPersona: string;
