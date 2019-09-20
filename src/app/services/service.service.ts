@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Persona } from '../interfaces/persona';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ServiceService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     const params = {password, username};
     // tslint:disable-next-line: max-line-length
-    return this.http.post( 'http://192.168.0.101:8080/api/authenticate', params, {headers} ).pipe(map(data => this.guardarToken(data[`id_token`])));
+    return this.http.post( 'http://192.168.0.3:8080/api/authenticate', params, {headers} ).pipe(map(data => this.guardarToken(data[`id_token`])));
 
   }
 
@@ -35,7 +36,7 @@ export class ServiceService {
   getPersona(dni: number) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
-    return this.http.get( 'http://192.168.0.101:8080/api/personas/dni/' + dni, {headers}).pipe(map(data => data ));
+    return this.http.get( 'http://192.168.0.3:8080/api/personas/dni/' + dni, {headers}).pipe(map(data => data as Persona));
   }
 
   getEmpresa() {
@@ -70,7 +71,31 @@ export class ServiceService {
       },
   });
     // tslint:disable-next-line:max-line-length
-    return this.http.post('http://192.168.0.101:8080/api/personas', body, {headers}).pipe(map(data => data));
+    return this.http.post('http://192.168.0.3:8080/api/personas', body, {headers}).pipe(map(data => data));
+  }
+
+  getMarca() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
+    return this.http.get( 'http://192.168.0.3:8080/api/marcas', {headers}).pipe(map(data => data ));
+  }
+
+  getModelo(id: number) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    return this.http.get( 'http://192.168.0.3:8080/api/modelos/' + id, {headers}).pipe(map(data => data));
+  }
+
+  getColor() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    return this.http.get('http://192.168.0.3:8080/api/colors', {headers}).pipe(map(data => data));
+  }
+
+  getSeguro() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    return this.http.get('http://192.168.0.3:8080/api/seguros', {headers}).pipe(map(data => data));
   }
 
 }
