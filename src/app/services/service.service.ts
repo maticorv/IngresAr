@@ -16,7 +16,7 @@ export class ServiceService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     const params = {password, username};
     // tslint:disable-next-line: max-line-length
-    return this.http.post( 'http://192.168.0.3:8080/api/authenticate', params, {headers} ).pipe(map(data => this.guardarToken(data[`id_token`])));
+    return this.http.post( 'http://192.168.0.1:8080/api/authenticate', params, {headers} ).pipe(map(data => this.guardarToken(data[`id_token`])));
 
   }
 
@@ -36,7 +36,7 @@ export class ServiceService {
   getPersona(dni: number) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
-    return this.http.get( 'http://192.168.0.3:8080/api/personas/dni/' + dni, {headers}).pipe(map(data => data as Persona));
+    return this.http.get( 'http://192.168.0.1:8080/api/personas/personasdni/' + dni, {headers}).pipe(map(data => data as Persona));
   }
 
   getEmpresa() {
