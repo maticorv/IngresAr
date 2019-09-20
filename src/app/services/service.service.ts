@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Persona } from '../interfaces/persona';
+import { Vehiculo } from '../interfaces/vehiculo';
 
 @Injectable({
   providedIn: 'root'
@@ -95,6 +96,13 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     return this.http.get('http://192.168.0.3:8080/api/seguros', {headers}).pipe(map(data => data));
+  }
+
+  getVechiculo(dni: number) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    // tslint:disable-next-line: max-line-length
+    return this.http.get('http://192.168.0.1:8080/api/personas/personasdni/' + dni, {headers}).pipe(map(data => data[`vehiculos`] as Vehiculo));
   }
 
 }
