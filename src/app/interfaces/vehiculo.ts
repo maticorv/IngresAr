@@ -1,4 +1,4 @@
-export class Vehiculo {
+export interface Vehiculo {
     id: number;
     dominio: string;
     planillaIngresoEgreso?: any;

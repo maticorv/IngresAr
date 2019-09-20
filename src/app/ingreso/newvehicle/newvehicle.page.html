@@ -9,6 +9,10 @@
 
 
 <ion-content>
+    <ion-button color="secondary" (click)="getMarca()">Marca</ion-button>
+    <ion-button color="tertiary" (click)="getModelo()">Modelo</ion-button>
+    <ion-button color="success" (click)="getColor()">Color</ion-button>
+    <ion-button color="warning" (click)="getSeguro()">Seguro</ion-button>
     <h2>Informacion del Vehiculo</h2>
     <h6>Dominio*</h6>
     <ion-row>
@@ -16,7 +20,7 @@
             <ion-input placeholder="ingrese dominio"></ion-input>
         </ion-item>
     </ion-row>
-    <h6>Tipo Vehiculo*</h6>
+    <h6>Marca</h6>
     <ion-row>
         <ion-item>
             <select class="form-control" id="sel1">
@@ -24,7 +28,7 @@
               </select>
         </ion-item>
     </ion-row>
-    <h6>Marca Vehiculo*</h6>
+    <h6>Modelo</h6>
     <ion-row>
         <ion-item>
             <select class="form-control" id="sel1">
@@ -32,8 +36,15 @@
               </select>
         </ion-item>
     </ion-row>
-    <h6>Color*</h6>
-    <h6>Aseguradora*</h6>
+    <h6>Color</h6>
+    <ion-row>
+        <ion-item>
+            <select class="form-control" id="sel1">
+                <option  *ngFor="let item of marca">{{item.nombre}}</option>
+            </select>
+        </ion-item>
+    </ion-row>
+    <h6>Aseguradora</h6>
     <ion-row>
         <ion-item>
             <select class="form-control" id="sel1">
@@ -42,16 +53,16 @@
               </select>
         </ion-item>
     </ion-row>
-    <h6>Vencimiento de seguro*</h6>
+    <h6>Vencimiento de seguro</h6>
     <ion-row>
         <ion-item>
             <ion-label>Mes/Dia/Año</ion-label>
             <ion-datetime displayFormat="MM DD YY" placeholder="Select Date"></ion-datetime>
         </ion-item>
 
-    </ion-row>
-    <ion-button color="primary" routerLink="/authorization" routerLinkActive="router-link-active">Aceptar</ion-button>
-    <ion-button color="primary" (click)="postVehiculo()">Crear</ion-button>
-
-
+    </ion-row> -->
+    <!-- <ion-button color="primary" routerLink="/authorization" routerLinkActive="router-link-active" >Aceptar</ion-button>
+    <ion-button color="primary" (click)="postVehiculo()" >Crear</ion-button>
+          
+    
 </ion-content>

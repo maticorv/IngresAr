@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { ServiceService } from '../../services/service.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class NewvehiclePage implements OnInit {
             nombre: 'Rivadavia Seguros'
             },
       ];
-  constructor(private calendar: Calendar, private service: ServiceService) {
+  idMarca: number;
+  constructor(private calendar: Calendar, private service: ServiceService, private router: Router) {
     this.calendar.createCalendar('MyCalendar').then(
       (msg) => { console.log(msg); },
       (err) => { console.log(err); }
@@ -52,6 +54,38 @@ export class NewvehiclePage implements OnInit {
   postVehiculo() {
     this.service.postVehiculo('SSSaaa', null, null, null, null, null, null).subscribe(data => console.log(data));
     console.log('1');
+  }
+
+  getMarca() {
+    this.service.getMarca().subscribe(data => {
+      console.log(data);
+    },
+    (error) => { console.log(error);
+    });
+  }
+
+  getModelo() {
+    this.service.getModelo(this.idMarca).subscribe(data => {
+      console.log(data);
+    },
+    (error) => { console.log(error);
+    });
+  }
+
+  getColor() {
+    this.service.getColor().subscribe( data => {
+      console.log(data);
+    },
+    (error) => { console.log(error);
+    });
+  }
+
+  getSeguro() {
+    this.service.getSeguro().subscribe(data => {
+      console.log(data);
+    },
+    (error) => { console.log(error);
+    });
   }
 
 }
