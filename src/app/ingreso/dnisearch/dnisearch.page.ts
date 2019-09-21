@@ -23,14 +23,15 @@ export class DnisearchPage implements OnInit {
   getpersona() {
     this.service.getPersona(this.dni).subscribe((data) => {
       this.persona = data;
-      this.presentAlertConfirm();
+      this.personaExiste();
     },
     (error) => { console.log(error);
+                 this.personaNoExiste();
     });
 
   }
 
-  async presentAlertConfirm() {
+  async personaExiste() {
     const alert = await this.alertCtrl.create({
       header: this.persona.nombrePersona + ' ' + this.persona.apellidoPersona + ' ' + this.persona.dniPersona,
       message: '¿Los datos son correctos?</strong>',
@@ -43,7 +44,31 @@ export class DnisearchPage implements OnInit {
             this.personas.nombrePersona = this.persona.nombrePersona;
             this.personas.apellidoPersona = this.persona.apellidoPersona;
             this.personas.dniPersona = this.persona.dniPersona;
-            this.router.navigateByUrl('/transport');
+            this.router.navigateByUrl('/destination');
+          }
+        }, {
+          text: 'Cancelar',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async personaNoExiste() {
+    const alert = await this.alertCtrl.create({
+      header: 'La persona con el dni: ' + this.dni + ' no se encuentra en la base de datos',
+      message: '¿Desea crearla?</strong>',
+      buttons: [
+        {
+          text: 'Aceptar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            this.router.navigateByUrl('/newperson');
           }
         }, {
           text: 'Cancelar',
