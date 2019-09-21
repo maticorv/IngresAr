@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Destino } from 'src/app/classes/destino';
 
 @Component({
   selector: 'app-destination',
@@ -10,16 +12,19 @@ export class DestinationPage implements OnInit {
   tipo: string;
   direccion: string;
 
-  constructor() { }
+  constructor(private router: Router, private destino: Destino) { }
 
   ngOnInit() {
   }
 
-  imprimirTipo() {
-    console.log(this.tipo);
-  }
-  imprimirDireccion() {
-    console.log(this.direccion);
+  destination() {
+    this.destino.tipoDestino = this.tipo;
+    if (this.tipo === 'lote') {
+      this.destino.lote = this.direccion;
+    } else {
+      this.destino.apellido = this.direccion;
+    }
+    this.router.navigateByUrl('/typeofvisit');
   }
 
 }
