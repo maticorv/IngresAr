@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Persona } from '../interfaces/persona';
+import { Observable } from 'rxjs';
+import { Imarca } from '../interfaces/marca';
 import { Vehiculo } from '../interfaces/vehiculo';
+import { Icolor } from '../interfaces/color';
 import { Empresa } from '../interfaces/empresa';
 
 @Injectable({
@@ -87,25 +90,25 @@ export class ServiceService {
     return this.http.post(this.url + 'personas', body, {headers}).pipe(map(data => data));
   }
 
-  getMarca() {
+  getMarca(): Observable <Imarca[]> {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
-    return this.http.get( this.url + 'marcas', {headers}).pipe(map(data => data ));
+    return this.http.get( this.url + 'marcas', {headers}).pipe(map(data => data as Imarca[] ));
   }
 
-  getModelo(id: number) {
+  getMarcaByNombre(id: string): Observable<Imarca[]> {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    return this.http.get( this.url + 'modelos/' + id, {headers}).pipe(map(data => data));
+    return this.http.get( this.url + 'marcas/nombremarcas/' + id, {headers}).pipe(map(data => data as Imarca[]));
   }
 
-  getColor() {
+  getColors(): Observable<Icolor[]> {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    return this.http.get( this.url + 'colors', {headers}).pipe(map(data => data));
+    return this.http.get( this.url + 'colors', {headers}).pipe(map(data => data as Icolor[]));
   }
 
-  getSeguro() {
+  getSeguros() {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     return this.http.get( this. url + 'seguros', {headers}).pipe(map(data => data));
