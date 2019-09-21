@@ -15,12 +15,12 @@
             <h2 class="text-center">¿Donde se dirige?</h2>
             <h3>Ingrese lote o apellido de la familia</h3>
             <ion-item>
-                <ion-select placeholder="Apellido" okText="Seleccionar" [(ngModel)]="tipo">Apellido
+                <ion-select placeholder="Lote" okText="Seleccionar" [(ngModel)]="tipo">Apellido
                     <ion-select-option value="LOTE">LOTE</ion-select-option>
-                    <ion-select-option value="APELLIDO">APELLIDO</ion-select-option>
+                    <!-- <ion-select-option value="APELLIDO">APELLIDO</ion-select-option> -->
                 </ion-select>
 
-                <ion-input type="text" placeholder="Ingrese lote o apellido" [(ngModel)]="direccion"></ion-input>
+                <ion-input type="text" placeholder="Ingrese lote" [(ngModel)]="direccion"></ion-input>
             </ion-item>
             <div style="text-align-last: right">
                 <ion-button class="mt-4" (click)="destination()">Siguiente</ion-button>

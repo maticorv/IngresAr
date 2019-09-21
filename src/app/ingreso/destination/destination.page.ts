@@ -19,11 +19,12 @@ export class DestinationPage implements OnInit {
 
   destination() {
     this.destino.tipoDestino = this.tipo;
-    if (this.tipo === 'lote') {
-      this.destino.lote = this.direccion;
-    } else {
-      this.destino.apellido = this.direccion;
-    }
+    this.destino.lote = this.direccion;
+    // if (this.tipo === 'lote') {
+    //   this.destino.lote = this.direccion;
+    // } else {
+    //   this.destino.apellido = this.direccion;
+    // }
     this.router.navigateByUrl('/typeofvisit');
   }
 
