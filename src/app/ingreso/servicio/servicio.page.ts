@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Empresa } from 'src/app/interfaces/empresa';
+import { ServiceService } from '../../services/service.service';
+import { Router } from '@angular/router';
+import { Servicio } from 'src/app/classes/servicio';
 
 @Component({
   selector: 'app-servicio',
@@ -6,32 +10,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./servicio.page.scss'],
 })
 export class ServicioPage implements OnInit {
-  empresa;
+  empresa: string;
 
-  empresas = [
-    {
-      nombre: 'Supercanal'
-    },
-    {
-      nombre: 'Direct TV'
-    },
-    {
-      nombre: 'Edemsa'
-    }];
+  empresas: Empresa;
 
-  constructor() { }
+  constructor(private service: ServiceService, private router: Router, private servicio: Servicio) { }
 
   ngOnInit() {
-  }
-  selected(value: string) {
-    console.log(value);
-    // this.empresa = value[`detail`].value;
-    // console.log(this.vehiculos[this.auto]);
-
+    this.getEmpresa();
   }
 
-  Imprimir() {
-    console.log(this.empresa);
+  getEmpresa() {
+    this.service.getEmpresa().subscribe(data => {
+      this.empresas = data;
+    },
+    (error) => {console.log(error);
+    });
+  }
+
+  aceptar() {
+    this.servicio.nomServicio = this.empresa;
+    this.router.navigateByUrl('/transport');
   }
 
 }
