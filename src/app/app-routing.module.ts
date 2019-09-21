@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'startmenu', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', loadChildren: './security/login/login.module#LoginPageModule' },
   { path: 'forgot', loadChildren: './security/forgot/forgot.module#ForgotPageModule' },
   { path: 'startmenu', loadChildren: './startmenu/startmenu.module#StartmenuPageModule' },
@@ -17,7 +17,11 @@ const routes: Routes = [
   { path: 'typeofingress', loadChildren: './ingreso/typeofingress/typeofingress.module#TypeofingressPageModule' },
   { path: 'typeofvisit', loadChildren: './ingreso/typeofvisit/typeofvisit.module#TypeofvisitPageModule' },
   { path: 'dnisearch', loadChildren: './ingreso/dnisearch/dnisearch.module#DnisearchPageModule' },
-  { path: 'authorization', loadChildren: './ingreso/authorization/authorization.module#AuthorizationPageModule' },  { path: 'egress', loadChildren: './egreso/egress/egress.module#EgressPageModule' },
+  { path: 'authorization', loadChildren: './ingreso/authorization/authorization.module#AuthorizationPageModule' },
+  { path: 'egress', loadChildren: './egreso/egress/egress.module#EgressPageModule' },
+  // tslint:disable-next-line: max-line-length
+  { path: 'planilla-ingreso-egreso', loadChildren: './funcionesMenu/planilla-ingreso-egreso/planilla-ingreso-egreso.module#PlanillaIngresoEgresoPageModule' },
+
 
 
 

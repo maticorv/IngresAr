@@ -14,7 +14,13 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ComponentsModule } from './components/components.module';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { HttpClientModule } from '@angular/common/http';
-import { Personas } from '../app/classes/persona';
+import { Personas } from 'src/app/classes/persona';
+import { Destino } from 'src/app/classes/destino';
+import { Tipovisita } from './classes/tipovisita';
+import { Autorizador } from './classes/autorizador';
+import { Acompañante } from './classes/acompañante';
+import { Servicio } from './classes/servicio';
+import { Vehiculo } from './classes/vehiculo';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +37,13 @@ import { Personas } from '../app/classes/persona';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Calendar,
-    Personas
+    Personas,
+    Destino,
+    Tipovisita,
+    Autorizador,
+    Acompañante,
+    Servicio,
+    Vehiculo,
   ],
   bootstrap: [AppComponent]
 })

@@ -7,6 +7,17 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen>
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+        <ion-item>
+            <ion-label position="stacked">Nombre Empresa
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="text" [(ngModel)]="nombreEmpresa"></ion-input>
+        </ion-item>
 
+        <div class="ion-padding">
+            <ion-button [disabled]="!(nombreEmpresa)" expand="block" type="submit" class="ion-no-margin" (click)="crearEmpresa()">Crear empresa</ion-button>
+        </div>
+    </ion-list>
 </ion-content>

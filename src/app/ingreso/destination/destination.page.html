@@ -23,9 +23,7 @@
                 <ion-input type="text" placeholder="Ingrese lote o apellido" [(ngModel)]="direccion"></ion-input>
             </ion-item>
             <div style="text-align-last: right">
-                <ion-button class="mt-4" routerLink="/typeofvisit">Siguiente</ion-button>
-                <ion-button color="light" (click)="imprimirTipo()">Imprimir Tipo</ion-button>
-                <ion-button color="tertiary" (click)="imprimirDireccion()">Imprimitor direccion</ion-button>
+                <ion-button class="mt-4" (click)="destination()">Siguiente</ion-button>
             </div>
         </div>
     </div>

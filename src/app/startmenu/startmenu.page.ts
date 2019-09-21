@@ -10,9 +10,15 @@ export class StartmenuPage implements OnInit {
 
   image = '../assets/logo.png';
 
-  constructor( private menuCtrl: MenuController) {}
+  constructor( private menuCtrl: MenuController) {
+    this.activarMenu();
+  }
 
   ngOnInit() {
+    this.activarMenu();
+  }
+
+  activarMenu() {
     this.menuCtrl.enable(true);
   }
 
