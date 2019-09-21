@@ -23,10 +23,16 @@
     <h6>Marca</h6>
     <ion-row>
         <ion-item>
-            <select class="form-control" id="sel1">
-                <option  *ngFor="let item of tipo">{{item.nombre}}</option>
-              </select>
+            <ng-container *ngIf="marcas===undefined; else elseTemplate">
+
+            </ng-container>
+            <ng-template #elseTemplate>
+                <select class="form-control" id="sel1" [(ngModel)]="brand">
+                    <option *ngFor="let marca of marcas, let i=index">{{marca.nombreMarca}}</option>
+                </select>
+            </ng-template>
         </ion-item>
+
     </ion-row>
     <h6>Modelo</h6>
     <ion-row>
@@ -60,9 +66,9 @@
             <ion-datetime displayFormat="MM DD YY" placeholder="Select Date"></ion-datetime>
         </ion-item>
 
-    </ion-row> -->
-    <!-- <ion-button color="primary" routerLink="/authorization" routerLinkActive="router-link-active" >Aceptar</ion-button>
-    <ion-button color="primary" (click)="postVehiculo()" >Crear</ion-button>
-          
-    
+    </ion-row>
+    <ion-button color="primary" routerLink="/authorization" routerLinkActive="router-link-active">Aceptar</ion-button>
+    <ion-button color="primary" (click)="postVehiculo()">Crear</ion-button>
+
+
 </ion-content>

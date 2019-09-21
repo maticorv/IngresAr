@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { ServiceService } from '../../services/service.service';
 import { Router } from '@angular/router';
+import { Vehiculo } from '../../interfaces/vehiculo';
+import { Imarca } from '../../interfaces/marca';
 
 
 @Component({
@@ -20,26 +22,9 @@ export class NewvehiclePage implements OnInit {
     {
       nombre: 'Camion'
     }];
-
-    marca = [
-      {
-        nombre: 'Toyota'
-      },
-      {
-        nombre: 'Fiat'
-      },
-      {
-        nombre: 'Peugeot'
-      }];
-      aseguradora = [
-        {
-        nombre: 'Sancor Seguros'
-        }, {
-          nombre: 'Federacion Patronal'
-          }, {
-            nombre: 'Rivadavia Seguros'
-            },
-      ];
+  marcas: Imarca[];
+  brand: string;
+  vehiculo: Vehiculo;
   idMarca: number;
   constructor(private calendar: Calendar, private service: ServiceService, private router: Router) {
     this.calendar.createCalendar('MyCalendar').then(
@@ -49,6 +34,7 @@ export class NewvehiclePage implements OnInit {
   }
 
   ngOnInit() {
+    this.getMarca();
   }
 
   postVehiculo() {
@@ -59,6 +45,7 @@ export class NewvehiclePage implements OnInit {
   getMarca() {
     this.service.getMarca().subscribe(data => {
       console.log(data);
+      this.marcas = data;
     },
     (error) => { console.log(error);
     });
