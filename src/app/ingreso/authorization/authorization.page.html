@@ -15,8 +15,8 @@
     <ion-row>
         <ion-list>
             <ion-item>
-                <ion-select class="select-people-size" placeholder="¿Quien autoriza?" okText="Seleccionar" [(ngModel)]="nombreAutorizador">
-                    <ion-select-option [value]=p.nombre *ngFor="let p of persona; let i = index"> {{p.nombre}}</ion-select-option>
+                <ion-select class="select-people-size" placeholder="¿Quien autoriza?" okText="Seleccionar" [(ngModel)]="index">
+                    <ion-select-option [value]=i *ngFor="let p of persona; let i = index"> {{p.nombrePersona}}  {{p.apellidoPersona}}</ion-select-option>
                 </ion-select>
             </ion-item>
         </ion-list>
@@ -43,7 +43,6 @@
 </ion-content>
 
 <ion-footer no-border>
-    <ion-button color="tertiary" (click)="imprimir()">Imprimir</ion-button>
     <ion-button routerLink="/startmenu">
         Procesar Ingreso
     </ion-button>
