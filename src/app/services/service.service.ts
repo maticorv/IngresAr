@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Persona } from '../interfaces/persona';
+import { Observable } from 'rxjs';
+import { Imarca } from '../interfaces/marca';
 
 @Injectable({
   providedIn: 'root'
@@ -73,28 +75,28 @@ export class ServiceService {
     return this.http.post('http://192.168.0.3:8080/api/personas', body, {headers}).pipe(map(data => data));
   }
 
-  getMarca() {
+  getMarca(): Observable <Imarca[]> {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
-    return this.http.get( 'http://192.168.0.3:8080/api/marcas', {headers}).pipe(map(data => data ));
+    return this.http.get( 'http://192.168.0.1:8080/api/marcas', {headers}).pipe(map(data => data as Imarca[] ));
   }
 
   getModelo(id: number) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    return this.http.get( 'http://192.168.0.3:8080/api/modelos/' + id, {headers}).pipe(map(data => data));
+    return this.http.get( 'http://192.168.0.1:8080/api/modelos/' + id, {headers}).pipe(map(data => data));
   }
 
   getColor() {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    return this.http.get('http://192.168.0.3:8080/api/colors', {headers}).pipe(map(data => data));
+    return this.http.get('http://192.168.0.1:8080/api/colors', {headers}).pipe(map(data => data));
   }
 
   getSeguro() {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    return this.http.get('http://192.168.0.3:8080/api/seguros', {headers}).pipe(map(data => data));
+    return this.http.get('http://192.168.0.1:8080/api/seguros', {headers}).pipe(map(data => data));
   }
 
 }
