@@ -14,7 +14,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ComponentsModule } from './components/components.module';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { HttpClientModule } from '@angular/common/http';
-import { Personas } from 'src/app/classes/persona';
+import { Personas } from '../app/classes/persona';
 
 @NgModule({
   declarations: [AppComponent],
