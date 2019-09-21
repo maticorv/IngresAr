@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Persona } from '../interfaces/persona';
 import { Vehiculo } from '../interfaces/vehiculo';
+import { Empresa } from '../interfaces/empresa';
 
 @Injectable({
   providedIn: 'root'
@@ -33,16 +34,28 @@ export class ServiceService {
     }
   }
 
+  borrarToken() {
+    localStorage.removeItem('token');
+    console.log('token eliminado');
+  }
+
   getPersona(dni: number) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
     return this.http.get( this.url + 'personas/personasdni/' + dni, {headers}).pipe(map(data => data as Persona));
   }
 
+  postPersona(nombrePersona: string, apellidoPersona: string, dniPersona: number, telefonoPersona: number) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    const params = {nombrePersona, apellidoPersona, dniPersona, telefonoPersona};
+    return this.http.post( this.url + 'personas', params, {headers}).pipe(map(data => data));
+  }
+
   getEmpresa() {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
-    return this.http.get( this.url, {headers}).pipe(map(data => data ));
+    return this.http.get( this.url + 'empresas', {headers}).pipe(map(data => data as Empresa));
   }
 
   postReporteIngresoEgreso(fechaDesde: Date, fechaHasta: Date) {
@@ -105,4 +118,24 @@ export class ServiceService {
     return this.http.get( this.url + 'personas/personasdni/' + dni, {headers}).pipe(map(data => data[`vehiculos`] as Vehiculo));
   }
 
+  postEmpresa(nombreEmpresa: string) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    const params = {nombreEmpresa};
+    return this.http.post(this.url + 'empresas', params, {headers}).pipe(map(data => data));
+  }
+
+  postPlanillaIngreso() {
+    const token = this.leerToken;
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    const params = {};
+    return this.http.post( this.url + 'planilla-ingreso-egreso', params, {headers}).pipe(map(date => date));
+  }
+
+  postPlanillaEgreso() {
+    const token = this.leerToken;
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    const params = {};
+    return this.http.put( this.url + 'planilla-ingreso-egreso', params, {headers}).pipe(map(date => date));
+  }
 }
