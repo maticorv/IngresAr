@@ -39,7 +39,6 @@ export class LoginPage implements OnInit {
     this.service.login(this.user.email, this.user.password).subscribe((data) => {
       console.log(data);
       this.presentToast('Successfully logged in!');
-      this.router.navigate(['/startmenu']);
     },
       (error) => {console.log(error);
                   this.presentToast('Datos incorrectos, por favor ingreselos nuevamente');
@@ -47,11 +46,16 @@ export class LoginPage implements OnInit {
    }
 
    async presentToast(me: string) {
-     const toast = await this.toastController.create({
-       color: 'dark',
-       duration: 2000,
-       message: me,
-     });
-     toast.present();
-   }
+    const toast = await this.toastController.create({
+      position: 'middle',
+      color: 'dark',
+      duration: 2000,
+      message: me,
+    });
+    toast.present();
+    setTimeout(() => {
+      this.router.navigateByUrl('/startmenu');
+      },
+      2000);
+  }
 }
