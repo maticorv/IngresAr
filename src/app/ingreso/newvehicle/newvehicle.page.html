@@ -14,61 +14,58 @@
     <ion-button color="success" (click)="getColor()">Color</ion-button>
     <ion-button color="warning" (click)="getSeguro()">Seguro</ion-button> -->
     <h2>Informacion del Vehiculo</h2>
-    <h6>Dominio*</h6>
     <ion-row>
         <ion-item>
-            <ion-input placeholder="ingrese dominio"></ion-input>
+            <ion-label position="floating">Dominio
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input [(ngModel)]="dominio" required type="text"></ion-input>
         </ion-item>
     </ion-row>
-    <h6>Marca</h6>
+    <ion-row>
+        <ng-container *ngIf="marcas===undefined; else elseTemplate">
+        </ng-container>
+        <ng-template #elseTemplate>
+            <ion-item>
+                <ion-label>Marca</ion-label>
+                <ion-select [(ngModel)]="this.brand" interface="popover" style="width: 18cm" (ionChange)="Marca($event)">
+                    <ion-select-option [value]="i" *ngFor="let marca of marcas, let i=index ">{{marca.nombreMarca}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ng-template>
+    </ion-row>
+    <ion-row>
+        <ng-container *ngIf="modelos== undefined; else elseTemplate1 ">
+        </ng-container>
+        <ng-template #elseTemplate1>
+            <ion-item>
+                <ion-label>Modelo</ion-label>
+                <ion-select [(ngModel)]="model" interface="popover" style="width: 18cm" (ionChange)="Modelo($event)">
+                    <ion-select-option [value]=" i " *ngFor="let modelo of modelos, let i=index ">{{modelo.nombreModelo}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ng-template>
+    </ion-row>
     <ion-row>
         <ion-item>
-            <ng-container *ngIf="marcas===undefined; else elseTemplate">
-
-            </ng-container>
-            <ng-template #elseTemplate>
-                <select class="form-control" id="sel1" [(ngModel)]="brand">
-                    <option *ngFor="let marca of marcas, let i=index">{{marca.nombreMarca}}</option>
-                </select>
-            </ng-template>
+            <ion-label>Color</ion-label>
+            <ion-select [(ngModel)]="color " interface="popover" style="width: 18cm" (ionChange)="Color($event)">
+                <ion-select-option [value]=" i " *ngFor="let color of colors, let i=index ">{{color?.nombreColor}}</ion-select-option>
+            </ion-select>
         </ion-item>
-
     </ion-row>
-    <h6>Modelo</h6>
     <ion-row>
         <ion-item>
-            <select class="form-control" id="sel1">
-                <option  *ngFor="let item of marca">{{item.nombre}}</option>
-              </select>
+            <ion-label position="floating ">Aseguradora</ion-label>
+            <ion-input required [(ngModel)]="aseguradora "></ion-input>
         </ion-item>
-    </ion-row>
-    <h6>Color</h6>
-    <ion-row>
         <ion-item>
-            <select class="form-control" id="sel1">
-                <option  *ngFor="let item of marca">{{item.nombre}}</option>
-            </select>
+            <ion-label>Vencimiento de seguro</ion-label>
+            <ion-datetime [(ngModel)]="vencimiento" placeholder="myDate " [min]="myDate " [max]="max " displayFormat="DD MM YY " placeholder="Select Date "></ion-datetime>
         </ion-item>
     </ion-row>
-    <h6>Aseguradora</h6>
-    <ion-row>
-        <ion-item>
-            <select class="form-control" id="sel1">
-                <option  *ngFor="let item of aseguradora">{{item.nombre}}</option>
-                
-              </select>
-        </ion-item>
-    </ion-row>
-    <h6>Vencimiento de seguro</h6>
-    <ion-row>
-        <ion-item>
-            <ion-label>Mes/Dia/Año</ion-label>
-            <ion-datetime displayFormat="MM DD YY" placeholder="Select Date"></ion-datetime>
-        </ion-item>
-
-    </ion-row>
-    <ion-button color="primary" routerLink="/authorization" routerLinkActive="router-link-active">Aceptar</ion-button>
-    <ion-button color="primary" (click)="postVehiculo()">Crear</ion-button>
+    <ion-button color="primary " routerLink="/authorization " routerLinkActive="router-link-active ">Aceptar</ion-button>
+    <ion-button color="primary " (click)="postVehiculo() ">Crear</ion-button>
 
 
 </ion-content>
