@@ -9,7 +9,7 @@ import { Empresa } from '../interfaces/empresa';
   providedIn: 'root'
 })
 export class ServiceService {
-  url = 'http://192.168.0.105:8080/api/';
+  url = 'http://192.168.0.106:8080/api/';
 
   constructor(private http: HttpClient) { }
 
@@ -137,5 +137,11 @@ export class ServiceService {
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     const params = {};
     return this.http.put( this.url + 'planilla-ingreso-egreso', params, {headers}).pipe(map(date => date));
+  }
+
+  getPersonasDomicilio(lote: string) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    return this.http.get( this. url + 'domicilios/domiciliospersona/' + lote, {headers}).pipe(map(data => data as Persona));
   }
 }
