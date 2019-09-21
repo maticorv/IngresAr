@@ -49,7 +49,7 @@ export class TransportPage implements OnInit {
 
   getVehiculo() {
     this.service.getVechiculo(this.personas.dniPersona).subscribe(dato => {
-      console.log(dato);
+      this.vehiculo = dato;
     },
     (error) => {
       console.log(error);

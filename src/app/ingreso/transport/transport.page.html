@@ -13,7 +13,7 @@
     <ion-radio-group>
       <ion-item *ngFor="let v of vehiculo, let i = index">
         <ion-radio slot="start" name="patente" [value]="i" (ionSelect)="selected($event)"></ion-radio>
-        <ion-label> {{v.dominio}}</ion-label>
+        <ion-label> {{v.vehiculomarca.nombreMarca}} {{v.dominio}}</ion-label>
       </ion-item>
     </ion-radio-group>
   </ion-list>
