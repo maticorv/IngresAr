@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../../services/service.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-// import { ModalPersonaPage } from 'src/pp/modals/modal-persona/modal-persona.page';
 import { Persona } from 'src/app/interfaces/persona';
+import { Personas } from 'src/app/classes/persona';
 
 @Component({
   selector: 'app-dnisearch',
@@ -15,7 +15,7 @@ export class DnisearchPage implements OnInit {
   dni: number;
   persona: Persona;
 
-  constructor(private service: ServiceService, private router: Router, private alertCtrl: AlertController) { }
+  constructor(private service: ServiceService, private router: Router, private alertCtrl: AlertController, private personas: Personas) { }
 
   ngOnInit() {
   }
@@ -23,54 +23,55 @@ export class DnisearchPage implements OnInit {
   getpersona() {
     this.service.getPersona(this.dni).subscribe((data) => {
       this.persona = data;
-      // this.abrirModal();
-      // this.router.navigateByUrl('/transport');
+      this.personaExiste();
     },
     (error) => { console.log(error);
-                //  this.abrirModalerror();
+                 this.personaNoExiste();
     });
-    // this.abrirModal();
+
   }
 
-  // async abrirModal() {
-  //   const modal = await this.modalCtrl.create({
-  //     component: ModalPersonaPage,
-  //     componentProps: {
-  //       existe: true,
-  //       nombrePersona: this.persona.nombrePersona,
-  //       apellidoPersona: this.persona.apellidoPersona,
-  //       dniPersona: this.persona.dniPersona
-  //     }
-  //   });
-
-  //   await modal.present();
-  // }
-
-  // async abrirModalerror() {
-  //   const modal = await this.modalCtrl.create({
-  //     component: ModalPersonaPage,
-  //     componentProps: {
-  //       existe: false,
-  //       dni: this.dni
-  //     }
-  //   });
-
-  //   await modal.present();
-  // }
-  async presentAlertConfirm() {
+  async personaExiste() {
     const alert = await this.alertCtrl.create({
-      header: this.persona.nombrePersona + this.persona.apellidoPersona + this.persona.dniPersona,
-      message: 'Message <strong>text</strong>!!!',
+      header: this.persona.nombrePersona + ' ' + this.persona.apellidoPersona + ' ' + this.persona.dniPersona,
+      message: '¿Los datos son correctos?</strong>',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Aceptar',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+          handler: () => {
+            this.personas.nombrePersona = this.persona.nombrePersona;
+            this.personas.apellidoPersona = this.persona.apellidoPersona;
+            this.personas.dniPersona = this.persona.dniPersona;
+            this.router.navigateByUrl('/destination');
           }
         }, {
-          text: 'Okay',
+          text: 'Cancelar',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async personaNoExiste() {
+    const alert = await this.alertCtrl.create({
+      header: 'La persona con el dni: ' + this.dni + ' no se encuentra en la base de datos',
+      message: '¿Desea crearla?</strong>',
+      buttons: [
+        {
+          text: 'Aceptar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            this.router.navigateByUrl('/newperson');
+          }
+        }, {
+          text: 'Cancelar',
           handler: () => {
             console.log('Confirm Okay');
           }

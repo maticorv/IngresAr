@@ -15,11 +15,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  entryComponents: [
+  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ],
   declarations: [DnisearchPage]
 })

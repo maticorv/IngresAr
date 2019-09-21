@@ -42,7 +42,7 @@ export class LoginPage implements OnInit {
       this.router.navigate(['/startmenu']);
     },
       (error) => {console.log(error);
-                  this.presentToast(error);
+                  this.presentToast('Datos incorrectos, por favor ingreselos nuevamente');
       });
    }
 
@@ -50,7 +50,7 @@ export class LoginPage implements OnInit {
      const toast = await this.toastController.create({
        color: 'dark',
        duration: 2000,
-       message: 'Datos incorrectos, por favor ingreselos nuevamente',
+       message: me,
      });
      toast.present();
    }
