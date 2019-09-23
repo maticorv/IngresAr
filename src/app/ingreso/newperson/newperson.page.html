@@ -1,6 +1,6 @@
 <html lang="en">
 <ion-header>
-    <ion-toolbar translucent color="primary">
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <ion-back-button defaultHref='/typeofingress'></ion-back-button>
         </ion-buttons>
@@ -10,40 +10,40 @@
 
 
 <ion-content fullscreen>
-        <ion-list lines="full" class="ion-no-margin ion-no-padding">
-            <ion-item>
-                <ion-label position="stacked">Nombre
-                    <ion-text color="danger">*</ion-text>
-                </ion-label>
-                <ion-input required type="text" [(ngModel)]="nombrePersona"></ion-input>
-            </ion-item>
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+        <ion-item>
+            <ion-label position="floating">Nombre
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="text" [(ngModel)]="nombrePersona"></ion-input>
+        </ion-item>
 
-            <ion-item>
-                <ion-label position="stacked">Apellido
-                    <ion-text color="danger">*</ion-text>
-                </ion-label>
-                <ion-input required type="text" [(ngModel)]="apellidoPersona"></ion-input>
-            </ion-item>
+        <ion-item>
+            <ion-label position="floating">Apellido
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="text" [(ngModel)]="apellidoPersona"></ion-input>
+        </ion-item>
 
-            <ion-item>
-                <ion-label position="stacked">Numero de DNI
-                    <ion-text color="danger">*</ion-text>
-                </ion-label>
-                <ion-input required type="number" [(ngModel)]="dniPersona"></ion-input>
-            </ion-item>
+        <ion-item>
+            <ion-label position="floating">Numero de DNI
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="number" [(ngModel)]="dniPersona"></ion-input>
+        </ion-item>
 
-            <ion-item>
-                <ion-label position="stacked">Numero de teléfono
-                    <ion-text color="danger">*</ion-text>
-                </ion-label>
-                <ion-input required type="number" [(ngModel)]="telefonoPersona"></ion-input>
-            </ion-item>
+        <ion-item>
+            <ion-label position="floating">Numero de teléfono
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="number" [(ngModel)]="telefonoPersona"></ion-input>
+        </ion-item>
 
 
-            <div class="ion-padding">
-                <ion-button [disabled]="!(nombrePersona && apellidoPersona && dniPersona && telefonoPersona)" expand="block" type="submit" class="ion-no-margin" (click)="crearPersona()">Crear persona</ion-button>
-            </div>
-        </ion-list>
+        <div class="ion-padding">
+            <ion-button [disabled]="!(nombrePersona && apellidoPersona && dniPersona && telefonoPersona)" expand="block" type="submit" class="ion-no-margin" (click)="crearPersona()">Crear persona</ion-button>
+        </div>
+    </ion-list>
 </ion-content>
 
 </html>

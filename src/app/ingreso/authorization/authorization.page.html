@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <ion-back-button defaultHref='/transport'></ion-back-button>
         </ion-buttons>
@@ -16,7 +16,7 @@
         <ion-list>
             <ion-item>
                 <ion-select class="select-people-size" placeholder="¿Quien autoriza?" okText="Seleccionar" [(ngModel)]="index">
-                    <ion-select-option [value]=i *ngFor="let p of persona; let i = index"> {{p.nombrePersona}}  {{p.apellidoPersona}}</ion-select-option>
+                    <ion-select-option [value]=i *ngFor="let p of persona; let i = index"> {{p.nombrePersona}} {{p.apellidoPersona}}</ion-select-option>
                 </ion-select>
             </ion-item>
         </ion-list>
@@ -35,8 +35,8 @@
         </ion-item> -->
         <ion-item>
             <ion-label position="fixed">Cantidad: </ion-label>
-            <ion-input [value] = cantidad [(ngModel)]="cantidad"></ion-input>
-          </ion-item>
+            <ion-input [value]=c antidad [(ngModel)]="cantidad"></ion-input>
+        </ion-item>
     </ion-row>
 
 

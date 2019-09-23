@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <ion-back-button defaultHref='/dnisearch'></ion-back-button>
         </ion-buttons>
@@ -13,7 +13,8 @@
     <div class="row h-100 justify-content-center align-items-center">
         <div>
             <h2 class="text-center">¿Donde se dirige?</h2>
-            <h3>Ingrese lote o apellido de la familia</h3>
+            <h3>Ingrese lote</h3>
+            <!-- <h3>Ingrese lote o apellido de la familia</h3> -->
             <ion-item>
                 <ion-select placeholder="Lote" okText="Seleccionar" [(ngModel)]="tipo">Apellido
                     <ion-select-option value="LOTE">LOTE</ion-select-option>

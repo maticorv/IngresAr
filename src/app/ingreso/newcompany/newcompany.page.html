@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <ion-back-button defaultHref='/dnisearch'></ion-back-button>
         </ion-buttons>
@@ -10,7 +10,7 @@
 <ion-content fullscreen>
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
         <ion-item>
-            <ion-label position="stacked">Nombre Empresa
+            <ion-label position="floating">Nombre Empresa
                 <ion-text color="danger">*</ion-text>
             </ion-label>
             <ion-input required type="text" [(ngModel)]="nombreEmpresa"></ion-input>
