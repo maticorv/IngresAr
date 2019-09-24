@@ -60,7 +60,7 @@ export class DnisearchPage implements OnInit {
 
   async personaNoExiste() {
     const alert = await this.alertCtrl.create({
-      header: 'La persona con el dni: ' + this.dni + ' no se encuentra en la base de datos',
+      header: 'La persona con el dni ' + this.dni + ' no se encuentra en la base de datos',
       message: '¿Desea crearla?</strong>',
       buttons: [
         {

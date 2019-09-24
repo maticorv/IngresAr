@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { Persona } from '../interfaces/persona';
 import { Observable } from 'rxjs';
 import { Imarca } from '../interfaces/marca';
-import { Vehiculo } from '../interfaces/vehiculo';
+import { IVehiculo } from '../interfaces/vehiculo';
 import { Icolor } from '../interfaces/color';
 import { Empresa } from '../interfaces/empresa';
 
@@ -12,7 +12,7 @@ import { Empresa } from '../interfaces/empresa';
   providedIn: 'root'
 })
 export class ServiceService {
-  url = 'http://192.168.0.106:8080/api/';
+  url = 'http://192.168.0.1:8080/api/';
 
   constructor(private http: HttpClient) { }
 
@@ -45,7 +45,7 @@ export class ServiceService {
   getPersona(dni: number) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
-    return this.http.get( this.url + 'personas/personasdni/' + dni, {headers}).pipe(map(data => data as Persona));
+    return this.http.get( this.url + 'personas/dni/' + dni, {headers}).pipe(map(data => data as Persona));
   }
 
   postPersona(nombrePersona: string, apellidoPersona: string, dniPersona: number, telefonoPersona: number) {
@@ -118,7 +118,7 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     // tslint:disable-next-line: max-line-length
-    return this.http.get( this.url + 'personas/personasdni/' + dni, {headers}).pipe(map(data => data[`vehiculos`] as Vehiculo));
+    return this.http.get( this.url + 'personas/dni/' + dni, {headers}).pipe(map(data => data[`vehiculos`] as IVehiculo));
   }
 
   postEmpresa(nombreEmpresa: string) {
@@ -135,10 +135,12 @@ export class ServiceService {
     return this.http.post( this.url + 'planilla-ingreso-egreso', params, {headers}).pipe(map(date => date));
   }
 
-  postPlanillaEgreso() {
+  // tslint:disable-next-line: max-line-length
+  postPlanillaEgreso(autorizadoPrevio, acompaniantes, fechaIngreso, fechaEgreso, fecha, hora, tipovisita, planillatipo, planillabarrio, planillapersona, planillaqr, planilladestino, planillavehiculo, planillaempresa, planillaautorizador) {
     const token = this.leerToken;
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    const params = {};
+    // tslint:disable-next-line: max-line-length
+    const params = {autorizadoPrevio, acompaniantes, fechaIngreso, fechaEgreso, fecha, hora, tipovisita, planillatipo, planillabarrio, planillapersona, planillaqr, planilladestino, planillavehiculo, planillaempresa, planillaautorizador};
     return this.http.put( this.url + 'planilla-ingreso-egreso', params, {headers}).pipe(map(date => date));
   }
 
