@@ -1,4 +1,4 @@
-import { Vehiculo } from './vehiculo';
+import { IVehiculo } from './vehiculo';
 
 export interface Persona {
     id: number;
@@ -11,7 +11,7 @@ export interface Persona {
     personaestados?: any;
     listaamigos?: any;
     tipopersona?: any;
-    vehiculos: Vehiculo[];
+    vehiculos: IVehiculo[];
     detalleEvento?: any;
     art?: any;
 }

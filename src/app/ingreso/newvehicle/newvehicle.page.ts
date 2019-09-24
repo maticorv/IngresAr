@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { ServiceService } from '../../services/service.service';
 import { Router } from '@angular/router';
+import { IVehiculo } from '../../interfaces/vehiculo';
 import { Imarca } from '../../interfaces/marca';
 import { Imodelo } from '../../interfaces/modelo';
 import { Icolor } from '../../interfaces/color';
@@ -17,7 +18,7 @@ import { Vehiculo } from 'src/app/classes/vehiculo';
 export class NewvehiclePage implements OnInit {
   marcas: Imarca[];
   brand: string;
-  vehiculo: Vehiculo;
+  vehiculo: IVehiculo;
   modelos: Imodelo[];
   model: string;
   color: string;

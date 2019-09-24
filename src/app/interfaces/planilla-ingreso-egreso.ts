@@ -1,5 +1,5 @@
 import { Persona } from './persona';
-import { Vehiculo } from './vehiculo';
+import { IVehiculo } from './vehiculo';
 import { Empresa } from './empresa';
 
 export interface PlanillaIngresoEgreso {
@@ -16,7 +16,7 @@ export interface PlanillaIngresoEgreso {
     planillapersona?: Persona;
     planillaqr?: any;
     planilladestino?: any;
-    planillavehiculo?: Vehiculo;
+    planillavehiculo?: IVehiculo;
     planillaempresa?: Empresa;
     planillaautorizador?: Persona;
 }

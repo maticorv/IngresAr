@@ -126,7 +126,7 @@ export class ServiceService {
     return this.http.post(this.url + 'empresas', params, {headers}).pipe(map(data => data));
   }
 
-  postPlanillaIngreso() {
+  postPlanillaEgreso() {
     const token = this.leerToken;
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     const params = {};
@@ -134,17 +134,30 @@ export class ServiceService {
   }
 
   // tslint:disable-next-line: max-line-length
-  postPlanillaEgreso(autorizadoPrevio, acompaniantes, fechaIngreso, fechaEgreso, fecha, hora, tipovisita, planillatipo, planillabarrio, planillapersona, planillaqr, planilladestino, planillavehiculo, planillaempresa, planillaautorizador) {
+  postPlanillaIngreso(autorizadoPrevio, acompaniantes, fechaIngreso, fechaEgreso, fecha, hora, tipovisita, planillatipo, planillabarrio, persona, planillaqr, destino, vehiculo, planillaempresa, autorizador) {
     const token = this.leerToken;
-    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    const planillapersona = persona;
+    const planillavehiculo = vehiculo;
+    const planilladestino = destino;
+    const planillaautorizador = autorizador;
+    // tslint:disable-next-line: max-line-length
+    const headers = new HttpHeaders({ Authorization : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU2OTM3NDI2MH0.jv03d_qk_ifKss5FJAYlXwV4JUJOdVEQ8dOW5gHEhCDjy7Ggfwtnqa-7fduP4SW4K0VG5UlejJWgbT8nkz8BGA'});
     // tslint:disable-next-line: max-line-length
     const params = {autorizadoPrevio, acompaniantes, fechaIngreso, fechaEgreso, fecha, hora, tipovisita, planillatipo, planillabarrio, planillapersona, planillaqr, planilladestino, planillavehiculo, planillaempresa, planillaautorizador};
-    return this.http.put( this.url + 'planilla-ingreso-egreso', params, {headers}).pipe(map(date => date));
+    console.log(headers, params );
+    return this.http.post( this.url + 'planilla-ingreso-egresos', params, {headers}).pipe(map(date => date));
   }
 
   getPersonasDomicilio(lote: string) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     return this.http.get( this. url + 'domicilios/domiciliospersona/' + lote, {headers}).pipe(map(data => data as Persona));
+  }
+
+
+  // Servicio JSON
+
+  getHistorialIngresoEgreso() {
+    return this.http.get('../assets/planillaIngreso.json');
   }
 }

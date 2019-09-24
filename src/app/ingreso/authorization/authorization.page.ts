@@ -61,13 +61,17 @@ export class AuthorizationPage implements OnInit {
   }
 
   procesarIngreso() {
-    this.autorizador.nombreAutorizador = this.personaAut[this.index].nombrePersona;
-    this.autorizador.apellidoAutorizador = this.personaAut[this.index].apellidoPersona;
+    return new Promise<any>((resolve, reject) => {
+
+      this.autorizador.nombreAutorizador = this.personaAut[this.index].nombrePersona;
+      this.autorizador.apellidoAutorizador = this.personaAut[this.index].apellidoPersona;
+      this.autorizador.id = this.personaAut[this.index].id;
+
+      setTimeout( () => {
+          resolve();
+      }, 1000);
+  });
     // this.acompañante.cantidadAcompañante = this.cantidad;
-    setTimeout(() => {
-      this.postPlanillaIngresoEgreso();
-      },
-      2000);
   }
 
   async presentToast(me: string) {
@@ -100,18 +104,32 @@ export class AuthorizationPage implements OnInit {
     this.planillavehiculo = this.vehiculo;
     this.planillaempresa = this.empresa;
     this.planillaautorizador = this.autorizador;
-    // this.planillaautorizador.nombreAutorizador = this.personaAut[this.index].nombrePersona;
-    // this.planillaautorizador.apellidoAutorizador = this.personaAut[this.index].apellidoPersona;
+    this.planillaautorizador.nombreAutorizador = this.personaAut[this.index].nombrePersona;
+    this.planillaautorizador.apellidoAutorizador = this.personaAut[this.index].apellidoPersona;
     console.log(this.planillaautorizador, this.autorizador);
     // tslint:disable-next-line: max-line-length
-    // console.log(this.autorizadoPrevio, this.acompaniantes, this.fechaIngreso, this.fechaEgreso, this.fecha, this.hora, this.tipovisita, this.planillatipo, this.planillabarrio, this.planillapersona, this.planillaqr, this.planilladestino, this.planillavehiculo, this.planillaempresa, this.planillaautorizador);
+    console.log(this.autorizadoPrevio, this.acompaniantes, this.fechaIngreso, this.fechaEgreso, this.fecha, this.hora, this.tipovisita, this.planillatipo, this.planillabarrio, this.planillapersona, this.planillaqr, this.planilladestino, this.planillavehiculo, this.planillaempresa, this.planillaautorizador);
     // tslint:disable-next-line: max-line-length
-    // this.service.postPlanillaEgresso(this.autorizadoPrevio, this.acompaniantes, this.fechaIngreso, this.fechaEgreso, this.fecha, this.hora, this.tipovisita, this.planillatipo, this.planillabarrio, this.planillapersona, this.planillaqr, this.planilladestino, this.planillavehiculo, this.planillaempresa, this.planillaautorizador).subscribe(data => {
-    //   console.log(data);
-    // },
-    // (error) => {console.log(error);
-    // });
+    this.service.postPlanillaIngreso(this.autorizadoPrevio, this.acompaniantes, this.fechaIngreso, this.fechaEgreso, this.fecha, this.hora, this.tipovisita, this.planillatipo, this.planillabarrio, this.planillapersona, this.planillaqr, this.planilladestino, this.planillavehiculo, this.planillaempresa, this.planillaautorizador).subscribe(data => {
+      console.log('data', data);
+    },
+    (error) => {console.log('error', error);
+    });
 
   }
+
+  global() {
+    this.procesarIngreso().then(res => {
+        this.postPlanillaIngresoEgreso();
+    });
+}
+
+procesarIngresoJson() {
+  setTimeout(() => {
+    this.presentToast('El ingreso se ha procesado correctamente');
+    },
+    2000);
+}
+
 
 }

@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <ion-back-button defaultHref='/startmenu'></ion-back-button>
         </ion-buttons>
@@ -17,8 +17,8 @@
         </ion-item>
       </ion-row>
       <ion-row>
-        <ion-item>
-          <ion-label></ion-label>
+        <ion-item *ngFor="let p of planiallaIngresoEgreso">
+          <ion-label> {{p.apellido}} </ion-label>
         </ion-item>
       </ion-row>
     </ion-col>
@@ -30,8 +30,8 @@
         </ion-item>
       </ion-row>
       <ion-row>
-        <ion-item>
-          <ion-label></ion-label>
+        <ion-item *ngFor="let p of planiallaIngresoEgreso">
+          <ion-label> {{p.dni}} </ion-label>
         </ion-item>
       </ion-row>
     </ion-col>
@@ -43,8 +43,8 @@
         </ion-item>
       </ion-row>
       <ion-row>
-        <ion-item>
-          <ion-label></ion-label>
+        <ion-item *ngFor="let p of planiallaIngresoEgreso">
+          <ion-label> {{p.fehcaIngreso}}</ion-label>
         </ion-item>
       </ion-row>
     </ion-col>
@@ -56,8 +56,8 @@
         </ion-item>
       </ion-row>
       <ion-row>
-        <ion-item>
-          <ion-label></ion-label>
+        <ion-item *ngFor="let p of planiallaIngresoEgreso">
+          <ion-label> {{p.fechaEgreso}} </ion-label>
         </ion-item>
       </ion-row>
     </ion-col>
@@ -65,12 +65,12 @@
     <ion-col>
       <ion-row>
         <ion-item>
-          <ion-label>Dominio Vehiculo</ion-label>
+          <ion-label>Dominio</ion-label>
         </ion-item>
       </ion-row>
       <ion-row>
-        <ion-item>
-          <ion-label></ion-label>
+        <ion-item *ngFor="let p of planiallaIngresoEgreso">
+          <ion-label> {{p.dominio}} </ion-label>
         </ion-item>
       </ion-row>
     </ion-col>

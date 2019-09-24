@@ -20,6 +20,7 @@ export class DestinationPage implements OnInit {
   destination() {
     this.destino.tipoDestino = this.tipo;
     this.destino.lote = this.direccion;
+    this.destino.id = 11;
     // if (this.tipo === 'lote') {
     //   this.destino.lote = this.direccion;
     // } else {
