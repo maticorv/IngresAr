@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { ServiceService } from '../../services/service.service';
 import { Router } from '@angular/router';
-import { Vehiculo } from '../../interfaces/vehiculo';
 import { Imarca } from '../../interfaces/marca';
 import { Imodelo } from '../../interfaces/modelo';
 import { Icolor } from '../../interfaces/color';
 import { Iseguro } from '../../interfaces/seguro';
 import { ToastController } from '@ionic/angular';
+import { Vehiculo } from 'src/app/classes/vehiculo';
 
 @Component({
   selector: 'app-newvehicle',
@@ -52,6 +52,7 @@ export class NewvehiclePage implements OnInit {
       this.modelos[this.model], null ,
       this.colors[this.color]).subscribe(data => {
         console.log(data);
+        this.vehiculo = data;
         this.service.postPersonaVehiculo(data).subscribe( persona => {
           this.presentToast('Vehiculo creado satisfactoriamente');
         });

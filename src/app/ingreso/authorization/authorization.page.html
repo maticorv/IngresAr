@@ -16,7 +16,7 @@
         <ion-list>
             <ion-item>
                 <ion-select class="select-people-size" placeholder="¿Quien autoriza?" okText="Seleccionar" [(ngModel)]="index">
-                    <ion-select-option [value]=i *ngFor="let p of persona; let i = index"> {{p.nombrePersona}} {{p.apellidoPersona}}</ion-select-option>
+                    <ion-select-option [value]=i *ngFor="let p of personaAut; let i = index"> {{p.nombrePersona}} {{p.apellidoPersona}}</ion-select-option>
                 </ion-select>
             </ion-item>
         </ion-list>
@@ -43,7 +43,7 @@
 </ion-content>
 
 <ion-footer no-border>
-    <ion-button routerLink="/startmenu">
+    <ion-button (click)="postPlanillaIngresoEgreso()">
         Procesar Ingreso
     </ion-button>
 </ion-footer>
