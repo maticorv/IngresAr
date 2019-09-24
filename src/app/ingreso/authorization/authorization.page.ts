@@ -32,27 +32,27 @@ export class AuthorizationPage implements OnInit {
   tipovisita: string;
   planillatipo?: any;
   planillabarrio?: any;
-  planillapersona?: Personas;
+  // planillapersona?: Personas;
   planillaqr?: any;
-  planilladestino?: any;
-  planillavehiculo?: Vehiculo;
-  planillaempresa?: Empresa;
-  planillaautorizador?: Autorizador;
+  // planilladestino?: any;
+  // planillavehiculo?: Vehiculo;
+  // planillaempresa?: Empresa;
+  // planillaautorizador?: Autorizador;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private autorizador: Autorizador,
+  constructor(private planillaautorizador: Autorizador,
               private service: ServiceService, private router: Router,
-              private destino: Destino, private toastController: ToastController,
+              private planilladestino: Destino, private toastController: ToastController,
               private acompañante: Acompañante, private tipovisitas: Tipovisita,
-              private persona: Personas, private vehiculo: Vehiculo,
-              private empresa: Empresa) { }
+              private planillapersona: Personas, private planillavehiculo: Vehiculo,
+              private planillaempresa: Empresa) { }
 
   ngOnInit() {
     this.getPersonasDomicilio();
   }
 
   getPersonasDomicilio() {
-    this.service.getPersonasDomicilio(this.destino.lote).subscribe(data => {
+    this.service.getPersonasDomicilio(this.planilladestino.lote).subscribe(data => {
       this.personaAut = data[`personadoms`];
       console.log(this.personaAut);
     },
@@ -63,9 +63,9 @@ export class AuthorizationPage implements OnInit {
   procesarIngreso() {
     return new Promise<any>((resolve, reject) => {
 
-      this.autorizador.nombreAutorizador = this.personaAut[this.index].nombrePersona;
-      this.autorizador.apellidoAutorizador = this.personaAut[this.index].apellidoPersona;
-      this.autorizador.id = this.personaAut[this.index].id;
+      this.planillaautorizador.nombreAutorizador = this.personaAut[this.index].nombrePersona;
+      this.planillaautorizador.apellidoAutorizador = this.personaAut[this.index].apellidoPersona;
+      this.planillaautorizador.id = this.personaAut[this.index].id;
 
       setTimeout( () => {
           resolve();
@@ -98,15 +98,14 @@ export class AuthorizationPage implements OnInit {
     this.tipovisita = this.tipovisitas.nombreTipoVisita;
     this.planillatipo = null;
     this.planillabarrio = null;
-    this.planillapersona = this.persona;
     this.planillaqr = null;
-    this.planilladestino = this.destino;
-    this.planillavehiculo = this.vehiculo;
-    this.planillaempresa = this.empresa;
-    this.planillaautorizador = this.autorizador;
+    // this.planilladestino = this.destino;
+    // this.planillavehiculo = this.vehiculo;
+    // this.planillaempresa = this.empresa;
+    // this.planillaautorizador = this.autorizador;
     this.planillaautorizador.nombreAutorizador = this.personaAut[this.index].nombrePersona;
     this.planillaautorizador.apellidoAutorizador = this.personaAut[this.index].apellidoPersona;
-    console.log(this.planillaautorizador, this.autorizador);
+    console.log(this.planillaautorizador, this.planillaautorizador);
     // tslint:disable-next-line: max-line-length
     console.log(this.autorizadoPrevio, this.acompaniantes, this.fechaIngreso, this.fechaEgreso, this.fecha, this.hora, this.tipovisita, this.planillatipo, this.planillabarrio, this.planillapersona, this.planillaqr, this.planilladestino, this.planillavehiculo, this.planillaempresa, this.planillaautorizador);
     // tslint:disable-next-line: max-line-length
