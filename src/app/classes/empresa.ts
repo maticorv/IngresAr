@@ -1,3 +1,4 @@
 export class Empresa {
-    nombreEmpresa = null;
+    id: number;
+    nombreEmpresa: string;
 }

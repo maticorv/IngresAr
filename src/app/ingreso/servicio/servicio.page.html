@@ -68,8 +68,8 @@
         </div>
         <ion-list>
             <ion-item>
-                <ion-select class="select-people-size" placeholder="Seleccione empresa" okText="Seleccionar" [(ngModel)]="empresa">
-                    <ion-select-option [value]=e.nombreEmpresa *ngFor="let e of empresas; let i = index"> {{e.nombreEmpresa}}</ion-select-option>
+                <ion-select class="select-people-size" placeholder="Seleccione empresa" okText="Seleccionar" [(ngModel)]="i">
+                    <ion-select-option [value]=i *ngFor="let e of empresas; let i = index"> {{e.nombreEmpresa}}</ion-select-option>
                 </ion-select>
             </ion-item>
         </ion-list>

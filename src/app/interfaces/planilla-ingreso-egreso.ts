@@ -2,7 +2,7 @@ import { Persona } from './persona';
 import { IVehiculo } from './vehiculo';
 import { Empresa } from './empresa';
 
-export interface PlanillaIngresoEgreso {
+export interface IPlanillaIngresoEgreso {
     id: number;
     autorizadoPrevio: boolean;
     acompaniantes: number;

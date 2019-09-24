@@ -10,7 +10,7 @@ import { Servicio } from 'src/app/classes/servicio';
   styleUrls: ['./servicio.page.scss'],
 })
 export class ServicioPage implements OnInit {
-  empresa: string;
+  i: number;
 
   empresas: Empresa;
 
@@ -29,7 +29,8 @@ export class ServicioPage implements OnInit {
   }
 
   aceptar() {
-    this.servicio.nomServicio = this.empresa;
+    this.servicio.nomServicio = this.empresas[this.i].nombreEmpresa;
+    this.servicio.nomServicio = this.empresas[this.i].id;
     this.router.navigateByUrl('/transport');
   }
 

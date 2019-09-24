@@ -18,7 +18,20 @@
       </ion-row>
       <ion-row>
         <ion-item *ngFor="let p of planiallaIngresoEgreso">
-          <ion-label> {{p.apellido}} </ion-label>
+          <ion-label> {{p.planillapersona.apellidoPersona}} </ion-label>
+        </ion-item>
+      </ion-row>
+    </ion-col>
+
+    <ion-col>
+      <ion-row>
+        <ion-item>
+          <ion-label>Nombre</ion-label>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item *ngFor="let p of planiallaIngresoEgreso">
+          <ion-label> {{p.planillapersona.nombrePersona}} </ion-label>
         </ion-item>
       </ion-row>
     </ion-col>
@@ -31,7 +44,7 @@
       </ion-row>
       <ion-row>
         <ion-item *ngFor="let p of planiallaIngresoEgreso">
-          <ion-label> {{p.dni}} </ion-label>
+          <ion-label> {{p.planillapersona.dniPersona}} </ion-label>
         </ion-item>
       </ion-row>
     </ion-col>
@@ -39,12 +52,12 @@
     <ion-col>
       <ion-row>
         <ion-item>
-          <ion-label>Fecha Egreso</ion-label>
+          <ion-label>Fecha Ingreso</ion-label>
         </ion-item>
       </ion-row>
       <ion-row>
         <ion-item *ngFor="let p of planiallaIngresoEgreso">
-          <ion-label> {{p.fehcaIngreso}}</ion-label>
+          <ion-label> {{p.fechaIngreso}} </ion-label>
         </ion-item>
       </ion-row>
     </ion-col>
@@ -57,7 +70,7 @@
       </ion-row>
       <ion-row>
         <ion-item *ngFor="let p of planiallaIngresoEgreso">
-          <ion-label> {{p.fechaEgreso}} </ion-label>
+          <ion-label>  </ion-label>
         </ion-item>
       </ion-row>
     </ion-col>
@@ -70,7 +83,7 @@
       </ion-row>
       <ion-row>
         <ion-item *ngFor="let p of planiallaIngresoEgreso">
-          <ion-label> {{p.dominio}} </ion-label>
+          <ion-label> {{p.planillavehiculo.dominio}} </ion-label>
         </ion-item>
       </ion-row>
     </ion-col>

@@ -66,6 +66,9 @@ export class AuthorizationPage implements OnInit {
       this.planillaautorizador.nombreAutorizador = this.personaAut[this.index].nombrePersona;
       this.planillaautorizador.apellidoAutorizador = this.personaAut[this.index].apellidoPersona;
       this.planillaautorizador.id = this.personaAut[this.index].id;
+      if (this.tipovisitas.nombreTipoVisita === 'visita') {
+        this.planillaempresa = null;
+      }
 
       setTimeout( () => {
           resolve();
@@ -111,8 +114,10 @@ export class AuthorizationPage implements OnInit {
     // tslint:disable-next-line: max-line-length
     this.service.postPlanillaIngreso(this.autorizadoPrevio, this.acompaniantes, this.fechaIngreso, this.fechaEgreso, this.fecha, this.hora, this.tipovisita, this.planillatipo, this.planillabarrio, this.planillapersona, this.planillaqr, this.planilladestino, this.planillavehiculo, this.planillaempresa, this.planillaautorizador).subscribe(data => {
       console.log('data', data);
+      this.presentToast('El ingreso se ha procesado correctamente');
     },
     (error) => {console.log('error', error);
+                this.presentToast('Hubo un error al procesar los datos, intente nuevamente');
     });
 
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../../services/service.service';
+import { IPlanillaIngresoEgreso } from 'src/app/interfaces/planilla-ingreso-egreso';
 
 @Component({
   selector: 'app-planilla-ingreso-egreso',
@@ -10,13 +11,18 @@ export class PlanillaIngresoEgresoPage implements OnInit {
 
   constructor(private service: ServiceService) { }
 
-  planiallaIngresoEgreso: any;
+  planiallaIngresoEgreso: IPlanillaIngresoEgreso;
 
   ngOnInit() {
     this.getPlanillaIngresoEgreso();
   }
 
   getPlanillaIngresoEgreso() {
-    this.service.getHistorialIngresoEgreso().subscribe(data => this.planiallaIngresoEgreso = data);
+    this.service.getHistorialIngresoEgreso().subscribe(data => {
+      this.planiallaIngresoEgreso = data;
+      console.log(this.planiallaIngresoEgreso);
+    },
+    (error) => {console.log(error);
+    });
   }
 }

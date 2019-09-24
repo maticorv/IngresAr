@@ -7,6 +7,7 @@ import { Imarca } from '../interfaces/marca';
 import { IVehiculo } from '../interfaces/vehiculo';
 import { Icolor } from '../interfaces/color';
 import { Empresa } from '../interfaces/empresa';
+import { IPlanillaIngresoEgreso } from '../interfaces/planilla-ingreso-egreso';
 
 @Injectable({
   providedIn: 'root'
@@ -138,6 +139,7 @@ export class ServiceService {
   // tslint:disable-next-line: max-line-length
   postPlanillaIngreso(autorizadoPrevio, acompaniantes, fechaIngreso, fechaEgreso, fecha, hora, tipovisita, planillatipo, planillabarrio, planillapersona, planillaqr, planilladestino, planillavehiculo, planillaempresa, planillaautorizador) {
     const token = this.leerToken;
+    console.log(planillaempresa);
     // const planillapersona = persona;
     // const planillavehiculo = vehiculo;
     // const planilladestino = destino;
@@ -162,6 +164,9 @@ export class ServiceService {
   // Servicio JSON
 
   getHistorialIngresoEgreso() {
-    return this.http.get('../assets/planillaIngreso.json');
+    const token = this.leerToken();
+    // tslint:disable-next-line: max-line-length
+    const headers = new HttpHeaders({ Authorization : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU2OTQzNDIxM30.PYa_dbnHGz5wostR1YuZK9M6S9ht7bkzeRqwkwYFwaY4UXWC-f5F7WgjKjpVYeSEIESo8tPXf_Qqi3DA7kp-QA'});
+    return this.http.get(this.url + 'planilla-ingreso-egresos', {headers}).pipe(map(data => data as IPlanillaIngresoEgreso));
   }
 }
