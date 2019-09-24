@@ -26,6 +26,7 @@ export class TransportPage implements OnInit {
   siguiente() {
     this.vehiculos.dominio = this.vehiculo[this.auto].dominio;
     this.vehiculos.vehiculomarca = this.vehiculo[this.auto].vehiculomarca;
+    this.vehiculos.id = this.vehiculo[this.auto].id;
     this.router.navigateByUrl('/authorization');
   }
   selected(value: string) {

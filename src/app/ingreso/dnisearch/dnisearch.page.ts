@@ -44,6 +44,7 @@ export class DnisearchPage implements OnInit {
             this.personas.nombrePersona = this.persona.nombrePersona;
             this.personas.apellidoPersona = this.persona.apellidoPersona;
             this.personas.dniPersona = this.persona.dniPersona;
+            this.personas.id = this.persona.id;
             this.router.navigateByUrl('/destination');
           }
         }, {
