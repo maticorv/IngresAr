@@ -7,6 +7,8 @@ import { Imarca } from '../../interfaces/marca';
 import { Imodelo } from '../../interfaces/modelo';
 import { Icolor } from '../../interfaces/color';
 import { Iseguro } from '../../interfaces/seguro';
+import { ToastController } from '@ionic/angular';
+import { Vehiculo } from 'src/app/classes/vehiculo';
 
 @Component({
   selector: 'app-newvehicle',
@@ -16,7 +18,7 @@ import { Iseguro } from '../../interfaces/seguro';
 export class NewvehiclePage implements OnInit {
   marcas: Imarca[];
   brand: string;
-  vehiculo: IVehiculo;
+  vehiculo: Vehiculo;
   modelos: Imodelo[];
   model: string;
   color: string;
@@ -28,7 +30,8 @@ export class NewvehiclePage implements OnInit {
   aseguradora: string;
   vencimiento: string;
   position: number;
-  constructor(private calendar: Calendar, private service: ServiceService, private router: Router) {
+  constructor(private calendar: Calendar, private service: ServiceService, private router: Router,
+              private toastController: ToastController, private vehiculos: Vehiculo) {
     this.myDate = new Date().toISOString();
     this.max = new Date(new Date().getFullYear() + 2, new Date().getMonth() , new Date().getDay()).toISOString();
     this.calendar.createCalendar('MyCalendar').then(
@@ -46,7 +49,21 @@ export class NewvehiclePage implements OnInit {
   postVehiculo() {
     console.log(this.dominio, this.marcas[this.brand],
       this.modelos[this.model], this.colors[this.color], this.aseguradora, this.vencimiento );
-    // this.service.postVehiculo('SSSaaa', null, null, null, null, null, null).subscribe(data => console.log(data));
+    this.service.postVehiculo(this.dominio, this.marcas[this.brand],
+      this.modelos[this.model], null ,
+      this.colors[this.color]).subscribe(data => {
+        console.log(data);
+        this.vehiculos.id = data.id;
+        // this.vehiculos.vehiculocolor = data.vehiculocolor;
+        // this.vehiculos.vehiculomarca = data.vehiculomarca;
+        this.vehiculos.dominio = data.dominio;
+        this.service.postPersonaVehiculo(data).subscribe( persona => {
+          this.presentToast('Vehiculo creado satisfactoriamente');
+        });
+      }, (error) => {console.log(error);
+                     this.presentToast('Ha ocurrido un error');
+                    }
+      );
   }
 
   getMarca() {
@@ -90,6 +107,20 @@ export class NewvehiclePage implements OnInit {
     },
     (error) => { console.log(error);
     });
+  }
+
+  async presentToast(me: string) {
+    const toast = await this.toastController.create({
+      position: 'middle',
+      color: 'dark',
+      duration: 2000,
+      message: me,
+    });
+    toast.present();
+    setTimeout(() => {
+      this.router.navigateByUrl('/authorization');
+      },
+      2000);
   }
 
 }
