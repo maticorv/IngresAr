@@ -7,12 +7,13 @@ import { Imarca } from '../interfaces/marca';
 import { Vehiculo } from '../interfaces/vehiculo';
 import { Icolor } from '../interfaces/color';
 import { Empresa } from '../interfaces/empresa';
+import { Imodelo } from '../interfaces/modelo';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceService {
-  url = 'http://192.168.0.106:8080/api/';
+  url = 'http://192.168.0.1:8080/api/';
 
   constructor(private http: HttpClient) { }
 
@@ -55,6 +56,13 @@ export class ServiceService {
     return this.http.post( this.url + 'personas', params, {headers}).pipe(map(data => data));
   }
 
+  postPersonaVehiculo(vehiculo: Vehiculo) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    const params = {vehiculo};
+    return this.http.post( this.url + 'personas', params, {headers}).pipe(map(data => data));
+  }
+
   getEmpresa() {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
@@ -69,25 +77,15 @@ export class ServiceService {
   }
 
   // tslint:disable-next-line: max-line-length
-  postVehiculo(a: string, vehiculomarca: number, vehiculocolor: number, vehiculotipo: number, nombrePersona: string, dniPersona: number, apellidoPersona: string) {
+  postVehiculo(dominio: string, vehiculomarca: Imarca, vehiculomodelo: Imodelo, segurovehiculo ,  vehiculocolor: Icolor): Observable <Vehiculo> {
     const token = this.leerToken();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Accept: 'application/json',
       Authorization: 'Bearer ' + token });
-    const body = JSON.stringify({
-      personavehiculo: {
-        id: 10,
-        dominio : ' moratorium moratorium' ,
-        planillaIngresoEgreso : null,
-        detalleEvento : null,
-        vehiculomarca : null,
-        vehiculocolor : null,
-        vehiculotipo : null
-      },
-  });
+    const params = {dominio, vehiculomarca, vehiculomodelo, segurovehiculo, vehiculocolor };
     // tslint:disable-next-line:max-line-length
-    return this.http.post(this.url + 'personas', body, {headers}).pipe(map(data => data));
+    return this.http.post(this.url + 'vehiculos', params, {headers}).pipe(map(data => data as Vehiculo));
   }
 
   getMarca(): Observable <Imarca[]> {
