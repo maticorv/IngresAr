@@ -86,7 +86,6 @@ export class AuthorizationPage implements OnInit {
     });
     toast.present();
     setTimeout(() => {
-      this.router.navigateByUrl('/startmenu');
       },
       2000);
   }
@@ -115,6 +114,7 @@ export class AuthorizationPage implements OnInit {
     this.service.postPlanillaIngreso(this.autorizadoPrevio, this.acompaniantes, this.fechaIngreso, this.fechaEgreso, this.fecha, this.hora, this.tipovisita, this.planillatipo, this.planillabarrio, this.planillapersona, this.planillaqr, this.planilladestino, this.planillavehiculo, this.planillaempresa, this.planillaautorizador).subscribe(data => {
       console.log('data', data);
       this.presentToast('El ingreso se ha procesado correctamente');
+      this.router.navigateByUrl('/startmenu');
     },
     (error) => {console.log('error', error);
                 this.presentToast('Hubo un error al procesar los datos, intente nuevamente');

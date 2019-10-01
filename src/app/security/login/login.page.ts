@@ -39,6 +39,7 @@ export class LoginPage implements OnInit {
     this.service.login(this.user.email, this.user.password).subscribe((data) => {
       console.log(data);
       this.presentToast('Successfully logged in!');
+      this.router.navigateByUrl('/startmenu');
     },
       (error) => {console.log(error);
                   this.presentToast('Datos incorrectos, por favor ingreselos nuevamente');
@@ -54,7 +55,6 @@ export class LoginPage implements OnInit {
     });
     toast.present();
     setTimeout(() => {
-      this.router.navigateByUrl('/startmenu');
       },
       2000);
   }
