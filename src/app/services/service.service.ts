@@ -14,7 +14,7 @@ import { Imodelo } from '../interfaces/modelo';
   providedIn: 'root'
 })
 export class ServiceService {
-  url = 'ingresar.ddns.net/api/';
+  url = 'http://ingresar.ddns.net:8080/api/';
 
   constructor(private http: HttpClient) { }
 
