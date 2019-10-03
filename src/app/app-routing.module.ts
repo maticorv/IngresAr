@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'register', pathMatch: 'full' },
   { path: 'login', loadChildren: './security/login/login.module#LoginPageModule' },
   { path: 'forgot', loadChildren: './security/forgot/forgot.module#ForgotPageModule' },
   { path: 'startmenu', loadChildren: './startmenu/startmenu.module#StartmenuPageModule' },
@@ -21,6 +21,9 @@ const routes: Routes = [
   { path: 'egress', loadChildren: './egreso/egress/egress.module#EgressPageModule' },
   // tslint:disable-next-line: max-line-length
   { path: 'planilla-ingreso-egreso', loadChildren: './funcionesMenu/planilla-ingreso-egreso/planilla-ingreso-egreso.module#PlanillaIngresoEgresoPageModule' },
+  { path: 'register', loadChildren: './security/register/register.module#RegisterPageModule' },  { path: 'register2', loadChildren: './security/register2/register2.module#Register2PageModule' },
+
+
 
 
 
