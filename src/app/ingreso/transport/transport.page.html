@@ -13,7 +13,7 @@
             <ion-radio-group>
                 <ion-item *ngFor="let v of vehiculo, let i = index">
                     <ion-radio slot="start" name="patente" [value]="i" (ionSelect)="selected($event)"></ion-radio>
-                    <ion-label> {{v.vehiculomarca.nombreMarca}} {{v.dominio}}</ion-label>
+                    <ion-label>{{v.vehiculoMarca.nombreMarca}} {{v.dominio}}</ion-label>
                 </ion-item>
             </ion-radio-group>
         </ion-list>
@@ -21,6 +21,9 @@
     </form>
     <div>
         <ion-button size="small" fill="clear" color="dark" strong="true" [routerLink]="['/newvehicle']">Agregar Vehiculo</ion-button>
+    </div>
+    <div>
+        <ion-button size="small" fill="clear" color="dark" strong="true" (click)="ingresoAPie()">Ingreso a Pie</ion-button>
     </div>
     <div style="text-align-last: right">
         <ion-button (click)="siguiente()">Aceptar</ion-button>

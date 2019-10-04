@@ -1,6 +1,6 @@
 export class Destino {
     id: number;
-    lote: string;
+    casaDomicilio: string;
     apellido: string;
     tipoDestino: string;
 }

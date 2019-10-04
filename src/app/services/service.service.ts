@@ -135,17 +135,16 @@ export class ServiceService {
   }
 
   // tslint:disable-next-line: max-line-length
-  postPlanillaIngreso(autorizadoPrevio, acompaniantes, fechaIngreso, fechaEgreso, fecha, hora, tipovisita, planillatipo, planillabarrio, planillapersona, planillaqr, planilladestino, planillavehiculo, planillaempresa, planillaautorizador) {
-    const token = this.leerToken;
-    console.log(planillaempresa);
+  postPlanillaIngreso(autorizadoPrevio, acompaniantes, fechaIngreso, fechaEgreso, tipovisita, ingresoAPie, planillaBarrio, planillaPersona, planillaQr, planillaDestino, planillaVehiculo, planillaEmpresa, planillaAutorizador, planillaAcompaniantes) {
+    const token = this.leerToken();
     // const planillapersona = persona;
     // const planillavehiculo = vehiculo;
     // const planilladestino = destino;
     // const planillaautorizador = autorizador;
     // tslint:disable-next-line: max-line-length
-    const headers = new HttpHeaders({ Authorization : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU2OTM3NDI2MH0.jv03d_qk_ifKss5FJAYlXwV4JUJOdVEQ8dOW5gHEhCDjy7Ggfwtnqa-7fduP4SW4K0VG5UlejJWgbT8nkz8BGA'});
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     // tslint:disable-next-line: max-line-length
-    const params = {autorizadoPrevio, acompaniantes, fechaIngreso, fechaEgreso, fecha, hora, tipovisita, planillatipo, planillabarrio, planillapersona, planillaqr, planilladestino, planillavehiculo, planillaempresa, planillaautorizador};
+    const params = {autorizadoPrevio, acompaniantes, fechaIngreso, fechaEgreso, tipovisita, ingresoAPie, planillaBarrio, planillaPersona, planillaQr, planillaDestino, planillaVehiculo, planillaEmpresa, planillaAutorizador, planillaAcompaniantes};
     // tslint:disable-next-line: max-line-length
     // const params = {autorizadoPrevio, acompaniantes, fechaIngreso, fechaEgreso, fecha, hora, tipovisita, planillatipo, planillabarrio, planillapersona};
     console.log(headers, params );
@@ -164,7 +163,7 @@ export class ServiceService {
   getHistorialIngresoEgreso() {
     const token = this.leerToken();
     // tslint:disable-next-line: max-line-length
-    const headers = new HttpHeaders({ Authorization : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU2OTQzNDIxM30.PYa_dbnHGz5wostR1YuZK9M6S9ht7bkzeRqwkwYFwaY4UXWC-f5F7WgjKjpVYeSEIESo8tPXf_Qqi3DA7kp-QA'});
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'planilla-ingreso-egresos', {headers}).pipe(map(data => data as IPlanillaIngresoEgreso));
   }
 }

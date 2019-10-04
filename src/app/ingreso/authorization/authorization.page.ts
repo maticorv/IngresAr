@@ -9,6 +9,7 @@ import { Autorizador } from 'src/app/classes/autorizador';
 import { Vehiculo } from 'src/app/classes/vehiculo';
 import { Empresa } from 'src/app/classes/empresa';
 import { Tipovisita } from 'src/app/classes/tipovisita';
+import { IngresoAPie } from 'src/app/classes/ingresoAPie';
 
 @Component({
   selector: 'app-authorization',
@@ -38,22 +39,24 @@ export class AuthorizationPage implements OnInit {
   // planillavehiculo?: Vehiculo;
   // planillaempresa?: Empresa;
   // planillaautorizador?: Autorizador;
+  planillaAcompaniantes = [];
+  ingresoAPie: boolean;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private planillaautorizador: Autorizador,
+  constructor(private planillaAutorizador: Autorizador,
               private service: ServiceService, private router: Router,
-              private planilladestino: Destino, private toastController: ToastController,
+              private planillaDestino: Destino, private toastController: ToastController,
               private acompañante: Acompañante, private tipovisitas: Tipovisita,
-              private planillapersona: Personas, private planillavehiculo: Vehiculo,
-              private planillaempresa: Empresa) { }
+              private planillaPersona: Personas, private planillaVehiculo: Vehiculo,
+              private planillaEmpresa: Empresa, private ingresoaPie: IngresoAPie) { }
 
   ngOnInit() {
     this.getPersonasDomicilio();
   }
 
   getPersonasDomicilio() {
-    this.service.getPersonasDomicilio(this.planilladestino.lote).subscribe(data => {
-      this.personaAut = data[`personadoms`];
+    this.service.getPersonasDomicilio(this.planillaDestino.casaDomicilio).subscribe(data => {
+      this.personaAut = data[`domiciliopersonas`];
       console.log(this.personaAut);
     },
     (error) => { console.log(error);
@@ -63,11 +66,14 @@ export class AuthorizationPage implements OnInit {
   procesarIngreso() {
     return new Promise<any>((resolve, reject) => {
 
-      this.planillaautorizador.nombreAutorizador = this.personaAut[this.index].nombrePersona;
-      this.planillaautorizador.apellidoAutorizador = this.personaAut[this.index].apellidoPersona;
-      this.planillaautorizador.id = this.personaAut[this.index].id;
+      this.planillaAutorizador.nombrePersona = this.personaAut[this.index].nombrePersona;
+      this.planillaAutorizador.apellidoPersona = this.personaAut[this.index].apellidoPersona;
+      this.planillaAutorizador.id = this.personaAut[this.index].id;
       if (this.tipovisitas.nombreTipoVisita === 'visita') {
-        this.planillaempresa = null;
+        this.planillaEmpresa = null;
+      }
+      if (this.ingresoaPie.ingresoAPie === true) {
+        this.planillaVehiculo = null;
       }
 
       setTimeout( () => {
@@ -101,24 +107,22 @@ export class AuthorizationPage implements OnInit {
     this.planillatipo = null;
     this.planillabarrio = null;
     this.planillaqr = null;
+    this.ingresoAPie = this.ingresoaPie.ingresoAPie;
     // this.planilladestino = this.destino;
     // this.planillavehiculo = this.vehiculo;
     // this.planillaempresa = this.empresa;
     // this.planillaautorizador = this.autorizador;
-    this.planillaautorizador.nombreAutorizador = this.personaAut[this.index].nombrePersona;
-    this.planillaautorizador.apellidoAutorizador = this.personaAut[this.index].apellidoPersona;
-    console.log(this.planillaautorizador, this.planillaautorizador);
+    this.planillaAutorizador.nombrePersona = this.personaAut[this.index].nombrePersona;
+    this.planillaAutorizador.apellidoPersona = this.personaAut[this.index].apellidoPersona;
     // tslint:disable-next-line: max-line-length
-    console.log(this.autorizadoPrevio, this.acompaniantes, this.fechaIngreso, this.fechaEgreso, this.fecha, this.hora, this.tipovisita, this.planillatipo, this.planillabarrio, this.planillapersona, this.planillaqr, this.planilladestino, this.planillavehiculo, this.planillaempresa, this.planillaautorizador);
-    // tslint:disable-next-line: max-line-length
-    this.service.postPlanillaIngreso(this.autorizadoPrevio, this.acompaniantes, this.fechaIngreso, this.fechaEgreso, this.fecha, this.hora, this.tipovisita, this.planillatipo, this.planillabarrio, this.planillapersona, this.planillaqr, this.planilladestino, this.planillavehiculo, this.planillaempresa, this.planillaautorizador).subscribe(data => {
-      console.log('data', data);
+    this.service.postPlanillaIngreso(this.autorizadoPrevio, this.acompaniantes, this.fechaIngreso, this.fechaEgreso, this.tipovisita, this.ingresoAPie, this.planillabarrio, this.planillaPersona, this.planillaqr, this.planillaDestino, this.planillaVehiculo, this.planillaEmpresa, this.planillaAutorizador, this.planillaAcompaniantes).subscribe(data => {
       this.presentToast('El ingreso se ha procesado correctamente');
       this.router.navigateByUrl('/startmenu');
     },
     (error) => {console.log('error', error);
                 this.presentToast('Hubo un error al procesar los datos, intente nuevamente');
     });
+    // console.log(this.ingresoAPie.ingresoAPie);
 
   }
 

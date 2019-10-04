@@ -6,6 +6,6 @@ export interface IVehiculo {
     dominio: string;
     planillaIngresoEgreso?: any;
     detalleEvento?: any;
-    vehiculomarca: Imarca;
-    vehiculocolor: Icolor;
+    vehiculoMarca: Imarca;
+    vehiculoColor: Icolor;
 }
