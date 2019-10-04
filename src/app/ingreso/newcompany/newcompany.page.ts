@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../../services/service.service';
-import { Servicio } from 'src/app/classes/servicio';
+import { Servicios } from 'src/app/classes/servicio';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
@@ -14,15 +14,16 @@ export class NewcompanyPage implements OnInit {
   nombreEmpresa: string;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private service: ServiceService, private servicio: Servicio, private router: Router, private toastController: ToastController) { }
+  constructor(private service: ServiceService, private servicio: Servicios, private router: Router, private toastController: ToastController) { }
 
   ngOnInit() {
   }
 
   crearEmpresa() {
-    this.servicio.nomServicio = this.nombreEmpresa;
     this.service.postEmpresa(this.nombreEmpresa).subscribe( data => {
       console.log(data);
+      this.servicio.id = data.id;
+      this.servicio.nombreEmpresa = data.nombreEmpresa;
       this.presentToast('La empresa se ha creado correctamente');
     },
     (error) => {console.log(error);

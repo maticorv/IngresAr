@@ -124,7 +124,7 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     const params = {nombreEmpresa};
-    return this.http.post(this.url + 'empresas', params, {headers}).pipe(map(data => data));
+    return this.http.post(this.url + 'empresas', params, {headers}).pipe(map(data => data as Empresa));
   }
 
   postPlanillaEgreso() {

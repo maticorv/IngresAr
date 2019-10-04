@@ -19,9 +19,8 @@ import { Destino } from 'src/app/classes/destino';
 import { Tipovisita } from './classes/tipovisita';
 import { Autorizador } from './classes/autorizador';
 import { Acompañante } from './classes/acompañante';
-import { Servicio } from './classes/servicio';
+import { Servicios } from './classes/servicio';
 import { Vehiculo } from './classes/vehiculo';
-import { Empresa } from 'src/app/classes/empresa';
 import { IngresoAPie } from 'src/app/classes/ingresoAPie';
 
 @NgModule({
@@ -32,7 +31,7 @@ import { IngresoAPie } from 'src/app/classes/ingresoAPie';
     AngularFireAuthModule,
     AppRoutingModule,
     ComponentsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     StatusBar,
@@ -44,9 +43,8 @@ import { IngresoAPie } from 'src/app/classes/ingresoAPie';
     Tipovisita,
     Autorizador,
     Acompañante,
-    Servicio,
+    Servicios,
     Vehiculo,
-    Empresa,
     IngresoAPie,
 
   ],

@@ -7,9 +7,9 @@ import { Personas } from 'src/app/classes/persona';
 import { Destino } from 'src/app/classes/destino';
 import { Autorizador } from 'src/app/classes/autorizador';
 import { Vehiculo } from 'src/app/classes/vehiculo';
-import { Empresa } from 'src/app/classes/empresa';
 import { Tipovisita } from 'src/app/classes/tipovisita';
 import { IngresoAPie } from 'src/app/classes/ingresoAPie';
+import { Servicios } from 'src/app/classes/servicio';
 
 @Component({
   selector: 'app-authorization',
@@ -48,7 +48,7 @@ export class AuthorizationPage implements OnInit {
               private planillaDestino: Destino, private toastController: ToastController,
               private acompañante: Acompañante, private tipovisitas: Tipovisita,
               private planillaPersona: Personas, private planillaVehiculo: Vehiculo,
-              private planillaEmpresa: Empresa, private ingresoaPie: IngresoAPie) { }
+              private planillaEmpresa: Servicios, private ingresoaPie: IngresoAPie) { }
 
   ngOnInit() {
     this.getPersonasDomicilio();
@@ -122,7 +122,7 @@ export class AuthorizationPage implements OnInit {
     (error) => {console.log('error', error);
                 this.presentToast('Hubo un error al procesar los datos, intente nuevamente');
     });
-    // console.log(this.ingresoAPie.ingresoAPie);
+    // console.log(this.planillaEmpresa);
 
   }
 
