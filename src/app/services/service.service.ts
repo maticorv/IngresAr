@@ -9,6 +9,7 @@ import { Icolor } from '../interfaces/color';
 import { Empresa } from '../interfaces/empresa';
 import { IPlanillaIngresoEgreso } from '../interfaces/planilla-ingreso-egreso';
 import { Imodelo } from '../interfaces/modelo';
+import { Vehiculo } from '../classes/vehiculo';
 
 @Injectable({
   providedIn: 'root'
@@ -54,14 +55,14 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     const params = {nombrePersona, apellidoPersona, dniPersona, telefonoPersona};
-    return this.http.post( this.url + 'personas', params, {headers}).pipe(map(data => data));
+    return this.http.post( this.url + 'personas', params, {headers}).pipe(map(data => data as Persona));
   }
 
-  postPersonaVehiculo( vehiculo: IVehiculo) {
+  postPersonaVehiculo(persona) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    const params = {vehiculo};
-    return this.http.post( this.url + 'personas', params, {headers}).pipe(map(data => data));
+    const params = {persona};
+    return this.http.put(this.url + 'personas', params, {headers}).pipe(map(data => data));
   }
 
   getEmpresa() {
@@ -78,13 +79,14 @@ export class ServiceService {
   }
 
   // tslint:disable-next-line: max-line-length
-  postVehiculo(dominio: string, vehiculomarca: Imarca, vehiculomodelo: Imodelo, segurovehiculo ,  vehiculocolor: Icolor): Observable <IVehiculo> {
+  postVehiculo(dominio, vehiculoMarca, vehiculoModelo, segurovehiculo ,  vehiculoColor) {
     const token = this.leerToken();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Accept: 'application/json',
       Authorization: 'Bearer ' + token });
-    const params = {dominio, vehiculomarca, vehiculomodelo, segurovehiculo, vehiculocolor };
+    const params = {dominio, vehiculoMarca, vehiculoModelo, segurovehiculo, vehiculoColor };
+    console.log(params);
     // tslint:disable-next-line:max-line-length
     return this.http.post(this.url + 'vehiculos', params, {headers}).pipe(map(data => data as IVehiculo));
   }

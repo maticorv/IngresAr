@@ -1,11 +1,11 @@
 import { Imarca } from './marca';
 import { Icolor } from './color';
+import { Imodelo } from './modelo';
 
 export interface IVehiculo {
     id: number;
     dominio: string;
-    planillaIngresoEgreso?: any;
-    detalleEvento?: any;
-    vehiculoMarca: Imarca;
-    vehiculoColor: Icolor;
+    vehiculoMarca?: any;
+    vehiculoColor?: any;
+    vehiculoModelo?: any;
 }

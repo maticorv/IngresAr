@@ -22,12 +22,13 @@ export class NewpersonPage implements OnInit {
   ngOnInit() {
   }
   crearPersona() {
-    this.persona.nombrePersona = this.nombrePersona;
-    this.persona.apellidoPersona = this.apellidoPersona;
-    this.persona.dniPersona = this.dniPersona;
-    this.persona.telefonoPersona = this.telefonoPersona;
     this.service.postPersona(this.nombrePersona, this.apellidoPersona, this.dniPersona, this.telefonoPersona).subscribe(data => {
       console.log(data);
+      this.persona.nombrePersona = data.nombrePersona;
+      this.persona.apellidoPersona = data.apellidoPersona;
+      this.persona.dniPersona = data.dniPersona;
+      this.persona.telefonoPersona = data.telefonoPersona;
+      this.persona.id = data.id;
       this.presentToast('El usuario se ha creado correctamente');
       // this.router.navigateByUrl('/destination');
     },

@@ -23,6 +23,7 @@ export class DnisearchPage implements OnInit {
   getpersona() {
     this.service.getPersona(this.dni).subscribe((data) => {
       this.persona = data;
+      console.log(data);
       this.personaExiste();
     },
     (error) => { console.log(error);

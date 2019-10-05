@@ -1,8 +1,9 @@
+import { Marca } from './marca';
+
 export class Vehiculo {
     id: number;
     dominio: string;
-    planillaIngresoEgreso?: any;
     vehiculoModelo?: any;
-    vehiculoMarca?: any;
+    vehiculoMarca?: Marca;
     vehiculoColor?: any;
 }
