@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref='/startmenu'></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-capitalize ion-text-center">Planilla Personas dentro del Establecimiento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-row>
+  <ion-col>
+    <ion-row>
+      <ion-item>
+        <ion-label>Apellido</ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item *ngFor="let p of planiallaIngresoEgreso">
+        <ion-label> {{p.planillaPersona.apellidoPersona}} </ion-label>
+      </ion-item>
+    </ion-row>
+  </ion-col>
+
+  <ion-col>
+    <ion-row>
+      <ion-item>
+        <ion-label>Nombre</ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item *ngFor="let p of planiallaIngresoEgreso">
+        <ion-label> {{p.planillaPersona.nombrePersona}} </ion-label>
+      </ion-item>
+    </ion-row>
+  </ion-col>
+
+  <ion-col>
+    <ion-row>
+      <ion-item>
+        <ion-label>DNI</ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item *ngFor="let p of planiallaIngresoEgreso">
+        <ion-label> {{p.planillaPersona.dniPersona}} </ion-label>
+      </ion-item>
+    </ion-row>
+  </ion-col>
+
+  <ion-col>
+    <ion-row>
+      <ion-item>
+        <ion-label>Dominio</ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item *ngFor="let p of planiallaIngresoEgreso">
+        <ion-label> {{p.planillaVehiculo.dominio}} </ion-label>
+      </ion-item>
+    </ion-row>
+  </ion-col>
+</ion-row>
+
+
+</ion-content>

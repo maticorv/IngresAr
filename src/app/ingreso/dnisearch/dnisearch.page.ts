@@ -46,6 +46,9 @@ export class DnisearchPage implements OnInit {
             this.personas.apellidoPersona = this.persona.apellidoPersona;
             this.personas.dniPersona = this.persona.dniPersona;
             this.personas.id = this.persona.id;
+            this.personas.telefonoPersona = this.persona.telefonoPersona;
+            this.personas.vehiculos = this.persona.vehiculos;
+            this.setNullData();
             this.router.navigateByUrl('/destination');
           }
         }, {
@@ -70,6 +73,7 @@ export class DnisearchPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
+            this.setNullData();
             this.router.navigateByUrl('/newperson');
           }
         }, {
@@ -82,6 +86,10 @@ export class DnisearchPage implements OnInit {
     });
 
     await alert.present();
+  }
+  setNullData() {
+    this.dni = null;
+    this.persona = null;
   }
 
 }
