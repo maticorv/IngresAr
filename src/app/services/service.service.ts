@@ -58,10 +58,10 @@ export class ServiceService {
     return this.http.post( this.url + 'personas', params, {headers}).pipe(map(data => data as Persona));
   }
 
-  postPersonaVehiculo(persona) {
+  postPersonaVehiculo(id, nombrePersona, apellidoPersona,dniPersona, telefonoPersona, vehiculos) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    const params = {persona};
+    const params = {id, nombrePersona, apellidoPersona,dniPersona, telefonoPersona, vehiculos};
     return this.http.put(this.url + 'personas', params, {headers}).pipe(map(data => data));
   }
 
@@ -168,4 +168,11 @@ export class ServiceService {
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'planilla-ingreso-egresos', {headers}).pipe(map(data => data as IPlanillaIngresoEgreso));
   }
+
+  getPersonasDentroEstablecimiento() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + '', {headers}).pipe(map(data => data as IPlanillaIngresoEgreso));
+  }
+
 }

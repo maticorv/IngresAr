@@ -62,12 +62,13 @@ export class NewvehiclePage implements OnInit {
         console.log(data);
         this.vehiculos.id = data.id;
         this.vehiculos.dominio = data.dominio;
-        // this.vehiculos.vehiculoMarca = data.vehiculoMarca;
-        // this.vehiculos.vehiculoMarca = data.vehiculoMarca;
+        this.vehiculos.vehiculoMarca = data.vehiculoMarca;
+        this.vehiculos.vehiculoModelo = data.vehiculoModelo;
         this.ingresoAPie.ingresoAPie = false;
-        // this.persona.vehiculos.push(data);
+        this.persona.vehiculos.push(data);
         // tslint:disable-next-line: no-shadowed-variable
-        this.service.postPersonaVehiculo(this.persona).subscribe((data) => {
+        // tslint:disable-next-line: max-line-length
+        this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe((data) => {
           this.presentToast('Vehiculo creado satisfactoriamente');
         });
       }, (error) => {console.log(error);
