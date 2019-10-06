@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../../services/service.service';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
-import { Acompañante } from 'src/app/classes/acompañante';
+import { ToastController, AlertController } from '@ionic/angular';
+import { Acompaniante } from 'src/app/classes/acompañante';
 import { Personas } from 'src/app/classes/persona';
 import { Destino } from 'src/app/classes/destino';
 import { Autorizador } from 'src/app/classes/autorizador';
@@ -10,6 +10,7 @@ import { Vehiculo } from 'src/app/classes/vehiculo';
 import { Tipovisita } from 'src/app/classes/tipovisita';
 import { IngresoAPie } from 'src/app/classes/ingresoAPie';
 import { Servicios } from 'src/app/classes/servicio';
+import { Persona } from 'src/app/interfaces/persona';
 
 @Component({
   selector: 'app-authorization',
@@ -19,9 +20,10 @@ import { Servicios } from 'src/app/classes/servicio';
 export class AuthorizationPage implements OnInit {
 
   index: number;
-  dni: string;
+  dni: number;
   cantidad = 0;
   personaAut: Personas;
+  persona: Persona;
 
   // planilla ingreso
   autorizadoPrevio: boolean;
@@ -33,12 +35,7 @@ export class AuthorizationPage implements OnInit {
   tipovisita: string;
   planillatipo?: any;
   planillabarrio?: any;
-  // planillapersona?: Personas;
   planillaqr?: any;
-  // planilladestino?: any;
-  // planillavehiculo?: Vehiculo;
-  // planillaempresa?: Empresa;
-  // planillaautorizador?: Autorizador;
   planillaAcompaniantes = [];
   ingresoAPie: boolean;
 
@@ -46,9 +43,10 @@ export class AuthorizationPage implements OnInit {
   constructor(private planillaAutorizador: Autorizador,
               private service: ServiceService, private router: Router,
               private planillaDestino: Destino, private toastController: ToastController,
-              private acompañante: Acompañante, private tipovisitas: Tipovisita,
+              private acompañante: Acompaniante, private tipovisitas: Tipovisita,
               private planillaPersona: Personas, private planillaVehiculo: Vehiculo,
-              private planillaEmpresa: Servicios, private ingresoaPie: IngresoAPie) { }
+              private planillaEmpresa: Servicios, private ingresoaPie: IngresoAPie,
+              private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.getPersonasDomicilio();
@@ -108,10 +106,6 @@ export class AuthorizationPage implements OnInit {
     this.planillabarrio = null;
     this.planillaqr = null;
     this.ingresoAPie = this.ingresoaPie.ingresoAPie;
-    // this.planilladestino = this.destino;
-    // this.planillavehiculo = this.vehiculo;
-    // this.planillaempresa = this.empresa;
-    // this.planillaautorizador = this.autorizador;
     this.planillaAutorizador.nombrePersona = this.personaAut[this.index].nombrePersona;
     this.planillaAutorizador.apellidoPersona = this.personaAut[this.index].apellidoPersona;
     // tslint:disable-next-line: max-line-length
@@ -132,12 +126,81 @@ export class AuthorizationPage implements OnInit {
     });
 }
 
-procesarIngresoJson() {
+  procesarIngresoJson() {
   setTimeout(() => {
     this.presentToast('El ingreso se ha procesado correctamente');
     },
     2000);
 }
+
+  buscarAcompaniante() {
+    this.service.getPersona(this.dni).subscribe((data) => {
+      this.persona = data;
+      console.log(data);
+      this.personaExiste();
+    },
+    (error) => { console.log(error);
+                 this.personaNoExiste();
+    });
+  }
+
+  async personaExiste() {
+    const alert = await this.alertCtrl.create({
+      header: this.persona.nombrePersona + ' ' + this.persona.apellidoPersona + ' ' + this.persona.dniPersona,
+      message: '¿Los datos son correctos?</strong>',
+      buttons: [
+        {
+          text: 'Aceptar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            this.planillaAcompaniantes.push(this.persona);
+            this.dni = null;
+          }
+        }, {
+          text: 'Cancelar',
+          handler: () => {
+            console.log('Confirm cancel');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async personaNoExiste() {
+    const alert = await this.alertCtrl.create({
+      header: 'La persona con el dni ' + this.dni + ' no se encuentra en la base de datos',
+      message: '¿Desea crearla?</strong>',
+      buttons: [
+        {
+          text: 'Aceptar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            this.dni = null;
+            this.router.navigateByUrl('/newcompanion');
+          }
+        }, {
+          text: 'Cancelar',
+          handler: () => {
+            console.log('Confirm cancel');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  mostrarAcompaniantes() {
+    console.log(this.planillaAcompaniantes);
+  }
+
+  agregarAcompaniante() {
+    this.planillaAcompaniantes.push(this.acompañante);
+  }
 
 
 }

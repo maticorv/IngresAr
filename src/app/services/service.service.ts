@@ -172,7 +172,7 @@ export class ServiceService {
   getPersonasDentroEstablecimiento() {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    return this.http.get(this.url + '', {headers}).pipe(map(data => data as IPlanillaIngresoEgreso));
+    return this.http.get(this.url + 'planillaegreso', {headers}).pipe(map(data => data as IPlanillaIngresoEgreso));
   }
 
 }

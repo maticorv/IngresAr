@@ -18,11 +18,12 @@ import { Personas } from 'src/app/classes/persona';
 import { Destino } from 'src/app/classes/destino';
 import { Tipovisita } from './classes/tipovisita';
 import { Autorizador } from './classes/autorizador';
-import { Acompañante } from './classes/acompañante';
+import { Acompaniante } from './classes/acompañante';
 import { Servicios } from './classes/servicio';
 import { Vehiculo } from './classes/vehiculo';
 import { IngresoAPie } from 'src/app/classes/ingresoAPie';
 import { Marca } from './classes/marca';
+import { AuthorizationPage } from './ingreso/authorization/authorization.page';
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,11 +44,12 @@ import { Marca } from './classes/marca';
     Destino,
     Tipovisita,
     Autorizador,
-    Acompañante,
+    Acompaniante,
     Servicios,
     Vehiculo,
     IngresoAPie,
     Marca,
+    AuthorizationPage,
 
   ],
   bootstrap: [AppComponent]
