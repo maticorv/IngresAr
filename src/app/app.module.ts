@@ -22,6 +22,8 @@ import { Acompañante } from './classes/acompañante';
 import { Servicio } from './classes/servicio';
 import { Vehiculo } from './classes/vehiculo';
 import { Empresa } from 'src/app/classes/empresa';
+import { Account } from './classes/account';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -45,7 +47,8 @@ import { Empresa } from 'src/app/classes/empresa';
     Acompañante,
     Servicio,
     Vehiculo,
-    Empresa
+    Empresa,
+    Account,
   ],
   bootstrap: [AppComponent]
 })
