@@ -9,6 +9,7 @@
 
 <ion-content>
 
+<<<<<<< HEAD
     <ion-row>
         <ion-list>
           <ion-row>
@@ -87,6 +88,87 @@
           </ion-row>
       </ion-list>
     </ion-row>
+=======
+  <ion-row>
+    <ion-col>
+      <ion-row>
+        <ion-item>
+          <ion-label>Apellido</ion-label>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item *ngFor="let p of planiallaIngresoEgreso">
+          <ion-label> {{p.planillaPersona.apellidoPersona}} </ion-label>
+        </ion-item>
+      </ion-row>
+    </ion-col>
+
+    <ion-col>
+      <ion-row>
+        <ion-item>
+          <ion-label>Nombre</ion-label>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item *ngFor="let p of planiallaIngresoEgreso">
+          <ion-label> {{p.planillaPersona.nombrePersona}} </ion-label>
+        </ion-item>
+      </ion-row>
+    </ion-col>
+  
+    <ion-col>
+      <ion-row>
+        <ion-item>
+          <ion-label>DNI</ion-label>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item *ngFor="let p of planiallaIngresoEgreso">
+          <ion-label> {{p.planillaPersona.dniPersona}} </ion-label>
+        </ion-item>
+      </ion-row>
+    </ion-col>
+  
+    <ion-col>
+      <ion-row>
+        <ion-item>
+          <ion-label>Fecha Ingreso</ion-label>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item *ngFor="let p of planiallaIngresoEgreso">
+          <ion-label> {{p.fechaIngreso}} </ion-label>
+        </ion-item>
+      </ion-row>
+    </ion-col>
+      
+    <ion-col>
+      <ion-row>
+        <ion-item>
+          <ion-label>Fecha Egreso</ion-label>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item *ngFor="let p of planiallaIngresoEgreso">
+          <ion-label>  </ion-label>
+        </ion-item>
+      </ion-row>
+    </ion-col>
+  
+    <ion-col>
+      <ion-row>
+        <ion-item>
+          <ion-label>Dominio</ion-label>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item *ngFor="let p of planiallaIngresoEgreso">
+          <ion-label> {{p.planillaVehiculo.dominio}} </ion-label>
+        </ion-item>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+>>>>>>> 127c0ec238ece81721f018c2dc6f0cd7d88a3769
 
 
 </ion-content>
