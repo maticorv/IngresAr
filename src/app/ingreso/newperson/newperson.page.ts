@@ -20,6 +20,7 @@ export class NewpersonPage implements OnInit {
   constructor(private router: Router, private persona: Personas, private service: ServiceService, private toastController: ToastController) { }
 
   ngOnInit() {
+    this.dniPersona = this.persona.dniPersona;
   }
   crearPersona() {
     this.service.postPersona(this.nombrePersona, this.apellidoPersona, this.dniPersona, this.telefonoPersona).subscribe(data => {

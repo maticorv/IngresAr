@@ -11,6 +11,7 @@ import { IPlanillaIngresoEgreso } from '../interfaces/planilla-ingreso-egreso';
 import { Imodelo } from '../interfaces/modelo';
 import { Vehiculo } from '../classes/vehiculo';
 import { Inovedad } from '../interfaces/novedad';
+import { Inormas } from '../interfaces/inormas';
 
 @Injectable({
   providedIn: 'root'
@@ -194,5 +195,10 @@ export class ServiceService {
     return this.http.post(this.url + 'novedades', params, {headers}).pipe(map(data => data as Inovedad));
   }
 
+  getNormasBarrio() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'norma-barrios', {headers}).pipe(map(data => data as Inormas));
+  }
 
 }

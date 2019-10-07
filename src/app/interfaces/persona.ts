@@ -4,7 +4,7 @@ export interface Persona {
     id: number;
     nombrePersona: string;
     apellidoPersona: string;
-    dniPersona?: number;
+    dniPersona: number;
     telefonoPersona?: number;
     personabarrio?: any;
     personacarnet?: any;
