@@ -26,6 +26,19 @@ const routes: Routes = [
   { path: 'newcompanion', loadChildren: './ingreso/newcompanion/newcompanion.module#NewcompanionPageModule' },
   { path: 'register', loadChildren: './security/register/register.module#RegisterPageModule' },
   { path: 'register2', loadChildren: './security/register2/register2.module#Register2PageModule' },
+  { path: 'menu-administrator', loadChildren: './Administrador/menu-administrator/menu-administrator.module#MenuAdministratorPageModule' },
+  // tslint:disable-next-line: max-line-length
+  { path: 'manage-common-space', loadChildren: './Administrador/manage-common-space/manage-common-space.module#ManageCommonSpacePageModule' },
+  { path: 'event-reports', loadChildren: './Administrador/event-reports/event-reports.module#EventReportsPageModule' },  { path: 'norms', loadChildren: './Administrador/norms/norms.module#NormsPageModule' },
+  { path: 'view-norm', loadChildren: './Administrador/view-norm/view-norm.module#ViewNormPageModule' },
+  { path: 'new-norm', loadChildren: './Administrador/new-norm/new-norm.module#NewNormPageModule' },
+  { path: 'edit-common-space', loadChildren: './Administrador/edit-common-space/edit-common-space.module#EditCommonSpacePageModule' },
+  { path: 'manage-guard', loadChildren: './Administrador/manage-guard/manage-guard.module#ManageGuardPageModule' },
+  { path: 'manage-homeowner', loadChildren: './Administrador/manage-homeowner/manage-homeowner.module#ManageHomeownerPageModule' },
+  { path: 'profile-administrator', loadChildren: './Administrador/profile-administrator/profile-administrator.module#ProfileAdministratorPageModule' },
+  { path: 'edit-profile-administrator', loadChildren: './Administrador/edit-profile-administrator/edit-profile-administrator.module#EditProfileAdministratorPageModule' },
+
+
 
 
 
