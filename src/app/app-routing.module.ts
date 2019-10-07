@@ -26,6 +26,8 @@ const routes: Routes = [
   { path: 'newcompanion', loadChildren: './ingreso/newcompanion/newcompanion.module#NewcompanionPageModule' },
   { path: 'register', loadChildren: './security/register/register.module#RegisterPageModule' },
   { path: 'register2', loadChildren: './security/register2/register2.module#Register2PageModule' },
+  { path: 'message', loadChildren: './Guardia/message/message.module#MessagePageModule' },
+  { path: 'news', loadChildren: './Guardia/news/news.module#NewsPageModule' },
 
 
 
