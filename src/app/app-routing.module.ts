@@ -24,6 +24,8 @@ const routes: Routes = [
   // tslint:disable-next-line: max-line-length
   { path: 'personas-dentro-establecimiento', loadChildren: './funcionesMenu/personas-dentro-establecimiento/personas-dentro-establecimiento.module#PersonasDentroEstablecimientoPageModule' },
   { path: 'newcompanion', loadChildren: './ingreso/newcompanion/newcompanion.module#NewcompanionPageModule' },
+  { path: 'register', loadChildren: './security/register/register.module#RegisterPageModule' },
+  { path: 'register2', loadChildren: './security/register2/register2.module#Register2PageModule' },
 
 
 

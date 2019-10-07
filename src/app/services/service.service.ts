@@ -24,7 +24,12 @@ export class ServiceService {
     const params = {password, username};
     // tslint:disable-next-line: max-line-length
     return this.http.post( this.url + 'authenticate', params, {headers} ).pipe(map(data => this.guardarToken(data[`id_token`])));
-
+  }
+  register(login: string, firstName: string, lastName: string, email: string, password: string) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const params = {login, firstName, lastName, email, password};
+    // tslint:disable-next-line: max-line-length
+    return this.http.post( this.url + 'register', params, {headers});
   }
 
   guardarToken(idToken: string ) {

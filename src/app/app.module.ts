@@ -24,6 +24,8 @@ import { Vehiculo } from './classes/vehiculo';
 import { IngresoAPie } from 'src/app/classes/ingresoAPie';
 import { Marca } from './classes/marca';
 import { AuthorizationPage } from './ingreso/authorization/authorization.page';
+import { Account } from './classes/account';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -50,6 +52,7 @@ import { AuthorizationPage } from './ingreso/authorization/authorization.page';
     IngresoAPie,
     Marca,
     AuthorizationPage,
+    Account,
 
   ],
   bootstrap: [AppComponent]
