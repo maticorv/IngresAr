@@ -10,6 +10,7 @@ import { Empresa } from '../interfaces/empresa';
 import { IPlanillaIngresoEgreso } from '../interfaces/planilla-ingreso-egreso';
 import { Imodelo } from '../interfaces/modelo';
 import { Vehiculo } from '../classes/vehiculo';
+import { Inovedad } from '../interfaces/novedad';
 
 @Injectable({
   providedIn: 'root'
@@ -63,10 +64,10 @@ export class ServiceService {
     return this.http.post( this.url + 'personas', params, {headers}).pipe(map(data => data as Persona));
   }
 
-  postPersonaVehiculo(id, nombrePersona, apellidoPersona,dniPersona, telefonoPersona, vehiculos) {
+  postPersonaVehiculo(id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, vehiculos) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    const params = {id, nombrePersona, apellidoPersona,dniPersona, telefonoPersona, vehiculos};
+    const params = {id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, vehiculos};
     return this.http.put(this.url + 'personas', params, {headers}).pipe(map(data => data));
   }
 
@@ -179,5 +180,19 @@ export class ServiceService {
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'planillaegreso', {headers}).pipe(map(data => data as IPlanillaIngresoEgreso));
   }
+
+  getNovedades(): Observable<Inovedad[]> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'novedades', {headers}).pipe(map(data => data as Inovedad[]));
+  }
+  postNovedad(fecha: string, descripcion: string, creada: Persona): Observable<Inovedad> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    const params = {fecha, descripcion, creada};
+    // tslint:disable-next-line: max-line-length
+    return this.http.post(this.url + 'novedades', params, {headers}).pipe(map(data => data as Inovedad));
+  }
+
 
 }

@@ -10,7 +10,7 @@ export interface Persona {
     personacarnet?: any;
     personaestados?: any;
     listaamigos?: any;
-    tipopersona?: any;
+    tipoPersona?: any;
     vehiculos: IVehiculo[];
     detalleEvento?: any;
     art?: any;

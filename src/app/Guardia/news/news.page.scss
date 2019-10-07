@@ -1,0 +1,129 @@
+// frontend/src/app/chat/chat.page.scss
+.input-wrap {
+    display: flex;
+    textarea {
+        flex: 3;
+        border: 0;
+        border-style: solid;
+    }
+    button {
+        flex: 1;
+    }
+}
+
+ion-footer {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.11);
+    background-color: #fff;
+}
+
+$userBackgroundColor: #387ef5;
+$toUserBackgroundColor: #fff;
+.line-breaker {
+    white-space: pre-line;
+    color: #343434
+}
+
+.message-wrap {
+    padding: 0 10px;
+    .message {
+        position: relative;
+        padding: 7px 0;
+        .user-img {
+            position: absolute;
+            border-radius: 45px;
+            width: 45px;
+            height: 45px;
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.36);
+        }
+        .msg-detail {
+            width: 100%;
+            display: inline-block;
+            p {
+                margin: 0;
+            }
+            .msg-info {
+                p {
+                    font-size: .8em;
+                    color: #888;
+                }
+            }
+            .msg-content {
+                position: relative;
+                margin-top: 5px;
+                border-radius: 5px;
+                padding: 8px;
+                border: 1px solid #ddd;
+                color: #fff;
+                width: auto;
+                max-width: 80%;
+                span.triangle {
+                    background-color: #fff;
+                    border-radius: 2px;
+                    height: 8px;
+                    width: 8px;
+                    top: 12px;
+                    display: block;
+                    border-style: solid;
+                    border-color: #ddd;
+                    border-width: 1px;
+                    -webkit-transform: rotate(45deg);
+                    transform: rotate(45deg);
+                    position: absolute;
+                }
+            }
+        }
+    }
+    .message.left {
+        .msg-content {
+            background-color: $toUserBackgroundColor;
+            float: left;
+        }
+        .msg-detail {
+            padding-left: 60px;
+        }
+        .user-img {
+            left: 0;
+        }
+        .msg-content {
+            .line-breaker {
+                white-space: pre-line;
+                color: #343434
+            }
+            span.triangle {
+                border-top-width: 0px !important;
+                border-right-width: 0px !important;
+                left: -5px;
+            }
+        }
+    }
+    .message.right {
+        .msg-detail {
+            padding-right: 60px;
+            .msg-info {
+                text-align: right;
+            }
+        }
+        .user-img {
+            right: 0;
+        }
+        ion-spinner {
+            position: absolute;
+            right: 10px;
+            top: 50px;
+        }
+        .msg-content {
+            background-color: $userBackgroundColor;
+            float: right;
+            .line-breaker {
+                white-space: pre-line;
+                color: #ffffff
+            }
+            span.triangle {
+                background-color: #387ef5 !important;
+                border-bottom-width: 0px !important;
+                border-left-width: 0px !important;
+                right: -5px;
+            }
+        }
+    }
+}
