@@ -10,6 +10,7 @@ import { Empresa } from '../interfaces/empresa';
 import { IPlanillaIngresoEgreso } from '../interfaces/planilla-ingreso-egreso';
 import { Imodelo } from '../interfaces/modelo';
 import { Vehiculo } from '../classes/vehiculo';
+import { Inormas } from '../interfaces/inormas';
 
 @Injectable({
   providedIn: 'root'
@@ -178,6 +179,12 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'planillaegreso', {headers}).pipe(map(data => data as IPlanillaIngresoEgreso));
+  }
+
+  getNormasBarrio() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'norma-barrios', {headers}).pipe(map(data => data as Inormas));
   }
 
 }
