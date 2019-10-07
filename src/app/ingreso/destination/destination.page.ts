@@ -18,14 +18,9 @@ export class DestinationPage implements OnInit {
   }
 
   destination() {
-    this.destino.tipoDestino = this.tipo;
-    this.destino.lote = this.direccion;
-    this.destino.id = 11;
-    // if (this.tipo === 'lote') {
-    //   this.destino.lote = this.direccion;
-    // } else {
-    //   this.destino.apellido = this.direccion;
-    // }
+    // this.destino.tipoDestino = this.tipo;
+    this.destino.casaDomicilio = this.direccion;
+    this.destino.id = 8;
     this.router.navigateByUrl('/typeofvisit');
   }
 

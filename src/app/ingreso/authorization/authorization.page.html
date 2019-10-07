@@ -26,17 +26,72 @@
         <h3>Acompañantes</h3>
     </ion-row>
     <ion-row>
-        <!-- <ion-item>
+        <ion-item>
+            <ion-label>Cantidad: </ion-label>
+            <ion-select class="select-people-size" placeholder="0" okText="Seleccionar" [(ngModel)]="cantidad">
+                <ion-select-option value=0> 0 </ion-select-option>
+                <ion-select-option value=1> 1 </ion-select-option>
+                <ion-select-option value=2> 2 </ion-select-option>
+                <ion-select-option value=4> 3 </ion-select-option>
+                <ion-select-option value=4> 4 </ion-select-option>
+                <ion-select-option value=5> 5 </ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
             <ion-select class="select-DNI-size" placeholder="DNI" value="dni" okText="Seleccionar">DNI
                 <ion-select-option value="DNI">DNI</ion-select-option>
             </ion-select>
-            <ion-input type="text" placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
-            <ion-icon name="add" color="black"></ion-icon>
-        </ion-item> -->
-        <ion-item>
-            <ion-label position="fixed">Cantidad: </ion-label>
-            <ion-input [value]=c antidad [(ngModel)]="cantidad"></ion-input>
+            <ion-input style="text-align: center" type="text" placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
+            <ion-icon name="add" color="black" (click)="buscarAcompaniante()"></ion-icon>
         </ion-item>
+        <!-- <ion-list>
+            <ion-row>
+                <ion-col>
+                    <ion-item>
+                        <ion-label>
+                            Apellido
+                        </ion-label>
+                    </ion-item>
+                </ion-col>
+                <ion-col>
+                    <ion-item>
+                        <ion-label>
+                            Nombre
+                        </ion-label>
+                    </ion-item>
+                </ion-col>
+                <ion-col>
+                    <ion-item>
+                        <ion-label>
+                            DNI
+                        </ion-label>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngFor="let ac of planillaAcompaniantes">
+                <ion-col>
+                    <ion-item>
+                        <ion-label>
+                            {{ac.apellidoPersona}}
+                        </ion-label>
+                    </ion-item>
+                </ion-col>
+                <ion-col>
+                    <ion-item>
+                        <ion-label>
+                            {{ac.nombrePersona}}
+                        </ion-label>
+                    </ion-item>
+                </ion-col>
+                <ion-col>
+                    <ion-item>
+                        <ion-label>
+                            {{ac.dniPersona}}
+                        </ion-label>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-list> -->
     </ion-row>
 
 

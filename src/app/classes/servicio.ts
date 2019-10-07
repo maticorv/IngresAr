@@ -1,3 +1,4 @@
-export class Servicio {
-    nomServicio: string;
+export class Servicios {
+    id: number;
+    nombreEmpresa: string;
 }

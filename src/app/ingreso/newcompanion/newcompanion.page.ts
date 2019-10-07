@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Personas } from 'src/app/classes/persona';
 import { ServiceService } from '../../services/service.service';
 import { ToastController } from '@ionic/angular';
+import { Acompaniante } from 'src/app/classes/acompañante';
+import { AuthorizationPage } from '../authorization/authorization.page';
 
 @Component({
-  selector: 'app-newperson',
-  templateUrl: './newperson.page.html',
-  styleUrls: ['./newperson.page.scss'],
+  selector: 'app-newcompanion',
+  templateUrl: './newcompanion.page.html',
+  styleUrls: ['./newcompanion.page.scss'],
 })
-export class NewpersonPage implements OnInit {
+export class NewcompanionPage implements OnInit {
 
   nombrePersona: string;
   apellidoPersona: string;
@@ -17,20 +18,21 @@ export class NewpersonPage implements OnInit {
   telefonoPersona: number;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private router: Router, private persona: Personas, private service: ServiceService, private toastController: ToastController) { }
+  constructor(private router: Router, private acompaniante: Acompaniante,
+              private service: ServiceService, private toastController: ToastController,
+              private authorization: AuthorizationPage) { }
 
   ngOnInit() {
   }
   crearPersona() {
     this.service.postPersona(this.nombrePersona, this.apellidoPersona, this.dniPersona, this.telefonoPersona).subscribe(data => {
       console.log(data);
-      this.persona.nombrePersona = data.nombrePersona;
-      this.persona.apellidoPersona = data.apellidoPersona;
-      this.persona.dniPersona = data.dniPersona;
-      this.persona.telefonoPersona = data.telefonoPersona;
-      this.persona.id = data.id;
+      this.acompaniante.nombrePersona = data.nombrePersona;
+      this.acompaniante.apellidoPersona = data.apellidoPersona;
+      this.acompaniante.dniPersona = data.dniPersona;
+      this.acompaniante.telefonoPersona = data.telefonoPersona;
+      this.acompaniante.id = data.id;
       this.presentToast('La persona se ha creado correctamente');
-      // this.router.navigateByUrl('/destination');
     },
     (error) => { console.log(error);
                  this.presentToast('La persona no se ha podido crear, intente nuevamente');
@@ -46,7 +48,7 @@ export class NewpersonPage implements OnInit {
     });
     toast.present();
     setTimeout(() => {
-      this.router.navigateByUrl('/destination');
+      this.router.navigateByUrl('/authorization');
       },
       2000);
   }

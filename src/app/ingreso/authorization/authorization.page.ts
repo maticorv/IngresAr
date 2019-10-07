@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../../services/service.service';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
-import { Acompañante } from 'src/app/classes/acompañante';
+import { ToastController, AlertController } from '@ionic/angular';
+import { Acompaniante } from 'src/app/classes/acompañante';
 import { Personas } from 'src/app/classes/persona';
 import { Destino } from 'src/app/classes/destino';
 import { Autorizador } from 'src/app/classes/autorizador';
 import { Vehiculo } from 'src/app/classes/vehiculo';
-import { Empresa } from 'src/app/classes/empresa';
 import { Tipovisita } from 'src/app/classes/tipovisita';
+import { IngresoAPie } from 'src/app/classes/ingresoAPie';
+import { Servicios } from 'src/app/classes/servicio';
+import { Persona } from 'src/app/interfaces/persona';
 
 @Component({
   selector: 'app-authorization',
@@ -18,9 +20,10 @@ import { Tipovisita } from 'src/app/classes/tipovisita';
 export class AuthorizationPage implements OnInit {
 
   index: number;
-  dni: string;
+  dni: number;
   cantidad = 0;
   personaAut: Personas;
+  persona: Persona;
 
   // planilla ingreso
   autorizadoPrevio: boolean;
@@ -32,28 +35,26 @@ export class AuthorizationPage implements OnInit {
   tipovisita: string;
   planillatipo?: any;
   planillabarrio?: any;
-  // planillapersona?: Personas;
   planillaqr?: any;
-  // planilladestino?: any;
-  // planillavehiculo?: Vehiculo;
-  // planillaempresa?: Empresa;
-  // planillaautorizador?: Autorizador;
+  planillaAcompaniantes = [];
+  ingresoAPie: boolean;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private planillaautorizador: Autorizador,
+  constructor(private planillaAutorizador: Autorizador,
               private service: ServiceService, private router: Router,
-              private planilladestino: Destino, private toastController: ToastController,
-              private acompañante: Acompañante, private tipovisitas: Tipovisita,
-              private planillapersona: Personas, private planillavehiculo: Vehiculo,
-              private planillaempresa: Empresa) { }
+              private planillaDestino: Destino, private toastController: ToastController,
+              private acompañante: Acompaniante, private tipovisitas: Tipovisita,
+              private planillaPersona: Personas, private planillaVehiculo: Vehiculo,
+              private planillaEmpresa: Servicios, private ingresoaPie: IngresoAPie,
+              private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.getPersonasDomicilio();
   }
 
   getPersonasDomicilio() {
-    this.service.getPersonasDomicilio(this.planilladestino.lote).subscribe(data => {
-      this.personaAut = data[`personadoms`];
+    this.service.getPersonasDomicilio(this.planillaDestino.casaDomicilio).subscribe(data => {
+      this.personaAut = data[`domiciliopersonas`];
       console.log(this.personaAut);
     },
     (error) => { console.log(error);
@@ -63,11 +64,14 @@ export class AuthorizationPage implements OnInit {
   procesarIngreso() {
     return new Promise<any>((resolve, reject) => {
 
-      this.planillaautorizador.nombreAutorizador = this.personaAut[this.index].nombrePersona;
-      this.planillaautorizador.apellidoAutorizador = this.personaAut[this.index].apellidoPersona;
-      this.planillaautorizador.id = this.personaAut[this.index].id;
+      this.planillaAutorizador.nombrePersona = this.personaAut[this.index].nombrePersona;
+      this.planillaAutorizador.apellidoPersona = this.personaAut[this.index].apellidoPersona;
+      this.planillaAutorizador.id = this.personaAut[this.index].id;
       if (this.tipovisitas.nombreTipoVisita === 'visita') {
-        this.planillaempresa = null;
+        this.planillaEmpresa = null;
+      }
+      if (this.ingresoaPie.ingresoAPie === true) {
+        this.planillaVehiculo = null;
       }
 
       setTimeout( () => {
@@ -101,24 +105,18 @@ export class AuthorizationPage implements OnInit {
     this.planillatipo = null;
     this.planillabarrio = null;
     this.planillaqr = null;
-    // this.planilladestino = this.destino;
-    // this.planillavehiculo = this.vehiculo;
-    // this.planillaempresa = this.empresa;
-    // this.planillaautorizador = this.autorizador;
-    this.planillaautorizador.nombreAutorizador = this.personaAut[this.index].nombrePersona;
-    this.planillaautorizador.apellidoAutorizador = this.personaAut[this.index].apellidoPersona;
-    console.log(this.planillaautorizador, this.planillaautorizador);
+    this.ingresoAPie = this.ingresoaPie.ingresoAPie;
+    this.planillaAutorizador.nombrePersona = this.personaAut[this.index].nombrePersona;
+    this.planillaAutorizador.apellidoPersona = this.personaAut[this.index].apellidoPersona;
     // tslint:disable-next-line: max-line-length
-    console.log(this.autorizadoPrevio, this.acompaniantes, this.fechaIngreso, this.fechaEgreso, this.fecha, this.hora, this.tipovisita, this.planillatipo, this.planillabarrio, this.planillapersona, this.planillaqr, this.planilladestino, this.planillavehiculo, this.planillaempresa, this.planillaautorizador);
-    // tslint:disable-next-line: max-line-length
-    this.service.postPlanillaIngreso(this.autorizadoPrevio, this.acompaniantes, this.fechaIngreso, this.fechaEgreso, this.fecha, this.hora, this.tipovisita, this.planillatipo, this.planillabarrio, this.planillapersona, this.planillaqr, this.planilladestino, this.planillavehiculo, this.planillaempresa, this.planillaautorizador).subscribe(data => {
-      console.log('data', data);
+    this.service.postPlanillaIngreso(this.autorizadoPrevio, this.acompaniantes, this.fechaIngreso, this.fechaEgreso, this.tipovisita, this.ingresoAPie, this.planillabarrio, this.planillaPersona, this.planillaqr, this.planillaDestino, this.planillaVehiculo, this.planillaEmpresa, this.planillaAutorizador, this.planillaAcompaniantes).subscribe(data => {
       this.presentToast('El ingreso se ha procesado correctamente');
       this.router.navigateByUrl('/startmenu');
     },
     (error) => {console.log('error', error);
                 this.presentToast('Hubo un error al procesar los datos, intente nuevamente');
     });
+    // console.log(this.planillaEmpresa);
 
   }
 
@@ -128,12 +126,81 @@ export class AuthorizationPage implements OnInit {
     });
 }
 
-procesarIngresoJson() {
+  procesarIngresoJson() {
   setTimeout(() => {
     this.presentToast('El ingreso se ha procesado correctamente');
     },
     2000);
 }
+
+  buscarAcompaniante() {
+    this.service.getPersona(this.dni).subscribe((data) => {
+      this.persona = data;
+      console.log(data);
+      this.personaExiste();
+    },
+    (error) => { console.log(error);
+                 this.personaNoExiste();
+    });
+  }
+
+  async personaExiste() {
+    const alert = await this.alertCtrl.create({
+      header: this.persona.nombrePersona + ' ' + this.persona.apellidoPersona + ' ' + this.persona.dniPersona,
+      message: '¿Los datos son correctos?</strong>',
+      buttons: [
+        {
+          text: 'Aceptar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            this.planillaAcompaniantes.push(this.persona);
+            this.dni = null;
+          }
+        }, {
+          text: 'Cancelar',
+          handler: () => {
+            console.log('Confirm cancel');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async personaNoExiste() {
+    const alert = await this.alertCtrl.create({
+      header: 'La persona con el dni ' + this.dni + ' no se encuentra en la base de datos',
+      message: '¿Desea crearla?</strong>',
+      buttons: [
+        {
+          text: 'Aceptar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            this.dni = null;
+            this.router.navigateByUrl('/newcompanion');
+          }
+        }, {
+          text: 'Cancelar',
+          handler: () => {
+            console.log('Confirm cancel');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  mostrarAcompaniantes() {
+    console.log(this.planillaAcompaniantes);
+  }
+
+  agregarAcompaniante() {
+    this.planillaAcompaniantes.push(this.acompañante);
+  }
 
 
 }

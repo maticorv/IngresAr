@@ -18,10 +18,12 @@ import { Personas } from 'src/app/classes/persona';
 import { Destino } from 'src/app/classes/destino';
 import { Tipovisita } from './classes/tipovisita';
 import { Autorizador } from './classes/autorizador';
-import { Acompañante } from './classes/acompañante';
-import { Servicio } from './classes/servicio';
+import { Acompaniante } from './classes/acompañante';
+import { Servicios } from './classes/servicio';
 import { Vehiculo } from './classes/vehiculo';
-import { Empresa } from 'src/app/classes/empresa';
+import { IngresoAPie } from 'src/app/classes/ingresoAPie';
+import { Marca } from './classes/marca';
+import { AuthorizationPage } from './ingreso/authorization/authorization.page';
 import { Account } from './classes/account';
 
 
@@ -33,7 +35,7 @@ import { Account } from './classes/account';
     AngularFireAuthModule,
     AppRoutingModule,
     ComponentsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     StatusBar,
@@ -44,11 +46,14 @@ import { Account } from './classes/account';
     Destino,
     Tipovisita,
     Autorizador,
-    Acompañante,
-    Servicio,
+    Acompaniante,
+    Servicios,
     Vehiculo,
-    Empresa,
+    IngresoAPie,
+    Marca,
+    AuthorizationPage,
     Account,
+
   ],
   bootstrap: [AppComponent]
 })

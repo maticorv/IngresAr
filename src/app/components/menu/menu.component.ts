@@ -22,4 +22,8 @@ export class MenuComponent implements OnInit {
     this.router.navigateByUrl('/planilla-ingreso-egreso');
   }
 
+  personasDentroEstablecimiento() {
+    this.router.navigateByUrl('/personas-dentro-establecimiento');
+  }
+
 }
