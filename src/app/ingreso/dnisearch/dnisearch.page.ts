@@ -73,6 +73,7 @@ export class DnisearchPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
+            this.personas.dniPersona = this.dni;
             this.setNullData();
             this.router.navigateByUrl('/newperson');
           }

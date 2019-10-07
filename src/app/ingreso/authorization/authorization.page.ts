@@ -179,6 +179,7 @@ export class AuthorizationPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
+            this.acompañante.dniPersona = this.dni;
             this.dni = null;
             this.router.navigateByUrl('/newcompanion');
           }

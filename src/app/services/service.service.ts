@@ -58,10 +58,10 @@ export class ServiceService {
     return this.http.post( this.url + 'personas', params, {headers}).pipe(map(data => data as Persona));
   }
 
-  postPersonaVehiculo(id, nombrePersona, apellidoPersona,dniPersona, telefonoPersona, vehiculos) {
+  postPersonaVehiculo(id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, vehiculos) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    const params = {id, nombrePersona, apellidoPersona,dniPersona, telefonoPersona, vehiculos};
+    const params = {id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, vehiculos};
     return this.http.put(this.url + 'personas', params, {headers}).pipe(map(data => data));
   }
 
