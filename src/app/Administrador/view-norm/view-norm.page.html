@@ -7,12 +7,14 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-list>
-      <ion-item>
-          <ion-icon name="list-box"></ion-icon>
-        <ion-label></ion-label>
-      </ion-item>
-    </ion-list>
-
+<ion-content fullscreen class="ion-padding">
+    <ion-card>
+        <ion-card-header style="text-align: center">
+            <ion-card-title>{{norma?.titulonorma}}</ion-card-title>
+        </ion-card-header>
+        
+        <ion-card-content>
+            {{norma?.descripcionnorma}}
+        </ion-card-content>
+    </ion-card>
 </ion-content>

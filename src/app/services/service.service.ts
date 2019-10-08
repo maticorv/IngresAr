@@ -220,4 +220,10 @@ export class ServiceService {
     return this.http.put(this.url + 'planilla-ingreso-egresos', params, {headers}).pipe(map(data => data));
   }
 
+  getNorma(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'norma-barrios/' + id, {headers}).pipe(map(data => data as Inormas));
+  }
+
 }

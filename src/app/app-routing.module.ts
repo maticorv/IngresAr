@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'manage-common-space', loadChildren: './Administrador/manage-common-space/manage-common-space.module#ManageCommonSpacePageModule' },
   { path: 'event-reports', loadChildren: './Administrador/event-reports/event-reports.module#EventReportsPageModule' },
   { path: 'norms', loadChildren: './Administrador/norms/norms.module#NormsPageModule' },
-  { path: 'view-norm', loadChildren: './Administrador/view-norm/view-norm.module#ViewNormPageModule' },
+  { path: 'view-norm/:id', loadChildren: './Administrador/view-norm/view-norm.module#ViewNormPageModule' },
   { path: 'new-norm', loadChildren: './Administrador/new-norm/new-norm.module#NewNormPageModule' },
   { path: 'edit-common-space', loadChildren: './Administrador/edit-common-space/edit-common-space.module#EditCommonSpacePageModule' },
   { path: 'manage-guard', loadChildren: './Administrador/manage-guard/manage-guard.module#ManageGuardPageModule' },
