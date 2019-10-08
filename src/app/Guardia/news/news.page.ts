@@ -32,6 +32,9 @@ export class NewsPage implements OnInit {
       vehiculos: null
     };
     const hoy = new Date().toJSON();
-    this.service.postNovedad(hoy, this.chatMessage, person ).subscribe(data => console.log(data));
+    this.service.postNovedad(hoy, this.chatMessage, person ).subscribe(data => {
+      this.chatMessage = '';
+      this.novedades.push(data);
+    });
   }
 }
