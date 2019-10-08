@@ -17,4 +17,6 @@ export interface IPlanillaIngresoEgreso {
     planillavehiculo?: IVehiculo;
     planillaempresa?: Empresa;
     planillaautorizador?: Persona;
+    ingresoAPie: boolean;
+    planillaAcompaniantes: any;
 }

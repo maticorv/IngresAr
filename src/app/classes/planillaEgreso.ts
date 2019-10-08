@@ -10,11 +10,13 @@ export class PlanillaEgreso {
     fechaEgreso: Date;
     tipovisita: string;
     planillatipo?: any;
-    planillabarrio?: any;
-    planillapersona?: Persona;
-    planillaqr?: any;
-    planilladestino?: any;
-    planillavehiculo?: IVehiculo;
-    planillaempresa?: Empresa;
-    planillaautorizador?: Persona;
+    planillaBarrio?: any;
+    planillaPersona?: Persona;
+    planillaQr?: any;
+    planillaDestino?: any;
+    planillaVehiculo?: IVehiculo;
+    planillaEmpresa?: Empresa;
+    planillaAutorizador?: Persona;
+    ingresoAPie: boolean;
+    planillaAcompaniantes: any;
 }
