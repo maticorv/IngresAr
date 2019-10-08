@@ -1,14 +1,13 @@
 <ion-header>
     <ion-toolbar color="primary">
         <ion-buttons slot="start">
-            <ion-back-button defaultHref='/startmenu'></ion-back-button>
+            <ion-back-button defaultHref='/egress'></ion-back-button>
         </ion-buttons>
-        <ion-title class="ion-text-capitalize ion-text-center">Planilla Ingreso/Egreso</ion-title>
+        <ion-title class="ion-text-capitalize ion-text-center">Planilla Egreso</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
     <ion-row>
         <ion-list>
           <ion-row>
@@ -36,6 +35,13 @@
               <ion-col>
                   <ion-item>
                       <ion-label>
+                          Fecha Ingreso
+                      </ion-label>
+                  </ion-item>
+              </ion-col>
+              <ion-col>
+                  <ion-item>
+                      <ion-label>
                           Marca
                       </ion-label>
                   </ion-item>
@@ -47,8 +53,15 @@
                       </ion-label>
                   </ion-item>
               </ion-col>
+              <ion-col>
+                  <ion-item>
+                      <ion-label>
+                          Destino
+                      </ion-label>
+                  </ion-item>
+              </ion-col>
           </ion-row>
-          <ion-row *ngFor="let p of planiallaIngresoEgreso">
+          <ion-row *ngFor="let p of planillaEgreso">
               <ion-col>
                   <ion-item>
                       <ion-label class="border">
@@ -87,6 +100,4 @@
           </ion-row>
       </ion-list>
     </ion-row>
-
-
 </ion-content>

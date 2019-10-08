@@ -1,8 +1,8 @@
-import { Persona } from './persona';
-import { IVehiculo } from './vehiculo';
-import { Empresa } from './empresa';
+import { Persona } from '../interfaces/persona';
+import { IVehiculo } from '../interfaces/vehiculo';
+import { Empresa } from '../interfaces/empresa';
 
-export interface IPlanillaIngresoEgreso {
+export class PlanillaEgreso {
     id: number;
     autorizadoPrevio: boolean;
     acompaniantes: number;
