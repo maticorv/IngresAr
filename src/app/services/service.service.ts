@@ -135,12 +135,12 @@ export class ServiceService {
     return this.http.post(this.url + 'empresas', params, {headers}).pipe(map(data => data as Empresa));
   }
 
-  postPlanillaEgreso() {
-    const token = this.leerToken;
-    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    const params = {};
-    return this.http.post( this.url + 'planilla-ingreso-egreso', params, {headers}).pipe(map(date => date));
-  }
+  // postPlanillaEgreso() {
+  //   const token = this.leerToken;
+  //   const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+  //   const params = {};
+  //   return this.http.post( this.url + 'planilla-ingreso-egreso', params, {headers}).pipe(map(date => date));
+  // }
 
   // tslint:disable-next-line: max-line-length
   postPlanillaIngreso(autorizadoPrevio, acompaniantes, fechaIngreso, fechaEgreso, tipovisita, ingresoAPie, planillaBarrio, planillaPersona, planillaQr, planillaDestino, planillaVehiculo, planillaEmpresa, planillaAutorizador, planillaAcompaniantes) {
@@ -185,6 +185,23 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'norma-barrios', {headers}).pipe(map(data => data as Inormas));
+  }
+
+  getPlanillaEgreso(dni: number) {
+    console.log(dni);
+    const token = this.leerToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+       Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'planillaegreso/dni/' + dni, {headers}).pipe(map(data => data as IPlanillaIngresoEgreso));
+  }
+
+  postPlanillaEgreso(planillaEgreso) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    const params = {planillaEgreso};
+    return this.http.put(this.url + 'planilla-ingreso-egresos', params, {headers}).pipe(map(data => data));
   }
 
 }

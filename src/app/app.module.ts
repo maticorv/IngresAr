@@ -25,6 +25,7 @@ import { IngresoAPie } from 'src/app/classes/ingresoAPie';
 import { Marca } from './classes/marca';
 import { AuthorizationPage } from './ingreso/authorization/authorization.page';
 import { Account } from './classes/account';
+import { PlanillaEgreso } from './classes/planillaEgreso';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { Account } from './classes/account';
     Marca,
     AuthorizationPage,
     Account,
+    PlanillaEgreso,
 
   ],
   bootstrap: [AppComponent]
