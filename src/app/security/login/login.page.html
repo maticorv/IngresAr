@@ -12,9 +12,19 @@
                 <div class="form-group">
                     <input [(ngModel)]="user.email" type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Usuario">
                 </div>
-
                 <div class="form-group">
-                    <input [(ngModel)]="user.password" type="password" name="password" class="form-control" aria-describedby="emailHelp" placeholder="Contraseña">
+                    <div class="input-group mb-3">
+                        <input type="text" name="casa" *ngIf="showPwd" [(ngModel)]="user.password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon2">
+                        <input type="password" name="casa" *ngIf="!showPwd" [(ngModel)]="user.password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">
+                                <button icon-only ion-button clear type="button" item-right (click)="showPwd=!showPwd">
+                                        <ion-icon *ngIf="showPwd" name="eye"></ion-icon>
+                                        <ion-icon *ngIf="!showPwd" name="eye-off"></ion-icon>
+                                      </button>
+                          </span>
+                        </div>
+                    </div>
                 </div>
                 <p>Olvidaste tus datos de inicio de sesión?
                     <b routerLink="/forgot">

@@ -10,6 +10,7 @@ import { Empresa } from '../interfaces/empresa';
 import { IPlanillaIngresoEgreso } from '../interfaces/planilla-ingreso-egreso';
 import { Imodelo } from '../interfaces/modelo';
 import { Vehiculo } from '../classes/vehiculo';
+import { Inovedad } from '../interfaces/novedad';
 import { Inormas } from '../interfaces/inormas';
 
 @Injectable({
@@ -179,6 +180,19 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'planillaegreso', {headers}).pipe(map(data => data as IPlanillaIngresoEgreso));
+  }
+
+  getNovedades(): Observable<Inovedad[]> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'novedades', {headers}).pipe(map(data => data as Inovedad[]));
+  }
+  postNovedad(fecha: string, descripcion: string, creada: Persona): Observable<Inovedad> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    const params = {fecha, descripcion, creada};
+    // tslint:disable-next-line: max-line-length
+    return this.http.post(this.url + 'novedades', params, {headers}).pipe(map(data => data as Inovedad));
   }
 
   getNormasBarrio() {

@@ -25,5 +25,14 @@ export class MenuComponent implements OnInit {
   personasDentroEstablecimiento() {
     this.router.navigateByUrl('/personas-dentro-establecimiento');
   }
+  mensajes() {
+    this.router.navigateByUrl('/message');
+  }
+  novedades() {
+    this.router.navigateByUrl('/news');
+  }
+  reportes() {
+    this.router.navigateByUrl('/reports');
+  }
 
 }

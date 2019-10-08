@@ -26,6 +26,8 @@ const routes: Routes = [
   { path: 'newcompanion', loadChildren: './ingreso/newcompanion/newcompanion.module#NewcompanionPageModule' },
   { path: 'register', loadChildren: './security/register/register.module#RegisterPageModule' },
   { path: 'register2', loadChildren: './security/register2/register2.module#Register2PageModule' },
+  { path: 'message', loadChildren: './Guardia/message/message.module#MessagePageModule' },
+  { path: 'news', loadChildren: './Guardia/news/news.module#NewsPageModule' },
   { path: 'menu-administrator', loadChildren: './Administrador/menu-administrator/menu-administrator.module#MenuAdministratorPageModule' },
   // tslint:disable-next-line: max-line-length
   { path: 'manage-common-space', loadChildren: './Administrador/manage-common-space/manage-common-space.module#ManageCommonSpacePageModule' },
@@ -39,8 +41,8 @@ const routes: Routes = [
   // tslint:disable-next-line: max-line-length
   { path: 'profile-administrator', loadChildren: './Administrador/profile-administrator/profile-administrator.module#ProfileAdministratorPageModule' },
   // tslint:disable-next-line: max-line-length
-  { path: 'edit-profile-administrator', loadChildren: './Administrador/edit-profile-administrator/edit-profile-administrator.module#EditProfileAdministratorPageModule' },  { path: 'egress-page', loadChildren: './egreso/egress-page/egress-page.module#EgressPagePageModule' },
-
+  { path: 'edit-profile-administrator', loadChildren: './Administrador/edit-profile-administrator/edit-profile-administrator.module#EditProfileAdministratorPageModule' },
+  { path: 'egress-page', loadChildren: './egreso/egress-page/egress-page.module#EgressPagePageModule' },
 
 
 
