@@ -9,12 +9,13 @@
 
 <ion-content>
     <ion-list>
-      <ion-item *ngFor="let n of normas; let i = index"  [routerLink]="['/view-norm', i+1]" >
-        <ion-icon name="list-box"></ion-icon>
+      <ion-item *ngFor="let n of normas; let i = index"  (click)="presentActionSheet(i)">
+        <ion-icon slot="start" name="list-box"></ion-icon>
         <ion-label class="ml-2">{{n.titulonorma}}</ion-label>
       </ion-item>
     </ion-list>
 </ion-content>
+<!-- [routerLink]="['/view-norm', i+1]" -->
 
 <ion-footer>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
