@@ -28,7 +28,7 @@
             <ion-label>Disponibilidad Hasta:</ion-label>
             <ion-datetime displayFormat="HH:mm"  
                           picker-format="HH:mm" 
-                          [value]="espacioComun?.horaDesde"></ion-datetime>
+                          [value]="horaDesde"></ion-datetime>
                           <!-- [(ngModel)]="espacioComun.horaDesde"></ion-datetime> -->
                         </ion-item>
     </ion-item>
@@ -39,7 +39,7 @@
             <ion-label>Disponibilidad Hasta:</ion-label>
             <ion-datetime displayFormat="HH:mm"  
                           picker-format="HH:mm" 
-                          [value]="espacioComun?.horaHasta"></ion-datetime>
+                          [value]="horaHasta"></ion-datetime>
                           <!-- [(ngModel)]="espacioComun.horaHasta"></ion-datetime> -->
           </ion-item>
     </ion-item>
@@ -50,7 +50,7 @@
         <ion-label>Periodo de reserva:</ion-label>
         <ion-datetime displayFormat="HH:mm"  
                       picker-format="HH:mm" 
-                      [value]="espacioComun?.espacioTipos[0].periodo"
+                      [value]="periodo"
                       minute-value="0,15,30,45"></ion-datetime>
                       <!-- [(ngModel)]="espacioComun?.espacioTipos[0].periodo" -->
       </ion-item>

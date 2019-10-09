@@ -237,13 +237,19 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     const params = {titulonorma, descripcionnorma};
-    return this.http.post(this.url + 'norma-barrios', params, {headers}).pipe(map(data => data as Inormas))
+    return this.http.post(this.url + 'norma-barrios', params, {headers}).pipe(map(data => data as Inormas));
   }
 
-  getEspacioComun() {
+  getAllEspacioComun() {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'espacio-comuns', {headers}).pipe(map(data => data as IEspacioComun));
+  }
+
+  getEspacioComun(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'espacio-comuns/' + id, {headers}).pipe(map(data => data as IEspacioComun));
   }
 
   postEspacioComun() {
@@ -258,6 +264,12 @@ export class ServiceService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     const params = {};
     return this.http.put(this.url + 'espacio-comuns', {headers}).pipe(map(data => data as IEspacioComun));
+  }
+
+  deleteEspacioComun(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.delete(this.url + 'espacio-comuns/' + id, {headers}).pipe(map(data => data));
   }
 
   getGuardias() {
