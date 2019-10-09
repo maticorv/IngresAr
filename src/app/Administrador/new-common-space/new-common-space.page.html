@@ -8,11 +8,10 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-row style="place-content: center">
-      <ion-thumbnail>
-          <!-- <ion-img [src]="espacioComun?.fotoEspacioComunContentType"></ion-img> -->
-          <ion-img [src]=foto></ion-img>
-        </ion-thumbnail>
+  <ion-row style="place-content: center" class="row-img">
+    <!-- <ion-img [src]="espacioComun?.fotoEspacioComunContentType"></ion-img> -->
+    <ion-img *ngIf="foto !== undefined" [src]=foto widht="80px" height="80px"></ion-img>
+    <ion-img *ngIf="foto === undefined" [src]=fotoVacia widht="80px" height="80px"></ion-img>
   </ion-row>
   <ion-row style="place-content: center">
     <ion-item>

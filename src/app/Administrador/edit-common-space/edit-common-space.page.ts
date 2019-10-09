@@ -31,4 +31,13 @@ export class EditCommonSpacePage implements OnInit {
     // console.log(this.periodo);
   }
 
+  ActualizarEspacioComun() {
+    // tslint:disable-next-line: max-line-length
+    this.service.putEspacioComun(this.espacioComun.id, this.espacioComun.disponibilidadDesde, this.espacioComun.disponibilidadHasta, this.espacioComun.fotoEspacioComun, this.espacioComun.fotoEspacioComunContentType, this.espacioComun.horaDesde, this.espacioComun.horaHasta, this.espacioComun.espacioBarrio, this.espacioComun.espacioTipos).subscribe(data => {
+      console.log(data);
+    },
+    (error) => {console.log(error);
+    });
+  }
+
 }

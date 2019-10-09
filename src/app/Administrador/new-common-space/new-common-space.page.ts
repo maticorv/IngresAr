@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class NewCommonSpacePage implements OnInit {
 
   foto: string;
-  horaDesde = '2019-10-07T00:00:00-03:00';
+  fotoVacia = 'assets/imageVacia.png';
+  horaDesde = '00:00:00';
   horaHasta = '2019-10-07T00:00:00-03:00';
   periodo = '2019-10-07T00:00:00-03:00';
 
