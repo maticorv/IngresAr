@@ -12,6 +12,7 @@ import { Imodelo } from '../interfaces/modelo';
 import { Vehiculo } from '../classes/vehiculo';
 import { Inovedad } from '../interfaces/novedad';
 import { Inormas } from '../interfaces/inormas';
+import { IEspacioComun } from '../interfaces/espacio-comun';
 
 @Injectable({
   providedIn: 'root'
@@ -224,6 +225,65 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'norma-barrios/' + id, {headers}).pipe(map(data => data as Inormas));
+  }
+
+  deleteNorma(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.delete(this.url + 'norma-barrios/' + id, {headers}).pipe(map(data => data));
+  }
+
+  postNorma(titulonorma, descripcionnorma) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    const params = {titulonorma, descripcionnorma};
+    return this.http.post(this.url + 'norma-barrios', params, {headers}).pipe(map(data => data as Inormas))
+  }
+
+  getEspacioComun() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'espacio-comuns', {headers}).pipe(map(data => data as IEspacioComun));
+  }
+
+  postEspacioComun() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    const params = {};
+    return this.http.post(this.url + 'espacio-comuns', {headers}).pipe(map(data => data as IEspacioComun));
+  }
+
+  putEspacioComun() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    const params = {};
+    return this.http.put(this.url + 'espacio-comuns', {headers}).pipe(map(data => data as IEspacioComun));
+  }
+
+  getGuardias() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + '', {headers}).pipe(map(data => data));
+  }
+
+  putGuardia() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    const params = {};
+    return this.http.put(this.url + '', params, {headers}).pipe(map(data => data));
+  }
+
+  getPropietarios() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + '', {headers}).pipe(map(data => data));
+  }
+
+  putPropietario() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    const params = {};
+    return this.http.put(this.url + '', params, {headers}).pipe(map(data => data));
   }
 
 }
