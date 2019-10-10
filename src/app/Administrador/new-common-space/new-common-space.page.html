@@ -8,9 +8,10 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-row style="place-content: center"  class="row-img">
+  <ion-row style="place-content: center" class="row-img">
     <!-- <ion-img [src]="espacioComun?.fotoEspacioComunContentType"></ion-img> -->
-    <ion-img [src]=foto></ion-img>
+    <ion-img *ngIf="foto !== undefined" [src]=foto widht="80px" height="80px"></ion-img>
+    <ion-img *ngIf="foto === undefined" [src]=fotoVacia widht="80px" height="80px"></ion-img>
   </ion-row>
   <ion-row style="place-content: center">
     <ion-item>
@@ -26,7 +27,7 @@
             <ion-label>Disponibilidad Hasta:</ion-label>
             <ion-datetime displayFormat="HH:mm"  
                           picker-format="HH:mm" 
-                          [value]="espacioComun?.horaDesde"></ion-datetime>
+                          [value]="horaDesde"></ion-datetime>
                           <!-- [(ngModel)]="espacioComun.horaDesde"></ion-datetime> -->
                         </ion-item>
     </ion-item>
@@ -37,7 +38,7 @@
             <ion-label>Disponibilidad Hasta:</ion-label>
             <ion-datetime displayFormat="HH:mm"  
                           picker-format="HH:mm" 
-                          [value]="espacioComun?.horaHasta"></ion-datetime>
+                          [value]="horaHasta"></ion-datetime>
                           <!-- [(ngModel)]="espacioComun.horaHasta"></ion-datetime> -->
           </ion-item>
     </ion-item>
@@ -48,7 +49,7 @@
         <ion-label>Periodo de reserva:</ion-label>
         <ion-datetime displayFormat="HH:mm"  
                       picker-format="HH:mm" 
-                      [value]="espacioComun?.espacioTipos[0].periodo"
+                      [value]="periodo"
                       minute-value="0,15,30,45"></ion-datetime>
                       <!-- [(ngModel)]="espacioComun?.espacioTipos[0].periodo" -->
       </ion-item>

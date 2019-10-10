@@ -21,4 +21,24 @@ export class MenuAdministratorPage implements OnInit {
     this.router.navigateByUrl('/norms');
   }
 
+  irAAdministrarEspCom() {
+    this.router.navigateByUrl('/manage-common-space');
+  }
+
+  irAAdminGuardias() {
+    this.router.navigateByUrl('/manage-guard');
+  }
+
+  irAAdminPropietario() {
+    this.router.navigateByUrl('/manage-homeowner');
+  }
+
+  irANovedades() {
+    this.router.navigateByUrl('/');
+  }
+
+  irAReportes() {
+    this.router.navigateByUrl('/norms');
+  }
+
 }

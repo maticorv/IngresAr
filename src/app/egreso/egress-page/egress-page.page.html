@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-row>
+    <!-- <ion-row> -->
         <ion-list>
           <ion-row>
               <ion-col>
@@ -35,20 +35,6 @@
               <ion-col>
                   <ion-item>
                       <ion-label>
-                          Fecha Ingreso
-                      </ion-label>
-                  </ion-item>
-              </ion-col>
-              <ion-col>
-                  <ion-item>
-                      <ion-label>
-                          Marca
-                      </ion-label>
-                  </ion-item>
-              </ion-col>
-              <ion-col>
-                  <ion-item>
-                      <ion-label>
                           Dominio
                       </ion-label>
                   </ion-item>
@@ -61,43 +47,48 @@
                   </ion-item>
               </ion-col>
           </ion-row>
-          <ion-row *ngFor="let p of planillaEgreso">
+          <ion-row>
               <ion-col>
                   <ion-item>
-                      <ion-label class="border">
-                          {{p.planillaPersona.apellidoPersona}}
+                      <ion-label>
+                          {{planillaEgreso?.planillaPersona.apellidoPersona}}
                       </ion-label>
                   </ion-item>
               </ion-col>
               <ion-col>
                   <ion-item>
                       <ion-label>
-                          {{p.planillaPersona.nombrePersona}}
+                          {{planillaEgreso?.planillaPersona.nombrePersona}}
                       </ion-label>
                   </ion-item>
               </ion-col>
               <ion-col>
                   <ion-item>
                       <ion-label>
-                          {{p.planillaPersona.dniPersona}}
+                          {{planillaEgreso?.planillaPersona.dniPersona}}
+                      </ion-label>
+                  </ion-item>
+              </ion-col>
+              <ion-col>
+                  <ion-item *ngIf="planillaEgreso?.planillaVehiculo !== null">
+                      <ion-label>
+                          {{planillaEgreso?.planillaVehiculo.dominio}}
+                      </ion-label>
+                  </ion-item>
+                  <ion-item *ngIf="planillaEgreso?.planillaVehiculo === null">
+                      <ion-label>
                       </ion-label>
                   </ion-item>
               </ion-col>
               <ion-col>
                   <ion-item>
                       <ion-label>
-                          {{p.planillaVehiculo.vehiculoMarca.nombreMarca}}
-                      </ion-label>
-                  </ion-item>
-              </ion-col>
-              <ion-col>
-                  <ion-item>
-                      <ion-label>
-                          {{p.planillaVehiculo.dominio}}
+                          {{planillaEgreso?.planillaDestino.casaDomicilio}}
                       </ion-label>
                   </ion-item>
               </ion-col>
           </ion-row>
       </ion-list>
-    </ion-row>
+    <!-- </ion-row> -->
+    <ion-button expand="full" (click)="registrarEgreso()">Procesar Egreso</ion-button>
 </ion-content>

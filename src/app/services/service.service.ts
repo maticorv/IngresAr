@@ -13,6 +13,7 @@ import { Vehiculo } from '../classes/vehiculo';
 import { Inovedad } from '../interfaces/novedad';
 import { Inormas } from '../interfaces/inormas';
 import { Iaccount } from '../interfaces/account';
+import { IEspacioComun } from '../interfaces/espacio-comun';
 
 @Injectable({
   providedIn: 'root'
@@ -218,11 +219,94 @@ export class ServiceService {
     return this.http.get(this.url + 'planillaegreso/dni/' + dni, {headers}).pipe(map(data => data as IPlanillaIngresoEgreso));
   }
 
-  postPlanillaEgreso(planillaEgreso) {
+  // tslint:disable-next-line: max-line-length
+  postPlanillaEgreso(id, autorizadoPrevio, acompaniantes, fechaIngreso, fechaEgreso, tipovisita, ingresoAPie, planillaBarrio, planillaPersona, planillaQr, planillaDestino, planillaVehiculo, planillaEmpresa, planillaAutorizador, planillaAcompaniantes) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
-    const params = {planillaEgreso};
+    // tslint:disable-next-line: max-line-length
+    const params = {id, autorizadoPrevio, acompaniantes, fechaIngreso, fechaEgreso, tipovisita, ingresoAPie, planillaBarrio, planillaPersona, planillaQr, planillaDestino, planillaVehiculo, planillaEmpresa, planillaAutorizador, planillaAcompaniantes};
     return this.http.put(this.url + 'planilla-ingreso-egresos', params, {headers}).pipe(map(data => data));
+  }
+
+  getNorma(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'norma-barrios/' + id, {headers}).pipe(map(data => data as Inormas));
+  }
+
+  deleteNorma(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.delete(this.url + 'norma-barrios/' + id, {headers}).pipe(map(data => data));
+  }
+
+  postNorma(titulonorma, descripcionnorma) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    const params = {titulonorma, descripcionnorma};
+    return this.http.post(this.url + 'norma-barrios', params, {headers}).pipe(map(data => data as Inormas));
+  }
+
+  getAllEspacioComun() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'espacio-comuns', {headers}).pipe(map(data => data as IEspacioComun));
+  }
+
+  getEspacioComun(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'espacio-comuns/' + id, {headers}).pipe(map(data => data as IEspacioComun));
+  }
+
+  // tslint:disable-next-line: max-line-length
+  postEspacioComun(id, disponibilidadDesde, disponibilidadHasta, fotoEspacioComun, fotoEspacioComunContentType, horaDesde, horaHasta, espacioBarrio, espacioTipos) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    // tslint:disable-next-line: max-line-length
+    const params = {id, disponibilidadDesde, disponibilidadHasta, fotoEspacioComun, fotoEspacioComunContentType, horaDesde, horaHasta, espacioBarrio, espacioTipos};
+    return this.http.post(this.url + 'espacio-comuns', params, {headers}).pipe(map(data => data as IEspacioComun));
+  }
+
+  // tslint:disable-next-line: max-line-length
+  putEspacioComun(id, disponibilidadDesde, disponibilidadHasta, fotoEspacioComun, fotoEspacioComunContentType, horaDesde, horaHasta, espacioBarrio, espacioTipos) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    // tslint:disable-next-line: max-line-length
+    const params = {id, disponibilidadDesde, disponibilidadHasta, fotoEspacioComun, fotoEspacioComunContentType, horaDesde, horaHasta, espacioBarrio, espacioTipos};
+    return this.http.put(this.url + 'espacio-comuns', params, {headers}).pipe(map(data => data as IEspacioComun));
+  }
+
+  deleteEspacioComun(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.delete(this.url + 'espacio-comuns/' + id, {headers}).pipe(map(data => data));
+  }
+
+  getGuardias() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + '', {headers}).pipe(map(data => data));
+  }
+
+  putGuardia() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    const params = {};
+    return this.http.put(this.url + '', params, {headers}).pipe(map(data => data));
+  }
+
+  getPropietarios() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + '', {headers}).pipe(map(data => data));
+  }
+
+  putPropietario() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    const params = {};
+    return this.http.put(this.url + '', params, {headers}).pipe(map(data => data));
   }
 
 }
