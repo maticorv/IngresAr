@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController, AlertController, MenuController } from '@ionic/angular';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../user.class';
 import { ServiceService } from '../../services/service.service';
+import { Account } from '../../classes/account';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +15,7 @@ export class LoginPage implements OnInit {
   error = '';
   image = '../assets/logo.png';
   // tslint:disable-next-line:max-line-length
-  constructor(private router: Router,  private fireauth: AngularFireAuth, private toastController: ToastController, private alertContrller: AlertController, private menuCtrl: MenuController, private service: ServiceService) { }
-
+  constructor(private router: Router,  private account: Account, private toastController: ToastController, private alertContrller: AlertController, private menuCtrl: MenuController, private service: ServiceService) { }
   ngOnInit() {
     this.menuCtrl.enable(false);
   }
@@ -36,10 +35,20 @@ export class LoginPage implements OnInit {
   //  }
 
   onLogin() {
-    this.service.login(this.user.email, this.user.password).subscribe((data) => {
-      console.log(data);
-      this.presentToast('Successfully logged in!');
-      this.router.navigateByUrl('/startmenu');
+    this.service.login(this.user.email, this.user.password).subscribe(() => {
+      this.service.account().subscribe(resp => {
+        this.account.activated = resp.activated;
+        this.account.id = resp.id;
+        this.account.authorities = resp.authorities;
+        this.account.createdBy = resp.createdBy;
+        this.account.email = resp.email;
+        this.account.firstName = resp.firstName;
+        this.account.imageUrl = resp.imageUrl;
+        this.account.lastName = resp.lastName;
+        this.account.login = resp.login;
+        this.presentToast('Successfully logged in!');
+        this.router.navigateByUrl('/startmenu');
+      });
     },
       (error) => {console.log(error);
                   this.presentToast('Datos incorrectos, por favor ingreselos nuevamente');

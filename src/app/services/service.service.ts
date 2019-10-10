@@ -12,6 +12,7 @@ import { Imodelo } from '../interfaces/modelo';
 import { Vehiculo } from '../classes/vehiculo';
 import { Inovedad } from '../interfaces/novedad';
 import { Inormas } from '../interfaces/inormas';
+import { Iaccount } from '../interfaces/account';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,12 @@ export class ServiceService {
     const params = {password, username};
     // tslint:disable-next-line: max-line-length
     return this.http.post( this.url + 'authenticate', params, {headers} ).pipe(map(data => this.guardarToken(data[`id_token`])));
+  }
+  account(): Observable<Iaccount> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
+    // tslint:disable-next-line: max-line-length
+    return this.http.get( this.url + 'account', {headers} ).pipe(map(data => data as Iaccount));
   }
   register(login: string, firstName: string, lastName: string, email: string, password: string) {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
