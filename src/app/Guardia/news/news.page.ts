@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServiceService } from '../../services/service.service';
 import { Inovedad } from '../../interfaces/novedad';
 import { Persona } from '../../interfaces/persona';
-import { Account } from 'src/app/classes/account';
 import { IonContent } from '@ionic/angular';
+import { Iaccount } from 'src/app/interfaces/account';
 
 @Component({
   selector: 'app-news',
@@ -13,11 +13,12 @@ import { IonContent } from '@ionic/angular';
 export class NewsPage implements OnInit {
   novedades: Inovedad[];
   chatMessage: string;
+  account: Iaccount;
 
-  constructor(private service: ServiceService, private account: Account) { }
+  constructor(private service: ServiceService) { }
   @ViewChild(IonContent, {static: false}) content: IonContent;
   ngOnInit() {
-    console.log(this.account);
+    this.service.account().subscribe(resp => this.account = resp);
     this.service.getNovedades().subscribe(data => {
       this.novedades = data;
       console.log(data);

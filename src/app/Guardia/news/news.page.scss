@@ -16,6 +16,12 @@ ion-footer {
     background-color: #fff;
 }
 
+ion-spinner {
+    position: absolute;
+    right: 10px;
+    top: 50px;
+}
+
 $userBackgroundColor: #387ef5;
 $toUserBackgroundColor: #fff;
 .line-breaker {
@@ -105,11 +111,6 @@ $toUserBackgroundColor: #fff;
         }
         .user-img {
             right: 0;
-        }
-        ion-spinner {
-            position: absolute;
-            right: 10px;
-            top: 50px;
         }
         .msg-content {
             background-color: $userBackgroundColor;
