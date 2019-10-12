@@ -37,6 +37,12 @@ export class ServiceService {
     // tslint:disable-next-line: max-line-length
     return this.http.get( this.url + 'account', {headers} ).pipe(map(data => data as Iaccount));
   }
+  getUsers(): Observable<Iaccount[]> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
+    // tslint:disable-next-line: max-line-length
+    return this.http.get( this.url + 'users', {headers} ).pipe(map(data => data as Iaccount[]));
+  }
   register(login: string, firstName: string, lastName: string, email: string, password: string) {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     const params = {login, firstName, lastName, email, password};
@@ -216,17 +222,17 @@ export class ServiceService {
     // tslint:disable-next-line: max-line-length
     return this.http.post(this.url + 'novedades', params, {headers}).pipe(map(data => data as IReporte));
   }
-  getMensajes(): Observable<IMensaje[]> {
+  getMensajes(id: number): Observable<IMensaje[]> {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    return this.http.get(this.url + 'reportes', {headers}).pipe(map(data => data as IMensaje[]));
+    return this.http.get(this.url + 'mensajesod/?id=' + id, {headers}).pipe(map(data => data as IMensaje[]));
   }
-  postMensaje(fecha: string, descripcion: string, creada: Iaccount): Observable<IMensaje> {
+  postMensaje(fechaHoraMensaje: string, descripcionMensaje: string, userOrigen: Iaccount, userDestino: Iaccount): Observable<IMensaje> {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    const params = {fecha, descripcion, creada};
+    const params = {fechaHoraMensaje, descripcionMensaje, userOrigen, userDestino};
     // tslint:disable-next-line: max-line-length
-    return this.http.post(this.url + 'novedades', params, {headers}).pipe(map(data => data as IMensaje));
+    return this.http.post(this.url + 'mensajes', params, {headers}).pipe(map(data => data as IMensaje));
   }
 
   getNormasBarrio() {
