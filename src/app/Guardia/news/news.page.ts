@@ -27,18 +27,8 @@ export class NewsPage implements OnInit {
   }
   sendMessage() {
     if (!(this.chatMessage === '' || this.chatMessage === '\n')) {
-      const person: Persona = {
-        id: this.account.id,
-        nombrePersona:  this.account.firstName,
-        apellidoPersona: this.account.lastName,
-        dniPersona: 5808,
-        telefonoPersona: 45924,
-        personabarrio: null,
-        tipoPersona: null,
-        vehiculos: null
-      };
       const hoy = new Date().toJSON();
-      this.service.postNovedad(hoy, this.chatMessage, person ).subscribe(data => {
+      this.service.postNovedad(hoy, this.chatMessage, this.account ).subscribe(data => {
         this.chatMessage = '';
         this.novedades.push(data);
         this.scrollToBottom();
