@@ -14,6 +14,8 @@ import { Inovedad } from '../interfaces/novedad';
 import { Inormas } from '../interfaces/inormas';
 import { Iaccount } from '../interfaces/account';
 import { IEspacioComun } from '../interfaces/espacio-comun';
+import { IReporte } from '../interfaces/reporte';
+import { IMensaje } from '../interfaces/mensaje';
 
 @Injectable({
   providedIn: 'root'
@@ -195,12 +197,36 @@ export class ServiceService {
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'novedades', {headers}).pipe(map(data => data as Inovedad[]));
   }
-  postNovedad(fecha: string, descripcion: string, creada: Persona): Observable<Inovedad> {
+  postNovedad(fecha: string, descripcion: string, creada: Iaccount): Observable<Inovedad> {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     const params = {fecha, descripcion, creada};
     // tslint:disable-next-line: max-line-length
     return this.http.post(this.url + 'novedades', params, {headers}).pipe(map(data => data as Inovedad));
+  }
+  getReportes(): Observable<IReporte[]> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'reportes', {headers}).pipe(map(data => data as IReporte[]));
+  }
+  postReporte(fecha: string, descripcion: string, creada: Iaccount): Observable<IReporte> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    const params = {fecha, descripcion, creada};
+    // tslint:disable-next-line: max-line-length
+    return this.http.post(this.url + 'novedades', params, {headers}).pipe(map(data => data as IReporte));
+  }
+  getMensajes(): Observable<IMensaje[]> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'reportes', {headers}).pipe(map(data => data as IMensaje[]));
+  }
+  postMensaje(fecha: string, descripcion: string, creada: Iaccount): Observable<IMensaje> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    const params = {fecha, descripcion, creada};
+    // tslint:disable-next-line: max-line-length
+    return this.http.post(this.url + 'novedades', params, {headers}).pipe(map(data => data as IMensaje));
   }
 
   getNormasBarrio() {
