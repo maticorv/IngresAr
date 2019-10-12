@@ -34,7 +34,7 @@ export class MenuAdministratorPage implements OnInit {
   }
 
   irANovedades() {
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/news');
   }
 
   irAReportes() {
