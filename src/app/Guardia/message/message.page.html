@@ -1,33 +1,30 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-title>message</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/startmenu'></ion-back-button>
+        </ion-buttons>
+        <ion-title>Mensajes</ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-    <div class="container">
-        <div *ngFor="let msg of messageList" class="message left">
-            <img class="user-img" [src]="msg.sender.avatarURL" alt="" src="">
-            <div class="msg-detail">
-                <div class="msg-info">
-                    <p>
-                        enviado por
-                    </p>
-                </div>
-                <div class="msg-content">
-                    <span class="triangle"></span>
-                    <p class="line-breaker ">mensaje</p>
-                </div>
-            </div>
-        </div>
-    </div>
+<ion-content class="ion-padding">
+    <ng-container *ngIf="Users==null; else elseTemplate">
+    </ng-container>
+    <ng-template #elseTemplate>
+        <ion-list>
+            <ion-item *ngFor="let user of Users; let i=index" (click)="onClick(user.id)">
+                <ion-avatar slot="start">
+                    <ng-container *ngIf="user?.imageUrl; else elseTemplate">
+                        <img class="user-img" [src]="user.imageUrl" alt="../../../assets/image.png">
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <img class="user-img" src="../../../assets/image.png" alt="">
+                    </ng-template>
+                </ion-avatar>
+                <ion-label>
+                    <h2>{{user.firstName}} {{user.lastName}}</h2>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </ng-template>
 </ion-content>
-<ion-footer no-border>
-    <div class="input-wrap">
-        <textarea #messageInput placeholder="Escribe un mensaje" [(ngModel)]="chatMessage" (keyup.enter)="sendMessage()">
-      </textarea>
-        <button ion-button clear icon-only item-right (click)="sendMessage()">
-        <ion-icon name="ios-send" ios="ios-send" md="md-send"></ion-icon>
-      </button>
-    </div>
-</ion-footer>
