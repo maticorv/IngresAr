@@ -41,7 +41,7 @@ export class MenuAdministratorPage implements OnInit {
     this.router.navigateByUrl('/norms');
   }
   Backup() {
-    this.router.navigateByUrl('/data-base');
+    this.router.navigateByUrl('/database');
   }
 
 
