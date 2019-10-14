@@ -19,7 +19,7 @@
         </ion-item>
     </ion-list>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="onClick()">
-        <ion-fab-button>
+        <ion-fab-button [disabled]="entity === 99">
             <ion-icon name="download"></ion-icon>
         </ion-fab-button>
     </ion-fab>
