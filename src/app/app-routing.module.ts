@@ -46,7 +46,8 @@ const routes: Routes = [
   { path: 'new-common-space', loadChildren: './Administrador/new-common-space/new-common-space.module#NewCommonSpacePageModule' },
   { path: 'diary', loadChildren: './Guardia/diary/diary.module#DiaryPageModule' },
   { path: 'message/:id', loadChildren: './Guardia/message/messageid/messageid.module#MessageidPageModule' },
-  { path: 'database', loadChildren: './Administrador/data-base/data-base.module#DataBasePageModule' },
+  { path: 'database', loadChildren: './Administrador/data-base/data-base.module#DataBasePageModule' },  { path: 'profile', loadChildren: './shared/profile/profile.module#ProfilePageModule' },
+
 
 
 

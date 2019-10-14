@@ -14,7 +14,7 @@ export class MenuAdministratorPage implements OnInit {
   }
 
   mostrar() {
-    console.log('Funciona');
+    this.router.navigateByUrl('/profile');
   }
 
   irANormas() {
