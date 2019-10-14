@@ -1,5 +1,6 @@
 export interface IEspacioComun {
     id: number;
+    nombreEspacioComun: string;
     disponibilidadDesde: Date;
     disponibilidadHasta: Date;
     fotoEspacioComun: string;

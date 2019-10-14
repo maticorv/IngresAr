@@ -26,6 +26,7 @@ import { Marca } from './classes/marca';
 import { AuthorizationPage } from './ingreso/authorization/authorization.page';
 import { Account } from './classes/account';
 import { PlanillaEgreso } from './classes/planillaEgreso';
+import { Camera } from '@ionic-native/camera/ngx';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { PlanillaEgreso } from './classes/planillaEgreso';
     AuthorizationPage,
     Account,
     PlanillaEgreso,
+    Camera,
 
   ],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServiceService } from 'src/app/services/service.service';
 import { IEspacioComun } from 'src/app/interfaces/espacio-comun';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-edit-common-space',
@@ -11,9 +12,10 @@ import { IEspacioComun } from 'src/app/interfaces/espacio-comun';
 export class EditCommonSpacePage implements OnInit {
 
   espacioComun: IEspacioComun;
-  foto = '../assets/icon/favicon.png';
+  foto = '../assets/imageVacia.png';
+  fotoEspCom: string;
 
-  constructor(private activatedRoute: ActivatedRoute, private service: ServiceService) { }
+  constructor(private activatedRoute: ActivatedRoute, private service: ServiceService, private camera: Camera) { }
 
   ngOnInit() {
     this.obtenerEspacioComun();
@@ -37,6 +39,38 @@ export class EditCommonSpacePage implements OnInit {
       console.log(data);
     },
     (error) => {console.log(error);
+    });
+  }
+
+  getPicture() {
+    const options: CameraOptions = {
+      destinationType: this.camera.DestinationType.DATA_URL,
+      targetWidth: 1000,
+      targetHeight: 1000,
+      quality: 100
+    };
+    this.camera.getPicture( options )
+    .then(imageData => {
+      this.fotoEspCom = `data:image/jpeg;base64,${imageData}`;
+    })
+    .catch(error => {
+      console.error( error );
+    });
+  }
+
+  getPictureAlbum() {
+    const options: CameraOptions = {
+      destinationType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      targetWidth: 1000,
+      targetHeight: 1000,
+      quality: 100
+    };
+    this.camera.getPicture( options )
+    .then(imageData => {
+      this.fotoEspCom = `data:image/jpeg;base64,${imageData}`;
+    })
+    .catch(error => {
+      console.error( error );
     });
   }
 
