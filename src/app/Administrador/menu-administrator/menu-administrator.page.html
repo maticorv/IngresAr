@@ -1,35 +1,38 @@
 <ion-header>
-  <ion-toolbar color="primary">
-      <ion-title class="ion-text-capitalize ion-text-center">IngresAr</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-title class="ion-text-capitalize ion-text-center">IngresAr</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
     <ion-list>
         <ion-item>
-          <ion-label (click)="irAAdministrarEspCom()">Administrar Espacion Comunes</ion-label>
-        </ion-item>                
+            <ion-label (click)="irAAdministrarEspCom()">Administrar Espacion Comunes</ion-label>
+        </ion-item>
         <ion-item>
-          <ion-label (click)="irAAdminGuardias()">Administrar Guardias</ion-label>
-        </ion-item>                
+            <ion-label (click)="irAAdminGuardias()">Administrar Guardias</ion-label>
+        </ion-item>
         <ion-item>
-          <ion-label (click)="irAAdminPropietario()">Administrar Propietarios</ion-label>
-        </ion-item>                
+            <ion-label (click)="irAAdminPropietario()">Administrar Propietarios</ion-label>
+        </ion-item>
         <ion-item>
-          <ion-label (click)="irANovedades()">Novedades</ion-label>
-        </ion-item>                
+            <ion-label (click)="irANovedades()">Novedades</ion-label>
+        </ion-item>
         <ion-item>
-          <ion-label (click)="irAReportes()">Reportes</ion-label>
-        </ion-item>                
+            <ion-label (click)="irAReportes()">Reportes</ion-label>
+        </ion-item>
         <ion-item>
-          <ion-label (click)="irANormas()">Normas</ion-label>
-        </ion-item>           
+            <ion-label (click)="irANormas()">Normas</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label (click)="Backup()">Backup</ion-label>
+        </ion-item>
     </ion-list>
-  </ion-content>
-  <ion-footer>
-      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-          <ion-fab-button (click)="mostrar()">
+</ion-content>
+<ion-footer>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="mostrar()">
             <ion-icon name="person"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
-  </ion-footer>
+        </ion-fab-button>
+    </ion-fab>
+</ion-footer>

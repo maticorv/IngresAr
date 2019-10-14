@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/'></ion-back-button>
+        </ion-buttons>
+        <ion-title>Base de datos</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" fullscreen>
+    <ion-list>
+        <ion-item>
+            <ion-label>Seleccione la Tabla</ion-label>
+            <ion-select [(ngModel)]="entity">
+                <ng-container *ngFor="let entidad of Entidades; let i=index">
+                    <ion-select-option [value]=" i ">{{entidad}}</ion-select-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="onClick()">
+        <ion-fab-button>
+            <ion-icon name="download"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

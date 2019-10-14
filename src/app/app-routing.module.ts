@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'message', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', loadChildren: './security/login/login.module#LoginPageModule' },
   { path: 'forgot', loadChildren: './security/forgot/forgot.module#ForgotPageModule' },
   { path: 'startmenu', loadChildren: './startmenu/startmenu.module#StartmenuPageModule' },
@@ -46,6 +46,8 @@ const routes: Routes = [
   { path: 'new-common-space', loadChildren: './Administrador/new-common-space/new-common-space.module#NewCommonSpacePageModule' },
   { path: 'diary', loadChildren: './Guardia/diary/diary.module#DiaryPageModule' },
   { path: 'message/:id', loadChildren: './Guardia/message/messageid/messageid.module#MessageidPageModule' },
+  { path: 'database', loadChildren: './Administrador/data-base/data-base.module#DataBasePageModule' },
+
 
 
 

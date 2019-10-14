@@ -40,5 +40,9 @@ export class MenuAdministratorPage implements OnInit {
   irAReportes() {
     this.router.navigateByUrl('/norms');
   }
+  Backup() {
+    this.router.navigateByUrl('/data-base');
+  }
+
 
 }
