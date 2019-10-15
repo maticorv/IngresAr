@@ -9,19 +9,21 @@
 
 
 <ion-content class="ion-padding" fullscreen>
-    <ion-avatar>
-        <ng-container *ngIf="account?.imageUrl; else elseTemplate">
-            <img class="user-img" [src]="account.imageUrl" alt="../../../assets/image.png">
-        </ng-container>
-        <ng-template #elseTemplate>
-            <img class="user-img" src="../../../assets/image.png" alt="">
-        </ng-template>
-    </ion-avatar>
+    <div class="image">
+        <ion-avatar>
+            <ng-container *ngIf="account?.imageUrl; else elseTemplate">
+                <img class="user-img" [src]="account.imageUrl" alt="../../../assets/image.png">
+            </ng-container>
+            <ng-template #elseTemplate>
+                <img class="user-img" src="../../../assets/image.png" alt="">
+            </ng-template>
+        </ion-avatar>
+    </div>
 
-    <ion-item-divider>
-        Perfil
-    </ion-item-divider>
     <ng-container *ngIf="account!==undefined">
+        <ion-item-divider>
+            Información personal
+        </ion-item-divider>
         <ion-item>
             <ion-label position="floating">Nombre</ion-label>
             <ion-input name="Nombre" [(ngModel)]="account.firstName" value="account.firstName"></ion-input>
@@ -34,14 +36,14 @@
             <ion-label position="floating">Correo electrónico</ion-label>
             <ion-input name="email" [(ngModel)]="account.email"></ion-input>
         </ion-item>
+        <ion-item-divider>
+            <ion-label>
+                Salir
+            </ion-label>
+        </ion-item-divider>
+        <ion-text (click)="cerrarSesion()">
+            <h6>Cerrar Sesión</h6>
+        </ion-text>
     </ng-container>
-    <ion-item-divider>
-        <ion-label>
-            Salir
-        </ion-label>
-    </ion-item-divider>
-    <ion-text (click)="cerrarSesion()">
-        <h6>Cerrar Sesión</h6>
-    </ion-text>
 
 </ion-content>

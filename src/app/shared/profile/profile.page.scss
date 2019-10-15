@@ -1,0 +1,10 @@
+.image {
+    text-align: -webkit-center;
+}
+
+ion-avatar ng-container img {
+    width: 100px !important;
+    height: 100px !important;
+    max-width: 100px !important; //any size
+    max-height: 100px !important; //any size
+}
