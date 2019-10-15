@@ -51,28 +51,28 @@
               <ion-col>
                   <ion-item>
                       <ion-label>
-                          {{planillaEgreso?.planillaPersona.apellidoPersona}}
+                          {{planillaEgreso?.planillaPersona?.apellidoPersona}}
                       </ion-label>
                   </ion-item>
               </ion-col>
               <ion-col>
                   <ion-item>
                       <ion-label>
-                          {{planillaEgreso?.planillaPersona.nombrePersona}}
+                          {{planillaEgreso?.planillaPersona?.nombrePersona}}
                       </ion-label>
                   </ion-item>
               </ion-col>
               <ion-col>
                   <ion-item>
                       <ion-label>
-                          {{planillaEgreso?.planillaPersona.dniPersona}}
+                          {{planillaEgreso?.planillaPersona?.dniPersona}}
                       </ion-label>
                   </ion-item>
               </ion-col>
               <ion-col>
                   <ion-item *ngIf="planillaEgreso?.planillaVehiculo !== null">
                       <ion-label>
-                          {{planillaEgreso?.planillaVehiculo.dominio}}
+                          {{planillaEgreso?.planillaVehiculo?.dominio}}
                       </ion-label>
                   </ion-item>
                   <ion-item *ngIf="planillaEgreso?.planillaVehiculo === null">
@@ -83,7 +83,7 @@
               <ion-col>
                   <ion-item>
                       <ion-label>
-                          {{planillaEgreso?.planillaDestino.casaDomicilio}}
+                            C: {{planillaEgreso?.planillaDestino?.casaDomicilio}} M: {{planillaEgreso?.planillaDestino?.manzanaDomicilio}}
                       </ion-label>
                   </ion-item>
               </ion-col>

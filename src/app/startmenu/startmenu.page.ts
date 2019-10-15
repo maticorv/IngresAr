@@ -18,6 +18,10 @@ export class StartmenuPage implements OnInit {
     this.activarMenu();
   }
 
+  ionViewWillEnter() {
+    this.activarMenu();
+  }
+
   activarMenu() {
     this.menuCtrl.enable(true);
   }

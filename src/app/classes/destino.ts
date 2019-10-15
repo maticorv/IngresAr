@@ -1,6 +1,6 @@
 export class Destino {
     id: number;
-    casaDomicilio: string;
-    apellido: string;
+    casa: string;
+    manzana: string;
     tipoDestino: string;
 }

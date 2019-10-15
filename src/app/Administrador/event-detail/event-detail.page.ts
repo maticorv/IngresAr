@@ -21,6 +21,7 @@ export class EventDetailPage implements OnInit {
   getEvent() {
     this.service.getEventById(this.activatedRouter.snapshot.params.id).subscribe(data => {
       this.evento = data;
+      console.log(this.evento);
     },
     (error) => { console.log(error);
     });

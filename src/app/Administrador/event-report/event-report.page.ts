@@ -22,6 +22,7 @@ export class EventReportPage implements OnInit {
   getAllEvents() {
     this.service.getAllEvent().subscribe(data => {
       this.eventos = data;
+      console.log(this.eventos);
     },
     (error) => {console.log(error);
     });

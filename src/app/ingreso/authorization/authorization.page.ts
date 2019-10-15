@@ -53,7 +53,8 @@ export class AuthorizationPage implements OnInit {
   }
 
   getPersonasDomicilio() {
-    this.service.getPersonasDomicilio(this.planillaDestino.casaDomicilio).subscribe(data => {
+    this.service.getPersonasDomicilio(this.planillaDestino.casa, this.planillaDestino.manzana).subscribe(data => {
+      this.planillaDestino.id = data.id;
       this.personaAut = data[`domiciliopersonas`];
       console.log(this.personaAut);
     },

@@ -7,25 +7,39 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
 
 
-    <div class="row h-100 justify-content-center align-items-center">
+    <!-- <div class="row h-100 justify-content-center align-items-center"> -->
         <div>
             <h2 class="text-center">¿Donde se dirige?</h2>
-            <h3>Ingrese lote</h3>
+            <h3>Ingrese Destino</h3>
             <!-- <h3>Ingrese lote o apellido de la familia</h3> -->
-            <ion-item>
-                <ion-select placeholder="Lote" okText="Seleccionar" [(ngModel)]="tipo">Apellido
-                    <ion-select-option value="LOTE">LOTE</ion-select-option>
-                    <!-- <ion-select-option value="APELLIDO">APELLIDO</ion-select-option> -->
+            <!-- <ion-item>
+                <ion-select placeholder="Casa" okText="Seleccionar">Apellido
+                    <ion-select-option value="Casa">Casa</ion-select-option>
                 </ion-select>
-
-                <ion-input type="text" placeholder="Ingrese lote" [(ngModel)]="direccion"></ion-input>
-            </ion-item>
+                <ion-input type="text" placeholder="Ingrese Casa" [(ngModel)]="casa"></ion-input>
+                <ion-select placeholder="Manzana" okText="Seleccionar">Apellido
+                    <ion-select-option value="Manzana">Manzana</ion-select-option>
+                </ion-select>
+                <ion-input type="text" placeholder="Ingrese Manzana" [(ngModel)]="manzana"></ion-input>
+            </ion-item> -->
+            <ion-grid>
+                <ion-item>
+                    <ion-label>Manzana : </ion-label>
+                    <ion-input class="ml-2" required type="text" placeholder="Ingrese Manzana" [(ngModel)]="manzana"></ion-input>
+                </ion-item>
+            </ion-grid>
+            <ion-grid>
+                <ion-item>
+                    <ion-label>Casa :</ion-label>
+                    <ion-input  class="ml-2" required type="number" placeholder="Ingrese Casa" [(ngModel)]="casa"></ion-input>
+                </ion-item>
+            </ion-grid>
             <div style="text-align-last: right">
-                <ion-button class="mt-4" (click)="destination()">Siguiente</ion-button>
+                <ion-button [disabled]="!(manzana && casa)" class="mt-4" (click)="destination()">Siguiente</ion-button>
             </div>
         </div>
-    </div>
+    <!-- </div> -->
 </ion-content>
