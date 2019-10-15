@@ -47,7 +47,7 @@ export class LoginPage implements OnInit {
         this.account.lastName = resp.lastName;
         this.account.login = resp.login;
         this.presentToast('Successfully logged in!');
-        this.router.navigateByUrl('/startmenu');
+        this.router.navigateByUrl(this.hasAnyAuthority());
       });
     },
       (error) => {console.log(error);
@@ -57,7 +57,7 @@ export class LoginPage implements OnInit {
 
    async presentToast(me: string) {
     const toast = await this.toastController.create({
-      position: 'middle',
+      position: 'bottom',
       color: 'dark',
       duration: 2000,
       message: me,
@@ -66,5 +66,14 @@ export class LoginPage implements OnInit {
     setTimeout(() => {
       },
       2000);
+  }
+
+  hasAnyAuthority(): string {
+    if (this.account.authorities.some (() => this.account.authorities.includes('ROLE_ADMIN'))) {
+      return 'menu-administrator';
+    } else {
+      this.account.authorities.some (() => this.account.authorities.includes('ROLE_USER'));
+      return 'startmenu';
+    }
   }
 }

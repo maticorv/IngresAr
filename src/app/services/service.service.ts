@@ -223,13 +223,14 @@ export class ServiceService {
     // tslint:disable-next-line: max-line-length
     return this.http.post(this.url + 'novedades', params, {headers}).pipe(map(data => data as IReporte));
   }
-  getMensajes(id: number): Observable<IMensaje[]> {
+  getMensajes(id: number, iddestino: number): Observable<IMensaje[]> {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    return this.http.get(this.url + 'mensajesod/?id=' + id, {headers}).pipe(map(data => data as IMensaje[]));
+    return this.http.get(this.url + 'mensajesod/?id=' + id + '&iddestino=' + iddestino  , {headers}).pipe(map(data => data as IMensaje[]));
   }
   postMensaje(fechaHoraMensaje: string, descripcionMensaje: string, userOrigen: Iaccount, userDestino: Iaccount): Observable<IMensaje> {
     const token = this.leerToken();
+    console.log(userOrigen, userDestino);
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     const params = {fechaHoraMensaje, descripcionMensaje, userOrigen, userDestino};
     // tslint:disable-next-line: max-line-length

@@ -27,7 +27,7 @@ export class MessageidPage implements OnInit {
   }
 
   obtenerMensajes() {
-      this.service.getMensajes(this.id).subscribe(data => {
+      this.service.getMensajes(this.account.id, this.id).subscribe(data => {
         this.mensajes = data;
         console.log(data);
       },
@@ -38,10 +38,10 @@ export class MessageidPage implements OnInit {
       if (!(this.chatMessage === '' || this.chatMessage === '\n')) {
         const hoy = new Date().toJSON();
         let destinatario: Iaccount;
-        if (this.account === this.mensajes[0].userDestino) {
+        if (this.account.id === this.mensajes[0].userDestino.id) {
           destinatario = this.mensajes[0].userOrigen;
         } else {
-          destinatario = this.mensajes[0].userOrigen;
+          destinatario = this.mensajes[0].userDestino;
         }
         this.service.postMensaje(hoy, this.chatMessage, this.account, destinatario).subscribe(data => {
           this.chatMessage = '';

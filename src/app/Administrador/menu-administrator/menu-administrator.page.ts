@@ -14,7 +14,7 @@ export class MenuAdministratorPage implements OnInit {
   }
 
   mostrar() {
-    console.log('Funciona');
+    this.router.navigateByUrl('/profile');
   }
 
   irANormas() {
@@ -41,7 +41,7 @@ export class MenuAdministratorPage implements OnInit {
     this.router.navigateByUrl('/report/evento');
   }
   Backup() {
-    this.router.navigateByUrl('/data-base');
+    this.router.navigateByUrl('/database');
   }
 
 
