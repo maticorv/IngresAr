@@ -88,6 +88,11 @@ export class ServiceService {
     const params = {nombrePersona, apellidoPersona, dniPersona, telefonoPersona};
     return this.http.post( this.url + 'personas', params, {headers}).pipe(map(data => data as Persona));
   }
+  getPersonaRol(rol: string): Observable <Persona[]> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
+    return this.http.get( this.url + 'persona/personarol/?role=' + rol, {headers}).pipe(map(data => data as Persona[]));
+  }
 
   postPersonaVehiculo(id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, vehiculos) {
     const token = this.leerToken();

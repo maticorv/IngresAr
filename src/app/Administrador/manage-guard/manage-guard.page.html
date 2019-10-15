@@ -1,12 +1,26 @@
 <ion-header>
-  <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-          <ion-back-button defaultHref='/menu-administrator'></ion-back-button>
-      </ion-buttons>
-      <ion-title class="ion-text-capitalize ion-text-center">IngresAr</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/menu-administrator'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">Guardias</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding" fullscreen>
+    <ion-list>
+        <ion-list-header>
+            Guardias
+        </ion-list-header>
+
+        <ion-item *ngFor="let guardia of guardias; let i=index">
+            <ion-avatar slot="start">
+                <img src="../../../assets/image.png">
+            </ion-avatar>
+            <ion-label>
+                <h2>{{guardia?.nombrePersona}} {{guardia?.apellidoPersona}}</h2>
+            </ion-label>
+        </ion-item>
+    </ion-list>
 
 </ion-content>
