@@ -12,8 +12,11 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 export class EditCommonSpacePage implements OnInit {
 
   espacioComun: IEspacioComun;
-  foto = '../assets/imageVacia.png';
+  foto = '../assets/Prado-Cancha.jpg';
   fotoEspCom: string;
+  nombreEspacioComun: string;
+  disponibilidadDesde: any;
+  disponibilidadHasta: any;
 
   constructor(private activatedRoute: ActivatedRoute, private service: ServiceService, private camera: Camera) { }
 
@@ -24,6 +27,9 @@ export class EditCommonSpacePage implements OnInit {
   obtenerEspacioComun() {
     this.service.getEspacioComun(this.activatedRoute.snapshot.params.id).subscribe(data => {
       this.espacioComun = data;
+      this.disponibilidadDesde = data.disponibilidadDesde;
+      this.disponibilidadHasta = data.disponibilidadHasta;
+      this.nombreEspacioComun = data.nombreEspacioComun;
     },
     (error) => {console.log(error);
     });
@@ -35,7 +41,7 @@ export class EditCommonSpacePage implements OnInit {
 
   ActualizarEspacioComun() {
     // tslint:disable-next-line: max-line-length
-    this.service.putEspacioComun(this.espacioComun.id, this.espacioComun.disponibilidadDesde, this.espacioComun.disponibilidadHasta, this.espacioComun.fotoEspacioComun, this.espacioComun.fotoEspacioComunContentType, this.espacioComun.horaDesde, this.espacioComun.horaHasta, this.espacioComun.espacioBarrio, this.espacioComun.espacioTipos).subscribe(data => {
+    this.service.putEspacioComun(this.espacioComun.id, this.nombreEspacioComun, this.disponibilidadDesde, this.disponibilidadHasta, this.espacioComun.fotoEspacioComun, this.espacioComun.fotoEspacioComunContentType, this.espacioComun.horaDesde, this.espacioComun.horaHasta, this.espacioComun.espacioBarrio, this.espacioComun.espacioTipos).subscribe(data => {
       console.log(data);
     },
     (error) => {console.log(error);

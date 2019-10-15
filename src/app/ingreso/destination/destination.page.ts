@@ -9,8 +9,8 @@ import { Destino } from 'src/app/classes/destino';
 })
 export class DestinationPage implements OnInit {
 
-  tipo: string;
-  direccion: string;
+  casa: string;
+  manzana: string;
 
   constructor(private router: Router, private destino: Destino) { }
 
@@ -19,8 +19,9 @@ export class DestinationPage implements OnInit {
 
   destination() {
     // this.destino.tipoDestino = this.tipo;
-    this.destino.casaDomicilio = this.direccion;
-    this.destino.id = 8;
+    this.destino.casa = this.casa;
+    this.destino.manzana = this.manzana;
+    // this.destino.id = 1;
     this.router.navigateByUrl('/typeofvisit');
   }
 

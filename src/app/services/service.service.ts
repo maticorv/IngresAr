@@ -177,10 +177,11 @@ export class ServiceService {
     return this.http.post( this.url + 'planilla-ingreso-egresos', params, {headers}).pipe(map(date => date));
   }
 
-  getPersonasDomicilio(lote: string) {
+  getPersonasDomicilio(casa: string, manzana) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    return this.http.get( this. url + 'domicilios/domiciliospersona/' + lote, {headers}).pipe(map(data => data as Persona));
+    // tslint:disable-next-line: max-line-length
+    return this.http.get( this. url + 'domicilios/domiciliospersona/?casaDomicilio=' + casa + '&' + 'manzanaDomicilio=' + manzana, {headers}).pipe(map(data => data as Persona));
   }
 
 
@@ -303,11 +304,11 @@ export class ServiceService {
   }
 
   // tslint:disable-next-line: max-line-length
-  putEspacioComun(id, disponibilidadDesde, disponibilidadHasta, fotoEspacioComun, fotoEspacioComunContentType, horaDesde, horaHasta, espacioBarrio, espacioTipos) {
+  putEspacioComun(id, nombreEspacioComun, disponibilidadDesde, disponibilidadHasta, fotoEspacioComun, fotoEspacioComunContentType, horaDesde, horaHasta, espacioBarrio, espacioTipos) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     // tslint:disable-next-line: max-line-length
-    const params = {id, disponibilidadDesde, disponibilidadHasta, fotoEspacioComun, fotoEspacioComunContentType, horaDesde, horaHasta, espacioBarrio, espacioTipos};
+    const params = {id, nombreEspacioComun, disponibilidadDesde, disponibilidadHasta, fotoEspacioComun, fotoEspacioComunContentType, horaDesde, horaHasta, espacioBarrio, espacioTipos};
     return this.http.put(this.url + 'espacio-comuns', params, {headers}).pipe(map(data => data as IEspacioComun));
   }
 

@@ -9,9 +9,9 @@
 
 <ion-content class="ion-padding">
   <ion-row style="place-content: center"  class="row-img">
-    <ion-img *ngIf="espacioComun?.fotoEspacioComun !== undefined || espacioComun?.fotoEspacioComun !== ''" [src]="espacioComun?.fotoEspacioComun"></ion-img>
-    <ion-img *ngIf="espacioComun?.fotoEspacioComun === undefined || espacioComun?.fotoEspacioComun === ''" [src]="espacioComun?.fotoEspacioComun"></ion-img>
-    <!-- <ion-img [src]=foto></ion-img> -->
+    <!-- <ion-img *ngIf="espacioComun?.fotoEspacioComun !== undefined || espacioComun?.fotoEspacioComun !== ''" [src]="espacioComun?.fotoEspacioComun"></ion-img>
+    <ion-img *ngIf="espacioComun?.fotoEspacioComun === undefined || espacioComun?.fotoEspacioComun === ''" [src]="espacioComun?.fotoEspacioComun"></ion-img> -->
+    <ion-img [src]=foto></ion-img>
   </ion-row>
   <ion-row>
       <ion-icon name="image" class="mr-3 icon" (click)="getPictureAlbum()"></ion-icon>
@@ -22,16 +22,17 @@
         <ion-label position="floating"> {{espacioComun?.nombreEspacioComun}}
             <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input required type="text"></ion-input>
+        <ion-input required type="text" [(ngModel)]="nombreEspacioComun"></ion-input>
     </ion-item>
   </ion-row>
   <ion-row>
     <ion-item>
         <ion-item>
-            <ion-label>Disponibilidad Hasta:</ion-label>
+            <ion-label>Disponibilidad Desde:</ion-label>
             <ion-datetime displayFormat="HH:mm"  
                           picker-format="HH:mm" 
-                          [value]="espacioComun?.horaDesde"></ion-datetime>
+                          [value]="espacioComun?.horaDesde"
+                          [(ngModel)]="disponibilidadDesde"></ion-datetime>
                           <!-- [(ngModel)]="espacioComun.horaDesde"></ion-datetime> -->
                         </ion-item>
     </ion-item>
@@ -42,7 +43,8 @@
             <ion-label>Disponibilidad Hasta:</ion-label>
             <ion-datetime displayFormat="HH:mm"  
                           picker-format="HH:mm" 
-                          [value]="espacioComun?.horaHasta"></ion-datetime>
+                          [value]="espacioComun?.horaHasta"
+                          [(ngModel)]="disponibilidadHasta"></ion-datetime>
                           <!-- [(ngModel)]="espacioComun.horaHasta"></ion-datetime> -->
           </ion-item>
     </ion-item>
@@ -60,10 +62,10 @@
 
   <ion-row class="mt-3">
     <ion-col>
-      <ion-button>Volver</ion-button>
+      <ion-button defaultHref='/manage-common-space'>Volver</ion-button>
     </ion-col>
     <ion-col style="text-align: right;">
-      <ion-button>Guardar</ion-button>
+      <ion-button (click)="ActualizarEspacioComun()">Guardar</ion-button>
     </ion-col>
   </ion-row>
 

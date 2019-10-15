@@ -22,6 +22,7 @@ export class ManageCommonSpacePage implements OnInit {
   obtenerEspacioComun() {
     this.service.getAllEspacioComun().subscribe(data => {
       this.espacioComun = data;
+      console.log(this.espacioComun);
     },
     (error) => {console.log(error);
     });
