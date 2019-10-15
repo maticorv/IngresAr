@@ -31,7 +31,6 @@ const routes: Routes = [
   { path: 'menu-administrator', loadChildren: './Administrador/menu-administrator/menu-administrator.module#MenuAdministratorPageModule' },
   // tslint:disable-next-line: max-line-length
   { path: 'manage-common-space', loadChildren: './Administrador/manage-common-space/manage-common-space.module#ManageCommonSpacePageModule' },
-  { path: 'event-reports', loadChildren: './Administrador/event-reports/event-reports.module#EventReportsPageModule' },
   { path: 'norms', loadChildren: './Administrador/norms/norms.module#NormsPageModule' },
   { path: 'view-norm/:id', loadChildren: './Administrador/view-norm/view-norm.module#ViewNormPageModule' },
   { path: 'new-norm', loadChildren: './Administrador/new-norm/new-norm.module#NewNormPageModule' },
@@ -47,6 +46,10 @@ const routes: Routes = [
   { path: 'diary', loadChildren: './Guardia/diary/diary.module#DiaryPageModule' },
   { path: 'message/:id', loadChildren: './Guardia/message/messageid/messageid.module#MessageidPageModule' },
   { path: 'database', loadChildren: './Administrador/data-base/data-base.module#DataBasePageModule' },
+  { path: 'report', loadChildren: './Administrador/report/report.module#ReportPageModule' },
+  { path: 'event-report', loadChildren: './Administrador/event-report/event-report.module#EventReportPageModule' },
+  { path: 'event-detail/:id', loadChildren: './Administrador/event-detail/event-detail.module#EventDetailPageModule' },
+
 
 
 

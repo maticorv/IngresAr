@@ -16,6 +16,7 @@ import { Iaccount } from '../interfaces/account';
 import { IEspacioComun } from '../interfaces/espacio-comun';
 import { IReporte } from '../interfaces/reporte';
 import { IMensaje } from '../interfaces/mensaje';
+import { Ievent } from '../interfaces/ievent';
 
 @Injectable({
   providedIn: 'root'
@@ -339,6 +340,24 @@ export class ServiceService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     const params = {};
     return this.http.put(this.url + '', params, {headers}).pipe(map(data => data));
+  }
+
+  getAllEvent() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'eventos', {headers}).pipe(map(data => data as Ievent));
+  }
+
+  getEventById(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'eventos/' + id, {headers}).pipe(map(data => data as Ievent));
+  }
+
+  getEventByFecha(fecha) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.post(this.url + 'eventosfecha/' + fecha, {headers}).pipe(map(data => data as Ievent));
   }
 
 }
