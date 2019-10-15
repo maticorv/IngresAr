@@ -48,11 +48,8 @@ const routes: Routes = [
   { path: 'message/:id', loadChildren: './Guardia/message/messageid/messageid.module#MessageidPageModule' },
   { path: 'database', loadChildren: './Administrador/data-base/data-base.module#DataBasePageModule' },
   { path: 'profile', loadChildren: './shared/profile/profile.module#ProfilePageModule' },
-
-
-
-
-
+  { path: 'report/evento', loadChildren: './Administrador/event-report/event-report.module#EventReportPageModule' },
+  { path: 'event-detail/:id', loadChildren: './Administrador/event-detail/event-detail.module#EventDetailPageModule' },
 
 
 
