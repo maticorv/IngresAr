@@ -23,5 +23,8 @@ export class ProfilePage implements OnInit {
     this.service.borrarToken();
     this.router.navigateByUrl('/login');
   }
+  postAccount() {
+    this.service.postAccount(this.account).subscribe( );
+  }
 
 }
