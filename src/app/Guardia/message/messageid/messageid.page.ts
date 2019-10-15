@@ -30,6 +30,7 @@ export class MessageidPage implements OnInit {
       this.service.getMensajes(this.account.id, this.id).subscribe(data => {
         this.mensajes = data;
         console.log(data);
+        this.scrollToBottom();
       },
       (error) => { console.log(error);
       });
@@ -37,12 +38,27 @@ export class MessageidPage implements OnInit {
   sendMessage() {
       if (!(this.chatMessage === '' || this.chatMessage === '\n')) {
         const hoy = new Date().toJSON();
-        let destinatario: Iaccount;
-        if (this.account.id === this.mensajes[0].userDestino.id) {
-          destinatario = this.mensajes[0].userOrigen;
-        } else {
-          destinatario = this.mensajes[0].userDestino;
-        }
+        const destinatario: Iaccount = {
+          id: this.id,
+          login: null,
+          firstName: null,
+          lastName: null,
+          email: null,
+          activated: true,
+          langKey: null,
+          imageUrl: null,
+          authorities: null,
+          createdBy: null,
+          createdDate: null,
+          lastModifiedBy: null,
+          lastModifiedDate: null,
+          password: null
+        };
+        // if (this.account.id === this.mensajes[0].userDestino.id) {
+        //   destinatario = this.mensajes[0].userOrigen;
+        // } else {
+        //   destinatario = this.mensajes[0].userDestino;
+        // }
         this.service.postMensaje(hoy, this.chatMessage, this.account, destinatario).subscribe(data => {
           this.chatMessage = '';
           this.mensajes.push(data);

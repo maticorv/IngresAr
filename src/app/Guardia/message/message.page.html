@@ -12,11 +12,11 @@
     </ng-container>
     <ng-template #elseTemplate>
         <ion-list>
-            <ng-container *ngFor="let user of Users; let i=index" (click)="onClick(user.id)">
-                <ng-container *ngIf="user.id===account.id; else elseTemplate">
+            <ng-container *ngFor="let user of Users; let i=index">
+                <ng-container *ngIf="user?.id===account.id; else elseTemplate">
                 </ng-container>
                 <ng-template #elseTemplate>
-                    <ion-item>
+                    <ion-item (click)="onClick(user?.id)">
                         <ion-avatar slot="start">
                             <ng-container *ngIf="user?.imageUrl; else elseTemplate">
                                 <img class="user-img" [src]="user.imageUrl" alt="../../../assets/image.png">
@@ -31,7 +31,6 @@
                     </ion-item>
                 </ng-template>
             </ng-container>
-
         </ion-list>
     </ng-template>
 </ion-content>
