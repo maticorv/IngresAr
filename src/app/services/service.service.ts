@@ -17,6 +17,7 @@ import { IEspacioComun } from '../interfaces/espacio-comun';
 import { IReporte } from '../interfaces/reporte';
 import { IMensaje } from '../interfaces/mensaje';
 import { Ievent } from '../interfaces/ievent';
+import { Account } from '../classes/account';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,12 @@ export class ServiceService {
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
     // tslint:disable-next-line: max-line-length
     return this.http.get( this.url + 'account', {headers} ).pipe(map(data => data as Iaccount));
+  }
+  postAccount(account) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    const params = account;
+    return this.http.post( this.url + 'account', params, {headers}).pipe(map(data => data as Iaccount));
   }
   getUsers(): Observable<Iaccount[]> {
     const token = this.leerToken();
