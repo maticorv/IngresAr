@@ -53,6 +53,7 @@ const routes: Routes = [
   { path: 'authorizations', loadChildren: './Owner/authorizations/authorizations.module#AuthorizationsPageModule' },
   { path: 'events', loadChildren: './Owner/events/events.module#EventsPageModule' },
   { path: 'events1', loadChildren: './Owner/events/events1/events1.module#Events1PageModule' },
+  { path: 'events2', loadChildren: './Owner/events/events2/events2.module#Events2PageModule' },
 
 
 
