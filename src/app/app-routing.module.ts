@@ -58,6 +58,7 @@ const routes: Routes = [
   { path: 'guests', loadChildren: './Owner/events/guests/guests.module#GuestsPageModule' },
   { path: 'new-list', loadChildren: './Owner/events/new-list/new-list.module#NewListPageModule' },
   { path: 'detail-list', loadChildren: './Owner/events/detail-list/detail-list.module#DetailListPageModule' },
+  { path: 'information', loadChildren: './Owner/information/information.module#InformationPageModule' },
 
 
 
