@@ -48,7 +48,8 @@ const routes: Routes = [
   { path: 'database', loadChildren: './Administrador/data-base/data-base.module#DataBasePageModule' },
   { path: 'profile', loadChildren: './shared/profile/profile.module#ProfilePageModule' },
   { path: 'report/evento', loadChildren: './Administrador/event-report/event-report.module#EventReportPageModule' },
-  { path: 'event-detail/:id', loadChildren: './Administrador/event-detail/event-detail.module#EventDetailPageModule' },
+  { path: 'event-detail/:id', loadChildren: './Administrador/event-detail/event-detail.module#EventDetailPageModule' },  { path: 'menu-user', loadChildren: './User/menu-user/menu-user.module#MenuUserPageModule' },
+
 
 
 
