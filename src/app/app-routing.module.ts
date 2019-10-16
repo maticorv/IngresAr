@@ -54,6 +54,7 @@ const routes: Routes = [
   { path: 'events', loadChildren: './Owner/events/events.module#EventsPageModule' },
   { path: 'events1', loadChildren: './Owner/events/events1/events1.module#Events1PageModule' },
   { path: 'events2', loadChildren: './Owner/events/events2/events2.module#Events2PageModule' },
+  { path: 'events3', loadChildren: './Owner/events/events3/events3.module#Events3PageModule' },
 
 
 
