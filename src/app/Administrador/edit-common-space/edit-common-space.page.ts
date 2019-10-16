@@ -36,7 +36,8 @@ export class EditCommonSpacePage implements OnInit {
   }
 
   mostrar() {
-    // console.log(this.periodo);
+    console.log('disponibilidad desde', this.disponibilidadDesde);
+    console.log('disponibilidad hasta', this.disponibilidadHasta);
   }
 
   ActualizarEspacioComun() {

@@ -31,7 +31,7 @@
             <ion-label>Disponibilidad Desde:</ion-label>
             <ion-datetime displayFormat="HH:mm"  
                           picker-format="HH:mm" 
-                          [value]="espacioComun?.horaDesde"
+                          [value]="disponibilidadDesde"
                           [(ngModel)]="disponibilidadDesde"></ion-datetime>
                           <!-- [(ngModel)]="espacioComun.horaDesde"></ion-datetime> -->
                         </ion-item>
@@ -43,7 +43,7 @@
             <ion-label>Disponibilidad Hasta:</ion-label>
             <ion-datetime displayFormat="HH:mm"  
                           picker-format="HH:mm" 
-                          [value]="espacioComun?.horaHasta"
+                          [value]="disponibilidadHasta"
                           [(ngModel)]="disponibilidadHasta"></ion-datetime>
                           <!-- [(ngModel)]="espacioComun.horaHasta"></ion-datetime> -->
           </ion-item>
@@ -62,7 +62,7 @@
 
   <ion-row class="mt-3">
     <ion-col>
-      <ion-button defaultHref='/manage-common-space'>Volver</ion-button>
+      <ion-button routerLink='/manage-common-space'>Volver</ion-button>
     </ion-col>
     <ion-col style="text-align: right;">
       <ion-button (click)="ActualizarEspacioComun()">Guardar</ion-button>

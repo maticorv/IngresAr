@@ -318,6 +318,8 @@ export class ServiceService {
   // tslint:disable-next-line: max-line-length
   putEspacioComun(id, nombreEspacioComun, disponibilidadDesde, disponibilidadHasta, fotoEspacioComun, fotoEspacioComunContentType, horaDesde, horaHasta, espacioBarrio, espacioTipos) {
     const token = this.leerToken();
+    console.log('disponibilidad desde', disponibilidadDesde);
+    console.log('disponibilidad hasta', disponibilidadHasta);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     // tslint:disable-next-line: max-line-length
     const params = {id, nombreEspacioComun, disponibilidadDesde, disponibilidadHasta, fotoEspacioComun, fotoEspacioComunContentType, horaDesde, horaHasta, espacioBarrio, espacioTipos};
