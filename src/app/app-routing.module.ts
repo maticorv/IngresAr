@@ -52,6 +52,7 @@ const routes: Routes = [
   { path: 'menu-owner', loadChildren: './Owner/menu-owner/menu-owner.module#MenuOwnerPageModule' },
   { path: 'authorizations', loadChildren: './Owner/authorizations/authorizations.module#AuthorizationsPageModule' },
   { path: 'events', loadChildren: './Owner/events/events.module#EventsPageModule' },
+  { path: 'events1', loadChildren: './Owner/events/events1/events1.module#Events1PageModule' },
 
 
 
