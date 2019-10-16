@@ -57,6 +57,7 @@ const routes: Routes = [
   { path: 'events3', loadChildren: './Owner/events/events3/events3.module#Events3PageModule' },
   { path: 'guests', loadChildren: './Owner/events/guests/guests.module#GuestsPageModule' },
   { path: 'new-list', loadChildren: './Owner/events/new-list/new-list.module#NewListPageModule' },
+  { path: 'detail-list', loadChildren: './Owner/events/detail-list/detail-list.module#DetailListPageModule' },
 
 
 
