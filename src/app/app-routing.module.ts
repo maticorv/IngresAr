@@ -48,7 +48,15 @@ const routes: Routes = [
   { path: 'database', loadChildren: './Administrador/data-base/data-base.module#DataBasePageModule' },
   { path: 'profile', loadChildren: './shared/profile/profile.module#ProfilePageModule' },
   { path: 'report/evento', loadChildren: './Administrador/event-report/event-report.module#EventReportPageModule' },
-  { path: 'event-detail/:id', loadChildren: './Administrador/event-detail/event-detail.module#EventDetailPageModule' },
+  { path: 'event-detail/:id', loadChildren: './Administrador/event-detail/event-detail.module#EventDetailPageModule' },  { path: 'search-guard', loadChildren: './Administrador/search-guard/search-guard.module#SearchGuardPageModule' },
+  { path: 'search-homeowner', loadChildren: './Administrador/search-homeowner/search-homeowner.module#SearchHomeownerPageModule' },
+  { path: 'new-guard', loadChildren: './Administrador/new-guard/new-guard.module#NewGuardPageModule' },
+  { path: 'new-homeowner', loadChildren: './Administrador/new-homeowner/new-homeowner.module#NewHomeownerPageModule' },
+  { path: 'search-person-guard', loadChildren: './Administrador/search-person-guard/search-person-guard.module#SearchPersonGuardPageModule' },
+  { path: 'search-person-homeowener', loadChildren: './Administrador/search-person-homeowener/search-person-homeowener.module#SearchPersonHomeowenerPageModule' },
+  { path: 'new-person-homeowener', loadChildren: './Administrador/new-person-homeowener/new-person-homeowener.module#NewPersonHomeowenerPageModule' },
+  { path: 'new-person-guard', loadChildren: './Administrador/new-person-guard/new-person-guard.module#NewPersonGuardPageModule' },
+
 
 
 
