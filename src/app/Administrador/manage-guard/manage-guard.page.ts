@@ -20,4 +20,7 @@ export class ManageGuardPage implements OnInit {
     this.service.getPersonaRol('ROLE_GUARDIA').subscribe(data => {this.guardias = data;  } );
   }
 
+  crearGuardia() {
+  }
+
 }

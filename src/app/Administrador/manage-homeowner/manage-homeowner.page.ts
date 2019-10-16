@@ -18,4 +18,7 @@ export class ManageHomeownerPage implements OnInit {
   getPropietarios() {
     this.service.getPersonaRol('ROLE_PROPIETARIO').subscribe(data => {this.propietarios = data; } );
   }
+
+  crearPropietario() {
+  }
 }
