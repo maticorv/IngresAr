@@ -52,7 +52,7 @@ export class RegisterPage implements OnInit {
     await alert.present();
   }
   onSubmit() {
-    this.service.register(this.nombre + this.apellido, this.nombre, this.apellido, this.email, this.password).subscribe(data => {
+    this.service.register(this.email, 'en', this.nombre + this.apellido, this.password).subscribe(data => {
       this.presentAlert3();
     },
     (error) => {

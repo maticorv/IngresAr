@@ -51,9 +51,9 @@ export class ServiceService {
     // tslint:disable-next-line: max-line-length
     return this.http.get( this.url + 'users', {headers} ).pipe(map(data => data as Iaccount[]));
   }
-  register(login: string, firstName: string, lastName: string, email: string, password: string) {
+  register( email: string, langKey: string, login: string, password: string) {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    const params = {login, firstName, lastName, email, password};
+    const params = {login, langKey, email, password};
     // tslint:disable-next-line: max-line-length
     return this.http.post( this.url + 'register', params, {headers});
   }
