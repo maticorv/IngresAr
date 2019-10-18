@@ -1,9 +1,47 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>newPersonGuard</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">Nueva Persona</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content fullscreen class="ion-padding">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+        <ion-item>
+            <ion-label position="floating">Nombre
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="text" [(ngModel)]="nombrePersona"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Apellido
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="text" [(ngModel)]="apellidoPersona"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Numero de DNI
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input disabled required type="number" [(ngModel)]="dniPersona"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Numero de teléfono
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="number" [(ngModel)]="telefonoPersona"></ion-input>
+        </ion-item>
+
+
+        <div class="ion-padding">
+            <ion-button [disabled]="!(nombrePersona && apellidoPersona && dniPersona && telefonoPersona)" expand="block" type="submit" class="ion-no-margin" (click)="crearPersona()">Crear persona</ion-button>
+        </div>
+    </ion-list>
 </ion-content>
+

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from 'src/app/services/service.service';
 import { Persona } from 'src/app/interfaces/persona';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-homeowner',
@@ -10,7 +11,7 @@ import { Persona } from 'src/app/interfaces/persona';
 export class ManageHomeownerPage implements OnInit {
   propietarios: Persona[];
 
-  constructor(private service: ServiceService) { }
+  constructor(private service: ServiceService, private router: Router) { }
 
   ngOnInit() {
     this.getPropietarios();
@@ -20,5 +21,6 @@ export class ManageHomeownerPage implements OnInit {
   }
 
   crearPropietario() {
+    this.router.navigateByUrl('/search-homeowner');
   }
 }

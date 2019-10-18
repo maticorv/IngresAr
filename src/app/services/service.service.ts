@@ -18,6 +18,7 @@ import { IReporte } from '../interfaces/reporte';
 import { IMensaje } from '../interfaces/mensaje';
 import { Ievent } from '../interfaces/ievent';
 import { Account } from '../classes/account';
+import { IUser } from '../interfaces/iuser';
 
 @Injectable({
   providedIn: 'root'
@@ -307,11 +308,11 @@ export class ServiceService {
   }
 
   // tslint:disable-next-line: max-line-length
-  postEspacioComun(id, disponibilidadDesde, disponibilidadHasta, fotoEspacioComun, fotoEspacioComunContentType, horaDesde, horaHasta, espacioBarrio, espacioTipos) {
+  postEspacioComun(nombreEspacioComun, disponibilidadDesde, disponibilidadHasta, fotoEspacioComun, fotoEspacioComunContentType, horaDesde, horaHasta, espacioBarrio, espacioTipos) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     // tslint:disable-next-line: max-line-length
-    const params = {id, disponibilidadDesde, disponibilidadHasta, fotoEspacioComun, fotoEspacioComunContentType, horaDesde, horaHasta, espacioBarrio, espacioTipos};
+    const params = {nombreEspacioComun, disponibilidadDesde, disponibilidadHasta, fotoEspacioComun, fotoEspacioComunContentType, horaDesde, horaHasta, espacioBarrio, espacioTipos};
     return this.http.post(this.url + 'espacio-comuns', params, {headers}).pipe(map(data => data as IEspacioComun));
   }
 
@@ -376,4 +377,9 @@ export class ServiceService {
     return this.http.post(this.url + 'eventosfecha/' + fecha, {headers}).pipe(map(data => data as Ievent));
   }
 
+  getUser(email) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'useremail/' + email, {headers}).pipe(map(data => data as IUser));
+  }
 }

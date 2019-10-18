@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from 'src/app/services/service.service';
 import { Persona } from 'src/app/interfaces/persona';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,16 +12,17 @@ import { Persona } from 'src/app/interfaces/persona';
 export class ManageGuardPage implements OnInit {
   guardias: Persona[];
 
-  constructor(private service: ServiceService) { }
+  constructor(private service: ServiceService, private router: Router) { }
 
   ngOnInit() {
     this.getGuardias();
   }
   getGuardias() {
-    this.service.getPersonaRol('ROLE_GUARDIA').subscribe(data => {this.guardias = data;  } );
+    this.service.getPersonaRol('ROLE_GUARDIA').subscribe(data => {this.guardias = data; } );
   }
 
   crearGuardia() {
+    this.router.navigateByUrl('/search-guard');
   }
 
 }
