@@ -19,6 +19,10 @@ export class ManageCommonSpacePage implements OnInit {
     this.obtenerEspacioComun();
   }
 
+  ionViewWillEnter() {
+    this.obtenerEspacioComun();
+  }
+
   obtenerEspacioComun() {
     this.service.getAllEspacioComun().subscribe(data => {
       this.espacioComun = data;
