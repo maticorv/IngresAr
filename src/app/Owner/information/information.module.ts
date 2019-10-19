@@ -14,11 +14,11 @@ const routes: Routes = [
     children: [
       {
         path: 'file',
-        loadChildren: '..information/files/files.module#FilesPageModule'
+        loadChildren: '../information/files/files.module#FilesPageModule'
       },
       {
         path: 'phone',
-        loadChildren: '..information/phone/phone.module#PhonePageModule'
+        loadChildren: '../information/phone/phone.module#PhonePageModule'
       },
     ]
   }
