@@ -73,8 +73,12 @@ const routes: Routes = [
   { path: 'new-person-homeowener', loadChildren: './Administrador/new-person-homeowener/new-person-homeowener.module#NewPersonHomeowenerPageModule' },
   { path: 'new-person-guard', loadChildren: './Administrador/new-person-guard/new-person-guard.module#NewPersonGuardPageModule' },
   // tslint:disable-next-line: max-line-length
-  { path: 'report-ingreso-egreso', loadChildren: './Administrador/report-ingreso-egreso/report-ingreso-egreso.module#ReportIngresoEgresoPageModule' },  { path: 'files', loadChildren: './Owner/files/files.module#FilesPageModule' },
-  { path: 'phone', loadChildren: './Owner/phone/phone.module#PhonePageModule' },
+  { path: 'report-ingreso-egreso', loadChildren: './Administrador/report-ingreso-egreso/report-ingreso-egreso.module#ReportIngresoEgresoPageModule' },
+  { path: 'files', loadChildren: './Owner/information/files/files.module#FilesPageModule' },
+  { path: 'phone', loadChildren: './Owner/information/phone/phone.module#PhonePageModule' },
+  { path: 'visit', loadChildren: './Owner/authorizations/visit/visit.module#VisitPageModule' },
+  { path: 'employee', loadChildren: './Owner/authorizations/employee/employee.module#EmployeePageModule' },
+  { path: 'resident', loadChildren: './Owner/authorizations/resident/resident.module#ResidentPageModule' },
 
 
 

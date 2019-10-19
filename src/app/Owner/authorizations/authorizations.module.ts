@@ -10,7 +10,21 @@ import { AuthorizationsPage } from './authorizations.page';
 const routes: Routes = [
   {
     path: '',
-    component: AuthorizationsPage
+    component: AuthorizationsPage,
+    children: [
+      {
+        path: 'resident',
+        loadChildren: '../authorizations/resident/resident.module#ResidentPageModule'
+      },
+      {
+        path: 'visit',
+        loadChildren: '../authorizations/visit/visit.module#VisitPageModule'
+      },
+      {
+        path: 'employee',
+        loadChildren: '../authorizations/employee/employee.module#EmployeePageModule'
+      },
+    ]
   }
 ];
 
