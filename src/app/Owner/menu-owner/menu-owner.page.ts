@@ -14,7 +14,7 @@ export class MenuOwnerPage implements OnInit {
   }
 
   irAutorizacionPrevia() {
-    this.router.navigateByUrl('/authorizations');
+    this.router.navigateByUrl('/authorizations/resident');
   }
 
   IrEventos() {
