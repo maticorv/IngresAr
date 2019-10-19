@@ -10,7 +10,17 @@ import { EventsPage } from './events.page';
 const routes: Routes = [
   {
     path: '',
-    component: EventsPage
+    component: EventsPage,
+    children: [
+      {
+        path: 'places',
+        loadChildren: '../events/places/places.module#PlacesPageModule'
+      },
+      {
+        path: 'friendsList',
+        loadChildren: '../events/friends-list/friends-list.module#FriendsListPageModule'
+      },
+    ]
   }
 ];
 

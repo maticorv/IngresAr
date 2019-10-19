@@ -18,7 +18,7 @@ export class MenuOwnerPage implements OnInit {
   }
 
   IrEventos() {
-    this.router.navigateByUrl('/events');
+    this.router.navigateByUrl('/events/places');
   }
 
   irPorteria() {
