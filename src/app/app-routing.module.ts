@@ -72,8 +72,10 @@ const routes: Routes = [
   { path: 'phone', loadChildren: './Owner/information/phone/phone.module#PhonePageModule' },
   { path: 'visit', loadChildren: './Owner/authorizations/visit/visit.module#VisitPageModule' },
   { path: 'employee', loadChildren: './Owner/authorizations/employee/employee.module#EmployeePageModule' },
-  { path: 'resident', loadChildren: './Owner/authorizations/resident/resident.module#ResidentPageModule' },  { path: 'places', loadChildren: './Owner/events/places/places.module#PlacesPageModule' },
+  { path: 'resident', loadChildren: './Owner/authorizations/resident/resident.module#ResidentPageModule' },
+  { path: 'places', loadChildren: './Owner/events/places/places.module#PlacesPageModule' },
   { path: 'friends-list', loadChildren: './Owner/events/friends-list/friends-list.module#FriendsListPageModule' },
+  { path: 'new-friend-list', loadChildren: './Owner/events/new-friend-list/new-friend-list.module#NewFriendListPageModule' },
 
 
 
