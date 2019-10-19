@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-owner',
@@ -7,9 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuOwnerPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  irAutorizacionPrevia() {
+    this.router.navigateByUrl('/authorizations');
+  }
+
+  IrEventos() {
+    this.router.navigateByUrl('/events');
+  }
+
+  irPorteria() {
+    this.router.navigateByUrl('');
+  }
+
+  irInformacionUtil() {
+    this.router.navigateByUrl('/information/file');
+  }
+
+  perfilOwner() {
+    this.router.navigateByUrl('');
   }
 
 }
