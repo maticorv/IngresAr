@@ -18,8 +18,12 @@ const routes: Routes = [
       },
       {
         path: 'ingreso',
-        loadChildren: './funcionesMenu/planilla-ingreso-egreso/planilla-ingreso-egreso.module#PlanillaIngresoEgresoPageModule'
-      }
+        loadChildren: '../report-ingreso-egreso/report-ingreso-egreso.module#ReportIngresoEgresoPageModule'
+      },
+      // {
+      //   path: 'ingreso',
+      //   loadChildren: './funcionesMenu/planilla-ingreso-egreso/planilla-ingreso-egreso.module#PlanillaIngresoEgresoPageModule'
+      // }
     ]
   }
 ];

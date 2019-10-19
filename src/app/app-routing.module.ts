@@ -47,7 +47,8 @@ const routes: Routes = [
   { path: 'message/:id', loadChildren: './Guardia/message/messageid/messageid.module#MessageidPageModule' },
   { path: 'database', loadChildren: './Administrador/data-base/data-base.module#DataBasePageModule' },
   { path: 'profile', loadChildren: './shared/profile/profile.module#ProfilePageModule' },
-  { path: 'report/evento', loadChildren: './Administrador/event-report/event-report.module#EventReportPageModule' },
+  { path: 'event-report', loadChildren: './Administrador/event-report/event-report.module#EventReportPageModule' },
+  { path: 'report', loadChildren: './Administrador/report/report.module#ReportPageModule' },
   { path: 'event-detail/:id', loadChildren: './Administrador/event-detail/event-detail.module#EventDetailPageModule' },
   { path: 'menu-user', loadChildren: './User/menu-user/menu-user.module#MenuUserPageModule' },
   { path: 'menu-owner', loadChildren: './Owner/menu-owner/menu-owner.module#MenuOwnerPageModule' },
@@ -71,6 +72,9 @@ const routes: Routes = [
   // tslint:disable-next-line: max-line-length
   { path: 'new-person-homeowener', loadChildren: './Administrador/new-person-homeowener/new-person-homeowener.module#NewPersonHomeowenerPageModule' },
   { path: 'new-person-guard', loadChildren: './Administrador/new-person-guard/new-person-guard.module#NewPersonGuardPageModule' },
+  // tslint:disable-next-line: max-line-length
+  { path: 'report-ingreso-egreso', loadChildren: './Administrador/report-ingreso-egreso/report-ingreso-egreso.module#ReportIngresoEgresoPageModule' },
+
 
 
 
