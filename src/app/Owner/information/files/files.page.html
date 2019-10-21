@@ -7,6 +7,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen class="ion-padding">
+
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let n of normas, let i = index" (click)="verNorma(i)"> {{n.titulonorma}} </li>
+    </ul>
 
 </ion-content>
