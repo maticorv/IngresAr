@@ -75,7 +75,9 @@ const routes: Routes = [
   { path: 'resident', loadChildren: './Owner/authorizations/resident/resident.module#ResidentPageModule' },
   { path: 'places', loadChildren: './Owner/events/places/places.module#PlacesPageModule' },
   { path: 'friends-list', loadChildren: './Owner/events/friends-list/friends-list.module#FriendsListPageModule' },
-  { path: 'new-friend-list', loadChildren: './Owner/events/new-friend-list/new-friend-list.module#NewFriendListPageModule' },  { path: 'new-friend', loadChildren: './Owner/events/new-friend/new-friend.module#NewFriendPageModule' },
+  { path: 'new-friend-list', loadChildren: './Owner/events/new-friend-list/new-friend-list.module#NewFriendListPageModule' },
+  { path: 'new-friend', loadChildren: './Owner/events/new-friend/new-friend.module#NewFriendPageModule' },  { path: 'eventos', loadChildren: './funcionesMenu/eventos/eventos.module#EventosPageModule' },
+
 
 
 
