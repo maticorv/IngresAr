@@ -38,4 +38,8 @@ export class MenuComponent implements OnInit {
     this.router.navigateByUrl('/diary');
   }
 
+  evento() {
+    this.router.navigateByUrl('eventos');
+  }
+
 }
