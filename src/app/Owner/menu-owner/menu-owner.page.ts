@@ -30,7 +30,7 @@ export class MenuOwnerPage implements OnInit {
   }
 
   perfilOwner() {
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('/profile');
   }
 
 }
