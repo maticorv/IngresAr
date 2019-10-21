@@ -22,7 +22,7 @@ export class MenuOwnerPage implements OnInit {
   }
 
   irPorteria() {
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('porteria');
   }
 
   irInformacionUtil() {
