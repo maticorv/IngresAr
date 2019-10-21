@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Amigo } from '../../../classes/amiigo';
 
+
 @Component({
   selector: 'app-new-friend-list',
   templateUrl: './new-friend-list.page.html',
@@ -11,16 +12,18 @@ export class NewFriendListPage implements OnInit {
   nombreListaAmigo: string;
   ListaAmigo = [];
 
-  constructor(private amigo: Amigo) { }
+  constructor(private amigos: Amigo) { }
 
   ngOnInit() {
   }
 
   ionViewWillEnter() {
-    if (this.amigo.id !== null) {
-      this.ListaAmigo.push(this.amigo);
-    }
-    console.log(this.ListaAmigo);
+    this.ListaAmigo = this.amigos.ListaAmigo;
+    console.log(this.amigos.ListaAmigo);
+  }
+
+  eliminarAmigo(i) {
+    this.ListaAmigo.splice(i, 1);
   }
 
 }

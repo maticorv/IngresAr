@@ -45,12 +45,13 @@ export class NewFriendPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            this.amigo.nombrePersona = this.persona.nombrePersona;
-            this.amigo.apellidoPersona = this.persona.apellidoPersona;
-            this.amigo.dniPersona = this.persona.dniPersona;
-            this.amigo.id = this.persona.id;
-            this.amigo.telefonoPersona = this.persona.telefonoPersona;
-            this.amigo.vehiculos = this.persona.vehiculos;
+            // this.amigo.nombrePersona = this.persona.nombrePersona;
+            // this.amigo.apellidoPersona = this.persona.apellidoPersona;
+            // this.amigo.dniPersona = this.persona.dniPersona;
+            // this.amigo.id = this.persona.id;
+            // this.amigo.telefonoPersona = this.persona.telefonoPersona;
+            // this.amigo.vehiculos = this.persona.vehiculos;
+            this.amigo.ListaAmigo.push(this.persona);
             this.setNullData();
             this.router.navigateByUrl('/new-friend-list');
           }

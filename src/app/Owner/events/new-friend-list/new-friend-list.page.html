@@ -22,10 +22,28 @@
       <ion-label>Amigos</ion-label>
     </ion-row>
 
-    <ion-row>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let l of ListaAmigo"> {{l.nombrePersona}} </li>
-      </ul>
+    <ion-row *ngIf="ListaAmigo !== []">
+        <ion-row>
+            <li class="list-group-item" *ngFor="let amigo of ListaAmigo, let i = index">
+              <ion-col class="tamaño">
+                  <ion-label> {{amigo.apellidoPersona}}</ion-label>
+              </ion-col>
+              <ion-col class="tamaño">
+                  <ion-label> {{amigo.nombrePersona}} </ion-label>
+              </ion-col>
+              <ion-col class="tamaño">
+                  <ion-label> {{amigo.dniPersona}}</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-button (click)="eliminarAmigo(i)">
+                  <ion-icon name="remove"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </li>
+            <!-- <ion-col>
+                <button type="button" class="btn btn-link"><ion-icon name="add"></ion-icon></button>
+            </ion-col> -->
+        </ion-row>
     </ion-row>
 
 </ion-content>
