@@ -28,6 +28,7 @@ import { Account } from './classes/account';
 import { PlanillaEgreso } from './classes/planillaEgreso';
 import { Camera } from '@ionic-native/camera/ngx';
 import { User } from './classes/user';
+import { Amigo } from './classes/amiigo';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { User } from './classes/user';
     PlanillaEgreso,
     Camera,
     User,
+    Amigo,
 
   ],
   bootstrap: [AppComponent]

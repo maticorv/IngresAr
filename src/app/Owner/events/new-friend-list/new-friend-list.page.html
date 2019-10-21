@@ -7,6 +7,33 @@
     </ion-toolbar>
   </ion-header>
 
-<ion-content>
+<ion-content fullscreen class="ion-padding">
+
+    <ion-row style="place-content: center">
+        <ion-item>
+            <ion-label position="floating">Nombre Lista Amigos
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="text" [(ngModel)]="nombreListaAmigo"></ion-input>
+        </ion-item>
+      </ion-row>
+
+    <ion-row class="mt-4">
+      <ion-label>Amigos</ion-label>
+    </ion-row>
+
+    <ion-row>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let l of ListaAmigo"> {{l.nombrePersona}} </li>
+      </ul>
+    </ion-row>
 
 </ion-content>
+
+<ion-footer>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button routerLink="/new-friend">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-footer>

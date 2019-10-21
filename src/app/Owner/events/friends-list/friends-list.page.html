@@ -10,4 +10,16 @@
 
 <ion-content>
 
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let l of ListaAmigos"> {{l.nombreListaAmigos}} </li>
+    </ul>
+
 </ion-content>
+
+<ion-footer>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button routerLink="/new-friend-list">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-footer>

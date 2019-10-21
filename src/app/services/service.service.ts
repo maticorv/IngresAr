@@ -19,6 +19,7 @@ import { IMensaje } from '../interfaces/mensaje';
 import { Ievent } from '../interfaces/ievent';
 import { Account } from '../classes/account';
 import { IUser } from '../interfaces/iuser';
+import { IFriendsList } from '../interfaces/ifriends-list';
 
 @Injectable({
   providedIn: 'root'
@@ -381,5 +382,11 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'useremail/' + email, {headers}).pipe(map(data => data as IUser));
+  }
+
+  getListaAmigos(dni) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.get(this.url + '', {headers}).pipe(map(data => data as IFriendsList));
   }
 }
