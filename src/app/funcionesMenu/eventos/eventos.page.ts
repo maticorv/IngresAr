@@ -29,7 +29,7 @@ export class EventosPage implements OnInit {
   }
 
   verEvento(i) {
-    this.router.navigate(['/', this.eventos[i].id]);
+    this.router.navigate(['/detalle-evento', this.eventos[i].id]);
   }
 
 }

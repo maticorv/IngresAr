@@ -23,8 +23,8 @@
   
     <ion-card style="background: gray;">
       <ion-list>
-        <ion-item *ngFor="let e of eventos; let i = index">
-          <label (click)="verEvento(i)">{{e.nombreEvento}}</label>
+        <ion-item *ngFor="let e of eventos; let i = index" (click)="verEvento(i)">
+          <label>{{e.nombreEvento}}</label>
         </ion-item>
       </ion-list>
     </ion-card>

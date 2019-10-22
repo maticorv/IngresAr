@@ -389,4 +389,21 @@ export class ServiceService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
     return this.http.get(this.url + '', {headers}).pipe(map(data => data as IFriendsList));
   }
+  // tslint:disable-next-line: max-line-length
+  putRegistroIngresoEvento(id, nombreEvento, fecha, horaInicio, horaFin, eventoPeriodo, eventoDomicilio, eventoEspacio, eventoPersona, estadoEvento, eventoDetalles) {
+    const token = this.leerToken();
+    console.log('Servicio Ingreso a evento');
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    // tslint:disable-next-line: max-line-length
+    const params = {id, nombreEvento, fecha, horaInicio, horaFin, eventoPeriodo, eventoDomicilio, eventoEspacio, eventoPersona, estadoEvento, eventoDetalles};
+    return this.http.put(this.url + 'eventos', params, {headers}).pipe(map(data => data));
+  }
+   // tslint:disable-next-line: max-line-length
+  putRegistroEgresoEvento(id, nombreEvento, fecha, horaInicio, horaFin, eventoPeriodo, eventoDomicilio, eventoEspacio, eventoPersona, estadoEvento, eventoDetalles) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    // tslint:disable-next-line: max-line-length
+    const params = {id, nombreEvento, fecha, horaInicio, horaFin, eventoPeriodo, eventoDomicilio, eventoEspacio, eventoPersona, estadoEvento, eventoDetalles};
+    return this.http.put(this.url + 'eventos', params, {headers}).pipe(map(data => data));
+  }
 }

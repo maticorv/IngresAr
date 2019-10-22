@@ -1,9 +1,98 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>detalleEvento</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">Eventos</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+
+    <!-- <ion-row>   
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let e of evento; let i = index">{{e.detallePersonaEvento.apellidoPersona}} {{e.detallePersonaEvento.nombrePersona}} {{e.detallePersonaEvento.dniPersona}} {{e.horaIngreso | date:'short'}} {{e.horaEngreso | date:'short'}}</li>
+        </ul>
+    </ion-row> -->
+
+    <ion-row>
+            <ion-list>
+              <ion-row>
+                  <ion-col>
+                      <ion-item>
+                          <ion-label>
+                              Apellido
+                          </ion-label>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col>
+                      <ion-item>
+                          <ion-label>
+                              Nombre
+                          </ion-label>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col>
+                      <ion-item>
+                          <ion-label>
+                              DNI
+                          </ion-label>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col>
+                      <ion-item>
+                          <ion-label>
+                              Ingreso
+                          </ion-label>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col>
+                      <ion-item>
+                          <ion-label>
+                              Egreso
+                          </ion-label>
+                      </ion-item>
+                  </ion-col>
+              </ion-row>
+              <ion-row *ngFor="let e of detalleEvento, let i = index" (click)="presentActionSheet(i)">
+                  <ion-col>
+                      <ion-item>
+                          <ion-label>
+                            {{e.detallePersonaEvento.apellidoPersona}}
+                          </ion-label>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col>
+                      <ion-item>
+                          <ion-label>
+                                {{e.detallePersonaEvento.nombrePersona}}
+                          </ion-label>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col>
+                      <ion-item>
+                          <ion-label>
+                                {{e.detallePersonaEvento.dniPersona}}
+                          </ion-label>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col>
+                      <ion-item>
+                          <ion-label>
+                                {{e.horaIngreso | date:'shortDate'}}
+                          </ion-label>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col>
+                      <ion-item>
+                          <ion-label>
+                                {{e.horaEngreso | date:'shortDate'}}
+                          </ion-label>
+                      </ion-item>
+                  </ion-col>
+              </ion-row>
+          </ion-list>
+          </ion-row>
+
 
 </ion-content>
