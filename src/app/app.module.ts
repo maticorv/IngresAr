@@ -29,6 +29,7 @@ import { PlanillaEgreso } from './classes/planillaEgreso';
 import { Camera } from '@ionic-native/camera/ngx';
 import { User } from './classes/user';
 import { Amigo } from './classes/amiigo';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { Amigo } from './classes/amiigo';
     Camera,
     User,
     Amigo,
+    BarcodeScanner,
 
   ],
   bootstrap: [AppComponent]
