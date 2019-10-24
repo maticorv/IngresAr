@@ -72,8 +72,15 @@ export class LoginPage implements OnInit {
     if (this.account.authorities.some (() => this.account.authorities.includes('ROLE_ADMIN'))) {
       return 'menu-administrator';
     } else {
-      this.account.authorities.some (() => this.account.authorities.includes('ROLE_USER'));
-      return 'startmenu';
+      if ( this.account.authorities.some (() => this.account.authorities.includes('ROLE_PROPIETARIO'))) {
+        return 'menu-owner';
+      } else {
+        if (this.account.authorities.some (() => this.account.authorities.includes('ROLE_GUARDIA'))) {
+          return 'startmenu';
+        } else {
+          return 'menu-user';
+        }
+      }
     }
   }
 }
