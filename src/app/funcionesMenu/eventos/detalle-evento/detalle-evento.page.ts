@@ -41,10 +41,11 @@ export class DetalleEventoPage implements OnInit {
         handler: () => {
           if (this.detalleEvento[i].horaIngreso === null) {
             this.detalleEvento[i].horaIngreso = new Date();
+            console.log(this.detalleEvento[i].horaIngreso);
             // tslint:disable-next-line: max-line-length
-            this.service.putRegistroIngresoEvento(this.evento.id, this.evento.nombreEvento, this.evento.fecha, this.evento.horaInicio, this.evento.horaFin, this.evento.eventoPeriodo, this.evento.eventoDomicilio, this.evento.eventoEspacio, this.evento.eventoPersona, this.evento.estadoEvento, this.detalleEvento).subscribe(data => {
+            this.service.putDetalleEvento(this.detalleEvento[i].id, this.detalleEvento[i].horaIngreso, this.detalleEvento[i].horaEngreso, this.detalleEvento[i].amigosevento, this.detalleEvento[i].detallePersonaEvento, this.detalleEvento[i].detalleEventoVehiculo).subscribe(data => {
               console.log('Ingreso realizado');
-              this.obtenerEvento();
+              // this.obtenerEvento();
             },
             (error) => {console.log(error);
                         this.presentAlert('No se pudo registrar el ingreso');
@@ -60,10 +61,11 @@ export class DetalleEventoPage implements OnInit {
         handler: () => {
           if (this.detalleEvento[i].horaIngreso !== null && this.detalleEvento[i].horaEngreso === null) {
             this.detalleEvento[i].horaEngreso = new Date();
+            console.log(this.detalleEvento[i].horaEngreso);
             // tslint:disable-next-line: max-line-length
             this.service.putRegistroEgresoEvento(this.evento.id, this.evento.nombreEvento, this.evento.fecha, this.evento.horaInicio, this.evento.horaFin, this.evento.eventoPeriodo, this.evento.eventoDomicilio, this.evento.eventoEspacio, this.evento.eventoPersona, this.evento.estadoEvento, this.detalleEvento).subscribe(data => {
               console.log('Egreso realizado');
-              this.obtenerEvento();
+              // this.obtenerEvento();
             },
             (error) => {console.log(error);
                         this.presentAlert('No se pudo registrar el egreso');
