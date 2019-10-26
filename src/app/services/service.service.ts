@@ -25,6 +25,7 @@ import { IUser } from '../interfaces/iuser';
 })
 export class ServiceService {
   url = 'http://ingresar.ddns.net:8080/api/';
+  idAccount: number;
 
   constructor(private http: HttpClient) { }
 
@@ -381,5 +382,16 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'useremail/' + email, {headers}).pipe(map(data => data as IUser));
+  }
+  getPersonUser(id: number): Observable<Persona> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'persona/userperson/?id=' + id , {headers}).pipe(map(data => data as Persona));
+  }
+  putPersona(persona: Persona): Observable<Persona> {
+    const token = this.leerToken();
+    const params = {persona};
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.put(this.url + 'personas', persona, {headers}).pipe(map(data => data as Persona));
   }
 }
