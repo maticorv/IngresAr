@@ -79,6 +79,7 @@ const routes: Routes = [
   { path: 'records', loadChildren: './Owner/porteria/records/records.module#RecordsPageModule' },
   { path: 'vehicles', loadChildren: './Owner/porteria/vehicles/vehicles.module#VehiclesPageModule' },
   { path: 'messages', loadChildren: './Owner/porteria/messages/messages.module#MessagesPageModule' },
+  { path: 'newvehicle', loadChildren: './Owner/porteria/vehicles/newvehicle/newvehicle.module#NewvehiclePageModule' },
 
 
 
