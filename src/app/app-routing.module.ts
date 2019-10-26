@@ -80,7 +80,8 @@ const routes: Routes = [
   { path: 'eventos', loadChildren: './funcionesMenu/eventos/eventos.module#EventosPageModule' },
   { path: 'detalle-evento/:id', loadChildren: './funcionesMenu/eventos/detalle-evento/detalle-evento.module#DetalleEventoPageModule' },
   { path: 'generate-qr', loadChildren: './Owner/authorizations/generate-qr/generate-qr.module#GenerateQrPageModule' },
-  { path: 'view-friend-list/:id', loadChildren: './Owner/events/view-friend-list/view-friend-list.module#ViewFriendListPageModule' },
+  { path: 'view-friend-list/:id', loadChildren: './Owner/events/view-friend-list/view-friend-list.module#ViewFriendListPageModule' },  { path: 'add-friend', loadChildren: './Owner/events/ViewFriendList/add-friend/add-friend.module#AddFriendPageModule' },
+
 
 
 
