@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Amigo } from '../../../classes/amiigo';
+
 
 @Component({
   selector: 'app-new-friend-list',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewFriendListPage implements OnInit {
 
-  constructor() { }
+  nombreListaAmigo: string;
+  ListaAmigo = [];
+
+  constructor(private amigos: Amigo) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    this.ListaAmigo = this.amigos.ListaAmigo;
+    console.log(this.amigos.ListaAmigo);
+  }
+
+  eliminarAmigo(i) {
+    this.ListaAmigo.splice(i, 1);
   }
 
 }

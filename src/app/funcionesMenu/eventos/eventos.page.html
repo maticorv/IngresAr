@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">Eventos</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+    <ion-item>
+      <ion-label>Selecione una fecha</ion-label>
+      <ion-icon mode="ios" name="calendar"></ion-icon>
+      <ion-datetime displayFormat="DD/MM/YYYY"
+                    placeholder="01-01-19"
+                    cancel-text='Cancelar'
+                    done-text="Seleccionar"
+                    min="2019"
+                    max="2030"></ion-datetime>
+                    <!-- (ionChange)="obtener($event)"></ion-datetime> -->
+    </ion-item>
+  
+    <ion-card style="background: gray;">
+      <ion-list>
+        <ion-item *ngFor="let e of eventos; let i = index" (click)="verEvento(i)">
+          <label>{{e.nombreEvento}}</label>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  
+  </ion-content>

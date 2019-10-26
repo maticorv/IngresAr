@@ -1,9 +1,19 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-title>qringress</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/startmenu'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">IngresAr</ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen class="ion-padding">
+
+    <ion-row>
+        <ion-button fill="outline"
+                    (click)="scan()"
+                    size="large"
+                    shape="round">ScanCode</ion-button>
+    </ion-row>
 
 </ion-content>

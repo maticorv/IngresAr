@@ -81,17 +81,12 @@ const routes: Routes = [
   { path: 'vehicles', loadChildren: './Owner/porteria/vehicles/vehicles.module#VehiclesPageModule' },
   { path: 'messages', loadChildren: './Owner/porteria/messages/messages.module#MessagesPageModule' },
   { path: 'newVehicle', loadChildren: './Owner/porteria/vehicles/newvehicle/newvehicle.module#NewvehiclePageModule' },
-
-
-
-
-
-
-
-
-
-
-
+  { path: 'new-friend', loadChildren: './Owner/events/new-friend/new-friend.module#NewFriendPageModule' },
+  { path: 'eventos', loadChildren: './funcionesMenu/eventos/eventos.module#EventosPageModule' },
+  { path: 'detalle-evento/:id', loadChildren: './funcionesMenu/eventos/detalle-evento/detalle-evento.module#DetalleEventoPageModule' },
+  { path: 'generate-qr', loadChildren: './Owner/authorizations/generate-qr/generate-qr.module#GenerateQrPageModule' },
+  { path: 'view-friend-list/:id', loadChildren: './Owner/events/view-friend-list/view-friend-list.module#ViewFriendListPageModule' },
+  { path: 'add-friend', loadChildren: './Owner/events/view-friend-list/add-friend/add-friend.module#AddFriendPageModule' },
 
 
   ];
