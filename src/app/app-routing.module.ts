@@ -75,11 +75,12 @@ const routes: Routes = [
   { path: 'resident', loadChildren: './Owner/authorizations/resident/resident.module#ResidentPageModule' },
   { path: 'places', loadChildren: './Owner/events/places/places.module#PlacesPageModule' },
   { path: 'friends-list', loadChildren: './Owner/events/friends-list/friends-list.module#FriendsListPageModule' },
-  { path: 'new-friend-list', loadChildren: './Owner/events/new-friend-list/new-friend-list.module#NewFriendListPageModule' },  { path: 'porteria', loadChildren: './Owner/porteria/porteria.module#PorteriaPageModule' },
+  { path: 'new-friend-list', loadChildren: './Owner/events/new-friend-list/new-friend-list.module#NewFriendListPageModule' },
+  { path: 'porteria', loadChildren: './Owner/porteria/porteria.module#PorteriaPageModule' },
   { path: 'records', loadChildren: './Owner/porteria/records/records.module#RecordsPageModule' },
   { path: 'vehicles', loadChildren: './Owner/porteria/vehicles/vehicles.module#VehiclesPageModule' },
   { path: 'messages', loadChildren: './Owner/porteria/messages/messages.module#MessagesPageModule' },
-  { path: 'newvehicle', loadChildren: './Owner/porteria/vehicles/newvehicle/newvehicle.module#NewvehiclePageModule' },
+  { path: 'newVehicle', loadChildren: './Owner/porteria/vehicles/newvehicle/newvehicle.module#NewvehiclePageModule' },
 
 
 
