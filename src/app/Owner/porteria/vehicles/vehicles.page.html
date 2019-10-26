@@ -1,9 +1,38 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>vehicles</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/menu-owner'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">Vehículos</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content fullscreen class="ion-padding">
+    <ng-container *ngFor="let vehiculo of vehiculos; let i=index">
+        <ion-item-sliding>
+            <ion-item [ngClass]="(i % 2 == 0) ? 'odd' : 'even'">
+                <ion-label>
+                    <h2><b>Dominio: </b>{{vehiculo.dominio}}</h2>
+                    <h3><b>Marca: </b>{{vehiculo.vehiculoMarca.nombreMarca}} <b>Modelo:</b> {{ vehiculo.vehiculoModelo.nombreModelo }} </h3>
+                    <p><b>Color: </b>{{vehiculo.vehiculoColor.nombreColor}}</p>
+
+                </ion-label>
+            </ion-item>
+
+            <ion-item-options side="end">
+                <ion-item-option (click)="Eliminar(i)" color="danger">
+                    <ion-icon slot="icon-only" name="trash"></ion-icon>
+                </ion-item-option>
+                <!-- <ion-item-option (click)="Eliminar(i)" color="danger">Eliminar</ion-item-option> -->
+            </ion-item-options>
+        </ion-item-sliding>
+
+    </ng-container>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="nuevoVehiculo()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>
