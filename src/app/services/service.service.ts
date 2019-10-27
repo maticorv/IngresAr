@@ -55,11 +55,18 @@ export class ServiceService {
     // tslint:disable-next-line: max-line-length
     return this.http.get( this.url + 'users', {headers} ).pipe(map(data => data as Iaccount[]));
   }
+
+  getUserByLogin(login) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
+    return this.http.get( this.url + 'users/' + login, {headers} ).pipe(map(data => data as IUser));
+  }
+
   register( email: string, langKey: string, login: string, password: string) {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     const params = {login, langKey, email, password};
     // tslint:disable-next-line: max-line-length
-    return this.http.post( this.url + 'register', params, {headers});
+    return this.http.post( this.url + 'register', params, {headers}).pipe(map(data => data as IUser));
   }
 
   guardarToken(idToken: string ) {
@@ -452,6 +459,29 @@ export class ServiceService {
     const params = {nombreListaAmigos, pertenece, amigos};
     console.log(params);
     return this.http.post(this.url + 'lista-amigos', params, {headers}).pipe(map(data => data));
+  }
+
+  crearGuardia(id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaUser, personabarrio, vehiculos) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    const params = {id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaUser, personabarrio, vehiculos};
+    return this.http.put(this.url + 'personas', params, {headers}).pipe(map(data => data));
+  }
+
+  crearPropietario(id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaUser, personabarrio, vehiculos) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    const params = {id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaUser, personabarrio, vehiculos};
+    return this.http.put(this.url + 'personas', params, {headers}).pipe(map(data => data));
+  }
+
+  // tslint:disable-next-line: max-line-length
+  cambiarRol(id, login, firstName, lastName, email, imageUrl, activated, langKey, createdBy, createdDate, lastModifiedBy, lastModifiedDate, authorities) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    // tslint:disable-next-line: max-line-length
+    const params = {id, login, firstName, lastName, email, imageUrl, activated, langKey, createdBy, createdDate, lastModifiedBy, lastModifiedDate, authorities};
+    return this.http.put(this.url + 'users', params, {headers}).pipe(map(data => data));
   }
 
 }

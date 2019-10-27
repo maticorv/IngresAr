@@ -1,9 +1,53 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>generateQr</ion-title>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref='/authorizations/visit'></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-capitalize ion-text-center">Autorizaciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+
+    <ion-row class="ion-justify-content-around">
+        <h3>Ingrese el DNI de la persona ha autorizar</h3>
+        <ion-item>
+            <ion-label>DNI : </ion-label>
+            <ion-input [disabled]="deshabilitar" type="number" placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
+        </ion-item>
+    </ion-row>
+    <div style="text-align-last: right">
+        <ion-button *ngIf="!deshabilitar" class="mt-4 ion-align-self-end" (click)="getpersona()">Aceptar</ion-button>
+    </div>
+    <ion-row class="ion-justify-content-around">
+        <h3>Seleccione el tiempo de validez</h3>
+        <ion-item style="width: 300px">
+            <ion-label>Fecha:</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" 
+                            picker-format="DD/MM/YYYY"
+                            [value]="fechaFinQR" 
+                            [(ngModel)]="fechaFinQR"
+                            [max]="fechaMax | date: 'yyyy-MM-dd'"
+                            [min]="fechaMin | date: 'yyyy-MM-dd'"></ion-datetime>
+        </ion-item>
+    </ion-row>
+    <ion-row hidden>
+        <ion-card *ngIf="qr">
+                <ngx-qrcode 
+                id="QR_Canvas"
+                qrc-element-type="canvas"
+                [qrc-value]="qr" ></ngx-qrcode>
+        </ion-card>
+    </ion-row>
+
+    <ion-row *ngIf="deshabilitar" style="float: right;">
+        <ion-button (click)="generarQr()">Generar QR</ion-button>
+    </ion-row>
+
+    <ion-row>
+        <ion-card *ngIf="img">
+            <img [src]="img">
+        </ion-card>
+    </ion-row>
 
 </ion-content>
