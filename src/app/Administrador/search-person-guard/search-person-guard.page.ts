@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Personas } from 'src/app/classes/persona';
 import { AlertController } from '@ionic/angular';
 import { Persona } from 'src/app/interfaces/persona';
+import { User } from '../../classes/user';
 
 @Component({
   selector: 'app-search-person-guard',
@@ -14,9 +15,14 @@ export class SearchPersonGuardPage implements OnInit {
 
   dni: number;
   persona: Persona;
+  authorities = [
+    {
+      name: 'ROLE_GUARDIA'
+    }
+  ];
 
   constructor(private service: ServiceService, private router: Router,
-              private alertCtrl: AlertController, private personas: Personas) { }
+              private alertCtrl: AlertController, private user: User) { }
 
   ngOnInit() {
   }
@@ -44,14 +50,20 @@ export class SearchPersonGuardPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            this.personas.nombrePersona = this.persona.nombrePersona;
-            this.personas.apellidoPersona = this.persona.apellidoPersona;
-            this.personas.dniPersona = this.persona.dniPersona;
-            this.personas.id = this.persona.id;
-            this.personas.telefonoPersona = this.persona.telefonoPersona;
-            this.personas.vehiculos = this.persona.vehiculos;
+            // tslint:disable-next-line: max-line-length
+            this.service.crearGuardia(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.user, this.persona.personabarrio, this.persona.vehiculos).subscribe(pers => {
+              console.log(pers);
+              // tslint:disable-next-line: max-line-length
+              this.service.cambiarRol(this.user.id, this.user.login, this.user.firstName, this.user.lastName, this.user.email, this.user.imageUrl, this.user.activated, this.user.langKey, this.user.createdBy, this.user.createdDate, this.user.lastModifiedBy, this.user.lastModifiedDate, this.authorities).subscribe(user => {
+                console.log(user);
+              },
+              (error) => {console.log(error);
+              });
+            },
+            (error) => {console.log(error);
+            });
             this.dni = null;
-            this.router.navigateByUrl('/new-person-guard');
+            this.router.navigateByUrl('/manage-guard');
           }
         }, {
           text: 'Cancelar',

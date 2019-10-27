@@ -15,8 +15,12 @@ export class ManageGuardPage implements OnInit {
   constructor(private service: ServiceService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     this.getGuardias();
   }
+
   getGuardias() {
     this.service.getPersonaRol('ROLE_GUARDIA').subscribe(data => {this.guardias = data; } );
   }

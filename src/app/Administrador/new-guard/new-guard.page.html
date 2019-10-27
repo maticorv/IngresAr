@@ -1,9 +1,75 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>newGuard</ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">Guardias</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
 <ion-content>
+
+    <h5>Por favor ingrese el numero
+        <ion-text color="danger">*</ion-text>
+    </h5>
+    <ion-item>
+        <ion-select class="select-DNI-size" placeholder="DNI" value="dni" okText="Seleccionar">DNI
+            <ion-select-option value="DNI">DNI</ion-select-option>
+        </ion-select>
+        <ion-input type="number" maxlength="9" required placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Nombre
+            <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input minlength="3" required [(ngModel)]="nombre" type="string"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="false" lines="none">
+        <ion-text color="danger" class="form-error">
+            El nombre es demasiado corto
+        </ion-text>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Apellido
+            <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input minlength="3" required [(ngModel)]="apellido" type="string"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="false" lines="none">
+        <ion-text color="danger" class="form-error">
+            El apellido es demasiado corto
+        </ion-text>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">E-Mail
+            <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required [(ngModel)]="email" type="email"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="false" lines="none">
+        <ion-text color="danger" class="form-error">
+            Please enter a valid email address.
+        </ion-text>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Contraseña
+            <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required [(ngModel)]="password" type="password"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="false" lines="none">
+        <ion-text color="danger" class="form-error">
+            Las contraseñas no son iguales.
+        </ion-text>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Contraseña
+            <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required [(ngModel)]="password1" type="password"></ion-input>
+    </ion-item>
+    <ion-button block color="primary" (click)="onSubmit()" [disabled]="password!==password1" type="submit">
+        Registrarse
+    </ion-button>
 
 </ion-content>

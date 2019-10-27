@@ -4,8 +4,12 @@ export interface IUser {
     firstName: string;
     lastName: string;
     email: string;
+    imageUrl: string;
     activated: boolean;
     langKey: string;
-    imageUrl: string;
-    resetDate?: any;
+    createdBy: string;
+    createdDate?: any;
+    lastModifiedBy: string;
+    lastModifiedDate?: any;
+    authorities: string[];
 }

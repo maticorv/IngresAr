@@ -15,27 +15,30 @@ export class SearchHomeownerPage implements OnInit {
   email: string;
   users: IUser;
 
-  constructor(private sservice: ServiceService, private router: Router,
+  constructor(private service: ServiceService, private router: Router,
               private alertCtrl: AlertController, private user: User) { }
 
   ngOnInit() {
   }
 
   getHomeowner() {
-    this.sservice.getUser(this.email).subscribe(data => {
-      console.log(data);
-      this.homeownerExiste();
+    this.service.getUser(this.email).subscribe(data => {
+      this.users = data;
+      console.log(this.users);
+      this.personaExiste();
     },
     (error) => {console.log(error);
-                this.router.navigateByUrl('/new-homeowner');
+                console.log('hola+');
+                this.personaNoExiste();
+                // this.router.navigateByUrl('/new-guard');
     });
   }
 
-  async homeownerExiste() {
+  async personaExiste() {
     const alert = await this.alertCtrl.create({
       header: 'Se ha encontrado el usuario con los siguientes dato' +
-              'Nombre: ' + this.users[0].firstName +
-              'Apellido: ' + this.users[0].lastName,
+              'Nombre: ' + this.users.firstName +
+              'Apellido: ' + this.users.lastName,
       message: '¿Desea continuar con este usuario?</strong>',
       buttons: [
         {
@@ -45,15 +48,44 @@ export class SearchHomeownerPage implements OnInit {
           handler: () => {
             this.email = null;
             this.user.id = this.users.id;
+            this.user.login = this.users.login;
             this.user.firstName = this.users.firstName;
             this.user.lastName = this.users.lastName;
-            this.user.activated = this.users.activated;
             this.user.email = this.users.email;
             this.user.imageUrl = this.users.imageUrl;
+            this.user.activated = this.users.activated;
             this.user.langKey = this.users.langKey;
-            this.user.login = this.users.login;
-            this.user.resetDate = this.users.resetDate;
+            this.user.createdBy = this.users.createdBy;
+            this.user.createdDate = this.users.createdDate;
+            this.user.lastModifiedBy = this.users.lastModifiedBy;
+            this.user.lastModifiedDate = this.users.lastModifiedDate;
+            this.user.authorities = this.users.authorities;
             this.router.navigateByUrl('/search-person-guard');
+          }
+        }, {
+          text: 'Cancelar',
+          handler: () => {
+            this.email = null;
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async personaNoExiste() {
+    const alert = await this.alertCtrl.create({
+      header: 'No se ha encontrado el usuario con los siguientes dato',
+      message: '¿Desea crear un nuevo usuario?</strong>',
+      buttons: [
+        {
+          text: 'Aceptar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            this.email = null;
+            this.router.navigateByUrl('/new-guard');
           }
         }, {
           text: 'Cancelar',
