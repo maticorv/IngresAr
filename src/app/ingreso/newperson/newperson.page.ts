@@ -31,7 +31,7 @@ export class NewpersonPage implements OnInit {
       this.persona.telefonoPersona = data.telefonoPersona;
       this.persona.id = data.id;
       this.presentToast('La persona se ha creado correctamente');
-      // this.router.navigateByUrl('/destination');
+      this.router.navigateByUrl('/destination');
     },
     (error) => { console.log(error);
                  this.presentToast('La persona no se ha podido crear, intente nuevamente');
@@ -47,7 +47,7 @@ export class NewpersonPage implements OnInit {
     });
     toast.present();
     setTimeout(() => {
-      this.router.navigateByUrl('/destination');
+      // this.router.navigateByUrl('/destination');
       },
       2000);
   }

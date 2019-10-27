@@ -30,6 +30,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { User } from './classes/user';
 import { Amigo } from './classes/amiigo';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     AppRoutingModule,
     ComponentsModule,
     HttpClientModule,
+    NgxQRCodeModule,
   ],
   providers: [
     StatusBar,

@@ -30,7 +30,7 @@ export class NewFriendPage implements OnInit {
       this.personaExiste();
     },
     (error) => { console.log(error);
-                 this.personaNoExiste();
+                 this.personaNoExiste('La persona no se encuentra en la base de datos');
     });
 
   }
@@ -45,13 +45,8 @@ export class NewFriendPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            // this.amigo.nombrePersona = this.persona.nombrePersona;
-            // this.amigo.apellidoPersona = this.persona.apellidoPersona;
-            // this.amigo.dniPersona = this.persona.dniPersona;
-            // this.amigo.id = this.persona.id;
-            // this.amigo.telefonoPersona = this.persona.telefonoPersona;
-            // this.amigo.vehiculos = this.persona.vehiculos;
             this.amigo.ListaAmigo.push(this.persona);
+            this.amigo.sinDatos = true;
             this.setNullData();
             this.router.navigateByUrl('/new-friend-list');
           }
@@ -67,31 +62,15 @@ export class NewFriendPage implements OnInit {
     await alert.present();
   }
 
-  async personaNoExiste() {
+  async personaNoExiste(msg) {
     const alert = await this.alertCtrl.create({
-      header: 'La persona con el dni ' + this.dni + ' no se encuentra en la base de datos',
-      message: '¿Desea crearla?</strong>',
-      buttons: [
-        {
-          text: 'Aceptar',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            this.personas.dniPersona = this.dni;
-            this.setNullData();
-            this.router.navigateByUrl('/newperson');
-          }
-        }, {
-          text: 'Cancelar',
-          handler: () => {
-            this.setNullData();
-          }
-        }
-      ]
+      header: msg,
+      buttons: ['Aceptar']
     });
-
+    this.setNullData();
     await alert.present();
   }
+
   setNullData() {
     this.dni = null;
     this.persona = null;

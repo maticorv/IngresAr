@@ -382,13 +382,13 @@ export class ServiceService {
   getUser(email) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
-    return this.http.get(this.url + 'useremail/' + email, {headers}).pipe(map(data => data as IUser));
+    return this.http.get(this.url + 'persona/useremail/' + email, {headers}).pipe(map(data => data as IUser));
   }
 
   getListaAmigos(dni) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
-    return this.http.get(this.url + '', {headers}).pipe(map(data => data as IFriendsList));
+    return this.http.get(this.url + 'lista-amigos/dnilista/' + dni, {headers}).pipe(map(data => data as IFriendsList));
   }
   // tslint:disable-next-line: max-line-length
   putRegistroIngresoEvento(id, nombreEvento, fecha, horaInicio, horaFin, eventoPeriodo, eventoDomicilio, eventoEspacio, eventoPersona, estadoEvento, eventoDetalles) {
@@ -420,4 +420,32 @@ export class ServiceService {
     const params = {id, horaIngreso, horaEngreso, amigosevento, detallePersonaEvento, detalleEventoVehiculo};
     return this.http.put(this.url + 'detalle-eventos', params, {headers}).pipe(map( data => data as IDetalleEvento));
   }
+
+  deleteFriendList(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.delete(this.url + 'lista-amigos/' + id, {headers}).pipe(map( data => data));
+  }
+
+  getListFriendById(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.get(this.url + 'lista-amigos/' + id, {headers}).pipe(map( data => data as IFriendsList));
+  }
+
+  putFriend(id, nombreListaAmigos, pertenece, amigos) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    const params = {id, nombreListaAmigos, pertenece, amigos};
+    return this.http.put(this.url + 'lista-amigos', params, {headers}).pipe(map(data => data));
+  }
+
+  ceateFriendList(nombreListaAmigos, pertenece, amigos) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    const params = {nombreListaAmigos, pertenece, amigos};
+    console.log(params);
+    return this.http.post(this.url + 'lista-amigos', params, {headers}).pipe(map(data => data));
+  }
+
 }

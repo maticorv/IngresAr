@@ -7,7 +7,8 @@
     </ion-toolbar>
   </ion-header>
 
-<ion-content fullscreen class="ion-padding">
+<ion-content class="ion-padding">
+
 
     <ion-row style="place-content: center">
         <ion-item>
@@ -22,29 +23,35 @@
       <ion-label>Amigos</ion-label>
     </ion-row>
 
-    <ion-row *ngIf="ListaAmigo !== []">
-        <ion-row>
-            <li class="list-group-item" *ngFor="let amigo of ListaAmigo, let i = index">
-              <ion-col class="tamaño">
-                  <ion-label> {{amigo.apellidoPersona}}</ion-label>
-              </ion-col>
-              <ion-col class="tamaño">
-                  <ion-label> {{amigo.nombrePersona}} </ion-label>
-              </ion-col>
-              <ion-col class="tamaño">
-                  <ion-label> {{amigo.dniPersona}}</ion-label>
-              </ion-col>
-              <ion-col>
-                <ion-button (click)="eliminarAmigo(i)">
-                  <ion-icon name="remove"></ion-icon>
-                </ion-button>
-              </ion-col>
-            </li>
-            <!-- <ion-col>
-                <button type="button" class="btn btn-link"><ion-icon name="add"></ion-icon></button>
-            </ion-col> -->
-        </ion-row>
-    </ion-row>
+
+    <ion-row *ngIf="ListaAmigo !== []" class="mt-2">
+        <ion-card>
+          <ion-item *ngFor="let amigo of ListaAmigo, let i = index">
+            <ion-list>
+              <ion-row>
+                <ion-col class="tamaño">
+                  <ion-label>{{amigo.apellidoPersona}} </ion-label>
+                </ion-col>
+                <ion-col class="tamaño">
+                    <ion-label>{{amigo.nombrePersona}} </ion-label>
+                </ion-col>
+                <ion-col class="tamaño">
+                    <ion-label>{{amigo.dniPersona}} </ion-label>
+                </ion-col>
+                <ion-col class="tamañoIcon">
+                  <ion-button shape="round" fill="outline" (click)="eliminarAmigo(i)">
+                    <ion-icon name="remove"></ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-list>
+          </ion-item>
+        </ion-card>
+      </ion-row>
+
+      <ion-row *ngIf="sinDato" class="mt-2" style="place-content: flex-end;">
+        <ion-button [disabled]="!(nombreListaAmigo)" (click)="crearLista()">Crear Lista</ion-button>
+      </ion-row>
 
 </ion-content>
 

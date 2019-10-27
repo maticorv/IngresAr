@@ -8,10 +8,10 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content class="ion-padding">
 
     <ul class="list-group">
-      <li class="list-group-item" *ngFor="let l of ListaAmigos"> {{l.nombreListaAmigos}} </li>
+      <li class="list-group-item" *ngFor="let l of listaAmigos; let i = index" (click)="presentActionSheet(i)"> {{l.nombreListaAmigos}} </li>
     </ul>
 
 </ion-content>
