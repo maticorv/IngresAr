@@ -27,6 +27,7 @@ import { IDetalleEvento } from '../interfaces/idetalle-evento';
 })
 export class ServiceService {
   url = 'http://ingresar.ddns.net:8080/api/';
+  idAccount: number;
 
   constructor(private http: HttpClient) { }
 
@@ -384,6 +385,17 @@ export class ServiceService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'persona/useremail/' + email, {headers}).pipe(map(data => data as IUser));
   }
+  getPersonUser(id: number): Observable<Persona> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'persona/userperson/?id=' + id , {headers}).pipe(map(data => data as Persona));
+  }
+  putPersona(persona: Persona): Observable<Persona> {
+    const token = this.leerToken();
+    const params = {persona};
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.put(this.url + 'personas', persona, {headers}).pipe(map(data => data as Persona));
+  }
 
   getListaAmigos(dni) {
     const token = this.leerToken();
@@ -406,12 +418,6 @@ export class ServiceService {
     // tslint:disable-next-line: max-line-length
     const params = {id, nombreEvento, fecha, horaInicio, horaFin, eventoPeriodo, eventoDomicilio, eventoEspacio, eventoPersona, estadoEvento, eventoDetalles};
     return this.http.put(this.url + 'eventos', params, {headers}).pipe(map(data => data));
-  }
-
-  getPersonUser(id) {
-    const token = this.leerToken();
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
-    return this.http.get(this.url + 'persona/userperson/?id=' + id, {headers}).pipe(map( data => data as Persona));
   }
 
   putDetalleEvento(id, horaIngreso, horaEngreso, amigosevento, detallePersonaEvento, detalleEventoVehiculo) {

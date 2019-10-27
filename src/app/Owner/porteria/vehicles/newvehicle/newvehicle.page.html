@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/vehicles'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">Crear Vehículo</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <h2>Informacion del Vehiculo</h2>
+    <ion-row>
+        <ion-item>
+            <ion-label position="floating">Dominio
+                <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input [(ngModel)]="dominio" required type="text"></ion-input>
+        </ion-item>
+    </ion-row>
+    <ion-row>
+        <ng-container *ngIf="marcas===undefined; else elseTemplate">
+        </ng-container>
+        <ng-template #elseTemplate>
+            <ion-item>
+                <ion-label>Marca</ion-label>
+                <ion-select [(ngModel)]="this.brand" interface="popover" style="width: 18cm" (ionChange)="Marca($event)">
+                    <ion-select-option [value]="i" *ngFor="let marca of marcas, let i=index ">{{marca.nombreMarca}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ng-template>
+    </ion-row>
+    <ion-row>
+        <ng-container *ngIf="modelos== undefined; else elseTemplate1 ">
+        </ng-container>
+        <ng-template #elseTemplate1>
+            <ion-item>
+                <ion-label>Modelo</ion-label>
+                <ion-select [(ngModel)]="model" interface="popover" style="width: 18cm" (ionChange)="Modelo($event)">
+                    <ion-select-option [value]=" i " *ngFor="let modelo of modelos, let i=index ">{{modelo.nombreModelo}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ng-template>
+    </ion-row>
+    <ion-row>
+        <ion-item>
+            <ion-label>Color</ion-label>
+            <ion-select [(ngModel)]="color " interface="popover" style="width: 18cm" (ionChange)="Color($event)">
+                <ion-select-option [value]=" i " *ngFor="let color of colors, let i=index ">{{color?.nombreColor}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+    </ion-row>
+    <!-- <ion-row>
+        <ion-item>
+            <ion-label position="floating ">Aseguradora</ion-label>
+            <ion-input required [(ngModel)]="aseguradora "></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Vencimiento de seguro</ion-label>
+            <ion-datetime [(ngModel)]="vencimiento" placeholder="myDate " [min]="myDate " [max]="max " displayFormat="DD MM YY " placeholder="Select Date "></ion-datetime>
+        </ion-item>
+    </ion-row> -->
+    <ion-button color="primary " routerLink="/authorization " routerLinkActive="router-link-active ">Aceptar</ion-button>
+    <ion-button color="primary " (click)="postVehiculo() ">Crear</ion-button>
+</ion-content>
