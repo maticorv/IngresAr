@@ -54,10 +54,10 @@ export class NewvehiclePage implements OnInit {
   postVehiculo() {
 
     console.log(this.dominio, this.marcas[this.brand],
-      this.modelos[this.model], this.colors[this.color], this.aseguradora, this.vencimiento );
+    this.modelos[this.model], this.colors[this.color], this.aseguradora, this.vencimiento );
     this.service.postVehiculo(this.dominio, this.marcas[this.brand],
-      this.modelos[this.model], null ,
-      this.colors[this.color]).subscribe(data => {
+    this.modelos[this.model], null ,
+    this.colors[this.color]).subscribe(data => {
         console.log(data);
         this.vehiculos.id = data.id;
         this.vehiculos.dominio = data.dominio;
@@ -108,7 +108,7 @@ export class NewvehiclePage implements OnInit {
     });
   }
   Color(e: Event) {
-    this.color = this.model = e[`detail`].value;
+    this.color = e[`detail`].value;
   }
 
   getSeguros() {

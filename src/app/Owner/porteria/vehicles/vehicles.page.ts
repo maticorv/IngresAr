@@ -21,6 +21,9 @@ export class VehiclesPage implements OnInit {
   ngOnInit() {
     this.getAccount();
   }
+  ionViewWillEnter() {
+    this.getAccount();
+  }
   getAccount() {
     this.service.account().subscribe((resp) => {
       this.account = resp;

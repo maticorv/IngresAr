@@ -47,6 +47,7 @@ export class NewvehiclePage implements OnInit {
               }
 
   ngOnInit() {
+    this.getAccount();
     this.getMarca();
     this.getColors();
     this.getSeguros();
@@ -62,13 +63,11 @@ export class NewvehiclePage implements OnInit {
     this.service.getPersonUser(this.account.id).subscribe((resp) => {
       this.persona = resp;
       this.vehiculos = resp.vehiculos;
-      console.log(this.vehiculos);
     }
     );
   }
   getMarca() {
     this.service.getMarca().subscribe(data => {
-      console.log(data);
       this.marcas = data;
     },
     (error) => { console.log(error);
@@ -76,7 +75,6 @@ export class NewvehiclePage implements OnInit {
   }
   Marca(idMarca: Event) {
     this.brand = idMarca[`detail`].value;
-    console.log(this.brand);
     if (idMarca !== undefined) {
       this.service.getMarcaByNombre(this.marcas[this.brand][`nombreMarca`]).subscribe(data => {
         this.modelos = data[`modelos`];
@@ -87,23 +85,20 @@ export class NewvehiclePage implements OnInit {
   }
   Modelo(e: Event) {
     this.model = e[`detail`].value;
-    console.log(this.model);
   }
   getColors() {
     this.service.getColors().subscribe( data => {
-      console.log(data);
       this.colors = data;
     },
     (error) => { console.log(error);
     });
   }
   Color(e: Event) {
-    this.color = this.model = e[`detail`].value;
+    this.color = e[`detail`].value;
   }
 
   getSeguros() {
     this.service.getSeguros().subscribe(data => {
-      console.log(data);
     },
     (error) => { console.log(error);
     });
@@ -111,16 +106,32 @@ export class NewvehiclePage implements OnInit {
 
   async presentToast(me: string) {
     const toast = await this.toastController.create({
-      position: 'middle',
+      position: 'bottom',
       color: 'dark',
       duration: 2000,
       message: me,
     });
     toast.present();
     setTimeout(() => {
-      this.router.navigateByUrl('/authorization');
+      this.router.navigateByUrl('/porteria/vehicles');
       },
       2000);
   }
+  postVehiculo() {
+    this.service.postVehiculo(this.dominio, this.marcas[this.brand],
+    this.modelos[this.model], null ,
+    this.colors[this.color]).subscribe(data => {
+      this.persona.vehiculos.push(data);
+      console.log('this.persona :', this.persona);
+      this.service.putPersona(this.persona).subscribe(
+        () =>  {this.presentToast('Vehiculo añadido satisfactoriamente');
+      },
+        (error) => {
+          console.log(error);
+          this.presentToast('Ha ocurrido un error');
+        }
+      );
 
+    });
+  }
 }

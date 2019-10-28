@@ -19,6 +19,12 @@
     </ion-row>
     <ion-row>
         <ng-container *ngIf="marcas===undefined; else elseTemplate">
+            <ion-item>
+                <ion-label>Marca</ion-label>
+                <ion-select [(ngModel)]="this.brand" interface="popover" style="width: 18cm">
+                    <ion-select-option></ion-select-option>
+                </ion-select>
+            </ion-item>
         </ng-container>
         <ng-template #elseTemplate>
             <ion-item>
@@ -30,16 +36,12 @@
         </ng-template>
     </ion-row>
     <ion-row>
-        <ng-container *ngIf="modelos== undefined; else elseTemplate1 ">
-        </ng-container>
-        <ng-template #elseTemplate1>
-            <ion-item>
-                <ion-label>Modelo</ion-label>
-                <ion-select [(ngModel)]="model" interface="popover" style="width: 18cm" (ionChange)="Modelo($event)">
-                    <ion-select-option [value]=" i " *ngFor="let modelo of modelos, let i=index ">{{modelo.nombreModelo}}</ion-select-option>
-                </ion-select>
-            </ion-item>
-        </ng-template>
+        <ion-item>
+            <ion-label>Modelo</ion-label>
+            <ion-select [disabled]="modelos== undefined" [(ngModel)]="model" interface="popover" style="width: 18cm" (ionChange)="Modelo($event)">
+                <ion-select-option [value]=" i " *ngFor="let modelo of modelos, let i=index ">{{modelo.nombreModelo}}</ion-select-option>
+            </ion-select>
+        </ion-item>
     </ion-row>
     <ion-row>
         <ion-item>
@@ -59,6 +61,5 @@
             <ion-datetime [(ngModel)]="vencimiento" placeholder="myDate " [min]="myDate " [max]="max " displayFormat="DD MM YY " placeholder="Select Date "></ion-datetime>
         </ion-item>
     </ion-row> -->
-    <ion-button color="primary " routerLink="/authorization " routerLinkActive="router-link-active ">Aceptar</ion-button>
     <ion-button color="primary " (click)="postVehiculo() ">Crear</ion-button>
 </ion-content>
