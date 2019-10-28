@@ -87,6 +87,10 @@ const routes: Routes = [
   { path: 'generate-qr', loadChildren: './Owner/authorizations/generate-qr/generate-qr.module#GenerateQrPageModule' },
   { path: 'view-friend-list/:id', loadChildren: './Owner/events/view-friend-list/view-friend-list.module#ViewFriendListPageModule' },
   { path: 'add-friend', loadChildren: './Owner/events/view-friend-list/add-friend/add-friend.module#AddFriendPageModule' },
+  {
+    path: 'newvehicle1',
+    loadChildren: () => import('./Owner/porteria/vehicles/newvehicle1/newvehicle1.module').then( m => m.Newvehicle1PageModule)
+  },
 
 
   ];
