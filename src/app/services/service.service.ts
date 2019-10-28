@@ -21,6 +21,7 @@ import { Account } from '../classes/account';
 import { IUser } from '../interfaces/iuser';
 import { IFriendsList } from '../interfaces/ifriends-list';
 import { IDetalleEvento } from '../interfaces/idetalle-evento';
+import { IQr } from '../interfaces/iqr';
 
 @Injectable({
   providedIn: 'root'
@@ -458,7 +459,15 @@ export class ServiceService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
     const params = {nombreListaAmigos, pertenece, amigos};
     console.log(params);
-    return this.http.post(this.url + 'lista-amigos', params, {headers}).pipe(map(data => data));
+    return this.http.post(this.url + 'lista-amigos', params, {headers}).pipe(map(data => data as IFriendsList));
+  }
+
+  puFriendList(id, nombreListaAmigos, pertenece, amigos) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    const params = {id , nombreListaAmigos, pertenece, amigos};
+    console.log(params);
+    return this.http.put(this.url + 'lista-amigos', params, {headers}).pipe(map(data => data as IFriendsList));
   }
 
   crearGuardia(id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaUser, personabarrio, vehiculos) {
@@ -482,6 +491,37 @@ export class ServiceService {
     // tslint:disable-next-line: max-line-length
     const params = {id, login, firstName, lastName, email, imageUrl, activated, langKey, createdBy, createdDate, lastModifiedBy, lastModifiedDate, authorities};
     return this.http.put(this.url + 'users', params, {headers}).pipe(map(data => data));
+  }
+
+  getQR() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.get(this.url + 'qrs', {headers}).pipe(map(data => data as IQr[]));
+  }
+
+  getQRByCodQR(codigoQR) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.get(this.url + 'qrs/' + codigoQR, {headers}).pipe(map(data => data as IQr));
+  }
+
+  postQR(codigoQR, fechaFinQR, fotoQR, fotoQRContentType, tipoVisira, qrAutorizador, qrAutorizado, qrDomicilio) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    const params = {codigoQR, fechaFinQR, fotoQR, fotoQRContentType, tipoVisira, qrAutorizador, qrAutorizado, qrDomicilio};
+    return this.http.post(this.url + 'qrs', params, {headers}).pipe(map(data => data as IQr));
+  }
+
+  getPersonasDomicilioByIdPers(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.get(this.url + 'personasdom/domicilio/' + id, {headers}).pipe(map(data => data as Persona));
+  }
+
+  getDomicilioById(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.get(this.url + 'dompersona/' + id, {headers}).pipe(map(data => data));
   }
 
 }

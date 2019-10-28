@@ -31,6 +31,12 @@ import { User } from './classes/user';
 import { Amigo } from './classes/amiigo';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 
 @NgModule({
@@ -43,6 +49,11 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
     ComponentsModule,
     HttpClientModule,
     NgxQRCodeModule,
+    BrowserAnimationsModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     StatusBar,
@@ -65,6 +76,8 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
     User,
     Amigo,
     BarcodeScanner,
+    FormBuilder,
+    EmailComposer,
 
   ],
   bootstrap: [AppComponent]

@@ -12,4 +12,7 @@ export class EmployeePage implements OnInit {
   ngOnInit() {
   }
 
+  ionViewWillEnter() {
+  }
+
 }

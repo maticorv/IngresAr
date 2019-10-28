@@ -3,6 +3,8 @@ import { ServiceService } from 'src/app/services/service.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Persona } from 'src/app/interfaces/persona';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-generate-qr',
@@ -14,7 +16,8 @@ export class GenerateQrPage implements OnInit {
   dni: number;
   personaAutorizada: Persona;
   personaAutorizador: Persona;
-  qr: string;
+  domicilio: any;
+  codigoQR: string;
   canvas = document.getElementById('value');
   img: string;
   fecha: any;
@@ -23,7 +26,14 @@ export class GenerateQrPage implements OnInit {
   fechaMin: Date;
   fechaMax: Date;
 
-  constructor(private service: ServiceService, private router: Router, private alertCtrl: AlertController) { }
+  isLinear = false;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+
+  constructor(private service: ServiceService, private router: Router,
+              // tslint:disable-next-line: variable-name
+              private alertCtrl: AlertController, private _formBuilder: FormBuilder,
+              private emailComposer: EmailComposer) { }
 
   ngOnInit() {
     this.getOwner();
@@ -33,16 +43,31 @@ export class GenerateQrPage implements OnInit {
     this.fechaFinQR = new Date().toISOString();
     console.log('fecha Max', this.fechaMax);
     // console.log(this.fechaFinQR);
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
   }
 
   generarQr() {
     // this.qr = this.personaAutorizada.nombrePersona + this.personaAutorizada.apellidoPersona + this.fecha;
-    console.log(this.qr);
     const canvas = document.querySelector('canvas') as HTMLCanvasElement;
     const imageData = canvas.toDataURL('image/jpeg').toString();
     // alert(imageData);
     // console.log(this.fechaFinQR);
     this.img = imageData;
+  }
+
+  crearQr() {
+    // tslint:disable-next-line: max-line-length
+    this.service.postQR(this.codigoQR, this.fechaFinQR, null, 'image/png', 'visita', this.personaAutorizador, this.personaAutorizada, this.domicilio).subscribe(data => {
+      console.log(data);
+      this.enviarMail();
+    },
+    (error) => {console.log(error);
+    });
   }
 
 
@@ -66,6 +91,11 @@ export class GenerateQrPage implements OnInit {
       this.service.getPersonUser(data.id).subscribe(pers => {
         console.log(pers);
         this.personaAutorizador = pers;
+        this.service.getDomicilioById(pers.id).subscribe(dom => {
+          this.domicilio = dom;
+        },
+        (error) => {console.log(error);
+        });
       },
       (error) => {console.log(error);
       });
@@ -84,13 +114,14 @@ export class GenerateQrPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            this.qr = this.personaAutorizada.nombrePersona + this.personaAutorizada.apellidoPersona + this.fecha;
+            this.codigoQR = this.personaAutorizada.nombrePersona + this.personaAutorizada.apellidoPersona + this.fecha;
             this.deshabilitar = true;
             // this.generarQr();
           }
         }, {
           text: 'Cancelar',
           handler: () => {
+            this.dni = null;
             console.log('Confirm Okay');
           }
         }
@@ -106,6 +137,20 @@ export class GenerateQrPage implements OnInit {
       buttons: ['Aceptar'],
     });
     await alert.present();
+  }
+
+  enviarMail() {
+
+    const email = {
+      to: this.personaAutorizada.personaUser.email,
+      attachments: [
+        this.img,
+      ],
+      subject: 'Autorización previa',
+      isHtml: true
+    };
+    this.emailComposer.open(email);
+    this.router.navigateByUrl('/authorizations/visit');
   }
 
 }
