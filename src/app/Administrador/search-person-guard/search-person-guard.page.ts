@@ -16,15 +16,14 @@ export class SearchPersonGuardPage implements OnInit {
   dni: number;
   persona: Persona;
   authorities = [
-    {
-      name: 'ROLE_GUARDIA'
-    }
+    'ROLE_GUARDIA'
   ];
 
   constructor(private service: ServiceService, private router: Router,
               private alertCtrl: AlertController, private user: User) { }
 
   ngOnInit() {
+    console.log('this.user :', this.user);
   }
 
   getPersonGuardia() {

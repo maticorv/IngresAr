@@ -23,7 +23,8 @@ export class SearchGuardPage implements OnInit {
 
   getGuardia() {
     this.service.getUser(this.email).subscribe(data => {
-      this.users = data;
+      this.users = data[`personaUser`];
+      console.log('users :', data);
       console.log(this.users);
       this.guardiaExiste();
     },

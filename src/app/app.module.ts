@@ -32,11 +32,11 @@ import { Amigo } from './classes/amiigo';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { DemoMaterialModule } from './material-module';
 
 
 @NgModule({
@@ -50,10 +50,10 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
     HttpClientModule,
     NgxQRCodeModule,
     BrowserAnimationsModule,
-    MatStepperModule,
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
+    DemoMaterialModule,
   ],
   providers: [
     StatusBar,

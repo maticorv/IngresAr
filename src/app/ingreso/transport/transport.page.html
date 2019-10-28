@@ -17,7 +17,6 @@
                 </ion-item>
             </ion-radio-group>
         </ion-list>
-        <!-- <ion-button (click)="siguiente(f)">Boton</ion-button> -->
     </form>
     <div>
         <ion-button size="small" fill="clear" color="dark" strong="true" [routerLink]="['/newvehicle']">Agregar Vehiculo</ion-button>
@@ -27,18 +26,6 @@
     </div>
     <div style="text-align-last: right">
         <ion-button (click)="siguiente()">Aceptar</ion-button>
-        <!-- <ion-button (click)="imprimir()">Imprimir</ion-button> -->
     </div>
-
-
-    <!-- <form #f="ngForm">
-  <div class="form-check" *ngFor="let v of vehiculos, let i = index">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="i" value="" [(ngModel)]="index">
-      <label class="form-check-label" for="i">
-          {{v.marca}} {{v.modelo}} {{v.patente}}
-      </label>
-  </div>
-  <ion-button (click)="siguiente(f)">Boton</ion-button>
-</form> -->
 
 </ion-content>

@@ -29,6 +29,7 @@ import { IQr } from '../interfaces/iqr';
 export class ServiceService {
   url = 'http://ingresar.ddns.net:8080/api/';
   idAccount: number;
+  codQR: string;
 
   constructor(private http: HttpClient) { }
 
@@ -522,6 +523,15 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
     return this.http.get(this.url + 'dompersona/' + id, {headers}).pipe(map(data => data));
+  }
+
+
+  getCodQR() {
+    return this.codQR;
+  }
+
+  setCodQR(codQR) {
+    this.codQR = codQR;
   }
 
 }
