@@ -14,4 +14,5 @@ export class Personas {
     vehiculos = [];
     detalleEvento?: any;
     art?: any;
+    personaUser: any;
 }
