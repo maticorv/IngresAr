@@ -59,13 +59,13 @@ export class GenerateQrPage implements OnInit {
     const imageData = canvas.toDataURL('image/jpeg').toString();
     // alert(imageData);
     // console.log(this.fechaFinQR);
-    this.handleImage(imageData);
+    // this.handleImage(imageData);
     this.img = imageData;
   }
 
   crearQr() {
     // tslint:disable-next-line: max-line-length
-    this.service.postQR(this.codigoQR, this.fechaFinQR, this.fileData, 'image/png', 'visita', this.personaAutorizador, this.personaAutorizada, this.domicilio).subscribe(data => {
+    this.service.postQR(this.codigoQR, this.fechaFinQR, null, 'image/png', 'visita', this.personaAutorizador, this.personaAutorizada, this.domicilio).subscribe(data => {
       console.log(data);
       this.enviarMail();
     },
@@ -157,25 +157,24 @@ export class GenerateQrPage implements OnInit {
     this.router.navigateByUrl('/authorizations/visit');
   }
 
-  public handleImage(Image: string): void {
-    // console.log('received webcam image', Image.imageAsDataUrl);
-    this.fileData = this.convertDataUrlToBlob(Image);
-    console.log('this.fileData :', this.fileData);
-  }
+//   public handleImage(Image: string): void {
+//     this.fileData = this.convertDataUrlToBlob(Image);
+//     console.log('this.fileData :', this.fileData);
+//   }
 
-  convertDataUrlToBlob(dataUrl: string): Blob {
-    console.log('dataUrl :', dataUrl);
-    const arr = dataUrl.split(',');
-    const mime = arr[0].match(/:(.*?);/)[1];
-    const bstr = atob(arr[1]);
-    let n = bstr.length;
-    const u8arr = new Uint8Array(n);
-    while (n--) {
-        u8arr[n] = bstr.charCodeAt(n);
-    }
+//   convertDataUrlToBlob(dataUrl: string): Blob {
+//     console.log('dataUrl :', dataUrl);
+//     const arr = dataUrl.split(',');
+//     const mime = arr[0].match(/:(.*?);/)[1];
+//     const bstr = atob(arr[1]);
+//     let n = bstr.length;
+//     const u8arr = new Uint8Array(n);
+//     while (n--) {
+//         u8arr[n] = bstr.charCodeAt(n);
+//     }
 
-    return new Blob([u8arr], {type: mime});
-}
+//     return new Blob([u8arr], {type: mime});
+// }
 
 
   goBack(stepper: MatStepper) {

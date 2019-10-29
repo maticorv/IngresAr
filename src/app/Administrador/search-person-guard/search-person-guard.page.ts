@@ -20,10 +20,15 @@ export class SearchPersonGuardPage implements OnInit {
   ];
 
   constructor(private service: ServiceService, private router: Router,
-              private alertCtrl: AlertController, private user: User) { }
+              private alertCtrl: AlertController, private user: User,
+              private personas: Personas) { }
 
   ngOnInit() {
     console.log('this.user :', this.user);
+  }
+
+  ionViewWillLeave() {
+    this.dni = null;
   }
 
   getPersonGuardia() {
@@ -75,5 +80,31 @@ export class SearchPersonGuardPage implements OnInit {
 
     await alert.present();
   }
+
+  async personaNoExiste() {
+    const alert = await this.alertCtrl.create({
+      header: 'La persona con el DNI:' + this.dni + 'no se encuentra en la base de datos',
+      message: '¿Desea crear la persona?</strong>',
+      buttons: [
+        {
+          text: 'Aceptar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            this.personas.dniPersona = this.dni;
+            this.router.navigateByUrl('/new-person-homeowener');
+          }
+        }, {
+          text: 'Cancelar',
+          handler: () => {
+            this.dni = null;
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
 
 }

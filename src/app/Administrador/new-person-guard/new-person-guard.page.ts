@@ -17,9 +17,7 @@ export class NewPersonGuardPage implements OnInit {
   dniPersona: number;
   telefonoPersona: number;
   authorities = [
-    {
-      name: 'ROLE_GUARDIA'
-    }
+      'ROLE_GUARDIA'
   ];
 
   // tslint:disable-next-line: max-line-length
@@ -29,6 +27,14 @@ export class NewPersonGuardPage implements OnInit {
   ngOnInit() {
     this.dniPersona = this.persona.dniPersona;
   }
+
+  ionViewWillLeave() {
+    this.nombrePersona = null;
+    this.apellidoPersona = null;
+    this.dniPersona = null;
+    this.telefonoPersona = null;
+  }
+  
   crearPersona() {
     this.service.postPersona(this.nombrePersona, this.apellidoPersona, this.dniPersona, this.telefonoPersona).subscribe(data => {
       console.log(data);

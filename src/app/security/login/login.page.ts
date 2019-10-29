@@ -19,6 +19,12 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.menuCtrl.enable(false);
   }
+
+  ionViewWillLeave() {
+    this.user.email = null;
+    this.user.password = null;
+    console.log('ionViewWillLeave');
+  }
   // async onLogin() {
   //   this.fireauth.auth.signInWithEmailAndPassword(this.user.email, this.user.password)
   //   .then(res => {

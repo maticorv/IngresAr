@@ -24,7 +24,19 @@ export class NewGuardPage implements OnInit {
   constructor(private router: Router, private account: Account, private service: ServiceService,
               private alertController: AlertController, private user: User) {
   }
+
   ngOnInit() {
+    this.email = this.user.email;
+  }
+
+  ionViewWillLeave() {
+    this.email = null;
+    this.password = null;
+    this.password1 = null;
+    this.dni = null;
+    this.nombre = null;
+    this.apellido = null;
+    this.users = null;
   }
   async presentAlert3() {
     const alert = await this.alertController.create({
@@ -35,7 +47,7 @@ export class NewGuardPage implements OnInit {
         text: 'Aceptar',
         cssClass: 'secondary',
         handler: (blah) => {
-          this.router.navigateByUrl('/search-person-guard');
+          this.router.navigateByUrl('/search-person-homeowener');
         }
       }],
     });

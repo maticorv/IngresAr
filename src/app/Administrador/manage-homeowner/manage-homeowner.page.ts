@@ -16,6 +16,11 @@ export class ManageHomeownerPage implements OnInit {
   ngOnInit() {
     this.getPropietarios();
   }
+
+  ionViewWillEnter() {
+    this.getPropietarios();
+  }
+
   getPropietarios() {
     this.service.getPersonaRol('ROLE_PROPIETARIO').subscribe(data => {this.propietarios = data; } );
   }

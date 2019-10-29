@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IQr } from '../../../interfaces/iqr';
 import { ServiceService } from '../../../services/service.service';
 
 @Component({
@@ -15,6 +14,11 @@ export class VisitPage implements OnInit {
   constructor(private router: Router, private service: ServiceService) { }
 
   ngOnInit() {
+    // this.ObtenerQrs();
+  }
+
+  ionViewWillLeave() {
+    this.qrs = [];
   }
 
   ionViewWillEnter() {
@@ -26,18 +30,32 @@ export class VisitPage implements OnInit {
   }
 
   ObtenerQrs() {
-    this.service.getQR().subscribe(data => {
-      const hoy = new Date();
-      data.forEach(element => {
-        // tslint:disable-next-line: max-line-length
-        if (new Date(element.fechaFinQR) >= hoy && element.tipoVisira === 'visita') {
-          this.qrs.push(element);
-        }
+    this.service.account().subscribe(data => {
+      this.service.getPersonUser(data.id).subscribe(pers => {
+        this.service.getDomicilioById(pers.id).subscribe(dom => {
+          this.service.getQRByIdPerson(dom.id).subscribe(qr => {
+            console.log('qr :', qr);
+            const hoy = new Date();
+            qr.forEach(element => {
+              // tslint:disable-next-line: max-line-length
+              console.log('element :', element);
+              if (new Date(element.fechaFinQR) >= hoy && element.tipoVisira === 'visita') {
+                this.qrs.push(element);
+              }
+            });
+          },
+          (error) => {console.log(error);
+          });
+          console.log('QRS', this.qrs);
+        },
+        (error) => {console.log(error);
+        });
+      },
+      (error) => {console.log(error);
       });
     },
     (error) => {console.log(error);
     });
-    console.log(this.qrs);
   }
 
 }

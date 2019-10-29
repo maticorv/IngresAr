@@ -72,15 +72,19 @@
               </ion-col>
               <ion-col>
                   <ion-item>
-                      <ion-label>
+                      <ion-label *ngIf="p.planillaVehiculo?.vehiculoMarca.nombreMarca !== null">
                           {{p.planillaVehiculo.vehiculoMarca.nombreMarca}}
+                      </ion-label>
+                      <ion-label *ngIf="p.planillaVehiculo?.vehiculoMarca.nombreMarca === null">
                       </ion-label>
                   </ion-item>
               </ion-col>
               <ion-col>
                   <ion-item>
-                      <ion-label>
+                      <ion-label *ngIf="p.planillaVehiculo?.dominio !== null">
                           {{p.planillaVehiculo.dominio}}
+                      </ion-label>
+                      <ion-label *ngIf="p.planillaVehiculo?.dominio === null">
                       </ion-label>
                   </ion-item>
               </ion-col>
