@@ -91,6 +91,10 @@ const routes: Routes = [
     path: 'newvehicle1',
     loadChildren: () => import('./Owner/porteria/vehicles/newvehicle1/newvehicle1.module').then( m => m.Newvehicle1PageModule)
   },
+  {
+    path: 'messages1',
+    loadChildren: () => import('./Owner/porteria/messages/messages1/messages1.module').then( m => m.Messages1PageModule)
+  },
 
 
   ];
