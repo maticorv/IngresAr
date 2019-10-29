@@ -503,5 +503,10 @@ export class ServiceService {
     const params = {id, login, firstName, lastName, email, imageUrl, activated, langKey, createdBy, createdDate, lastModifiedBy, lastModifiedDate, authorities};
     return this.http.put(this.url + 'users', params, {headers}).pipe(map(data => data));
   }
+  getVehiculoByDominio(dominio: string): Observable<IVehiculo> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.get(this.url + 'vehiculos/dominio/' + dominio, {headers}).pipe(map( data => data as IVehiculo));
+  }
 
 }
