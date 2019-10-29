@@ -9,9 +9,22 @@
 
 
 <ion-content fullscreen class="ion-padding">
-    <ion-list>
-        <ion-item *ngFor="let n of espacioComun; let i = index">
-            <ion-label class="ml-2"> {{n.nombreEspacioComun}} </ion-label>
-        </ion-item>
-    </ion-list>
+    <ng-container *ngFor="let planilla of planillas; let i=index">
+        <ng-container *ngIf="planillas === undefined; else elseTemplate">
+
+        </ng-container>
+        <ng-template #elseTemplate>
+            <ion-item [ngClass]="(i % 2 == 0) ? 'odd' : 'even'">
+                <ion-label>
+                    <h2><b>Persona: </b>{{planilla.planillaPersona.nombrePersona}} {{planilla.planillaPersona.apellidoPersona}}</h2>
+                    <h3><b>Vehiculo: </b> {{ planilla.planillaVehiculo.vehiculoMarca?.nombreMarca }} {{ planilla.planillaVehiculo.vehiculoModelo?.nombreModelo }} <b>Dominio:</b> {{planilla.planillaVehiculo?.dominio}} </h3>
+                    <p><b>Color: </b>{{planilla.planillaVehiculo.vehiculoColor?.nombreColor}}</p>
+
+                </ion-label>
+            </ion-item>
+        </ng-template>
+
+    </ng-container>
+
+
 </ion-content>
