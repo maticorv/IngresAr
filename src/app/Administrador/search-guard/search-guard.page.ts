@@ -21,6 +21,11 @@ export class SearchGuardPage implements OnInit {
   ngOnInit() {
   }
 
+  ionViewWillLeave() {
+    this.email = null;
+    this.users = null;
+  }
+
   getGuardia() {
     this.service.getUser(this.email).subscribe(data => {
       this.users = data[`personaUser`];
@@ -37,9 +42,7 @@ export class SearchGuardPage implements OnInit {
 
   async guardiaExiste() {
     const alert = await this.alertCtrl.create({
-      header: 'Se ha encontrado el usuario con los siguientes dato' +
-              'Nombre: ' + this.users.firstName +
-              'Apellido: ' + this.users.lastName,
+      header: 'Se ha encontrado el usuario con el siguiente email: ' + this.email,
       message: '¿Desea continuar con este usuario?</strong>',
       buttons: [
         {
@@ -77,7 +80,7 @@ export class SearchGuardPage implements OnInit {
 
   async guardiaNoExiste() {
     const alert = await this.alertCtrl.create({
-      header: 'No se ha encontrado el usuario con los siguientes dato',
+      header: 'No se ha encontrado el usuario con el usuario con el email: ' + this.email,
       message: '¿Desea crear un nuevo usuario?</strong>',
       buttons: [
         {
@@ -85,7 +88,7 @@ export class SearchGuardPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            this.email = null;
+            this.user.email = this.email;
             this.router.navigateByUrl('/new-guard');
           }
         }, {

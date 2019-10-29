@@ -22,6 +22,7 @@ import { IUser } from '../interfaces/iuser';
 import { IFriendsList } from '../interfaces/ifriends-list';
 import { IDetalleEvento } from '../interfaces/idetalle-evento';
 import { IQr } from '../interfaces/iqr';
+import { IDomicilio } from '../interfaces/idomicilio';
 
 @Injectable({
   providedIn: 'root'
@@ -500,6 +501,12 @@ export class ServiceService {
     return this.http.get(this.url + 'qrs', {headers}).pipe(map(data => data as IQr[]));
   }
 
+  getQRByIdPerson(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.get(this.url + 'qrs/domicilioqr/' + id, {headers}).pipe(map(data => data as IQr[]));
+  }
+
   getQRByCodQR(codigoQR) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
@@ -522,7 +529,7 @@ export class ServiceService {
   getDomicilioById(id) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
-    return this.http.get(this.url + 'dompersona/' + id, {headers}).pipe(map(data => data));
+    return this.http.get(this.url + 'dompersona/' + id, {headers}).pipe(map(data => data as IDomicilio));
   }
 
 

@@ -15,6 +15,7 @@ export class ManageGuardPage implements OnInit {
   constructor(private service: ServiceService, private router: Router) { }
 
   ngOnInit() {
+    this.getGuardias();
   }
 
   ionViewWillEnter() {

@@ -3,7 +3,7 @@
         <ion-buttons slot="start">
             <ion-back-button defaultHref='/'></ion-back-button>
         </ion-buttons>
-        <ion-title class="ion-text-capitalize ion-text-center">Guardias</ion-title>
+        <ion-title class="ion-text-capitalize ion-text-center">Crear Guardia</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -13,10 +13,10 @@
         <ion-text color="danger">*</ion-text>
     </h5>
     <ion-item>
-        <ion-select class="select-DNI-size" placeholder="DNI" value="dni" okText="Seleccionar">DNI
-            <ion-select-option value="DNI">DNI</ion-select-option>
-        </ion-select>
-        <ion-input type="number" maxlength="9" required placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
+        <ion-label position="floating">DNI
+            <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input class="ml-2" type="text" [(ngModel)]="dni"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label position="floating">Nombre
@@ -44,7 +44,7 @@
         <ion-label position="floating">E-Mail
             <ion-text color="danger">*</ion-text>
         </ion-label>
-        <ion-input required [(ngModel)]="email" type="email"></ion-input>
+        <ion-input disabled required [(ngModel)]="email" type="email"></ion-input>
     </ion-item>
     <ion-item *ngIf="false" lines="none">
         <ion-text color="danger" class="form-error">
