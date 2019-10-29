@@ -21,6 +21,7 @@ import { Account } from '../classes/account';
 import { IUser } from '../interfaces/iuser';
 import { IFriendsList } from '../interfaces/ifriends-list';
 import { IDetalleEvento } from '../interfaces/idetalle-evento';
+import { IDomicilio } from '../interfaces/domicilio';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,12 @@ export class ServiceService {
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
     // tslint:disable-next-line: max-line-length
     return this.http.get( this.url + 'account', {headers} ).pipe(map(data => data as Iaccount));
+  }
+  getUserById(id: number): Observable<Iaccount> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
+    // tslint:disable-next-line: max-line-length
+    return this.http.get( this.url + 'users/userid/' + id, {headers} ).pipe(map(data => data as Iaccount));
   }
   postAccount(account) {
     const token = this.leerToken();
@@ -205,6 +212,19 @@ export class ServiceService {
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     // tslint:disable-next-line: max-line-length
     return this.http.get( this. url + 'domicilios/domiciliospersona/?casaDomicilio=' + casa + '&' + 'manzanaDomicilio=' + manzana, {headers}).pipe(map(data => data as Persona));
+  }
+  getDomPersona(id: number): Observable<IDomicilio> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    // tslint:disable-next-line: max-line-length
+    return this.http.get( this. url + 'dompersona/' + id , {headers}).pipe(map(data => data as IDomicilio));
+
+  }
+  getPlanillaIngresoEgresodom(casaDomicilio: string, manzanaDomicilio: string): Observable <IPlanillaIngresoEgreso[]> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    // tslint:disable-next-line: max-line-length
+    return this.http.get( this. url + 'planilladomicilio/?casaDomicilio=' + casaDomicilio + '&' + 'manzanaDomicilio=' + manzanaDomicilio, {headers}).pipe(map(data => data as IPlanillaIngresoEgreso[]));
   }
 
 

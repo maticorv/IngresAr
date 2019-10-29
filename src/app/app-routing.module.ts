@@ -92,7 +92,7 @@ const routes: Routes = [
     loadChildren: () => import('./Owner/porteria/vehicles/newvehicle1/newvehicle1.module').then( m => m.Newvehicle1PageModule)
   },
   {
-    path: 'messages1',
+    path: 'messages1/:id',
     loadChildren: () => import('./Owner/porteria/messages/messages1/messages1.module').then( m => m.Messages1PageModule)
   },
 
