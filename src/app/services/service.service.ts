@@ -69,9 +69,9 @@ export class ServiceService {
     return this.http.get( this.url + 'users/' + login, {headers} ).pipe(map(data => data as IUser));
   }
 
-  register( email: string, langKey: string, login: string, password: string) {
+  register( email: string, langKey: string, login: string, password: string, firstName: string, lastName: string) {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    const params = {login, langKey, email, password};
+    const params = {login, langKey, email, password, firstName, lastName};
     // tslint:disable-next-line: max-line-length
     return this.http.post( this.url + 'register', params, {headers}).pipe(map(data => data as IUser));
   }
