@@ -3,6 +3,9 @@ import { ServiceService } from 'src/app/services/service.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Persona } from 'src/app/interfaces/persona';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-generate-qr',
@@ -14,7 +17,8 @@ export class GenerateQrPage implements OnInit {
   dni: number;
   personaAutorizada: Persona;
   personaAutorizador: Persona;
-  qr: string;
+  domicilio: any;
+  codigoQR: string;
   canvas = document.getElementById('value');
   img: string;
   fecha: any;
@@ -22,8 +26,16 @@ export class GenerateQrPage implements OnInit {
   fechaFinQR: string;
   fechaMin: Date;
   fechaMax: Date;
+  fileData;
 
-  constructor(private service: ServiceService, private router: Router, private alertCtrl: AlertController) { }
+  isLinear = false;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+
+  constructor(private service: ServiceService, private router: Router,
+              // tslint:disable-next-line: variable-name
+              private alertCtrl: AlertController, private _formBuilder: FormBuilder,
+              private emailComposer: EmailComposer) { }
 
   ngOnInit() {
     this.getOwner();
@@ -33,26 +45,42 @@ export class GenerateQrPage implements OnInit {
     this.fechaFinQR = new Date().toISOString();
     console.log('fecha Max', this.fechaMax);
     // console.log(this.fechaFinQR);
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
   }
 
   generarQr() {
     // this.qr = this.personaAutorizada.nombrePersona + this.personaAutorizada.apellidoPersona + this.fecha;
-    console.log(this.qr);
     const canvas = document.querySelector('canvas') as HTMLCanvasElement;
     const imageData = canvas.toDataURL('image/jpeg').toString();
     // alert(imageData);
     // console.log(this.fechaFinQR);
+    this.handleImage(imageData);
     this.img = imageData;
+  }
+
+  crearQr() {
+    // tslint:disable-next-line: max-line-length
+    this.service.postQR(this.codigoQR, this.fechaFinQR, this.fileData, 'image/png', 'visita', this.personaAutorizador, this.personaAutorizada, this.domicilio).subscribe(data => {
+      console.log(data);
+      this.enviarMail();
+    },
+    (error) => {console.log(error);
+    });
   }
 
 
 
-  getpersona() {
+  getpersona(stepper) {
     this.service.getPersona(this.dni).subscribe((data) => {
       this.personaAutorizada = data;
       console.log(data);
       this.fecha = new Date().toLocaleString();
-      this.personaExiste();
+      this.personaExiste(stepper);
     },
     (error) => { console.log(error);
                  this.presentAlert('La persona no se encuentra en la Base de Datos');
@@ -66,6 +94,11 @@ export class GenerateQrPage implements OnInit {
       this.service.getPersonUser(data.id).subscribe(pers => {
         console.log(pers);
         this.personaAutorizador = pers;
+        this.service.getDomicilioById(pers.id).subscribe(dom => {
+          this.domicilio = dom;
+        },
+        (error) => {console.log(error);
+        });
       },
       (error) => {console.log(error);
       });
@@ -74,7 +107,7 @@ export class GenerateQrPage implements OnInit {
     });
   }
 
-  async personaExiste() {
+  async personaExiste(stepper) {
     const alert = await this.alertCtrl.create({
       header: this.personaAutorizada.nombrePersona + ' ' + this.personaAutorizada.apellidoPersona + ' ' + this.personaAutorizada.dniPersona,
       message: '¿Los datos son correctos?</strong>',
@@ -84,13 +117,15 @@ export class GenerateQrPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            this.qr = this.personaAutorizada.nombrePersona + this.personaAutorizada.apellidoPersona + this.fecha;
+            this.codigoQR = this.personaAutorizada.nombrePersona + this.personaAutorizada.apellidoPersona + this.fecha;
             this.deshabilitar = true;
+            this.goForward(stepper);
             // this.generarQr();
           }
         }, {
           text: 'Cancelar',
           handler: () => {
+            this.dni = null;
             console.log('Confirm Okay');
           }
         }
@@ -108,4 +143,46 @@ export class GenerateQrPage implements OnInit {
     await alert.present();
   }
 
+  enviarMail() {
+
+    const email = {
+      to: this.personaAutorizada.personaUser.email,
+      attachments: [
+        this.img,
+      ],
+      subject: 'Autorización previa',
+      isHtml: true
+    };
+    this.emailComposer.open(email);
+    this.router.navigateByUrl('/authorizations/visit');
+  }
+
+  public handleImage(Image: string): void {
+    // console.log('received webcam image', Image.imageAsDataUrl);
+    this.fileData = this.convertDataUrlToBlob(Image);
+    console.log('this.fileData :', this.fileData);
+  }
+
+  convertDataUrlToBlob(dataUrl: string): Blob {
+    console.log('dataUrl :', dataUrl);
+    const arr = dataUrl.split(',');
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new Blob([u8arr], {type: mime});
+}
+
+
+  goBack(stepper: MatStepper) {
+      stepper.previous();
+  }
+
+  goForward(stepper: MatStepper) {
+      stepper.next();
+  }
 }

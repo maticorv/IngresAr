@@ -32,6 +32,12 @@ import { Amigo } from './classes/amiigo';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { DemoMaterialModule } from './material-module';
 
 
 @NgModule({
@@ -44,7 +50,12 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     ComponentsModule,
     HttpClientModule,
     NgxQRCodeModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DemoMaterialModule,
   ],
   providers: [
     StatusBar,
@@ -67,6 +78,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     User,
     Amigo,
     BarcodeScanner,
+    FormBuilder,
+    EmailComposer,
 
   ],
   bootstrap: [AppComponent]

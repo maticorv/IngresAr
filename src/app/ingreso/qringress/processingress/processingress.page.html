@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref='/startmenu'></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-capitalize ion-text-center">IngresAr</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="vertical-align: -webkit-baseline-middle">
+  <form #f="ngForm">
+      <ion-list>
+          <ion-radio-group>
+              <ion-item *ngFor="let v of vehiculo, let i = index">
+                  <ion-radio slot="start" name="patente" [value]="i" (ionSelect)="selected($event)"></ion-radio>
+                  <ion-label>{{v.vehiculoMarca.nombreMarca}} {{v.dominio}}</ion-label>
+              </ion-item>
+              <ion-item>
+                  <ion-radio slot="start" (ionSelect)="selectedPie($event)"></ion-radio>
+                  <ion-label>A Pie</ion-label>
+              </ion-item>
+          </ion-radio-group>
+      </ion-list>
+  </form>
+  <div>
+      <ion-button size="small" fill="clear" color="dark" strong="true" [routerLink]="['/newvehicle-QR']">Agregar Vehiculo</ion-button>
+  </div>
+  <div style="text-align-last: right">
+      <ion-button (click)="procesarIngreso()">Procesar Ingreso</ion-button>
+  </div>
+
+</ion-content>

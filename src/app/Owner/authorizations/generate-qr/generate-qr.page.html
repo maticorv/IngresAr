@@ -9,14 +9,14 @@
 
 <ion-content class="ion-padding">
 
-    <ion-row class="ion-justify-content-around">
+    <!-- <ion-row class="ion-justify-content-around">
         <h3>Ingrese el DNI de la persona ha autorizar</h3>
         <ion-item>
             <ion-label>DNI : </ion-label>
             <ion-input [disabled]="deshabilitar" type="number" placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
         </ion-item>
-    </ion-row>
-    <div style="text-align-last: right">
+    </ion-row> -->
+    <!-- <div style="text-align-last: right">
         <ion-button *ngIf="!deshabilitar" class="mt-4 ion-align-self-end" (click)="getpersona()">Aceptar</ion-button>
     </div>
     <ion-row class="ion-justify-content-around">
@@ -30,17 +30,17 @@
                             [max]="fechaMax | date: 'yyyy-MM-dd'"
                             [min]="fechaMin | date: 'yyyy-MM-dd'"></ion-datetime>
         </ion-item>
-    </ion-row>
+    </ion-row> -->
     <ion-row hidden>
-        <ion-card *ngIf="qr">
+        <ion-card *ngIf="codigoQR">
                 <ngx-qrcode 
                 id="QR_Canvas"
                 qrc-element-type="canvas"
-                [qrc-value]="qr" ></ngx-qrcode>
+                [qrc-value]="codigoQR" ></ngx-qrcode>
         </ion-card>
     </ion-row>
 
-    <ion-row *ngIf="deshabilitar" style="float: right;">
+    <!-- <ion-row *ngIf="deshabilitar" style="float: right;">
         <ion-button (click)="generarQr()">Generar QR</ion-button>
     </ion-row>
 
@@ -48,6 +48,52 @@
         <ion-card *ngIf="img">
             <img [src]="img">
         </ion-card>
-    </ion-row>
+    </ion-row> -->
+
+    <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+            {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+          </button> -->
+          <mat-vertical-stepper linear="true" #stepper>
+            <mat-step [stepControl]="firstFormGroup">
+              <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Ingrese el DNI de la persona</ng-template>
+                <mat-form-field>
+                  <input matInput placeholder="Ingrese DNI" formControlName="firstCtrl" required [(ngModel)]="dni">
+                </mat-form-field>
+                <div>
+                  <button mat-button color="primary" (click)="getpersona(stepper)" >Siguiente</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="secondFormGroup">
+              <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Ingrese el tiempo de validez</ng-template>
+                <mat-form-field>
+                    <ion-item style="width: 300px">
+                            <ion-label>Fecha:</ion-label>
+                            <ion-datetime displayFormat="DD/MM/YYYY" 
+                                            picker-format="DD/MM/YYYY"
+                                            [value]="fechaFinQR" 
+                                            [(ngModel)]="fechaFinQR"
+                                            [max]="fechaMax | date: 'yyyy-MM-dd'"
+                                            [min]="fechaMin | date: 'yyyy-MM-dd'"
+                                            formControlName="secondCtrl" required></ion-datetime>
+                    </ion-item>
+                  <input hidden matInput formControlName="secondCtrl" required>
+                </mat-form-field>
+                <div>
+                  <button mat-button matStepperPrevious>Atras</button>
+                  <button mat-button matStepperNext (click)="generarQr()">Siguiente</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step>
+              <ng-template matStepLabel>Generar autorización</ng-template>
+              <div>
+                <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
+                <button mat-button color="primary" (click)="crearQr()" matStepperPrevious>Crear Autorizacion</button>
+              </div>
+            </mat-step>
+          </mat-vertical-stepper>
 
 </ion-content>

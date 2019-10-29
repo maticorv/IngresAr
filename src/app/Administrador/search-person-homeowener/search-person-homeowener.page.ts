@@ -16,15 +16,17 @@ export class SearchPersonHomeowenerPage implements OnInit {
   dni: number;
   persona: Persona;
   authorities = [
-    {
-      name: 'ROLE_PROPIETARIO'
-    }
+      'ROLE_PROPIETARIO'
   ];
 
   constructor(private service: ServiceService, private router: Router,
-              private alertCtrl: AlertController, private user: User) { }
+              private alertCtrl: AlertController, private user: User, private personas: Personas) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillLeave() {
+    this.dni = null;
   }
 
   getPersonPropietario() {
@@ -34,6 +36,7 @@ export class SearchPersonHomeowenerPage implements OnInit {
       this.personaExiste();
     },
     (error) => { console.log(error);
+                 this.personaNoExiste();
     });
 
   }
@@ -64,6 +67,31 @@ export class SearchPersonHomeowenerPage implements OnInit {
             });
             this.dni = null;
             this.router.navigateByUrl('/manage-guard');
+          }
+        }, {
+          text: 'Cancelar',
+          handler: () => {
+            this.dni = null;
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async personaNoExiste() {
+    const alert = await this.alertCtrl.create({
+      header: 'La persona con el DNI:' + this.dni + 'no se encuentra en la base de datos',
+      message: '¿Desea crear la persona?</strong>',
+      buttons: [
+        {
+          text: 'Aceptar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            this.personas.dniPersona = this.dni;
+            this.router.navigateByUrl('/new-person-homeowener');
           }
         }, {
           text: 'Cancelar',

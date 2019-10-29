@@ -88,6 +88,14 @@ const routes: Routes = [
   { path: 'view-friend-list/:id', loadChildren: './Owner/events/view-friend-list/view-friend-list.module#ViewFriendListPageModule' },
   { path: 'add-friend', loadChildren: './Owner/events/view-friend-list/add-friend/add-friend.module#AddFriendPageModule' },
   {
+    path: 'processingress',
+    loadChildren: () => import('./ingreso/qringress/processingress/processingress.module').then( m => m.ProcessingressPageModule)
+  },
+  {
+    path: 'newvehicle-qr',
+    loadChildren: () => import('./ingreso/qringress/newvehicle-qr/newvehicle-qr.module').then( m => m.NewvehicleQRPageModule)
+  },
+  {
     path: 'newvehicle1',
     loadChildren: () => import('./Owner/porteria/vehicles/newvehicle1/newvehicle1.module').then( m => m.Newvehicle1PageModule)
   },
@@ -95,8 +103,6 @@ const routes: Routes = [
     path: 'messages1/:id',
     loadChildren: () => import('./Owner/porteria/messages/messages1/messages1.module').then( m => m.Messages1PageModule)
   },
-
-
   ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../../../services/service.service';
+import { Persona } from '../../../interfaces/persona';
 
 @Component({
   selector: 'app-resident',
@@ -8,14 +9,23 @@ import { ServiceService } from '../../../services/service.service';
 })
 export class ResidentPage implements OnInit {
 
+  persona: Persona;
+
   constructor(private service: ServiceService) { }
 
   ngOnInit() {
+    this.obtenerResidentes();
   }
 
   obtenerResidentes() {
     this.service.account().subscribe(data => {
       this.service.getPersonUser(data.id).subscribe(pers => {
+        this.service.getPersonasDomicilioByIdPers(pers.id).subscribe(result => {
+          this.persona = result;
+          console.log(this.persona);
+        },
+        (error) => {console.log(error);
+        });
       },
       (error) => {console.log(error);
       });

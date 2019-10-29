@@ -5,13 +5,9 @@ export interface Persona {
     nombrePersona: string;
     apellidoPersona: string;
     dniPersona: number;
-    telefonoPersona?: number;
-    personabarrio?: any;
-    personacarnet?: any;
-    personaestados?: any;
-    listaamigos?: any;
-    tipoPersona?: any;
+    telefonoPersona: number;
+    personaUser: any;
+    personabarrio: any;
     vehiculos: IVehiculo[];
-    detalleEvento?: any;
-    art?: any;
+    personadomicilios?: any;
 }
