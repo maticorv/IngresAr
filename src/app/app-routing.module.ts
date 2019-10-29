@@ -103,6 +103,18 @@ const routes: Routes = [
     path: 'messages1/:id',
     loadChildren: () => import('./Owner/porteria/messages/messages1/messages1.module').then( m => m.Messages1PageModule)
   },
+  {
+    path: 'vehicles2',
+    loadChildren: () => import('./User/vehicles/vehicles.module').then( m => m.VehiclesPageModule)
+  },
+  {
+    path: 'newvehicle3',
+    loadChildren: () => import('./User/newvehicle3/newvehicle3.module').then( m => m.Newvehicle3PageModule)
+  },
+  {
+    path: 'newvehicle4',
+    loadChildren: () => import('./User/newvehicle4/newvehicle4.module').then( m => m.Newvehicle4PageModule)
+  },
   ];
 
 @NgModule({
