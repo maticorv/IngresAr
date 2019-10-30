@@ -11,7 +11,7 @@ export class ReportIngresoEgresoPage implements OnInit {
 
   constructor(private service: ServiceService) { }
 
-  planiallaIngresoEgreso: IPlanillaIngresoEgreso;
+  planiallaIngresoEgreso: IPlanillaIngresoEgreso[];
 
   ngOnInit() {
     this.getPlanillaIngresoEgreso();
