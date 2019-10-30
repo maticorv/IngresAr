@@ -10,14 +10,16 @@
 <ion-content class="ion-padding">
 
     <ion-item>
-      <ion-label>Selecione una fecha</ion-label>
+      <ion-label>Filtrar por fecha</ion-label>
       <ion-icon mode="ios" name="calendar"></ion-icon>
       <ion-datetime displayFormat="DD/MM/YYYY"
-                    placeholder="01-01-19"
+                    [value]="fecha"
+                    [(ngModel)]="fecha"
                     cancel-text='Cancelar'
                     done-text="Seleccionar"
-                    min="2019"
-                    max="2030"></ion-datetime>
+                    [min]="fechaMin | date: 'yyyy-MM-dd'"
+                    max="2030"
+                    (ionChange)="filtrar()"></ion-datetime>
                     <!-- (ionChange)="obtener($event)"></ion-datetime> -->
     </ion-item>
   

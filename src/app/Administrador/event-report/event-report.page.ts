@@ -10,7 +10,7 @@ import { ServiceService } from '../../services/service.service';
 })
 export class EventReportPage implements OnInit {
 
-  eventos: Ievent;
+  eventos: Ievent[];
   fecha: any;
 
   constructor(private router: Router, private service: ServiceService) { }

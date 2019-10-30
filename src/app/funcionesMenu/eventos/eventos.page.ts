@@ -10,19 +10,34 @@ import { ServiceService } from 'src/app/services/service.service';
 })
 export class EventosPage implements OnInit {
 
-  eventos: Ievent;
-  fecha: any;
+  eventos = [];
+  evento: Ievent[];
+  fecha: string;
+  fechaMin: string;
 
   constructor(private router: Router, private service: ServiceService) { }
 
   ngOnInit() {
     this.getAllEvents();
+    this.fecha = new Date(new Date().setHours(0, 0, 0, 0)).toString();
+    this.fechaMin = new Date(new Date().setHours(0, 0, 0, 0)).toString();
+  }
+
+  ionViewWillLeave() {
+    this.eventos = [];
   }
 
   getAllEvents() {
     this.service.getAllEvent().subscribe(data => {
-      this.eventos = data;
-      console.log(this.eventos);
+      console.log(data);
+      this.evento = data;
+      const hoy = new Date(new Date().setHours(0, 0, 0, 0));
+      console.log(hoy);
+      data.forEach(element => {
+        if (new Date(element.fecha) >= hoy) {
+          this.eventos.push(element);
+        }
+      });
     },
     (error) => {console.log(error);
     });
@@ -30,6 +45,18 @@ export class EventosPage implements OnInit {
 
   verEvento(i) {
     this.router.navigate(['/detalle-evento', this.eventos[i].id]);
+  }
+
+  filtrar() {
+    const aux = [];
+    const fecha = new Date(this.fecha);
+    fecha.setDate( fecha.getDate() + 1);
+    this.evento.forEach(element => {
+      if (new Date(element.fecha) > new Date(this.fecha) && new Date(element.fecha) < fecha) {
+        aux.push(element);
+      }
+    });
+    this.eventos = aux;
   }
 
 }

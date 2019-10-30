@@ -394,7 +394,7 @@ export class ServiceService {
   getAllEvent() {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
-    return this.http.get(this.url + 'eventos', {headers}).pipe(map(data => data as Ievent));
+    return this.http.get(this.url + 'eventos', {headers}).pipe(map(data => data as Ievent[]));
   }
 
   getEventById(id) {
@@ -406,7 +406,7 @@ export class ServiceService {
   getEventByFecha(fecha) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
-    return this.http.post(this.url + 'eventosfecha/' + fecha, {headers}).pipe(map(data => data as Ievent));
+    return this.http.post(this.url + 'eventosfecha/' + fecha, {headers}).pipe(map(data => data as Ievent[]));
   }
 
   getUser(email) {
