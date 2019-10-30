@@ -38,6 +38,7 @@ export class SearchPersonGuardPage implements OnInit {
       this.personaExiste();
     },
     (error) => { console.log(error);
+                 this.personaNoExiste();
     });
 
   }
