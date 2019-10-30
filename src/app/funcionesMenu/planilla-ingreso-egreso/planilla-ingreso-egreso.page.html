@@ -9,6 +9,35 @@
 
 <ion-content>
 
+    <ion-row style="text-align-last: center;">
+        <ion-col class="col-fecha">
+            <ion-item>
+                    <ion-label>Fecha Desde:</ion-label>
+                    <ion-datetime displayFormat="DD-MM-YYYY"  
+                                    picker-format="DD-MM-YYYY"
+                                    max="2030-12-31"
+                                    min="2015-01-01"
+                                    [value]="fechaDesde"
+                                    [(ngModel)]="fechaDesde"></ion-datetime>
+                </ion-item>
+        </ion-col>
+        <ion-col class="col-fecha">
+            <ion-item>
+                    <ion-label>Fecha Hasta:</ion-label>
+                    <ion-datetime displayFormat="DD-MM-YYYY"  
+                                    picker-format="DD-MM-YYYY"
+                                    [value]="fechaHasta"
+                                    max="2030-12-31"
+                                    min="2015-01-01"
+                                    [(ngModel)]="fechaHasta"></ion-datetime>
+
+                </ion-item>
+        </ion-col>
+        <ion-col>
+            <ion-button (click)="filtrar()" shape="round" fill="outline" color="dark"><ion-icon name="search"></ion-icon></ion-button>
+        </ion-col>
+    </ion-row>
+
     <ion-row>
         <ion-list>
           <ion-row>
@@ -48,7 +77,7 @@
                   </ion-item>
               </ion-col>
           </ion-row>
-          <ion-row *ngFor="let p of planiallaIngresoEgreso">
+          <ion-row *ngFor="let p of planilla">
               <ion-col>
                   <ion-item>
                       <ion-label>

@@ -6,6 +6,10 @@ import { Persona } from 'src/app/interfaces/persona';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+// PDFMAKE
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-generate-qr',
@@ -21,13 +25,15 @@ export class GenerateQrPage implements OnInit {
   codigoQR: string;
   canvas = document.getElementById('value');
   img: string;
-  fecha: any;
+  fecha: string;
   deshabilitar: boolean;
   fechaFinQR: string;
   fechaMin: Date;
   fechaMax: Date;
   fileData;
-
+  pdfObj;
+  pdfGenerator;
+  // tslint:disable-next-line: max-line-length
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -79,7 +85,7 @@ export class GenerateQrPage implements OnInit {
     this.service.getPersona(this.dni).subscribe((data) => {
       this.personaAutorizada = data;
       console.log(data);
-      this.fecha = new Date().toLocaleString();
+      this.fecha = new Date().toISOString();
       this.personaExiste(stepper);
     },
     (error) => { console.log(error);
@@ -145,10 +151,12 @@ export class GenerateQrPage implements OnInit {
 
   enviarMail() {
 
+    this.createPdf();
+
     const email = {
       to: this.personaAutorizada.personaUser.email,
       attachments: [
-        this.img,
+        `base64:Autorizacion.pdf//${this.pdfObj}`,
       ],
       subject: 'Autorización previa',
       isHtml: true
@@ -184,4 +192,70 @@ export class GenerateQrPage implements OnInit {
   goForward(stepper: MatStepper) {
       stepper.next();
   }
+
+  createPdf() {
+    const docDefinition = {
+      content: [
+        {
+          text: 'Autorización Previa',
+          bold: true,
+          fontSize: 32,
+          alignment: 'center',
+          margin: [0, 15, 0, 15]
+        },
+        {
+          image: this.img,
+          fit: [250, 250],
+          alignment: 'center',
+          // margin: [0, 0, 0, 20]
+        },
+        {
+          text: 'Datos de la persona autorizada:',
+          fontSize: 16,
+          margin: [0, 10, 0, 5]
+        },
+          {
+            ul: [
+              {
+                text: 'Apellido: ' + this.personaAutorizada.apellidoPersona,
+                fontSize: 14,
+                margin: [5, 0, 0, 0]
+              },
+              {
+                text: 'Nombre: ' + this.personaAutorizada.nombrePersona,
+                fontSize: 14,
+                margin: [5, 0, 0, 0]
+              },
+              {
+                text: 'DNI: ' + this.personaAutorizada.dniPersona,
+                fontSize: 14,
+                margin: [5, 0, 0, 0]
+              },
+              {
+                text: 'Fecha expiración: ' + new Date(this.fechaFinQR).toLocaleDateString(),
+                fontSize: 14,
+                margin: [5, 0, 0, 0]
+              },
+            ]
+          }
+      ],
+      footer:
+      {
+        text: new Date().toLocaleString(),
+        alignment: 'right',
+        margin: [0, 0, 10, 0]
+      },
+    };
+    const pdfGenerator = pdfMake.createPdf(docDefinition);
+    this.pdfGenerator = pdfMake.createPdf(docDefinition);
+    pdfGenerator.getBase64((data) => {
+    this.pdfObj = data;
+    console.log('El pdf se creo correctamente');
+  });
+  }
+
+  descargarPDF() {
+    this.pdfGenerator.download();
+  }
+
 }

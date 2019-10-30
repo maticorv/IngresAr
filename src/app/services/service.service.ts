@@ -217,7 +217,7 @@ export class ServiceService {
     const token = this.leerToken();
     // tslint:disable-next-line: max-line-length
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    return this.http.get(this.url + 'planilla-ingreso-egresos', {headers}).pipe(map(data => data as IPlanillaIngresoEgreso));
+    return this.http.get(this.url + 'planilla-ingreso-egresos', {headers}).pipe(map(data => data as IPlanillaIngresoEgreso[]));
   }
 
   getPersonasDentroEstablecimiento() {
@@ -510,7 +510,7 @@ export class ServiceService {
   getQRByCodQR(codigoQR) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
-    return this.http.get(this.url + 'qrs/' + codigoQR, {headers}).pipe(map(data => data as IQr));
+    return this.http.get(this.url + 'qrs/personaqr/' + codigoQR, {headers}).pipe(map(data => data as IQr));
   }
 
   postQR(codigoQR, fechaFinQR, fotoQR, fotoQRContentType, tipoVisira, qrAutorizador, qrAutorizado, qrDomicilio) {
