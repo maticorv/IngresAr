@@ -67,6 +67,10 @@ export class Newvehicle1Page implements OnInit {
         title: 'No se encuentra',
         text: 'El vehículo que esta buscando no existe',
         confirmButtonText: 'Crear Vehículo',
+      }).then((result) => {
+        if (result.value) {
+          this.CrearVehiculo();
+        }
       });
     }
     );

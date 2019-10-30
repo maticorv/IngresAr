@@ -1,9 +1,25 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>newvehicle3</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/porteria/vehicles'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Añadir vehiculo</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <form (ngSubmit)="onSubmit()">
+        <ion-row class="ion-justify-content-around">
+            <h3>Por favor ingrese el dominio</h3>
+            <ion-item>
+                <ion-label>Dominio : </ion-label>
+                <ion-input name="dominio" type="text" placeholder="Ingrese el dominio" [(ngModel)]="dominio"></ion-input>
+            </ion-item>
+        </ion-row>
+        <div style="text-align-last: right">
+            <ion-button class="mt-4 ion-align-self-end" (click)="onSubmit()">Aceptar</ion-button>
+        </div>
+
+    </form>
 
 </ion-content>
