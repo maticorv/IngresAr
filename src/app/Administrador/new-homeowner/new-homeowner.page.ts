@@ -54,7 +54,7 @@ export class NewHomeownerPage implements OnInit {
   }
 
   onSubmit() {
-    this.service.register(this.email, 'en', this.nombre + this.apellido, this.password).subscribe(data => {
+    this.service.register(this.email, 'en', this.nombre + this.apellido, this.password, this.nombre, this.apellido).subscribe(data => {
       const login = this.nombre.toLocaleLowerCase() + this.apellido.toLocaleLowerCase();
       this.service.getUserByLogin(login).subscribe(resp => {
         this.user.id = resp.id;
