@@ -17,6 +17,10 @@ export class VisitPage implements OnInit {
     // this.ObtenerQrs();
   }
 
+  ionViewWillLeave() {
+    this.qrs = [];
+  }
+
   ionViewWillEnter() {
     this.ObtenerQrs();
   }

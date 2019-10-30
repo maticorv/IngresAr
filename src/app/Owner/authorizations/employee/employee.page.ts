@@ -21,6 +21,10 @@ export class EmployeePage implements OnInit {
     this.ObtenerQrs();
   }
 
+  ionViewWillLeave() {
+    this.qrs = [];
+  }
+
   generarAutorizacion() {
     this.router.navigateByUrl('/generate-qr');
   }
@@ -35,7 +39,7 @@ export class EmployeePage implements OnInit {
             qr.forEach(element => {
               // tslint:disable-next-line: max-line-length
               console.log('element :', element);
-              if (new Date(element.fechaFinQR) >= hoy && element.tipoVisira === 'visita') {
+              if (new Date(element.fechaFinQR) >= hoy && element.tipoVisira === 'servicio') {
                 this.qrs.push(element);
               }
             });

@@ -51,7 +51,7 @@ export class NewPersonHomeowenerPage implements OnInit {
       (error) => {console.log(error);
       });
       this.presentToast('La persona se ha creado correctamente');
-      this.router.navigateByUrl('/manage-guard');
+      this.router.navigateByUrl('/manage-homeowner');
     },
     (error) => { console.log(error);
                  this.presentToast('La persona no se ha podido crear, intente nuevamente');

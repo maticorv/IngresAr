@@ -34,7 +34,7 @@ export class NewPersonGuardPage implements OnInit {
     this.dniPersona = null;
     this.telefonoPersona = null;
   }
-  
+
   crearPersona() {
     this.service.postPersona(this.nombrePersona, this.apellidoPersona, this.dniPersona, this.telefonoPersona).subscribe(data => {
       console.log(data);
