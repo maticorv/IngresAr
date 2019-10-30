@@ -86,7 +86,8 @@ const routes: Routes = [
   { path: 'detalle-evento/:id', loadChildren: './funcionesMenu/eventos/detalle-evento/detalle-evento.module#DetalleEventoPageModule' },
   { path: 'generate-qr', loadChildren: './Owner/authorizations/generate-qr/generate-qr.module#GenerateQrPageModule' },
   { path: 'view-friend-list/:id', loadChildren: './Owner/events/view-friend-list/view-friend-list.module#ViewFriendListPageModule' },
-  { path: 'add-friend', loadChildren: './Owner/events/view-friend-list/add-friend/add-friend.module#AddFriendPageModule' },  {
+  { path: 'add-friend', loadChildren: './Owner/events/view-friend-list/add-friend/add-friend.module#AddFriendPageModule' },
+  {
     path: 'processingress',
     loadChildren: () => import('./ingreso/qringress/processingress/processingress.module').then( m => m.ProcessingressPageModule)
   },
@@ -94,9 +95,14 @@ const routes: Routes = [
     path: 'newvehicle-qr',
     loadChildren: () => import('./ingreso/qringress/newvehicle-qr/newvehicle-qr.module').then( m => m.NewvehicleQRPageModule)
   },
-
-
-
+  {
+    path: 'newvehicle1',
+    loadChildren: () => import('./Owner/porteria/vehicles/newvehicle1/newvehicle1.module').then( m => m.Newvehicle1PageModule)
+  },
+  {
+    path: 'messages1/:id',
+    loadChildren: () => import('./Owner/porteria/messages/messages1/messages1.module').then( m => m.Messages1PageModule)
+  },
   ];
 
 @NgModule({

@@ -46,6 +46,12 @@ export class ServiceService {
     // tslint:disable-next-line: max-line-length
     return this.http.get( this.url + 'account', {headers} ).pipe(map(data => data as Iaccount));
   }
+  getUserById(id: number): Observable<Iaccount> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
+    // tslint:disable-next-line: max-line-length
+    return this.http.get( this.url + 'users/userid/' + id, {headers} ).pipe(map(data => data as Iaccount));
+  }
   postAccount(account) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
@@ -65,9 +71,9 @@ export class ServiceService {
     return this.http.get( this.url + 'users/' + login, {headers} ).pipe(map(data => data as IUser));
   }
 
-  register( email: string, langKey: string, login: string, password: string) {
+  register( email: string, langKey: string, login: string, password: string, firstName: string, lastName: string) {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    const params = {login, langKey, email, password};
+    const params = {login, langKey, email, password, firstName, lastName};
     // tslint:disable-next-line: max-line-length
     return this.http.post( this.url + 'register', params, {headers}).pipe(map(data => data as IUser));
   }
@@ -208,6 +214,19 @@ export class ServiceService {
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     // tslint:disable-next-line: max-line-length
     return this.http.get( this. url + 'domicilios/domiciliospersona/?casaDomicilio=' + casa + '&' + 'manzanaDomicilio=' + manzana, {headers}).pipe(map(data => data as Persona));
+  }
+  getDomPersona(id: number): Observable<IDomicilio> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    // tslint:disable-next-line: max-line-length
+    return this.http.get( this. url + 'dompersona/' + id , {headers}).pipe(map(data => data as IDomicilio));
+
+  }
+  getPlanillaIngresoEgresodom(casaDomicilio: string, manzanaDomicilio: string): Observable <IPlanillaIngresoEgreso[]> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    // tslint:disable-next-line: max-line-length
+    return this.http.get( this. url + 'planilladomicilio/?casaDomicilio=' + casaDomicilio + '&' + 'manzanaDomicilio=' + manzanaDomicilio, {headers}).pipe(map(data => data as IPlanillaIngresoEgreso[]));
   }
 
 
@@ -493,6 +512,11 @@ export class ServiceService {
     // tslint:disable-next-line: max-line-length
     const params = {id, login, firstName, lastName, email, imageUrl, activated, langKey, createdBy, createdDate, lastModifiedBy, lastModifiedDate, authorities};
     return this.http.put(this.url + 'users', params, {headers}).pipe(map(data => data));
+  }
+  getVehiculoByDominio(dominio: string): Observable<IVehiculo> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.get(this.url + 'vehiculos/dominio/' + dominio, {headers}).pipe(map( data => data as IVehiculo));
   }
 
   getQR() {

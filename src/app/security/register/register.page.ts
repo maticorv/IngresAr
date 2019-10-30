@@ -52,7 +52,9 @@ export class RegisterPage implements OnInit {
     await alert.present();
   }
   onSubmit() {
-    this.service.register(this.email, 'en', this.nombre + this.apellido, this.password).subscribe(data => {
+    const rand = Math.floor(Math.random() * 9) ;
+    // tslint:disable-next-line:max-line-length
+    this.service.register(this.email, 'en', this.nombre + this.apellido + rand , this.password, this.nombre, this.apellido).subscribe(data => {
       this.presentAlert3();
     },
     (error) => {

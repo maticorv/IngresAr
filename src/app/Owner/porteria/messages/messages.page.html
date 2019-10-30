@@ -1,9 +1,32 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>messages</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/menu-owner'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Mensajes</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="ion-padding">
+    <ion-list>
+        <ng-container *ngFor="let propietario of propietarios; let i=index">
+            <ng-container *ngIf="propietario?.id===account?.id; else elseTemplate">
+            </ng-container>
+            <ng-template #elseTemplate>
+                <ion-item (click)="onClick(propietario?.id)" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'">
+                    <ion-avatar slot="start">
+                        <ng-container *ngIf="propietario?.imageUrl; else elseTemplate">
+                            <img class="propietario-img" [src]="propietario.imageUrl" alt="../../../assets/image.png">
+                        </ng-container>
+                        <ng-template #elseTemplate>
+                            <img class="propietario-img" src="../../../assets/image.png" alt="">
+                        </ng-template>
+                    </ion-avatar>
+                    <ion-label>
+                        <h2>{{propietario.nombrePersona}} {{propietario.apellidoPersona}}</h2>
+                    </ion-label>
+                </ion-item>
+            </ng-template>
+        </ng-container>
+    </ion-list>
 </ion-content>

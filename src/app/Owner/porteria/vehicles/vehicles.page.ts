@@ -35,7 +35,7 @@ export class VehiclesPage implements OnInit {
     this.service.getPersonUser(this.account.id).subscribe((resp) => {
       this.persona = resp;
       this.vehiculos = resp.vehiculos;
-      console.log(this.vehiculos);
+      // console.log(this.vehiculos);
     }
     );
   }
@@ -44,7 +44,7 @@ export class VehiclesPage implements OnInit {
     this.service.putPersona(this.persona).subscribe();
   }
   nuevoVehiculo() {
-    this.router.navigateByUrl('newVehicle');
+    this.router.navigateByUrl('newvehicle1');
   }
   myBackButton() {
     this.location.back();

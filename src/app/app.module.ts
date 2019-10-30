@@ -31,6 +31,7 @@ import { User } from './classes/user';
 import { Amigo } from './classes/amiigo';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -49,6 +50,7 @@ import { DemoMaterialModule } from './material-module';
     ComponentsModule,
     HttpClientModule,
     NgxQRCodeModule,
+    SweetAlert2Module.forRoot(),
     BrowserAnimationsModule,
     MatFormFieldModule,
     FormsModule,
