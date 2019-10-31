@@ -408,6 +408,9 @@ export class ServiceService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     return this.http.post(this.url + 'eventosfecha/' + fecha, {headers}).pipe(map(data => data as Ievent[]));
   }
+  getEventByFechaAndId(fecha: Date, id: number): Observable<Ievent[]> {
+
+  }
 
   getUser(email) {
     const token = this.leerToken();
@@ -542,6 +545,11 @@ export class ServiceService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
     const params = {codigoQR, fechaFinQR, fotoQR, fotoQRContentType, tipoVisira, qrAutorizador, qrAutorizado, qrDomicilio};
     return this.http.post(this.url + 'qrs', params, {headers}).pipe(map(data => data as IQr));
+  }
+  getQrAutorizado(id: number): Observable<IQr[]> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.get(this.url + 'qrs/qrautorizado/' + id, {headers}).pipe(map(data => data as IQr[]));
   }
 
   getPersonasDomicilioByIdPers(id) {

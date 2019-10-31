@@ -119,6 +119,10 @@ const routes: Routes = [
     path: 'place/:id',
     loadChildren: () => import('./Owner/events/place/place.module').then( m => m.PlacePageModule)
   },
+  {
+    path: 'authorizations1',
+    loadChildren: () => import('./User/authorizations/authorizations.module').then( m => m.AuthorizationsPageModule)
+  },
   ];
 
 @NgModule({
