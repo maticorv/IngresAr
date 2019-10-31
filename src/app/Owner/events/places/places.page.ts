@@ -30,7 +30,7 @@ export class PlacesPage implements OnInit {
     });
   }
   onClick(i) {
-    this.router.navigateByUrl('');
+    this.router.navigate(['/place', i]);
   }
 
 }
