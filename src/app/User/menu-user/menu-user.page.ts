@@ -16,5 +16,12 @@ export class MenuUserPage implements OnInit {
   mostrar() {
     this.router.navigateByUrl('/profile');
   }
+  autorizaciones() {
+    this.router.navigateByUrl('/profile');
+  }
+  vehicles() {
+    this.router.navigateByUrl('/vehicles2');
+  }
+
 
 }

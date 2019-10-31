@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { Persona } from 'src/app/interfaces/persona';
+import { Iaccount } from 'src/app/interfaces/account';
+import { IVehiculo } from 'src/app/interfaces/vehiculo';
 import { ServiceService } from 'src/app/services/service.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { Persona } from '../../../../interfaces/persona';
-import { Iaccount } from '../../../../interfaces/account';
 import Swal from 'sweetalert2';
-import { Button } from 'protractor';
-import { IVehiculo } from '../../../../interfaces/vehiculo';
 
 @Component({
-  selector: 'app-newvehicle1',
-  templateUrl: './newvehicle1.page.html',
-  styleUrls: ['./newvehicle1.page.scss'],
+  selector: 'app-newvehicle3',
+  templateUrl: './newvehicle3.page.html',
+  styleUrls: ['./newvehicle3.page.scss'],
 })
-export class Newvehicle1Page implements OnInit {
+export class Newvehicle3Page implements OnInit {
   dominio: string;
   persona: Persona;
   account: Iaccount;
@@ -91,7 +90,7 @@ export class Newvehicle1Page implements OnInit {
         showConfirmButton: false,
         timer: 1500
       }).then((result) => {
-        this.router.navigateByUrl('porteria/vehicles');
+        this.router.navigateByUrl('vehicles2');
     });
     },
     (error) => {
@@ -105,7 +104,7 @@ export class Newvehicle1Page implements OnInit {
     );
   }
   CrearVehiculo() {
-    this.router.navigateByUrl('/newVehicle');
+    this.router.navigateByUrl('/newvehicle4');
   }
 
 }
