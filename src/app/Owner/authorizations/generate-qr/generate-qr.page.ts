@@ -151,7 +151,7 @@ export class GenerateQrPage implements OnInit {
 
   enviarMail() {
 
-    this.createPdf();
+    // this.createPdf();
 
     const email = {
       to: this.personaAutorizada.personaUser.email,

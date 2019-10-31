@@ -16,27 +16,44 @@ export class QringressPage implements OnInit {
               private router: Router, private alertCtrl: AlertController) { }
 
   qr: IQr;
+  // codQR = 'GastonSilveyra2019-10-31T22:44:48.406Z';
 
   ngOnInit() {
   }
 
   ionViewDidEnter() {
     this.scan();
+    // this.scaForce();
   }
+
+  // scaForce() {
+  //   const hoy = new Date( new Date().setHours(0, 0, 0, 0));
+  //   this.service.getQRByCodQR(this.codQR).subscribe(qr => {
+  //     console.log('qr :', qr);
+  //     this.qr = qr;
+  //     if (new Date(qr.fechaFinQR) >= hoy) {
+  //       this.service.setCodQR(this.qr.codigoQR);
+  //       this.qrExiste();
+  //     } else {
+  //       this.presentAlert();
+  //     }
+  //   },
+  //   (error) => {console.log(error);
+  //   });
+  // }
 
   scan() {
     this.barcodeScanner.scan().then(barcodeData => {
       console.log('Barcode data', barcodeData);
-      const hoy = new Date();
+      const hoy = new Date( new Date().setHours(0, 0, 0, 0));
       this.service.getQRByCodQR(barcodeData.text).subscribe(data => {
-        if (new Date(data.fechaFinQR) < hoy) {
-          this.presentAlert();
-        } else {
-          this.qrExiste();
-        }
-        console.log(data);
         this.qr = data;
-        this.qrExiste();
+        if (new Date(data.fechaFinQR) >= hoy) {
+          this.service.setCodQR(this.qr.codigoQR);
+          this.qrExiste();
+        } else {
+          this.presentAlert();
+        }
       },
       (error) => {console.log(error);
       });
