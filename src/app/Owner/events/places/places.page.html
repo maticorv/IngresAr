@@ -1,17 +1,17 @@
 <ion-header>
-  <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-          <ion-back-button defaultHref='/menu-owner'></ion-back-button>
-      </ion-buttons>
-      <ion-title class="ion-text-capitalize ion-text-center">Lugares</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/menu-owner'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">Lugares</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 
-<ion-content fullscreen class="ion-padding">
-  <ion-list>
-    <ion-item *ngFor="let n of espacioComun; let i = index">
-      <ion-label class="ml-2"> {{n.nombreEspacioComun}} </ion-label>
-    </ion-item>
-  </ion-list>
+<ion-content fullscreen class="ion-padding ">
+    <ion-list class="animated fadeIn">
+        <ion-item (click)="onClick(i)" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'" *ngFor="let n of espacioComun; let i = index">
+            <ion-label class="ml-2"> {{n.nombreEspacioComun}} </ion-label>
+        </ion-item>
+    </ion-list>
 </ion-content>
