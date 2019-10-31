@@ -15,7 +15,6 @@ export class PlacesPage implements OnInit {
   constructor(private service: ServiceService, private router: Router) { }
 
   ngOnInit() {
-    this.obtenerEspacioComun();
   }
 
   ionViewWillEnter() {
@@ -29,6 +28,9 @@ export class PlacesPage implements OnInit {
     },
     (error) => {console.log(error);
     });
+  }
+  onClick(i) {
+    this.router.navigateByUrl('');
   }
 
 }

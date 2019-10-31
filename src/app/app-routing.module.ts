@@ -115,6 +115,10 @@ const routes: Routes = [
     path: 'newvehicle4',
     loadChildren: () => import('./User/newvehicle4/newvehicle4.module').then( m => m.Newvehicle4PageModule)
   },
+  {
+    path: 'place/:id',
+    loadChildren: () => import('./Owner/events/place/place.module').then( m => m.PlacePageModule)
+  },
   ];
 
 @NgModule({
