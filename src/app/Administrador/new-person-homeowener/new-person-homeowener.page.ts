@@ -67,7 +67,6 @@ export class NewPersonHomeowenerPage implements OnInit {
     });
     toast.present();
     setTimeout(() => {
-      this.router.navigateByUrl('/destination');
       },
       2000);
   }

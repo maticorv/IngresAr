@@ -66,7 +66,7 @@ export class SearchPersonHomeowenerPage implements OnInit {
             (error) => {console.log(error);
             });
             this.dni = null;
-            this.router.navigateByUrl('/manage-guard');
+            this.router.navigateByUrl('/manage-homeowner');
           }
         }, {
           text: 'Cancelar',
