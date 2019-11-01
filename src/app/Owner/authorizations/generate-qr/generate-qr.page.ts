@@ -165,7 +165,11 @@ export class GenerateQrPage implements OnInit {
       isHtml: true
     };
     this.emailComposer.open(email);
-    this.router.navigateByUrl('/authorizations/visit');
+    if (this.tipoVisita === 'visita') {
+      this.router.navigateByUrl('/authorizations/visit');
+    } else {
+      this.router.navigateByUrl('/authorizations/employee');
+    }
   }
 
 //   public handleImage(Image: string): void {

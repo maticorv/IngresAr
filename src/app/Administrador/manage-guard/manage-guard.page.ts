@@ -44,7 +44,8 @@ export class ManageGuardPage implements OnInit {
       console.log(data);
       this.getGuardias();
     },
-    (error) => {console.log(error);})
+    (error) => {console.log(error);
+    })
   }
 
 }
