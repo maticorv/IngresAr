@@ -127,6 +127,16 @@ const routes: Routes = [
     path: 'modal',
     loadChildren: () => import('./components/modal/modal.module').then( m => m.ModalPageModule)
   },
+  {
+    path: 'habilitar-deshabilitar/:id',
+    // tslint:disable-next-line: max-line-length
+    loadChildren: () => import('./funcionesMenu/habilitar-deshabilitar/habilitar-deshabilitar.module').then( m => m.HabilitarDeshabilitarPageModule)
+  },  {
+    path: 'personas-bloqueadas',
+    loadChildren: () => import('./shared/personas-bloqueadas/personas-bloqueadas.module').then( m => m.PersonasBloqueadasPageModule)
+  },
+
+
   ];
 
 @NgModule({

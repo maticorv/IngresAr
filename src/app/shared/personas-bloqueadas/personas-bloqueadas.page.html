@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">Personas Bloqueadas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+
+    <ion-row>
+        <ion-card>
+          <ion-item>
+            <ion-list>
+              <ion-row>
+                <ion-col>
+                  <ion-label> Apellido </ion-label>
+                </ion-col>
+                <ion-col>
+                  <ion-label> Nombre </ion-label>
+                </ion-col>
+                <ion-col>
+                  <ion-label> Fecha Hasta </ion-label>
+                </ion-col>
+              </ion-row>
+            </ion-list>
+          </ion-item>
+          <ion-item *ngFor="let p of persona">
+            <ion-list>
+              <ion-row>
+                <ion-col>
+                  <ion-label> {{p.apellidoPersona}}  </ion-label>
+                </ion-col>
+                <ion-col>
+                  <ion-label> {{p.nombrePersona}} </ion-label>
+                </ion-col>
+                <ion-col>
+                  <ion-label> {{p.dniPersona}} </ion-label>
+                </ion-col>
+              </ion-row>
+            </ion-list>
+          </ion-item>
+        </ion-card>
+      </ion-row>
+
+</ion-content>

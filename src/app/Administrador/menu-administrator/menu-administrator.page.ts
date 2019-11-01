@@ -44,5 +44,9 @@ export class MenuAdministratorPage implements OnInit {
     this.router.navigateByUrl('/database');
   }
 
+  personasBloqueadas() {
+    this.router.navigateByUrl('/personas-bloqueadas');
+  }
+
 
 }
