@@ -26,7 +26,7 @@ export class VisitPage implements OnInit {
   }
 
   generarAutorizacion() {
-    this.router.navigateByUrl('/generate-qr');
+    this.router.navigate(['/generate-qr', 'visita']);
   }
 
   ObtenerQrs() {
@@ -38,7 +38,6 @@ export class VisitPage implements OnInit {
             const hoy = new Date();
             qr.forEach(element => {
               // tslint:disable-next-line: max-line-length
-              console.log('element :', element);
               if (new Date(element.fechaFinQR) >= hoy && element.tipoVisira === 'visita') {
                 this.qrs.push(element);
               }

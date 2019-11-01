@@ -26,7 +26,7 @@ export class EmployeePage implements OnInit {
   }
 
   generarAutorizacion() {
-    this.router.navigateByUrl('/generate-qr');
+    this.router.navigate(['/generate-qr', 'servicio']);
   }
 
   ObtenerQrs() {

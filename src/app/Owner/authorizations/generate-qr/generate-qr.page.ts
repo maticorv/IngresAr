@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from 'src/app/services/service.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Persona } from 'src/app/interfaces/persona';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
@@ -19,6 +19,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export class GenerateQrPage implements OnInit {
 
   dni: number;
+  tipoVisita: string;
   personaAutorizada: Persona;
   personaAutorizador: Persona;
   domicilio: any;
@@ -41,9 +42,11 @@ export class GenerateQrPage implements OnInit {
   constructor(private service: ServiceService, private router: Router,
               // tslint:disable-next-line: variable-name
               private alertCtrl: AlertController, private _formBuilder: FormBuilder,
-              private emailComposer: EmailComposer) { }
+              private emailComposer: EmailComposer, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.tipoVisita = this.activatedRoute.snapshot.params.id;
+    console.log('tipoVisita :', this.activatedRoute.snapshot.params.id);
     this.getOwner();
     this.fechaMin = new Date();
     this.fechaMax = new Date();
@@ -71,7 +74,7 @@ export class GenerateQrPage implements OnInit {
 
   crearQr() {
     // tslint:disable-next-line: max-line-length
-    this.service.postQR(this.codigoQR, this.fechaFinQR, null, 'image/png', 'visita', this.personaAutorizador, this.personaAutorizada, this.domicilio).subscribe(data => {
+    this.service.postQR(this.codigoQR, this.fechaFinQR, null, 'image/png', this.tipoVisita, this.personaAutorizador, this.personaAutorizada, this.domicilio).subscribe(data => {
       console.log(data);
       this.enviarMail();
     },
