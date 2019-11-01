@@ -28,14 +28,14 @@
           <ion-label position="floating">Numero de DNI
               <ion-text color="danger">*</ion-text>
           </ion-label>
-          <ion-input disabled required type="number" [(ngModel)]="dniPersona"></ion-input>
+          <ion-input disabled required type="tel" minlength="7" maxlength="9" [(ngModel)]="dniPersona"></ion-input>
       </ion-item>
 
       <ion-item>
           <ion-label position="floating">Numero de teléfono
               <ion-text color="danger">*</ion-text>
           </ion-label>
-          <ion-input required type="number" [(ngModel)]="telefonoPersona"></ion-input>
+          <ion-input required type="tel" minlength="7" maxlength="10" [(ngModel)]="telefonoPersona"></ion-input>
       </ion-item>
 
 
