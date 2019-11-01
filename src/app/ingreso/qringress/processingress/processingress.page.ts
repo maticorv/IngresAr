@@ -13,7 +13,7 @@ import { ToastController } from '@ionic/angular';
 export class ProcessingressPage implements OnInit {
 
   auto: number;
-  ingresoApie = true;
+  ingresoApie: boolean;
   qr: IQr;
 
   vehiculo: IVehiculo;
@@ -25,7 +25,6 @@ export class ProcessingressPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.getVehiculo();
     this.getQR(this.service.getCodQR());
   }
 
@@ -84,6 +83,8 @@ export class ProcessingressPage implements OnInit {
   getQR(codQR) {
     this.service.getQRByCodQR(codQR).subscribe(data => {
       this.qr = data;
+      console.log('this.qr :', this.qr);
+      this.getVehiculo();
     },
     (error) => {console.log(error);
     });
