@@ -1,9 +1,35 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>authorizations</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/menu-user'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">Autorizaciones</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
+
+<ion-content fullscreen class="ion-padding">
+    <ion-row>
+        <ion-col size="12">
+            <ng-container *ngIf="autorizaciones?.length === 0; then thenTemplate; else elseTemplate"></ng-container>
+            <ng-template #thenTemplate>
+                <h2 style="text-align: center;"> Usted no posee autorizaciones </h2>
+
+            </ng-template>
+            <ng-template #elseTemplate>
+                <h1> Has sido autorizado a ingresar por:</h1>
+                <ion-list *ngFor="let autorizacion of autorizaciones; let i=index" class="animated fadeIn">
+                    <ion-item (click)="onClick(i)" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'" class="animated fadeIn">
+                        <ion-label><b>Te autorizó: </b>
+                            <h2>{{autorizacion.qrAutorizador.nombrePersona}} {{autorizacion.qrAutorizador.apellidoPersona}}</h2>
+                            <b> a ingresar a su domicilio </b>
+                            <p>Selecciona para mostrar el codigo al guardia</p>
+                        </ion-label>
+                    </ion-item>
+                </ion-list>
+            </ng-template>
+
+        </ion-col>
+    </ion-row>
 
 </ion-content>
