@@ -99,11 +99,12 @@
               <div>
                 <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
                 <button mat-button color="primary" (click)="crearQr()" matStepperPrevious>Crear Autorizacion</button>
+                <button mat-button color="primary" (click)="reset()" matStepperPrevious>Reset click</button>
               </div>
             </mat-step>
           </mat-vertical-stepper>
 
-          <ion-button fill="outline" shape="round" expand="full" color="success" (click)="descargarPDF()">Imprimir PDF</ion-button>
-          <ion-button fill="outline" shape="round" expand="full" color="tertiary" (click)="createPdf()">Crear PDF</ion-button>
+          <!-- <ion-button fill="outline" shape="round" expand="full" color="success" (click)="descargarPDF()">Imprimir PDF</ion-button>
+          <ion-button fill="outline" shape="round" expand="full" color="tertiary" (click)="createPdf()">Crear PDF</ion-button> -->
 
 </ion-content>

@@ -200,6 +200,10 @@ export class GenerateQrPage implements OnInit {
       stepper.next();
   }
 
+  reset(stepper: MatStepper) {
+    stepper.reset();
+  }
+
   createPdf() {
     const docDefinition = {
       content: [
