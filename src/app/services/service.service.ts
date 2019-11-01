@@ -408,9 +408,6 @@ export class ServiceService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     return this.http.post(this.url + 'eventosfecha/' + fecha, {headers}).pipe(map(data => data as Ievent[]));
   }
-  getEventByFechaAndId(fecha: Date, id: number): Observable<Ievent[]> {
-
-  }
 
   getUser(email) {
     const token = this.leerToken();
