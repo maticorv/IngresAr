@@ -38,6 +38,8 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { DemoMaterialModule } from './material-module';
+import { ModalPageModule } from './components/modal/modal.module';
+
 
 
 @NgModule({
@@ -56,6 +58,7 @@ import { DemoMaterialModule } from './material-module';
     FormsModule,
     ReactiveFormsModule,
     DemoMaterialModule,
+    ModalPageModule
   ],
   providers: [
     StatusBar,

@@ -123,6 +123,10 @@ const routes: Routes = [
     path: 'authorizations1',
     loadChildren: () => import('./User/authorizations/authorizations.module').then( m => m.AuthorizationsPageModule)
   },
+  {
+    path: 'modal',
+    loadChildren: () => import('./components/modal/modal.module').then( m => m.ModalPageModule)
+  },
   ];
 
 @NgModule({
