@@ -135,6 +135,14 @@ const routes: Routes = [
     path: 'personas-bloqueadas',
     loadChildren: () => import('./shared/personas-bloqueadas/personas-bloqueadas.module').then( m => m.PersonasBloqueadasPageModule)
   },
+  {
+    path: 'carnet',
+    loadChildren: () => import('./shared/carnet/carnet.module').then( m => m.CarnetPageModule)
+  },
+  {
+    path: 'actualizar-carnet',
+    loadChildren: () => import('./shared/actualizar-carnet/actualizar-carnet.module').then( m => m.ActualizarCarnetPageModule)
+  },
 
 
   ];

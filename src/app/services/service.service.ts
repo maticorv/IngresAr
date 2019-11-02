@@ -24,6 +24,7 @@ import { IDetalleEvento } from '../interfaces/idetalle-evento';
 import { IQr } from '../interfaces/iqr';
 import { IDomicilio } from '../interfaces/idomicilio';
 import { IPersonaEstado } from '../interfaces/ipersona-estado';
+import { ICarnet } from '../interfaces/icarnet';
 
 @Injectable({
   providedIn: 'root'
@@ -583,6 +584,13 @@ export class ServiceService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
     const params = {id, nombreEstadoPersona, fecha};
     return this.http.put(this.url + 'estado-personas', params, {headers}).pipe(map( data => data as IPersonaEstado));
+  }
+
+  postCarnet(categoria, fechaOtorgamiento, fechaVencimiento, carnetPersona) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    const params = {categoria, fechaOtorgamiento, fechaVencimiento, carnetPersona};
+    return this.http.post(this.url + 'carnet-de-conducirs', params, {headers}).pipe(map( data => data as ICarnet));
   }
 
 
