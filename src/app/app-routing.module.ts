@@ -143,6 +143,14 @@ const routes: Routes = [
     path: 'actualizar-carnet',
     loadChildren: () => import('./shared/actualizar-carnet/actualizar-carnet.module').then( m => m.ActualizarCarnetPageModule)
   },
+  {
+    path: 'art',
+    loadChildren: () => import('./ingreso/servicio/art/art.module').then( m => m.ArtPageModule)
+  },
+  {
+    path: 'actualizar-art',
+    loadChildren: () => import('./ingreso/servicio/actualizar-art/actualizar-art.module').then( m => m.ActualizarArtPageModule)
+  },
 
 
   ];

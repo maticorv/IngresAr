@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/servicio'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">IngresAr</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+    <ion-row class="mt-3">
+        <ion-item>
+            <ion-label>Fecha Vencimiento ART:</ion-label>
+            <ion-datetime displayFormat="DD-MM-YYYY"  
+                            picker-format="DD-MM-YYYY" 
+                            [value]="fechaVencimientoArt"
+                            max= "2030"
+                            [min]="fechaMin | date: 'yyyy-MM-dd'"
+                            [(ngModel)]="fechaVencimientoArt"></ion-datetime>
+        </ion-item>
+    </ion-row>
+
+
+            <ion-button class="mt-4" expand="full" shape="round" (click)="actualizarART()">Actualizar Art</ion-button>
+
+
+</ion-content>
