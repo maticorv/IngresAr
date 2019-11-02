@@ -8,9 +8,46 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+
+  <ion-card>
+    <ion-row>
+      <img [src]="convertedImg" height="250px">
+    </ion-row>
+    <ion-row class="mt-2">
+        <ion-icon name="image" class="mr-3 icon" (click)="getPictureAlbum()"></ion-icon>
+        <ion-icon name="camera" class="icon" (click)="getPicture()"></ion-icon>
+    </ion-row>
+    
+    <ion-card-content>
+        <ion-item style="text-align-last: center;">
+            <ion-input required type="text" [(ngModel)]="nombreEspacioComun"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Disponibilidad Desde:</ion-label>
+            <ion-datetime displayFormat="HH:mm"  
+                          picker-format="HH:mm" 
+                          [value]="disponibilidadDesde"
+                          [(ngModel)]="disponibilidadDesde"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Disponibilidad Hasta:</ion-label>
+            <ion-datetime displayFormat="HH:mm"  
+                          picker-format="HH:mm" 
+                          [value]="disponibilidadHasta"
+                          [(ngModel)]="disponibilidadHasta"></ion-datetime>
+          </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+
+
+<!-- 
+
   <ion-row style="place-content: center"  class="row-img">
-    <!-- <ion-img *ngIf="espacioComun?.fotoEspacioComun !== undefined || espacioComun?.fotoEspacioComun !== ''" [src]="espacioComun?.fotoEspacioComun"></ion-img>
-    <ion-img *ngIf="espacioComun?.fotoEspacioComun === undefined || espacioComun?.fotoEspacioComun === ''" [src]="espacioComun?.fotoEspacioComun"></ion-img> -->
+    <ion-img *ngIf="espacioComun?.fotoEspacioComun !== undefined || espacioComun?.fotoEspacioComun !== ''" [src]="espacioComun?.fotoEspacioComun"></ion-img>
+    <ion-img *ngIf="espacioComun?.fotoEspacioComun === undefined || espacioComun?.fotoEspacioComun === ''" [src]="espacioComun?.fotoEspacioComun"></ion-img>
     <ion-img [src]=foto></ion-img>
   </ion-row>
   <ion-row>
@@ -19,9 +56,6 @@
   </ion-row>
   <ion-row style="place-content: center">
     <ion-item>
-        <!-- <ion-label position="floating"> {{espacioComun?.nombreEspacioComun}}
-            <ion-text color="danger">*</ion-text>
-        </ion-label> -->
         <ion-input required type="text" [(ngModel)]="nombreEspacioComun"></ion-input>
     </ion-item>
   </ion-row>
@@ -33,7 +67,6 @@
                           picker-format="HH:mm" 
                           [value]="disponibilidadDesde"
                           [(ngModel)]="disponibilidadDesde"></ion-datetime>
-                          <!-- [(ngModel)]="espacioComun.horaDesde"></ion-datetime> -->
         </ion-item>
     </ion-item>
   </ion-row>
@@ -45,19 +78,8 @@
                           picker-format="HH:mm" 
                           [value]="disponibilidadHasta"
                           [(ngModel)]="disponibilidadHasta"></ion-datetime>
-                          <!-- [(ngModel)]="espacioComun.horaHasta"></ion-datetime> -->
           </ion-item>
     </ion-item>
-  </ion-row>
-  <!-- <ion-row>
-    <ion-item>
-      <ion-label>Periodo de reserva:</ion-label>
-      <ion-datetime displayFormat="HH:mm"  
-                    picker-format="HH:mm" 
-                    [value]="espacioComun?.espacioTipos[0].periodo"
-                    minute-value="0,15,30,45"></ion-datetime> -->
-                    <!-- [(ngModel)]="espacioComun?.espacioTipos[0].periodo" -->
-    <!-- </ion-item>
   </ion-row> -->
 
   <ion-row class="mt-3">
