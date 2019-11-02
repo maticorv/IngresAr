@@ -575,7 +575,7 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
     const params = {nombreEstadoPersona, fecha};
-    return this.http.post(this.url + '', params, {headers}).pipe(map( data => data as IPersonaEstado));
+    return this.http.post(this.url + 'estado-personas', params, {headers}).pipe(map( data => data as IPersonaEstado));
   }
 
   putPersonaEstado(id, nombreEstadoPersona, fecha) {

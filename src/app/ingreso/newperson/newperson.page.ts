@@ -27,8 +27,9 @@ export class NewpersonPage implements OnInit {
   }
 
   createPersonaEstado() {
-    this.service.postPersonaEstado('Habilitada', new Date()).subscribe(data => {
+    this.service.postPersonaEstado('habilitada', new Date()).subscribe(data => {
       this.personaEstado = data;
+      console.log('this.personaEstado :', this.personaEstado);
     },
     (error) => {console.log(error);
     });
@@ -43,6 +44,10 @@ export class NewpersonPage implements OnInit {
       this.persona.dniPersona = data.dniPersona;
       this.persona.telefonoPersona = data.telefonoPersona;
       this.persona.id = data.id;
+      this.persona.personabarrio = data.personabarrio;
+      this.persona.personadomicilios = data.personadomicilios;
+      this.persona.personaEstado = data.personaEstado;
+      this.persona.personaUser = data.personaUser;
       this.presentToast('La persona se ha creado correctamente');
       this.router.navigateByUrl('/destination');
     },

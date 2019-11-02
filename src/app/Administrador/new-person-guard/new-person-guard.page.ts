@@ -40,7 +40,7 @@ export class NewPersonGuardPage implements OnInit {
   }
 
   createPersonaEstado() {
-    this.service.postPersonaEstado('Habilitada', new Date()).subscribe(data => {
+    this.service.postPersonaEstado('habilitada', new Date()).subscribe(data => {
       this.personaEstado = data;
     },
     (error) => {console.log(error);

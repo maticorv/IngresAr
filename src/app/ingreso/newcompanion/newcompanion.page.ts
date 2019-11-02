@@ -46,6 +46,7 @@ export class NewcompanionPage implements OnInit {
       this.acompaniante.dniPersona = data.dniPersona;
       this.acompaniante.telefonoPersona = data.telefonoPersona;
       this.acompaniante.id = data.id;
+      this.acompaniante.personaEstado = data.personaEstado;
       this.presentToast('La persona se ha creado correctamente');
     },
     (error) => { console.log(error);
