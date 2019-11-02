@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/authorization'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">IngresAr</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-row style="justify-content: center;" class="mt-5">
+        <ion-card>
+          <ion-item>
+            <ion-list>
+              <ion-row style="text-align: -webkit-center;">
+                <ion-col>
+                  <ion-label>Apellido</ion-label>
+                </ion-col>
+                <ion-col>
+                  <ion-label>Nombre</ion-label>
+                </ion-col>
+                <ion-col>
+                  <ion-label>DNI</ion-label>
+                </ion-col>
+              </ion-row>
+            </ion-list>
+          </ion-item>
+          <ion-item-sliding *ngFor="let l of planillaAcompaniante; let i = index">
+            <ion-item>
+              <ion-list>
+                <ion-row style="text-align: -webkit-center;">
+                  <ion-col class="tamaño">
+                    <ion-label>{{l.apellidoPersona}} </ion-label>
+                  </ion-col>
+                  <ion-col class="tamaño">
+                      <ion-label>{{l.nombrePersona}} </ion-label>
+                  </ion-col>
+                  <ion-col class="tamaño">
+                      <ion-label>{{l.dniPersona}} </ion-label>
+                  </ion-col>
+                </ion-row>
+              </ion-list>
+            </ion-item>
+            <ion-item-options side="end">
+                <ion-item-option (click)="borrar(i)" color="danger" mode="ios">
+                    <ion-icon slot="icon-only" name="trash"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-card>
+      </ion-row>
+
+      <ion-row class="mt-5 mt-r1" style="place-content: flex-end;">
+          <ion-button style="width: 150px;;" shape="round" (click)="volver()">volver</ion-button>
+      </ion-row>
+
+</ion-content>

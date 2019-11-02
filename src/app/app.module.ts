@@ -39,6 +39,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { DemoMaterialModule } from './material-module';
 import { ModalPageModule } from './components/modal/modal.module';
+import { PlanillaAcompaniante } from './classes/planilla-acompaniante';
 
 
 
@@ -83,6 +84,7 @@ import { ModalPageModule } from './components/modal/modal.module';
     BarcodeScanner,
     FormBuilder,
     EmailComposer,
+    PlanillaAcompaniante,
 
   ],
   bootstrap: [AppComponent]

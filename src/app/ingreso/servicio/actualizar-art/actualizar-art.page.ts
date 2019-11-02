@@ -24,7 +24,7 @@ export class ActualizarArtPage implements OnInit {
 
   ionViewWillEnter() {
     this.fechaMin = new Date().toString();
-    this.obtenerART()
+    this.obtenerART();
   }
 
   ionViewWillLeave() {

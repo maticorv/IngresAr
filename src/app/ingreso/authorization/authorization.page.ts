@@ -11,6 +11,7 @@ import { Tipovisita } from 'src/app/classes/tipovisita';
 import { IngresoAPie } from 'src/app/classes/ingresoAPie';
 import { Servicios } from 'src/app/classes/servicio';
 import { Persona } from 'src/app/interfaces/persona';
+import { PlanillaAcompaniante } from '../../classes/planilla-acompaniante';
 
 @Component({
   selector: 'app-authorization',
@@ -46,9 +47,14 @@ export class AuthorizationPage implements OnInit {
               private acompañante: Acompaniante, private tipovisitas: Tipovisita,
               private planillaPersona: Personas, private planillaVehiculo: Vehiculo,
               private planillaEmpresa: Servicios, private ingresoaPie: IngresoAPie,
-              private alertCtrl: AlertController) { }
+              private alertCtrl: AlertController, private acompaniante: PlanillaAcompaniante) { }
 
   ngOnInit() {
+    // this.getPersonasDomicilio();
+  }
+
+  ionViewWillEnter() {
+    this.planillaAcompaniantes = this.acompaniante.planillaAcompaniante;
     this.getPersonasDomicilio();
   }
 
@@ -202,6 +208,11 @@ export class AuthorizationPage implements OnInit {
 
   agregarAcompaniante() {
     this.planillaAcompaniantes.push(this.acompañante);
+  }
+
+  verListaAcom() {
+    this.acompaniante.planillaAcompaniante = this.planillaAcompaniantes;
+    this.router.navigateByUrl('view-planilla-acompaniante');
   }
 
 
