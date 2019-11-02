@@ -131,7 +131,8 @@ const routes: Routes = [
     path: 'habilitar-deshabilitar/:id',
     // tslint:disable-next-line: max-line-length
     loadChildren: () => import('./funcionesMenu/habilitar-deshabilitar/habilitar-deshabilitar.module').then( m => m.HabilitarDeshabilitarPageModule)
-  },  {
+  },
+  {
     path: 'personas-bloqueadas',
     loadChildren: () => import('./shared/personas-bloqueadas/personas-bloqueadas.module').then( m => m.PersonasBloqueadasPageModule)
   },
@@ -150,6 +151,10 @@ const routes: Routes = [
   {
     path: 'actualizar-art',
     loadChildren: () => import('./ingreso/servicio/actualizar-art/actualizar-art.module').then( m => m.ActualizarArtPageModule)
+  },
+  {
+    path: 'newevent/:id',
+    loadChildren: () => import('./Owner/events/newevent/newevent.module').then( m => m.NeweventPageModule)
   },
 
 

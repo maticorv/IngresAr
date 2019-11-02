@@ -12,16 +12,21 @@
         <ion-col style="text-align: center;">
             <img [src]="convertedImage" class="img-fluid animated fadeIn " alt="Responsive image">
             <ion-item>
-                <ion-label>Start Date</ion-label>
-                <ion-datetime value="1990-02-19" placeholder="Select Date"></ion-datetime>
+                <ion-label>Disponible Desde</ion-label>
+                <ion-label>{{espacioComun?.horaDesde | date:"shortTime"}}</ion-label>
             </ion-item>
 
             <ion-list>
                 <ion-item>
-                    <ion-label>Desde Hasta</ion-label>
+                    <ion-label>Disponible Hasta</ion-label>
+                    <ion-label>{{espacioComun?.horaHasta| date:"shortTime"}}</ion-label>
                 </ion-item>
             </ion-list>
         </ion-col>
     </ion-row>
-
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="onClick()">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>

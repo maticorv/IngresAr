@@ -25,5 +25,8 @@ constructor(private router: Router, private activatedRoute: ActivatedRoute, priv
       console.log('this.espacioComun :', this.espacioComun);
     });
   }
+  Click() {
+    this.router.navigate(['newevent', this.id]);
+  }
 
 }
