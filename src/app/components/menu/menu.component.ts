@@ -42,4 +42,16 @@ export class MenuComponent implements OnInit {
     this.router.navigateByUrl('eventos');
   }
 
+  habilitar() {
+    this.router.navigate(['/habilitar-deshabilitar', 'habilitada']);
+  }
+
+  deshabilitar() {
+    this.router.navigate(['/habilitar-deshabilitar', 'bloqueada']);
+  }
+
+  personasBloqueadas() {
+    this.router.navigateByUrl('/personas-bloqueadas');
+  }
+
 }

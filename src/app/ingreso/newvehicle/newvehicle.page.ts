@@ -7,7 +7,7 @@ import { Imarca } from '../../interfaces/marca';
 import { Imodelo } from '../../interfaces/modelo';
 import { Icolor } from '../../interfaces/color';
 import { Iseguro } from '../../interfaces/seguro';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular';
 import { Vehiculo } from 'src/app/classes/vehiculo';
 import { IngresoAPie } from 'src/app/classes/ingresoAPie';
 import { Personas } from 'src/app/classes/persona';
@@ -39,7 +39,7 @@ export class NewvehiclePage implements OnInit {
 
   constructor(private calendar: Calendar, private service: ServiceService, private router: Router,
               private toastController: ToastController, private vehiculos: Vehiculo, private ingresoAPie: IngresoAPie,
-              private persona: Personas, private marca: Marca) {
+              private persona: Personas, private marca: Marca, private alertCtrl: AlertController) {
     this.myDate = new Date().toISOString();
     this.max = new Date(new Date().getFullYear() + 2, new Date().getMonth() , new Date().getDay()).toISOString();
     this.calendar.createCalendar('MyCalendar').then(
@@ -59,33 +59,65 @@ export class NewvehiclePage implements OnInit {
 
     console.log(this.dominio, this.marcas[this.brand],
     this.modelos[this.model], this.colors[this.color], this.aseguradora, this.vencimiento );
-    this.service.postVehiculo(this.dominio, this.marcas[this.brand],
-    this.modelos[this.model], null ,
-    this.colors[this.color]).subscribe(data => {
-        console.log(data);
-        this.vehiculos.id = data.id;
-        this.vehiculos.dominio = data.dominio;
-        this.vehiculos.vehiculoMarca = data.vehiculoMarca;
-        this.vehiculos.vehiculoModelo = data.vehiculoModelo;
-        this.ingresoAPie.ingresoAPie = false;
-        this.persona.vehiculos.push(data);
+    this.service.getVehiculoByDominio(this.dominio).subscribe( vehic => {
+      this.persona.vehiculos.push(vehic);
+      if (this.check) {
         const seguro: Iseguro = {
           id: null,
           fechaVencimientoSeguro: this.vencimiento,
           seguroAseguradora: this.aseguradora,
-          seguroVehiculo: data,
+          seguroVehiculo: vehic,
         };
         this.service.postSeguro(seguro).subscribe(() => {
           // tslint:disable-next-line: max-line-length
           this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
              this.presentToast('Vehiculo creado satisfactoriamente');
           });
-
         });
-      }, (error) => {console.log(error);
-                     this.presentToast('Ha ocurrido un error');
-                    }
-      );
+      } else {
+        // tslint:disable-next-line:max-line-length
+        this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
+          this.presentToast('Vehiculo creado satisfactoriamente');
+       });
+      }
+    }, (error: any) => {
+      this.service.postVehiculo(this.dominio, this.marcas[this.brand],
+      this.modelos[this.model], null ,
+      this.colors[this.color]).subscribe(data => {
+          console.log(data);
+          this.vehiculos.id = data.id;
+          this.vehiculos.dominio = data.dominio;
+          this.vehiculos.vehiculoMarca = data.vehiculoMarca;
+          this.vehiculos.vehiculoModelo = data.vehiculoModelo;
+          this.ingresoAPie.ingresoAPie = false;
+          this.persona.vehiculos.push(data);
+          if (this.check) {
+            const seguro: Iseguro = {
+              id: null,
+              fechaVencimientoSeguro: this.vencimiento,
+              seguroAseguradora: this.aseguradora,
+              seguroVehiculo: data,
+            };
+            this.service.postSeguro(seguro).subscribe(() => {
+              // tslint:disable-next-line: max-line-length
+              this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
+                 this.presentToast('Vehiculo creado satisfactoriamente');
+              });
+            });
+          } else {
+              // tslint:disable-next-line:max-line-length
+              this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
+                  this.presentToast('Vehiculo creado satisfactoriamente');
+              });
+          }
+        // tslint:disable-next-line:no-shadowed-variable
+        }, (error: any) => {
+          console.log(error);
+          this.presentToast('Ha ocurrido un error');
+          }
+        );
+    }
+    );
   }
 
   getMarca() {
@@ -141,8 +173,9 @@ export class NewvehiclePage implements OnInit {
     );
   }
   Aseguradora(event: Event) {
-    // console.log(event);
-    this.aseguradora = event[`detail`].value;
+    console.log(event);
+    const indx = event[`detail`].value;
+    this.aseguradora = this.aseguradoras[indx];
   }
 
   async presentToast(me: string) {
@@ -157,6 +190,15 @@ export class NewvehiclePage implements OnInit {
       this.router.navigateByUrl('/authorization');
       },
       2000);
+  }
+
+  async presentAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'El vehiculo con el domini: ' + this.dominio + 'ya se encuentra registrado',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
   }
 
 }

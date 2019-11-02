@@ -16,6 +16,8 @@ export class NewCommonSpacePage implements OnInit {
   periodo = '2019-10-07T00:00:00-03:00';
   fotoEspCom: string;
   nombreEspComun: string;
+  convertedImg: string;
+  fotoEspacioComunContentType = 'image/jpeg';
 
   constructor(private camera: Camera, private service: ServiceService,
               private router: Router) { }
@@ -25,7 +27,7 @@ export class NewCommonSpacePage implements OnInit {
 
   crearEspacioComun() {
     // tslint:disable-next-line: max-line-length
-    this.service.postEspacioComun(this.nombreEspComun, this.horaDesde, this.horaHasta, this.fotoEspCom, null, this.horaDesde, this.horaHasta, null, null).subscribe(data => {
+    this.service.postEspacioComun(this.nombreEspComun, this.horaDesde, this.horaHasta, this.fotoEspCom, this.fotoEspacioComunContentType, this.horaDesde, this.horaHasta, null, null).subscribe(data => {
       console.log(data);
       this.horaDesde = '2019-10-07T00:00:00-03:00';
       this.horaHasta = '2019-10-07T00:00:00-03:00';
@@ -47,7 +49,8 @@ export class NewCommonSpacePage implements OnInit {
     };
     this.camera.getPicture( options )
     .then(imageData => {
-      this.fotoEspCom = `data:image/jpeg;base64,${imageData}`;
+      this.fotoEspCom = imageData;
+      this.convertedImg = `data:image/jpeg;base64,${imageData}`;
     })
     .catch(error => {
       console.error( error );
@@ -63,7 +66,8 @@ export class NewCommonSpacePage implements OnInit {
     };
     this.camera.getPicture( options )
     .then(imageData => {
-      this.fotoEspCom = `data:image/jpeg;base64,${imageData}`;
+      this.fotoEspCom = imageData;
+      this.convertedImg = `data:image/jpeg;base64,${imageData}`;
     })
     .catch(error => {
       console.error( error );

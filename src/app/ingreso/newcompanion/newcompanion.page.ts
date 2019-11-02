@@ -4,6 +4,7 @@ import { ServiceService } from '../../services/service.service';
 import { ToastController } from '@ionic/angular';
 import { Acompaniante } from 'src/app/classes/acompañante';
 import { AuthorizationPage } from '../authorization/authorization.page';
+import { IPersonaEstado } from 'src/app/interfaces/ipersona-estado';
 
 @Component({
   selector: 'app-newcompanion',
@@ -16,6 +17,7 @@ export class NewcompanionPage implements OnInit {
   apellidoPersona: string;
   dniPersona: number;
   telefonoPersona: number;
+  personaEstado: IPersonaEstado;
 
   // tslint:disable-next-line: max-line-length
   constructor(private router: Router, private acompaniante: Acompaniante,
@@ -24,15 +26,27 @@ export class NewcompanionPage implements OnInit {
 
   ngOnInit() {
     this.dniPersona = this.acompaniante.dniPersona;
+    this.createPersonaEstado();
   }
+
+  createPersonaEstado() {
+    this.service.postPersonaEstado('Habilitada', new Date()).subscribe(data => {
+      this.personaEstado = data;
+    },
+    (error) => {console.log(error);
+    });
+  }
+
   crearPersona() {
-    this.service.postPersona(this.nombrePersona, this.apellidoPersona, this.dniPersona, this.telefonoPersona).subscribe(data => {
+    // tslint:disable-next-line: max-line-length
+    this.service.postPersona(this.nombrePersona, this.apellidoPersona, this.dniPersona, this.telefonoPersona, this.personaEstado, null, null, null).subscribe(data => {
       console.log(data);
       this.acompaniante.nombrePersona = data.nombrePersona;
       this.acompaniante.apellidoPersona = data.apellidoPersona;
       this.acompaniante.dniPersona = data.dniPersona;
       this.acompaniante.telefonoPersona = data.telefonoPersona;
       this.acompaniante.id = data.id;
+      this.acompaniante.personaEstado = data.personaEstado;
       this.presentToast('La persona se ha creado correctamente');
     },
     (error) => { console.log(error);

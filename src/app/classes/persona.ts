@@ -10,4 +10,5 @@ export class Personas {
     personabarrio: any;
     vehiculos: Vehiculo[];
     personadomicilios?: any;
+    personaEstado?: any;
 }

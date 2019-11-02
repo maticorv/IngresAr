@@ -41,7 +41,8 @@ export class VehiclesPage implements OnInit {
   }
   Eliminar(indx: number) {
     this.persona.vehiculos.splice(indx, 1);
-    this.service.putPersona(this.persona).subscribe();
+    // tslint:disable-next-line: max-line-length
+    this.service.putPersona(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.personaEstado, this.persona.personaUser, this.persona.personabarrio, this.persona.vehiculos).subscribe();
   }
   nuevoVehiculo() {
     this.router.navigateByUrl('newvehicle1');

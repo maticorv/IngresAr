@@ -1,0 +1,77 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref='/'></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-capitalize ion-text-center">Personas Bloqueadas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+
+  <ion-row>
+    <ion-list>
+      <ion-row>
+          <ion-col>
+              <ion-item>
+                  <ion-label>
+                      Apellido
+                  </ion-label>
+              </ion-item>
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label>
+                      Nombre
+                  </ion-label>
+              </ion-item>
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label>
+                      DNI
+                  </ion-label>
+              </ion-item>
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label>
+                      Fecha
+                  </ion-label>
+              </ion-item>
+          </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let p of persona">
+          <ion-col>
+              <ion-item>
+                  <ion-label>
+                      {{p.apellidoPersona}}
+                  </ion-label>
+              </ion-item>
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label>
+                      {{p.nombrePersona}}
+                  </ion-label>
+              </ion-item>
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label>
+                      {{p.dniPersona}}
+                  </ion-label>
+              </ion-item>
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label>
+                          {{p.personaEstado.fecha | date: 'dd-MM-yyyy'}}
+                  </ion-label>
+              </ion-item>
+          </ion-col>
+      </ion-row>
+  </ion-list>
+  </ion-row>
+
+</ion-content>

@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { IVehiculo } from 'src/app/interfaces/vehiculo';
 import { ServiceService } from 'src/app/services/service.service';
 import { IQr } from '../../../interfaces/iqr';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular';
+import { Personas } from '../../../classes/persona';
 
 @Component({
   selector: 'app-processingress',
@@ -12,20 +13,32 @@ import { ToastController } from '@ionic/angular';
 })
 export class ProcessingressPage implements OnInit {
 
-  auto: number;
   ingresoApie: boolean;
   qr: IQr;
-
+  auto: number;
   vehiculo: IVehiculo;
+  avanzar: boolean;
+  carnet: string;
+  hoy: Date;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private service: ServiceService, private router: Router, private toastController: ToastController) { }
+  constructor(private service: ServiceService, private router: Router, private toastController: ToastController,
+              private persona: Personas, private alertCtrl: AlertController) { }
 
   ngOnInit() {
   }
 
   ionViewWillEnter() {
     this.getQR(this.service.getCodQR());
+    this.hoy = new Date();
+  }
+
+  ionViewWillLeave() {
+    this.auto = null;
+    this.vehiculo = null;
+    this.avanzar = null;
+    this.carnet = null;
+    this.hoy = null;
   }
 
   procesarIngreso() {
@@ -52,6 +65,22 @@ export class ProcessingressPage implements OnInit {
       });
     }
   }
+
+  getCarnet() {
+    this.service.getCarnetByIdPerson(this.persona.id).subscribe(data => {
+      if (new Date(data.fechaVencimiento) < this.hoy) {
+        this.carnet = 'vencido';
+        this.carnetVencido();
+      } else {
+        this.avanzar = true;
+      }
+    },
+    (error) => {console.log(error);
+                this.carnet = 'crear';
+                this.sinCarnet();
+    });
+  }
+
   selected(value: string) {
     console.log( value);
     this.auto = value[`detail`].value;
@@ -83,8 +112,19 @@ export class ProcessingressPage implements OnInit {
   getQR(codQR) {
     this.service.getQRByCodQR(codQR).subscribe(data => {
       this.qr = data;
+      this.persona.apellidoPersona = data.qrAutorizado.apellidoPersona;
+      this.persona.dniPersona = data.qrAutorizado.dniPersona;
+      this.persona.id = data.qrAutorizado.id;
+      this.persona.nombrePersona = data.qrAutorizado.nombrePersona;
+      this.persona.personaEstado = data.qrAutorizado.personaEstado;
+      this.persona.personaUser = data.qrAutorizado.personaUser;
+      this.persona.personabarrio = data.qrAutorizado.personabarrio;
+      this.persona.personadomicilios = data.qrAutorizado.personadomicilios;
+      this.persona.telefonoPersona = data.qrAutorizado.telefonoPersona;
+      this.persona.vehiculos = data.qrAutorizador.vehiculos;
       console.log('this.qr :', this.qr);
       this.getVehiculo();
+      this.getCarnet();
     },
     (error) => {console.log(error);
     });
@@ -101,6 +141,24 @@ export class ProcessingressPage implements OnInit {
     setTimeout(() => {
       },
       2000);
+  }
+
+  async carnetVencido() {
+    const alert = await this.alertCtrl.create({
+      header: 'La persona tiene vencido el carnet, por favor actualicelo',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
+  }
+
+  async sinCarnet() {
+    const alert = await this.alertCtrl.create({
+      header: 'La persona no tiene asociado el carnet, por favor agreguelo',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
   }
 
 }

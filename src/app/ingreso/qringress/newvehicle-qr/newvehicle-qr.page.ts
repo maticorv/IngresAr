@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular';
 import { Vehiculo } from 'src/app/classes/vehiculo';
 import { IngresoAPie } from 'src/app/classes/ingresoAPie';
 import { Personas } from 'src/app/classes/persona';
@@ -37,7 +37,7 @@ export class NewvehicleQRPage implements OnInit {
   qr: IQr;
   constructor(private calendar: Calendar, private service: ServiceService, private router: Router,
               private toastController: ToastController, private vehiculos: Vehiculo, private ingresoAPie: IngresoAPie,
-              private persona: Personas, private marca: Marca) {
+              private persona: Personas, private marca: Marca, private alertCtrl: AlertController) {
     this.myDate = new Date().toISOString();
     this.max = new Date(new Date().getFullYear() + 2, new Date().getMonth() , new Date().getDay()).toISOString();
     this.calendar.createCalendar('MyCalendar').then(
@@ -62,21 +62,33 @@ export class NewvehicleQRPage implements OnInit {
   }
   postVehiculo() {
 
-    this.service.postVehiculo(this.dominio, this.marcas[this.brand],
-    this.modelos[this.model], null ,
-    this.colors[this.color]).subscribe(data => {
-        console.log(data);
-        // this.persona.vehiculos.push(data);
-        this.qr.qrAutorizado.vehiculos.push(data);
-        // tslint:disable-next-line: no-shadowed-variable
-        // tslint:disable-next-line: max-line-length
-        this.service.postPersonaVehiculo(this.qr.qrAutorizado.id, this.qr.qrAutorizado.nombrePersona, this.qr.qrAutorizado.apellidoPersona, this.qr.qrAutorizado.dniPersona, this.qr.qrAutorizado.telefonoPersona, this.qr.qrAutorizado.vehiculos).subscribe((result) => {
-          this.presentToast('Vehiculo creado satisfactoriamente');
-        });
-      }, (error) => {console.log(error);
-                     this.presentToast('Ha ocurrido un error');
-                    }
-      );
+    console.log(this.dominio, this.marcas[this.brand],
+    this.modelos[this.model], this.colors[this.color], this.aseguradora, this.vencimiento );
+    this.service.getVehiculoByDominio(this.dominio).subscribe( vehic => {
+      console.log(vehic);
+      this.service.postVehiculo(this.dominio, this.marcas[this.brand],
+      this.modelos[this.model], null ,
+      this.colors[this.color]).subscribe(data => {
+          console.log(data);
+          this.vehiculos.id = data.id;
+          this.vehiculos.dominio = data.dominio;
+          this.vehiculos.vehiculoMarca = data.vehiculoMarca;
+          this.vehiculos.vehiculoModelo = data.vehiculoModelo;
+          this.ingresoAPie.ingresoAPie = false;
+          this.persona.vehiculos.push(data);
+          // tslint:disable-next-line: no-shadowed-variable
+          // tslint:disable-next-line: max-line-length
+          this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe((vehi) => {
+            this.presentToast('Vehiculo creado satisfactoriamente');
+          });
+        }, (error) => {console.log(error);
+                       this.presentToast('Ha ocurrido un error');
+                      }
+        );
+    },
+    (error) => {console.log(error);
+                this.presentAlert();
+    });
   }
 
   getMarca() {
@@ -135,5 +147,15 @@ export class NewvehicleQRPage implements OnInit {
       },
       2000);
   }
+
+  async presentAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'El vehiculo con el domini: ' + this.dominio + 'ya se encuentra registrado',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
+  }
+
 
 }

@@ -1,4 +1,5 @@
 import { IVehiculo } from './vehiculo';
+import { IPersonaEstado } from './ipersona-estado';
 
 export interface Persona {
     id: number;
@@ -10,4 +11,5 @@ export interface Persona {
     personabarrio: any;
     vehiculos: IVehiculo[];
     personadomicilios?: any;
+    personaEstado: IPersonaEstado;
 }
