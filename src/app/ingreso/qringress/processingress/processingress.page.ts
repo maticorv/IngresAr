@@ -4,6 +4,7 @@ import { IVehiculo } from 'src/app/interfaces/vehiculo';
 import { ServiceService } from 'src/app/services/service.service';
 import { IQr } from '../../../interfaces/iqr';
 import { ToastController } from '@ionic/angular';
+import { Personas } from '../../../classes/persona';
 
 @Component({
   selector: 'app-processingress',
@@ -19,7 +20,7 @@ export class ProcessingressPage implements OnInit {
   vehiculo: IVehiculo;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private service: ServiceService, private router: Router, private toastController: ToastController) { }
+  constructor(private service: ServiceService, private router: Router, private toastController: ToastController, private persona: Personas) { }
 
   ngOnInit() {
   }
@@ -83,6 +84,16 @@ export class ProcessingressPage implements OnInit {
   getQR(codQR) {
     this.service.getQRByCodQR(codQR).subscribe(data => {
       this.qr = data;
+      this.persona.apellidoPersona = data.qrAutorizado.apellidoPersona;
+      this.persona.dniPersona = data.qrAutorizado.dniPersona;
+      this.persona.id = data.qrAutorizado.id;
+      this.persona.nombrePersona = data.qrAutorizado.nombrePersona;
+      this.persona.personaEstado = data.qrAutorizado.personaEstado;
+      this.persona.personaUser = data.qrAutorizado.personaUser;
+      this.persona.personabarrio = data.qrAutorizado.personabarrio;
+      this.persona.personadomicilios = data.qrAutorizado.personadomicilios;
+      this.persona.telefonoPersona = data.qrAutorizado.telefonoPersona;
+      this.persona.vehiculos = data.qrAutorizador.vehiculos;
       console.log('this.qr :', this.qr);
       this.getVehiculo();
     },
