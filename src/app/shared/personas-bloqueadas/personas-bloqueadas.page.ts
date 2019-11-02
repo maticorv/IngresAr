@@ -14,16 +14,21 @@ export class PersonasBloqueadasPage implements OnInit {
   constructor(private service: ServiceService) { }
 
   ngOnInit() {
+    this.obtenerPersonas();
   }
 
   obtenerPersonas() {
     this.service.getAllPersonas().subscribe( data => {
-      if (data.personaEstado.nombreEstadoPersona === 'bloqueada') {
-        this.persona.push(data);
-      }
+      console.log(data);
+      data.forEach(element => {
+        if (element.personaEstado.nombreEstadoPersona === 'bloqueada') {
+          this.persona.push(element);
+        }
+      });
     },
     (error) => {console.log(error);
     });
+    console.log('this.persona :', this.persona);
   }
 
 

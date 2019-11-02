@@ -106,7 +106,7 @@ export class ServiceService {
   getAllPersonas() {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
-    return this.http.get( this.url + 'personas', {headers}).pipe(map(data => data as Persona));
+    return this.http.get( this.url + 'personas', {headers}).pipe(map(data => data as Persona[]));
   }
 
   putPersona(id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaEstado, personaUser, personabarrio, vehiculos) {
