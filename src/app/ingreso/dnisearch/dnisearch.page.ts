@@ -68,21 +68,23 @@ export class DnisearchPage implements OnInit {
       header: 'La persona con el dni ' + this.dni + ' no se encuentra en la base de datos',
       message: '¿Desea crearla?</strong>',
       buttons: [
+         {
+          text: 'Cancelar',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        },
         {
           text: 'Aceptar',
           role: 'cancel',
-          cssClass: 'secondary',
+          cssClass: 'primary',
           handler: () => {
             this.personas.dniPersona = this.dni;
             this.setNullData();
             this.router.navigateByUrl('/newperson');
           }
-        }, {
-          text: 'Cancelar',
-          handler: () => {
-            console.log('Confirm Okay');
-          }
-        }
+        },
       ]
     });
 
