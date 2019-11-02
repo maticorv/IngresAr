@@ -31,6 +31,14 @@ export class HabilitarDeshabilitarPage implements OnInit {
     }
   }
 
+  ionViewWillLeave() {
+    this.accion = null;
+    this.persona = null;
+    this.dni = null;
+    this.PersonaEstado = null;
+    this.accionmsj = null;
+  }
+
   getpersona() {
     this.service.getPersona(this.dni).subscribe((data) => {
       this.persona = data;
@@ -46,7 +54,7 @@ export class HabilitarDeshabilitarPage implements OnInit {
   async personaExiste() {
     const alert = await this.alertCtrl.create({
       header: this.persona.nombrePersona + ' ' + this.persona.apellidoPersona + ' ' + this.persona.dniPersona,
-      message: 'Esta seguro de ' + this.accionmsj + ' a esta persona?</strong>',
+      message: '¿Esta seguro de ' + this.accionmsj + ' a esta persona?</strong>',
       buttons: [
         {
           text: 'Aceptar',
