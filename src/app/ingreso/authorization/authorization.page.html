@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content class="ion-padding" fullscreen>
+
     <h3>¿Quien autoriza el ingreso?</h3>
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
         <ion-item>
@@ -31,69 +32,23 @@
             </ion-select>
         </ion-item>
         <ion-item>
-            <ion-select class="select-DNI-size" placeholder="DNI" value="dni" okText="Seleccionar">DNI
-                <ion-select-option value="DNI">DNI</ion-select-option>
-            </ion-select>
-            <ion-input style="text-align: center" type="number" placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
+            <ion-label>DNI : </ion-label>
+            <ion-input style="text-align: center; width: 237px;" type="number" placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
             <ion-icon name="add" color="black" (click)="buscarAcompaniante()"></ion-icon>
         </ion-item>
     </ion-list>
-    <ion-row>
-        <!-- <ion-list>
-            <ion-row>
-                <ion-col>
-                    <ion-item>
-                        <ion-label>
-                            Apellido
-                        </ion-label>
-                    </ion-item>
-                </ion-col>
-                <ion-col>
-                    <ion-item>
-                        <ion-label>
-                            Nombre
-                        </ion-label>
-                    </ion-item>
-                </ion-col>
-                <ion-col>
-                    <ion-item>
-                        <ion-label>
-                            DNI
-                        </ion-label>
-                    </ion-item>
-                </ion-col>
-            </ion-row>
-            <ion-row *ngFor="let ac of planillaAcompaniantes">
-                <ion-col>
-                    <ion-item>
-                        <ion-label>
-                            {{ac.apellidoPersona}}
-                        </ion-label>
-                    </ion-item>
-                </ion-col>
-                <ion-col>
-                    <ion-item>
-                        <ion-label>
-                            {{ac.nombrePersona}}
-                        </ion-label>
-                    </ion-item>
-                </ion-col>
-                <ion-col>
-                    <ion-item>
-                        <ion-label>
-                            {{ac.dniPersona}}
-                        </ion-label>
-                    </ion-item>
-                </ion-col>
-            </ion-row>
-        </ion-list> -->
+
+    <ion-row style="place-content: flex-end;">
+        <ion-button size="small" fill="clear" color="dark" strong="true" (click)="verListaAcom()">Ver Acompañantes</ion-button>
     </ion-row>
 
 
 </ion-content>
 
 <ion-footer no-border>
-    <ion-button style="float: right;" (click)="global()">
-        Procesar Ingreso
-    </ion-button>
+    <ion-row style="place-content: flex-end; margin-right: 10px;;">
+        <ion-button (click)="global()">
+            Procesar Ingreso
+        </ion-button>
+    </ion-row>
 </ion-footer>

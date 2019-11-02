@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ManageCommonSpacePage implements OnInit {
 
-  espacioComun: IEspacioComun;
+  espacioComun: IEspacioComun[];
 
   constructor(private service: ServiceService, public actionSheetController: ActionSheetController, private router: Router) { }
 
@@ -37,7 +37,7 @@ export class ManageCommonSpacePage implements OnInit {
 
   async presentActionSheet(i) {
     const actionSheet = await this.actionSheetController.create({
-      header: this.espacioComun[i].titulonorma,
+      header: this.espacioComun[`i`].titulonorma,
       mode: 'ios',
       buttons: [ {
         text: 'Abrir',
