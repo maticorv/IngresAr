@@ -12,6 +12,7 @@ import { Icolor } from 'src/app/interfaces/color';
 import { Iseguro } from 'src/app/interfaces/seguro';
 import { ServiceService } from 'src/app/services/service.service';
 import { IQr } from '../../../interfaces/iqr';
+import { IAseguradora } from 'src/app/interfaces/aseguradora';
 
 @Component({
   selector: 'app-newvehicle-qr',
@@ -19,7 +20,6 @@ import { IQr } from '../../../interfaces/iqr';
   styleUrls: ['./newvehicle-qr.page.scss'],
 })
 export class NewvehicleQRPage implements OnInit {
-
   marcas: Imarca[];
   brand: string;
   vehiculo: Vehiculo;
@@ -31,10 +31,12 @@ export class NewvehicleQRPage implements OnInit {
   myDate: string;
   max: string;
   dominio: string;
-  aseguradora: string;
-  vencimiento: string;
+  vencimiento: Date;
   position: number;
-  qr: IQr;
+  check: boolean;
+  aseguradoras: IAseguradora[];
+  aseguradora: IAseguradora;
+
   constructor(private calendar: Calendar, private service: ServiceService, private router: Router,
               private toastController: ToastController, private vehiculos: Vehiculo, private ingresoAPie: IngresoAPie,
               private persona: Personas, private marca: Marca, private alertCtrl: AlertController) {
@@ -50,22 +52,35 @@ export class NewvehicleQRPage implements OnInit {
     this.getMarca();
     this.getColors();
     this.getSeguros();
-    this.obtenerQR(this.service.getCodQR());
+    this.getAseguradoras();
   }
 
-  obtenerQR(codQR) {
-    this.service.getQRByCodQR(codQR).subscribe(data => {
-      this.qr = data;
-    },
-    (error) => {console.log(error);
-    });
-  }
   postVehiculo() {
 
     console.log(this.dominio, this.marcas[this.brand],
     this.modelos[this.model], this.colors[this.color], this.aseguradora, this.vencimiento );
     this.service.getVehiculoByDominio(this.dominio).subscribe( vehic => {
-      console.log(vehic);
+      this.persona.vehiculos.push(vehic);
+      if (this.check) {
+        const seguro: Iseguro = {
+          id: null,
+          fechaVencimientoSeguro: this.vencimiento,
+          seguroAseguradora: this.aseguradora,
+          seguroVehiculo: vehic,
+        };
+        this.service.postSeguro(seguro).subscribe(() => {
+          // tslint:disable-next-line: max-line-length
+          this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
+             this.presentToast('Vehiculo creado satisfactoriamente');
+          });
+        });
+      } else {
+        // tslint:disable-next-line:max-line-length
+        this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
+          this.presentToast('Vehiculo creado satisfactoriamente');
+       });
+      }
+    }, (error: any) => {
       this.service.postVehiculo(this.dominio, this.marcas[this.brand],
       this.modelos[this.model], null ,
       this.colors[this.color]).subscribe(data => {
@@ -76,19 +91,33 @@ export class NewvehicleQRPage implements OnInit {
           this.vehiculos.vehiculoModelo = data.vehiculoModelo;
           this.ingresoAPie.ingresoAPie = false;
           this.persona.vehiculos.push(data);
-          // tslint:disable-next-line: no-shadowed-variable
-          // tslint:disable-next-line: max-line-length
-          this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe((vehi) => {
-            this.presentToast('Vehiculo creado satisfactoriamente');
-          });
-        }, (error) => {console.log(error);
-                       this.presentToast('Ha ocurrido un error');
-                      }
+          if (this.check) {
+            const seguro: Iseguro = {
+              id: null,
+              fechaVencimientoSeguro: this.vencimiento,
+              seguroAseguradora: this.aseguradora,
+              seguroVehiculo: data,
+            };
+            this.service.postSeguro(seguro).subscribe(() => {
+              // tslint:disable-next-line: max-line-length
+              this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
+                 this.presentToast('Vehiculo creado satisfactoriamente');
+              });
+            });
+          } else {
+              // tslint:disable-next-line:max-line-length
+              this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
+                  this.presentToast('Vehiculo creado satisfactoriamente');
+              });
+          }
+        // tslint:disable-next-line:no-shadowed-variable
+        }, (error: any) => {
+          console.log(error);
+          this.presentToast('Ha ocurrido un error');
+          }
         );
-    },
-    (error) => {console.log(error);
-                this.presentAlert();
-    });
+    }
+    );
   }
 
   getMarca() {
@@ -133,6 +162,21 @@ export class NewvehicleQRPage implements OnInit {
     (error) => { console.log(error);
     });
   }
+  getAseguradoras() {
+    this.service.getAseguradora().subscribe( data => {
+      this.aseguradoras = data;
+      // console.log('this.aseguradoras :', this.aseguradoras);
+    },
+    (error: any) => {
+      console.log(error);
+    }
+    );
+  }
+  Aseguradora(event: Event) {
+    console.log(event);
+    const indx = event[`detail`].value;
+    this.aseguradora = this.aseguradoras[indx];
+  }
 
   async presentToast(me: string) {
     const toast = await this.toastController.create({
@@ -156,6 +200,5 @@ export class NewvehicleQRPage implements OnInit {
 
     await alert.present();
   }
-
 
 }
