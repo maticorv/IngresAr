@@ -128,24 +128,43 @@ export class NewvehiclePage implements OnInit {
       },
       2000);
   }
+  
   postVehiculo() {
 
     console.log(this.dominio, this.marcas[this.brand],
     this.modelos[this.model], this.colors[this.color], this.aseguradora, this.vencimiento );
-    this.service.postVehiculo(this.dominio, this.marcas[this.brand],
-      this.modelos[this.model], null ,
-      this.colors[this.color]).subscribe(data => {
-          console.log(data);
-          this.persona.vehiculos.push(data);
-          // tslint:disable-next-line: no-shadowed-variable
-          // tslint:disable-next-line: max-line-length
-          this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe((vehi) => {
-            this.presentToast('Vehiculo creado satisfactoriamente');
-          });
-        }, (error) => {console.log(error);
+
+    this.service.getVehiculoByDominio(this.dominio).subscribe(data => {
+      console.log(data);
+      this.presentAlert();
+    },
+    (error) => {console.log(error);
+
+                this.service.postVehiculo(this.dominio, this.marcas[this.brand],
+        this.modelos[this.model], null ,
+        this.colors[this.color]).subscribe(data => {
+            console.log(data);
+            this.persona.vehiculos.push(data);
+            // tslint:disable-next-line: no-shadowed-variable
+            // tslint:disable-next-line: max-line-length
+            this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe((vehi) => {
+              this.presentToast('Vehiculo creado satisfactoriamente');
+            });
+          }, (err) => {console.log(err);
                        this.presentToast('Ha ocurrido un error');
-                      }
-        );
+                        }
+          );
+    });
+
+  }
+
+  async presentAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'El vehiculo con el domini: ' + this.dominio + 'ya se encuentra registrado',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
   }
 
 }

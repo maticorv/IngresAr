@@ -27,6 +27,7 @@ import { IAseguradora } from '../interfaces/aseguradora';
 import { Iseguro } from '../interfaces/seguro';
 import { IPersonaEstado } from '../interfaces/ipersona-estado';
 import { ICarnet } from '../interfaces/icarnet';
+import { IArt } from '../interfaces/iart';
 
 @Injectable({
   providedIn: 'root'
@@ -611,6 +612,26 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
     return this.http.get(this.url + 'carnet/persona/' + id, {headers}).pipe(map( data => data as ICarnet));
+  }
+
+  getArtByIdPersona(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.get(this.url + 'arts/persona/' + id, {headers}).pipe(map( data => data as IArt));
+  }
+
+  postART(fechaVencimientoArt, artDersona) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    const params = {fechaVencimientoArt, artDersona};
+    return this.http.post(this.url + 'arts/', params, {headers}).pipe(map( data => data as IArt));
+  }
+
+  putART(id, fechaVencimientoArt, artDersona) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    const params = {id, fechaVencimientoArt, artDersona};
+    return this.http.put(this.url + 'arts/', params, {headers}).pipe(map( data => data as IArt));
   }
 
 

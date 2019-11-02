@@ -75,10 +75,16 @@
         </ion-list>
     </ion-row>
     <div>
-        <ion-button routerLink="/newcompany"> Agregar Empresa</ion-button>
+        <ion-button size="small" fill="clear" color="dark" strong="true" routerLink="/newcompany">Agregar Empresa</ion-button>
+    </div>
+    <div *ngIf="art === 'crear'">
+        <ion-button size="small" fill="clear" color="dark" strong="true" routerLink="/art">Agregar ART</ion-button>
+    </div>
+    <div *ngIf="art === 'vencida'">
+        <ion-button size="small" fill="clear" color="dark" strong="true" routerLink="/actualizar-art">Actualizar ART</ion-button>
     </div>
     <div class="mt-5" style="text-align-last: right">
-        <ion-button (click)="aceptar()"> Siguiente</ion-button>
+        <ion-button [disabled]="!(condicion)" (click)="aceptar()"> Siguiente</ion-button>
     </div>
 
 </ion-content>
