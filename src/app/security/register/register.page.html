@@ -18,7 +18,7 @@
             <ion-select class="select-DNI-size" placeholder="DNI" value="dni" okText="Seleccionar">DNI
                 <ion-select-option value="DNI">DNI</ion-select-option>
             </ion-select>
-            <ion-input name="dni" type="number" maxlength="9" required placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
+            <ion-input name="dni" type="tel" minlength="7" maxlength="9" required placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label position="floating">Nombre
@@ -68,7 +68,7 @@
             <ion-label position="floating">Contraseña
                 <ion-text color="danger">*</ion-text>
             </ion-label>
-            <ion-input name="pass1" required [(ngModel)]="password1" type="password"></ion-input>
+            <ion-input name="pass1" minlength="6" maxlength="15" required [(ngModel)]="password1" type="password"></ion-input>
         </ion-item>
         <ion-button block color="primary" (click)="onSubmit()" [disabled]="password!==password1" type="submit">
             Registrarse

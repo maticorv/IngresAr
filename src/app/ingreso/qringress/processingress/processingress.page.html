@@ -25,8 +25,14 @@
   <div>
       <ion-button size="small" fill="clear" color="dark" strong="true" [routerLink]="['/newvehicle-QR']">Agregar Vehiculo</ion-button>
   </div>
+  <div *ngIf="carnet === 'crear'">
+        <ion-button size="small" fill="clear" color="dark" strong="true" routerLink="/carnet">Agregar Carnet</ion-button>
+  </div>
+    <div *ngIf="carnet === 'vencido'">
+        <ion-button size="small" fill="clear" color="dark" strong="true" routerLink="/actualizar-carnet">Actualizar Carnet</ion-button>
+    </div>
   <div style="text-align-last: right">
-      <ion-button (click)="procesarIngreso()">Procesar Ingreso</ion-button>
+      <ion-button [disabled]="!(avanzar)" (click)="procesarIngreso()">Procesar Ingreso</ion-button>
   </div>
 
 </ion-content>

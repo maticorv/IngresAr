@@ -25,6 +25,8 @@ import { IQr } from '../interfaces/iqr';
 import { IDomicilio } from '../interfaces/idomicilio';
 import { IAseguradora } from '../interfaces/aseguradora';
 import { Iseguro } from '../interfaces/seguro';
+import { IPersonaEstado } from '../interfaces/ipersona-estado';
+import { ICarnet } from '../interfaces/icarnet';
 
 @Injectable({
   providedIn: 'root'
@@ -104,10 +106,24 @@ export class ServiceService {
     return this.http.get( this.url + 'personas/dni/' + dni, {headers}).pipe(map(data => data as Persona));
   }
 
-  postPersona(nombrePersona: string, apellidoPersona: string, dniPersona: number, telefonoPersona: number) {
+  getAllPersonas() {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
+    return this.http.get( this.url + 'personas', {headers}).pipe(map(data => data as Persona[]));
+  }
+
+  putPersona(id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaEstado, personaUser, personabarrio, vehiculos) {
+    const token = this.leerToken();
+    const params = {id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaEstado, personaUser, personabarrio, vehiculos};
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.put(this.url + 'personas', params, {headers}).pipe(map(data => data as Persona));
+  }
+
+  // tslint:disable-next-line: max-line-length
+  postPersona(nombrePersona: string, apellidoPersona: string, dniPersona: number, telefonoPersona: number, personaEstado, personaUser, personabarrio, vehiculos) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    const params = {nombrePersona, apellidoPersona, dniPersona, telefonoPersona};
+    const params = {nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaEstado, personaUser, personabarrio, vehiculos};
     return this.http.post( this.url + 'personas', params, {headers}).pipe(map(data => data as Persona));
   }
   getPersonaRol(rol: string): Observable <Persona[]> {
@@ -426,12 +442,7 @@ export class ServiceService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'persona/userperson/?id=' + id , {headers}).pipe(map(data => data as Persona));
   }
-  putPersona(persona: Persona): Observable<Persona> {
-    const token = this.leerToken();
-    const params = {persona};
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
-    return this.http.put(this.url + 'personas', persona, {headers}).pipe(map(data => data as Persona));
-  }
+
 
   getListaAmigos(dni) {
     const token = this.leerToken();
@@ -498,17 +509,17 @@ export class ServiceService {
     return this.http.put(this.url + 'lista-amigos', params, {headers}).pipe(map(data => data as IFriendsList));
   }
 
-  crearGuardia(id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaUser, personabarrio, vehiculos) {
+  crearGuardia(id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaEstado, personaUser, personabarrio, vehiculos) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
-    const params = {id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaUser, personabarrio, vehiculos};
+    const params = {id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaEstado, personaUser, personabarrio, vehiculos};
     return this.http.put(this.url + 'personas', params, {headers}).pipe(map(data => data));
   }
 
-  crearPropietario(id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaUser, personabarrio, vehiculos) {
+  crearPropietario(id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaEstado, personaUser, personabarrio, vehiculos) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
-    const params = {id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaUser, personabarrio, vehiculos};
+    const params = {id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaEstado, personaUser, personabarrio, vehiculos};
     return this.http.put(this.url + 'personas', params, {headers}).pipe(map(data => data));
   }
 
@@ -566,6 +577,40 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
     return this.http.get(this.url + 'dompersona/' + id, {headers}).pipe(map(data => data as IDomicilio));
+  }
+
+  postPersonaEstado(nombreEstadoPersona, fecha) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    const params = {nombreEstadoPersona, fecha};
+    return this.http.post(this.url + 'estado-personas', params, {headers}).pipe(map( data => data as IPersonaEstado));
+  }
+
+  putPersonaEstado(id, nombreEstadoPersona, fecha) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    const params = {id, nombreEstadoPersona, fecha};
+    return this.http.put(this.url + 'estado-personas', params, {headers}).pipe(map( data => data as IPersonaEstado));
+  }
+
+  postCarnet(categoria, fechaOtorgamiento, fechaVencimiento, carnetPersona) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    const params = {categoria, fechaOtorgamiento, fechaVencimiento, carnetPersona};
+    return this.http.post(this.url + 'carnet-de-conducirs', params, {headers}).pipe(map( data => data as ICarnet));
+  }
+
+  putCarnet(id, categoria, fechaOtorgamiento, fechaVencimiento, carnetPersona) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    const params = {id, categoria, fechaOtorgamiento, fechaVencimiento, carnetPersona};
+    return this.http.put(this.url + 'carnet-de-conducirs', params, {headers}).pipe(map( data => data as ICarnet));
+  }
+
+  getCarnetByIdPerson(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.get(this.url + 'carnet/persona/' + id, {headers}).pipe(map( data => data as ICarnet));
   }
 
 

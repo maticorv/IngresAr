@@ -57,10 +57,15 @@
             <ion-label>Vencimiento de seguro</ion-label>
             <ion-datetime [disabled]="!check" [(ngModel)]="vencimiento" placeholder="myDate " [min]="myDate " [max]="max " displayFormat="DD MM YY " placeholder="Select Date "></ion-datetime>
         </ion-item>
-
     </ion-list>
-    <ion-button color="primary " routerLink="/authorization " routerLinkActive="router-link-active ">Aceptar</ion-button>
-    <ion-button color="primary " (click)="postVehiculo() ">Crear</ion-button>
+    <ion-row>
+        <ion-col>
+            <ion-button color="primary " routerLink="/carnet" routerLinkActive="router-link-active ">Agregar Carnet</ion-button>
+        </ion-col>
+        <ion-col>
+            <ion-button color="primary " (click)="postVehiculo() ">Crear Vehiculo</ion-button>
+        </ion-col>
+    </ion-row>
 
 
 </ion-content>

@@ -39,6 +39,10 @@ export class GenerateQrPage implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
+  fotoQR: string;
+  fotoQRContentType: string;
+
+
   constructor(private service: ServiceService, private router: Router,
               // tslint:disable-next-line: variable-name
               private alertCtrl: AlertController, private _formBuilder: FormBuilder,
@@ -74,7 +78,7 @@ export class GenerateQrPage implements OnInit {
 
   crearQr() {
     // tslint:disable-next-line: max-line-length
-    this.service.postQR(this.codigoQR, this.fechaFinQR, null, 'image/png', this.tipoVisita, this.personaAutorizador, this.personaAutorizada, this.domicilio).subscribe(data => {
+    this.service.postQR(this.codigoQR, this.fechaFinQR, this.fotoQR, this.fotoQRContentType, this.tipoVisita, this.personaAutorizador, this.personaAutorizada, this.domicilio).subscribe(data => {
       console.log(data);
       this.enviarMail();
     },
@@ -200,6 +204,7 @@ export class GenerateQrPage implements OnInit {
       stepper.next();
   }
 
+
   createPdf() {
     const docDefinition = {
       content: [
@@ -263,6 +268,15 @@ export class GenerateQrPage implements OnInit {
 
   descargarPDF() {
     this.pdfGenerator.download();
+  }
+
+  getPart(str: string) {
+    // this.img = str.split(',')[1];
+    const axu = str.split(':')[1];
+    this.fotoQRContentType = axu.split(';')[0];
+    this.fotoQR = str.split(',')[1];
+    console.log('this.fotoQRContentType :', this.fotoQRContentType);
+    console.log('this.fotoQR :', this.fotoQR);
   }
 
 }

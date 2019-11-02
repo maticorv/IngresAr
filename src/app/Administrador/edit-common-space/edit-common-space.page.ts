@@ -13,10 +13,12 @@ export class EditCommonSpacePage implements OnInit {
 
   espacioComun: IEspacioComun;
   foto = '../assets/Prado-Cancha.jpg';
-  fotoEspCom: string;
+  fotoEspacioComun: string;
   nombreEspacioComun: string;
   disponibilidadDesde: any;
   disponibilidadHasta: any;
+  convertedImg: string;
+  fotoEspacioComunContentType = 'image/jpeg';
 
   constructor(private activatedRoute: ActivatedRoute, private service: ServiceService, private camera: Camera) { }
 
@@ -30,6 +32,9 @@ export class EditCommonSpacePage implements OnInit {
       this.disponibilidadDesde = data.disponibilidadDesde;
       this.disponibilidadHasta = data.disponibilidadHasta;
       this.nombreEspacioComun = data.nombreEspacioComun;
+      this.fotoEspacioComun = data.fotoEspacioComun;
+      this.fotoEspacioComunContentType = data.fotoEspacioComunContentType;
+      this.convertedImg = 'data:' + data.fotoEspacioComunContentType + ';base64,' + data.fotoEspacioComun;
     },
     (error) => {console.log(error);
     });
@@ -42,7 +47,7 @@ export class EditCommonSpacePage implements OnInit {
 
   ActualizarEspacioComun() {
     // tslint:disable-next-line: max-line-length
-    this.service.putEspacioComun(this.espacioComun.id, this.nombreEspacioComun, this.disponibilidadDesde, this.disponibilidadHasta, this.espacioComun.fotoEspacioComun, this.espacioComun.fotoEspacioComunContentType, this.espacioComun.horaDesde, this.espacioComun.horaHasta, this.espacioComun.espacioBarrio, this.espacioComun.espacioTipos).subscribe(data => {
+    this.service.putEspacioComun(this.espacioComun.id, this.nombreEspacioComun, this.disponibilidadDesde, this.disponibilidadHasta, this.fotoEspacioComun, this.fotoEspacioComunContentType, this.espacioComun.horaDesde, this.espacioComun.horaHasta, this.espacioComun.espacioBarrio, this.espacioComun.espacioTipos).subscribe(data => {
       console.log(data);
     },
     (error) => {console.log(error);
@@ -58,7 +63,8 @@ export class EditCommonSpacePage implements OnInit {
     };
     this.camera.getPicture( options )
     .then(imageData => {
-      this.fotoEspCom = `data:image/jpeg;base64,${imageData}`;
+      this.fotoEspacioComun = imageData;
+      this.convertedImg = `data:image/jpeg;base64,${imageData}`;
     })
     .catch(error => {
       console.error( error );
@@ -74,7 +80,8 @@ export class EditCommonSpacePage implements OnInit {
     };
     this.camera.getPicture( options )
     .then(imageData => {
-      this.fotoEspCom = `data:image/jpeg;base64,${imageData}`;
+      this.fotoEspacioComun = imageData;
+      this.convertedImg = `data:image/jpeg;base64,${imageData}`;
     })
     .catch(error => {
       console.error( error );

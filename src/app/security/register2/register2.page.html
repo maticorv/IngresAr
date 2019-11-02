@@ -15,7 +15,7 @@
         <ion-select class="select-DNI-size" placeholder="DNI" value="dni" okText="Seleccionar">DNI
             <ion-select-option value="DNI">DNI</ion-select-option>
         </ion-select>
-        <ion-input type="number" maxlength="9" required placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
+        <ion-input type="tel" minlength="7" maxlength="9" required placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
     </ion-item>
 
     <ion-item>

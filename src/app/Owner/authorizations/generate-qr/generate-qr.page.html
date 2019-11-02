@@ -61,7 +61,8 @@
                   <input matInput placeholder="Ingrese DNI" formControlName="firstCtrl" required [(ngModel)]="dni">
                 </mat-form-field>
                 <div>
-                  <button mat-button color="primary" (click)="getpersona(stepper)" >Siguiente</button>
+                  <!-- <button mat-button color="primary" (click)="getpersona(stepper)" >Siguiente</button> -->
+                  <ion-button fill="clear" color="dark" (click)="getpersona(stepper)">Siguiente</ion-button>
                 </div>
               </form>
             </mat-step>
@@ -82,28 +83,35 @@
                   <input hidden matInput formControlName="secondCtrl" required>
                 </mat-form-field>
                 <div>
-                  <button mat-button matStepperPrevious>Atras</button>
-                  <button mat-button matStepperNext (click)="generarQr()">Siguiente</button>
+                  <!-- <button mat-button matStepperPrevious>Atras</button>
+                  <button mat-button matStepperNext (click)="generarQr()">Siguiente</button> -->
+                  <ion-button fill="clear" color="dark" (click)="goBack(stepper)">Atras</ion-button>
+                  <ion-button fill="clear" color="dark" (click)="goForward(stepper); generarQr()">Siguiente</ion-button>
                 </div>
               </form>
             </mat-step>
             <mat-step>
               <ng-template matStepLabel>Generar autorización</ng-template>
               <div>
-                <button mat-button matStepperPrevious>Atras</button>
-                <button mat-button color="primary" (click)="createPdf()" matStepperNext>Crear Autorizacion</button>
+                <!-- <button mat-button matStepperPrevious>Atras</button>
+                <button mat-button color="primary" (click)="createPdf()" matStepperNext>Crear Autorizacion</button> -->
+                <ion-button fill="clear" color="dark" (click)="goBack(stepper)">Atras</ion-button>
+                <ion-button fill="clear" color="dark" (click)="goForward(stepper); createPdf(); getPart(img)">Siguiente</ion-button>
               </div>
             </mat-step>
             <mat-step>
               <ng-template matStepLabel>Evniar autorización</ng-template>
               <div>
-                <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
+                <!-- <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
                 <button mat-button color="primary" (click)="crearQr()" matStepperPrevious>Crear Autorizacion</button>
+                <ion-button (click)="stepper.reset()">Reset</ion-button> -->
+                <ion-button fill="clear" color="dark" (click)="stepper.reset()">Reset</ion-button>
+                <ion-button fill="clear" color="dark" (click)="crearQr()">Crear Autorización</ion-button>
               </div>
             </mat-step>
           </mat-vertical-stepper>
 
-          <ion-button fill="outline" shape="round" expand="full" color="success" (click)="descargarPDF()">Imprimir PDF</ion-button>
-          <ion-button fill="outline" shape="round" expand="full" color="tertiary" (click)="createPdf()">Crear PDF</ion-button>
+          <!-- <ion-button fill="outline" shape="round" expand="full" color="success" (click)="getPart(img)">Por Parte</ion-button> -->
+          <!-- <ion-button fill="outline" shape="round" expand="full" color="tertiary" (click)="createPdf()">Crear PDF</ion-button> -->
 
 </ion-content>

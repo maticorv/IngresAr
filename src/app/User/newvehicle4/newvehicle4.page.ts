@@ -10,7 +10,8 @@ import { Persona } from 'src/app/interfaces/persona';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { ServiceService } from 'src/app/services/service.service';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular';
+import { Personas } from '../../classes/persona';
 
 @Component({
   selector: 'app-newvehicle4',
@@ -37,7 +38,7 @@ export class Newvehicle4Page implements OnInit {
   persona: Persona;
 
   constructor(private calendar: Calendar, private service: ServiceService, private router: Router,
-              private toastController: ToastController) {
+              private toastController: ToastController, private alertCtrl: AlertController, private personas: Personas) {
                 this.myDate = new Date().toISOString();
                 this.max = new Date(new Date().getFullYear() + 2, new Date().getMonth() , new Date().getDay()).toISOString();
                 this.calendar.createCalendar('MyCalendar').then(
@@ -63,6 +64,16 @@ export class Newvehicle4Page implements OnInit {
     this.service.getPersonUser(this.account.id).subscribe((resp) => {
       this.persona = resp;
       this.vehiculos = resp.vehiculos;
+      this.personas.apellidoPersona = resp.apellidoPersona;
+      this.personas.dniPersona = resp.dniPersona;
+      this.personas.id = resp.id;
+      this.personas.nombrePersona = resp.nombrePersona;
+      this.personas.personaEstado = resp.personaEstado;
+      this.personas.personaUser = resp.personaUser;
+      this.personas.personabarrio = resp.personabarrio;
+      this.personas.personadomicilios = resp.personadomicilios;
+      this.personas.telefonoPersona = resp.telefonoPersona;
+      this.personas.vehiculos = resp.vehiculos;
     }
     );
   }
@@ -118,20 +129,23 @@ export class Newvehicle4Page implements OnInit {
       2000);
   }
   postVehiculo() {
-    this.service.postVehiculo(this.dominio, this.marcas[this.brand],
-    this.modelos[this.model], null ,
-    this.colors[this.color]).subscribe(data => {
-      this.persona.vehiculos.push(data);
-      console.log('this.persona :', this.persona);
-      this.service.putPersona(this.persona).subscribe(
-        () =>  {this.presentToast('Vehiculo añadido satisfactoriamente');
-      },
-        (error) => {
-          console.log(error);
-          this.presentToast('Ha ocurrido un error');
-        }
-      );
 
-    });
+    console.log(this.dominio, this.marcas[this.brand],
+    this.modelos[this.model], this.colors[this.color], this.aseguradora, this.vencimiento );
+    this.service.postVehiculo(this.dominio, this.marcas[this.brand],
+      this.modelos[this.model], null ,
+      this.colors[this.color]).subscribe(data => {
+          console.log(data);
+          this.persona.vehiculos.push(data);
+          // tslint:disable-next-line: no-shadowed-variable
+          // tslint:disable-next-line: max-line-length
+          this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe((vehi) => {
+            this.presentToast('Vehiculo creado satisfactoriamente');
+          });
+        }, (error) => {console.log(error);
+                       this.presentToast('Ha ocurrido un error');
+                      }
+        );
   }
+
 }
