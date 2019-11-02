@@ -1,6 +1,8 @@
+import { IAseguradora } from './aseguradora';
+import { IVehiculo } from './vehiculo';
 export interface Iseguro {
-    id: number;
-    nombreSeguro: string;
     fechaVencimientoSeguro: Date;
-    segurovehiculo?: any;
+    id: number;
+    seguroAseguradora: IAseguradora;
+    seguroVehiculo: IVehiculo;
 }

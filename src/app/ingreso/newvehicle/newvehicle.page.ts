@@ -12,6 +12,7 @@ import { Vehiculo } from 'src/app/classes/vehiculo';
 import { IngresoAPie } from 'src/app/classes/ingresoAPie';
 import { Personas } from 'src/app/classes/persona';
 import { Marca } from 'src/app/classes/marca';
+import { IAseguradora } from '../../interfaces/aseguradora';
 
 @Component({
   selector: 'app-newvehicle',
@@ -19,7 +20,6 @@ import { Marca } from 'src/app/classes/marca';
   styleUrls: ['./newvehicle.page.scss'],
 })
 export class NewvehiclePage implements OnInit {
-
   marcas: Imarca[];
   brand: string;
   vehiculo: Vehiculo;
@@ -31,9 +31,12 @@ export class NewvehiclePage implements OnInit {
   myDate: string;
   max: string;
   dominio: string;
-  aseguradora: string;
-  vencimiento: string;
+  vencimiento: Date;
   position: number;
+  check: boolean;
+  aseguradoras: IAseguradora[];
+  aseguradora: IAseguradora;
+
   constructor(private calendar: Calendar, private service: ServiceService, private router: Router,
               private toastController: ToastController, private vehiculos: Vehiculo, private ingresoAPie: IngresoAPie,
               private persona: Personas, private marca: Marca) {
@@ -49,6 +52,7 @@ export class NewvehiclePage implements OnInit {
     this.getMarca();
     this.getColors();
     this.getSeguros();
+    this.getAseguradoras();
   }
 
   postVehiculo() {
@@ -65,10 +69,18 @@ export class NewvehiclePage implements OnInit {
         this.vehiculos.vehiculoModelo = data.vehiculoModelo;
         this.ingresoAPie.ingresoAPie = false;
         this.persona.vehiculos.push(data);
-        // tslint:disable-next-line: no-shadowed-variable
-        // tslint:disable-next-line: max-line-length
-        this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe((data) => {
-          this.presentToast('Vehiculo creado satisfactoriamente');
+        const seguro: Iseguro = {
+          id: null,
+          fechaVencimientoSeguro: this.vencimiento,
+          seguroAseguradora: this.aseguradora,
+          seguroVehiculo: data,
+        };
+        this.service.postSeguro(seguro).subscribe(() => {
+          // tslint:disable-next-line: max-line-length
+          this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
+             this.presentToast('Vehiculo creado satisfactoriamente');
+          });
+
         });
       }, (error) => {console.log(error);
                      this.presentToast('Ha ocurrido un error');
@@ -117,6 +129,20 @@ export class NewvehiclePage implements OnInit {
     },
     (error) => { console.log(error);
     });
+  }
+  getAseguradoras() {
+    this.service.getAseguradora().subscribe( data => {
+      this.aseguradoras = data;
+      // console.log('this.aseguradoras :', this.aseguradoras);
+    },
+    (error: any) => {
+      console.log(error);
+    }
+    );
+  }
+  Aseguradora(event: Event) {
+    // console.log(event);
+    this.aseguradora = event[`detail`].value;
   }
 
   async presentToast(me: string) {

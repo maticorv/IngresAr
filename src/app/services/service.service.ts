@@ -23,6 +23,8 @@ import { IFriendsList } from '../interfaces/ifriends-list';
 import { IDetalleEvento } from '../interfaces/idetalle-evento';
 import { IQr } from '../interfaces/iqr';
 import { IDomicilio } from '../interfaces/idomicilio';
+import { IAseguradora } from '../interfaces/aseguradora';
+import { Iseguro } from '../interfaces/seguro';
 
 @Injectable({
   providedIn: 'root'
@@ -169,6 +171,11 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
     return this.http.get( this. url + 'seguros', {headers}).pipe(map(data => data));
+  }
+  postSeguro(seguro: Iseguro): Observable <Iseguro> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
+    return this.http.post( this. url + 'seguros', seguro, {headers}).pipe(map(data => data as Iseguro));
   }
 
   getVechiculo(dni: number) {
@@ -568,6 +575,12 @@ export class ServiceService {
 
   setCodQR(codQR) {
     this.codQR = codQR;
+  }
+  getAseguradora(): Observable<IAseguradora[]> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
+    // tslint:disable-next-line: max-line-length
+    return this.http.get( this.url + 'aseguradoras', {headers} ).pipe(map(data => data as IAseguradora[]));
   }
 
 }
