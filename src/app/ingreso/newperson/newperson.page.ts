@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Personas } from 'src/app/classes/persona';
 import { ServiceService } from '../../services/service.service';
 import { ToastController } from '@ionic/angular';
+import { IPersonaEstado } from 'src/app/interfaces/ipersona-estado';
 
 @Component({
   selector: 'app-newperson',
@@ -15,15 +16,27 @@ export class NewpersonPage implements OnInit {
   apellidoPersona: string;
   dniPersona: number;
   telefonoPersona: number;
+  personaEstado: IPersonaEstado;
 
   // tslint:disable-next-line: max-line-length
   constructor(private router: Router, private persona: Personas, private service: ServiceService, private toastController: ToastController) { }
 
   ngOnInit() {
     this.dniPersona = this.persona.dniPersona;
+    this.createPersonaEstado();
   }
+
+  createPersonaEstado() {
+    this.service.postPersonaEstado('Habilitada', new Date()).subscribe(data => {
+      this.personaEstado = data;
+    },
+    (error) => {console.log(error);
+    });
+  }
+
   crearPersona() {
-    this.service.postPersona(this.nombrePersona, this.apellidoPersona, this.dniPersona, this.telefonoPersona).subscribe(data => {
+    // tslint:disable-next-line: max-line-length
+    this.service.postPersona(this.nombrePersona, this.apellidoPersona, this.dniPersona, this.telefonoPersona, this.personaEstado, null, null, null).subscribe(data => {
       console.log(data);
       this.persona.nombrePersona = data.nombrePersona;
       this.persona.apellidoPersona = data.apellidoPersona;

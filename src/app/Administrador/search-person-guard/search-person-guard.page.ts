@@ -5,6 +5,7 @@ import { Personas } from 'src/app/classes/persona';
 import { AlertController } from '@ionic/angular';
 import { Persona } from 'src/app/interfaces/persona';
 import { User } from '../../classes/user';
+import { IPersonaEstado } from 'src/app/interfaces/ipersona-estado';
 
 @Component({
   selector: 'app-search-person-guard',
@@ -14,6 +15,7 @@ import { User } from '../../classes/user';
 export class SearchPersonGuardPage implements OnInit {
 
   dni: number;
+  personaEstado: IPersonaEstado;
   persona: Persona;
   authorities = [
     'ROLE_GUARDIA'
@@ -25,10 +27,20 @@ export class SearchPersonGuardPage implements OnInit {
 
   ngOnInit() {
     console.log('this.user :', this.user);
+    this.createPersonaEstado();
   }
 
   ionViewWillLeave() {
     this.dni = null;
+    this.personaEstado = null;
+  }
+
+  createPersonaEstado() {
+    this.service.postPersonaEstado('Habilitada', new Date()).subscribe(data => {
+      this.personaEstado = data;
+    },
+    (error) => {console.log(error);
+    });
   }
 
   getPersonGuardia() {
@@ -56,7 +68,7 @@ export class SearchPersonGuardPage implements OnInit {
           cssClass: 'secondary',
           handler: () => {
             // tslint:disable-next-line: max-line-length
-            this.service.crearGuardia(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.user, this.persona.personabarrio, this.persona.vehiculos).subscribe(pers => {
+            this.service.crearGuardia(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.personaEstado, this.user, this.persona.personabarrio, this.persona.vehiculos).subscribe(pers => {
               console.log(pers);
               // tslint:disable-next-line: max-line-length
               this.service.cambiarRol(this.user.id, this.user.login, this.user.firstName, this.user.lastName, this.user.email, this.user.imageUrl, this.user.activated, this.user.langKey, this.user.createdBy, this.user.createdDate, this.user.lastModifiedBy, this.user.lastModifiedDate, this.authorities).subscribe(user => {

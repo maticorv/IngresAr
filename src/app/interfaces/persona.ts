@@ -10,4 +10,5 @@ export interface Persona {
     personabarrio: any;
     vehiculos: IVehiculo[];
     personadomicilios?: any;
+    personaEstado?: any;
 }

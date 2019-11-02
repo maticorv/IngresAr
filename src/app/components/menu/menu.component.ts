@@ -43,11 +43,11 @@ export class MenuComponent implements OnInit {
   }
 
   habilitar() {
-    this.router.navigate(['/habilitar-deshabilitar', 'habilitar']);
+    this.router.navigate(['/habilitar-deshabilitar', 'habilitada']);
   }
 
   deshabilitar() {
-    this.router.navigate(['/habilitar-deshabilitar', 'deshabilitar']);
+    this.router.navigate(['/habilitar-deshabilitar', 'bloqueada']);
   }
 
   personasBloqueadas() {

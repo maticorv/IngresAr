@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Persona } from '../../interfaces/persona';
+import { ServiceService } from '../../services/service.service';
 
 @Component({
   selector: 'app-personas-bloqueadas',
@@ -8,11 +9,23 @@ import { Persona } from '../../interfaces/persona';
 })
 export class PersonasBloqueadasPage implements OnInit {
 
-  persona: Persona;
+  persona = [];
 
-  constructor() { }
+  constructor(private service: ServiceService) { }
 
   ngOnInit() {
   }
+
+  obtenerPersonas() {
+    this.service.getAllPersonas().subscribe( data => {
+      if (data.personaEstado.nombreEstadoPersona === 'bloqueada') {
+        this.persona.push(data);
+      }
+    },
+    (error) => {console.log(error);
+    });
+  }
+
+
 
 }

@@ -123,7 +123,8 @@ export class NewvehiclePage implements OnInit {
     this.colors[this.color]).subscribe(data => {
       this.persona.vehiculos.push(data);
       console.log('this.persona :', this.persona);
-      this.service.putPersona(this.persona).subscribe(
+      // tslint:disable-next-line: max-line-length
+      this.service.putPersona(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.personaEstado, this.persona.personaUser, this.persona.personabarrio, this.persona.vehiculos).subscribe(
         () =>  {this.presentToast('Vehiculo añadido satisfactoriamente');
       },
         (error) => {

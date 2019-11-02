@@ -5,6 +5,7 @@ import { Personas } from 'src/app/classes/persona';
 import { AlertController } from '@ionic/angular';
 import { Persona } from 'src/app/interfaces/persona';
 import { User } from 'src/app/classes/user';
+import { IPersonaEstado } from 'src/app/interfaces/ipersona-estado';
 
 @Component({
   selector: 'app-search-person-homeowener',
@@ -15,6 +16,7 @@ export class SearchPersonHomeowenerPage implements OnInit {
 
   dni: number;
   persona: Persona;
+  personaEstado: IPersonaEstado;
   authorities = [
       'ROLE_PROPIETARIO'
   ];
@@ -23,10 +25,12 @@ export class SearchPersonHomeowenerPage implements OnInit {
               private alertCtrl: AlertController, private user: User, private personas: Personas) { }
 
   ngOnInit() {
+    this.createPersonaEstado();
   }
 
   ionViewWillLeave() {
     this.dni = null;
+    this.personaEstado = null;
   }
 
   getPersonPropietario() {
@@ -39,6 +43,14 @@ export class SearchPersonHomeowenerPage implements OnInit {
                  this.personaNoExiste();
     });
 
+  }
+
+  createPersonaEstado() {
+    this.service.postPersonaEstado('Habilitada', new Date()).subscribe(data => {
+      this.personaEstado = data;
+    },
+    (error) => {console.log(error);
+    });
   }
 
   async personaExiste() {
@@ -54,7 +66,7 @@ export class SearchPersonHomeowenerPage implements OnInit {
           cssClass: 'secondary',
           handler: () => {
             // tslint:disable-next-line: max-line-length
-            this.service.crearGuardia(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.user, this.persona.personabarrio, this.persona.vehiculos).subscribe(pers => {
+            this.service.crearGuardia(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.personaEstado, this.user, this.persona.personabarrio, this.persona.vehiculos).subscribe(pers => {
               console.log(pers);
               // tslint:disable-next-line: max-line-length
               this.service.cambiarRol(this.user.id, this.user.login, this.user.firstName, this.user.lastName, this.user.email, this.user.imageUrl, this.user.activated, this.user.langKey, this.user.createdBy, this.user.createdDate, this.user.lastModifiedBy, this.user.lastModifiedDate, this.authorities).subscribe(user => {

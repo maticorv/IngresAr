@@ -82,7 +82,8 @@ export class Newvehicle3Page implements OnInit {
     });
     this.persona.vehiculos.push(this.vehiculo);
     console.log('this.persona :', this.persona);
-    this.service.putPersona(this.persona).subscribe(data => {
+    // tslint:disable-next-line: max-line-length
+    this.service.putPersona(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.personaEstado, this.persona.personaUser, this.persona.personabarrio, this.persona.vehiculos).subscribe(data => {
       Swal.fire({
         position: 'center',
         type: 'success',
