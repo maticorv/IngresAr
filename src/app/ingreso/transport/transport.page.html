@@ -19,13 +19,19 @@
         </ion-list>
     </form>
     <div>
-        <ion-button size="small" fill="clear" color="dark" strong="true" [routerLink]="['/newvehicle']">Agregar Vehiculo</ion-button>
-    </div>
-    <div>
         <ion-button size="small" fill="clear" color="dark" strong="true" (click)="ingresoAPie()">Ingreso a Pie</ion-button>
     </div>
+    <div>
+        <ion-button size="small" fill="clear" color="dark" strong="true" [routerLink]="['/newvehicle']">Agregar Vehiculo</ion-button>
+    </div>
+    <div *ngIf="carnet === 'crear'">
+        <ion-button size="small" fill="clear" color="dark" strong="true" routerLink="/carnet">Agregar Carnet</ion-button>
+    </div>
+    <div *ngIf="carnet === 'vencido'">
+        <ion-button size="small" fill="clear" color="dark" strong="true" routerLink="/actualizar-carnet">Actualizar Carnet</ion-button>
+    </div>
     <div style="text-align-last: right">
-        <ion-button (click)="siguiente()">Aceptar</ion-button>
+        <ion-button [disabled]="!(avanzar)" (click)="siguiente()">Aceptar</ion-button>
     </div>
 
 </ion-content>

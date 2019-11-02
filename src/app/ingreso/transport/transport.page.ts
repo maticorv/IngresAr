@@ -6,6 +6,7 @@ import { IVehiculo } from '../../interfaces/vehiculo';
 import { Vehiculo } from 'src/app/classes/vehiculo';
 import { Router } from '@angular/router';
 import { IngresoAPie } from 'src/app/classes/ingresoAPie';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-transport',
@@ -15,14 +16,45 @@ import { IngresoAPie } from 'src/app/classes/ingresoAPie';
 export class TransportPage implements OnInit {
 
   auto: number;
-
   vehiculo: IVehiculo;
+  avanzar: boolean;
+  carnet: string;
+  hoy: Date;
 
   // tslint:disable-next-line: max-line-length
-  constructor(private service: ServiceService, private personas: Personas, private vehiculos: Vehiculo, private router: Router, private ingresoApie: IngresoAPie) { }
+  constructor(private service: ServiceService, private personas: Personas, private vehiculos: Vehiculo,
+              private router: Router, private ingresoApie: IngresoAPie, private alertCtrl: AlertController) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     this.getVehiculo();
+    this.hoy = new Date();
+    this.getCarnet();
+  }
+
+  ionViewWillLeave() {
+    this.auto = null;
+    this.vehiculo = null;
+    this.avanzar = null;
+    this.carnet = null;
+    this.hoy = null;
+  }
+
+  getCarnet() {
+    this.service.getCarnetByIdPerson(this.personas.id).subscribe(data => {
+      if (new Date(data.fechaVencimiento) < this.hoy) {
+        this.carnet = 'vencido';
+        this.carnetVencido();
+      } else {
+        this.avanzar = true;
+      }
+    },
+    (error) => {console.log(error);
+                this.carnet = 'crear';
+                this.sinCarnet();
+    });
   }
 
   siguiente() {
@@ -54,6 +86,24 @@ export class TransportPage implements OnInit {
     (error) => {
       console.log(error);
     });
+  }
+
+  async carnetVencido() {
+    const alert = await this.alertCtrl.create({
+      header: 'La persona tiene vencido el carnet, por favor actualicelo',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
+  }
+
+  async sinCarnet() {
+    const alert = await this.alertCtrl.create({
+      header: 'La persona no tiene asociado el carnet, por favor agreguelo',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
   }
 
 }

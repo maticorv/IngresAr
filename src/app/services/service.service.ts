@@ -593,6 +593,19 @@ export class ServiceService {
     return this.http.post(this.url + 'carnet-de-conducirs', params, {headers}).pipe(map( data => data as ICarnet));
   }
 
+  putCarnet(id, categoria, fechaOtorgamiento, fechaVencimiento, carnetPersona) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    const params = {id, categoria, fechaOtorgamiento, fechaVencimiento, carnetPersona};
+    return this.http.put(this.url + 'carnet-de-conducirs', params, {headers}).pipe(map( data => data as ICarnet));
+  }
+
+  getCarnetByIdPerson(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.get(this.url + 'carnet/persona/' + id, {headers}).pipe(map( data => data as ICarnet));
+  }
+
 
   getCodQR() {
     return this.codQR;
