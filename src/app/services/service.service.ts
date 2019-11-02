@@ -351,10 +351,10 @@ export class ServiceService {
     return this.http.post(this.url + 'norma-barrios', params, {headers}).pipe(map(data => data as Inormas));
   }
 
-  getAllEspacioComun() {
+  getAllEspacioComun(): Observable<IEspacioComun[]> {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
-    return this.http.get(this.url + 'espacio-comuns', {headers}).pipe(map(data => data as IEspacioComun));
+    return this.http.get(this.url + 'espacio-comuns', {headers}).pipe(map(data => data as IEspacioComun[]));
   }
 
   getEspacioComun(id): Observable<IEspacioComun> {
@@ -431,6 +431,11 @@ export class ServiceService {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     return this.http.post(this.url + 'eventosfecha/' + fecha, {headers}).pipe(map(data => data as Ievent[]));
+  }
+  getEventByFechaAndById(fecha: Date, id: number): Observable<Ievent[]> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'espaciofecha/?fecha=' + fecha + '&id=' + id, {headers}).pipe(map(data => data as Ievent[]));
   }
 
   getUser(email) {
