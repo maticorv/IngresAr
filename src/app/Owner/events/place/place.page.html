@@ -10,7 +10,14 @@
 <ion-content class="ion-padding" fullscreen>
     <ion-row>
         <ion-col style="text-align: center;">
-            <img [src]="convertedImage" class="img-fluid animated fadeIn " alt="Responsive image">
+            <ng-container *ngIf="espacioComun===undefined; else elseTemplate">
+                <div style="height: 318px; width: auto;"></div>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <img [src]="convertedImage" style="height: 318px; width: auto;" class="img-fluid animated fadeIn " alt="Responsive image">
+
+            </ng-template>
+
             <ion-item>
                 <ion-label>Disponible Desde</ion-label>
                 <ion-label>{{espacioComun?.horaDesde | date:"shortTime"}}</ion-label>
