@@ -132,9 +132,7 @@ export class NewvehiclePage implements OnInit {
 
     console.log(this.dominio, this.marcas[this.brand],
     this.modelos[this.model], this.colors[this.color], this.aseguradora, this.vencimiento );
-    this.service.getVehiculoByDominio(this.dominio).subscribe( vehic => {
-      console.log(vehic);
-      this.service.postVehiculo(this.dominio, this.marcas[this.brand],
+    this.service.postVehiculo(this.dominio, this.marcas[this.brand],
       this.modelos[this.model], null ,
       this.colors[this.color]).subscribe(data => {
           console.log(data);
@@ -148,19 +146,6 @@ export class NewvehiclePage implements OnInit {
                        this.presentToast('Ha ocurrido un error');
                       }
         );
-    },
-    (error) => {console.log(error);
-                this.presentAlert();
-    });
-  }
-
-  async presentAlert() {
-    const alert = await this.alertCtrl.create({
-      header: 'El vehiculo con el domini: ' + this.dominio + 'ya se encuentra registrado',
-      buttons: ['Aceptar']
-    });
-
-    await alert.present();
   }
 
 }
