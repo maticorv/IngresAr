@@ -151,6 +151,10 @@ const routes: Routes = [
     path: 'actualizar-art',
     loadChildren: () => import('./ingreso/servicio/actualizar-art/actualizar-art.module').then( m => m.ActualizarArtPageModule)
   },
+  {
+    path: 'view-planilla-acompaniante',
+    loadChildren: () => import('./ingreso/authorization/view-planilla-acompaniante/view-planilla-acompaniante.module').then( m => m.ViewPlanillaAcompaniantePageModule)
+  },
 
 
   ];
