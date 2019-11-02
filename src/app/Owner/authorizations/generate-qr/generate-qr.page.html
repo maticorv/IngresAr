@@ -96,7 +96,7 @@
                 <!-- <button mat-button matStepperPrevious>Atras</button>
                 <button mat-button color="primary" (click)="createPdf()" matStepperNext>Crear Autorizacion</button> -->
                 <ion-button fill="clear" color="dark" (click)="goBack(stepper)">Atras</ion-button>
-                <ion-button fill="clear" color="dark" (click)="goForward(stepper); createPdf()">Siguiente</ion-button>
+                <ion-button fill="clear" color="dark" (click)="goForward(stepper); createPdf(); getPart(img)">Siguiente</ion-button>
               </div>
             </mat-step>
             <mat-step>
@@ -111,7 +111,7 @@
             </mat-step>
           </mat-vertical-stepper>
 
-          <!-- <ion-button fill="outline" shape="round" expand="full" color="success" (click)="descargarPDF()">Imprimir PDF</ion-button>
-          <ion-button fill="outline" shape="round" expand="full" color="tertiary" (click)="createPdf()">Crear PDF</ion-button> -->
+          <!-- <ion-button fill="outline" shape="round" expand="full" color="success" (click)="getPart(img)">Por Parte</ion-button> -->
+          <!-- <ion-button fill="outline" shape="round" expand="full" color="tertiary" (click)="createPdf()">Crear PDF</ion-button> -->
 
 </ion-content>
