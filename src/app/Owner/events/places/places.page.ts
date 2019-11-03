@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class PlacesPage implements OnInit {
 
-  espacioComun: IEspacioComun;
+  espacioComun: IEspacioComun[];
 
   constructor(private service: ServiceService, private router: Router) { }
 
@@ -30,7 +30,7 @@ export class PlacesPage implements OnInit {
     });
   }
   onClick(i) {
-    this.router.navigate(['/place', i]);
+    this.router.navigate(['/place', this.espacioComun[i].id]);
   }
 
 }

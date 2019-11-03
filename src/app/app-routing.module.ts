@@ -131,7 +131,8 @@ const routes: Routes = [
     path: 'habilitar-deshabilitar/:id',
     // tslint:disable-next-line: max-line-length
     loadChildren: () => import('./funcionesMenu/habilitar-deshabilitar/habilitar-deshabilitar.module').then( m => m.HabilitarDeshabilitarPageModule)
-  },  {
+  },
+  {
     path: 'personas-bloqueadas',
     loadChildren: () => import('./shared/personas-bloqueadas/personas-bloqueadas.module').then( m => m.PersonasBloqueadasPageModule)
   },
@@ -152,12 +153,16 @@ const routes: Routes = [
     loadChildren: () => import('./ingreso/servicio/actualizar-art/actualizar-art.module').then( m => m.ActualizarArtPageModule)
   },
   {
-    path: 'view-planilla-acompaniante',
-    loadChildren: () => import('./ingreso/authorization/view-planilla-acompaniante/view-planilla-acompaniante.module').then( m => m.ViewPlanillaAcompaniantePageModule)
+    path: 'newevent/:id',
+    loadChildren: () => import('./Owner/events/newevent/newevent.module').then( m => m.NeweventPageModule)
   },
 
-
-  ];
+  {
+  path: 'view-planilla-acompaniante',
+  // tslint:disable-next-line:max-line-length
+  loadChildren: () => import('./ingreso/authorization/view-planilla-acompaniante/view-planilla-acompaniante.module').then( m => m.ViewPlanillaAcompaniantePageModule)
+  },
+];
 
 @NgModule({
   imports: [
