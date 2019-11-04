@@ -133,10 +133,11 @@ export class ServiceService {
     return this.http.get( this.url + 'persona/personarol/?role=' + rol, {headers}).pipe(map(data => data as Persona[]));
   }
 
-  postPersonaVehiculo(id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, vehiculos) {
+  // tslint:disable-next-line: max-line-length
+  postPersonaVehiculo(id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaEstado, personaUser, personabarrio, vehiculos) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    const params = {id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, vehiculos};
+    const params = {id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaEstado, personaUser, personabarrio, vehiculos};
     return this.http.put(this.url + 'personas', params, {headers}).pipe(map(data => data));
   }
 
