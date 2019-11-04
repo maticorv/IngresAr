@@ -23,7 +23,7 @@ export class RegisterPage implements OnInit {
   }
   async presentAlert3() {
     const alert = await this.alertController.create({
-      header: 'Tu cuenta ha sido creada',
+      header: 'La cuenta con el email: ' + this.email + ' ha sido creada correctamente',
       // tslint:disable-next-line:max-line-length
       message: 'Por favor verifica tu correo para activar la cuenta',
       buttons: [{
@@ -51,15 +51,45 @@ export class RegisterPage implements OnInit {
     });
     await alert.present();
   }
-  onSubmit() {
-    const rand = Math.floor(Math.random() * 9) ;
-    // tslint:disable-next-line:max-line-length
-    this.service.register(this.email, 'en', this.nombre + this.apellido + rand , this.password, this.nombre, this.apellido).subscribe(data => {
-      this.presentAlert3();
+  crarUsuario() {
+
+    this.service.getUser(this.email).subscribe(data => {
+      this.userExistente();
     },
-    (error) => {
-      console.log(error);
-      this.presentAlert2();
-      }) ;
+    (error) => {console.log(error);
+                const rand = Math.floor(Math.random() * 9);
+                // tslint:disable-next-line: max-line-length
+                this.service.register(this.email, 'en', this.nombre + this.apellido + rand , this.password, this.nombre, this.apellido).subscribe(reg => {
+        this.presentAlert3();
+      },
+      (err) => {console.log(err);
+                // this.presentAlert2();
+      });
+    });
+
+    // this.service.getUser(this.email).subscribe(data => {
+    //   this.userExistente();
+    // },
+    // (error) => {
+    //   const rand = Math.floor(Math.random() * 9) ;
+       // tslint:disable-next-line:max-line-length
+    //   this.service.register(this.email, 'en', this.nombre + this.apellido + rand , this.password, this.nombre, this.apellido).subscribe(data => {
+    //     this.presentAlert3();
+    //   },
+    //   (err) => {
+    //     console.log(err);
+    //     console.log('Entro al error del post');
+    //     // this.presentAlert2();
+    //     }) ;
+    // });
+  }
+
+  async userExistente() {
+    const alert = await this.alertController.create({
+      header: 'El usuario con el email ' + this.email + ' ya existe',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
   }
 }

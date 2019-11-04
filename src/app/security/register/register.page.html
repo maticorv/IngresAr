@@ -13,7 +13,8 @@
     <h5>Por favor ingrese el numero
         <ion-text color="danger">*</ion-text>
     </h5>
-    <form (ngSubmit)="onSubmit()">
+    <!-- <form (ngSubmit)="onSubmit()"> -->
+    <form>
         <ion-item>
             <ion-select class="select-DNI-size" placeholder="DNI" value="dni" okText="Seleccionar">DNI
                 <ion-select-option value="DNI">DNI</ion-select-option>
@@ -70,7 +71,7 @@
             </ion-label>
             <ion-input name="pass1" minlength="6" maxlength="15" required [(ngModel)]="password1" type="password"></ion-input>
         </ion-item>
-        <ion-button block color="primary" (click)="onSubmit()" [disabled]="password!==password1" type="submit">
+        <ion-button block color="primary" (click)="crarUsuario()" [disabled]="password!==password1" type="submit">
             Registrarse
         </ion-button>
     </form>

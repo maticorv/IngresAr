@@ -441,7 +441,7 @@ export class ServiceService {
   getUser(email) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
-    return this.http.get(this.url + 'persona/useremail/' + email, {headers}).pipe(map(data => data as IUser));
+    return this.http.get(this.url + 'users/email/' + email, {headers}).pipe(map(data => data as IUser));
   }
   getPersonUser(id: number): Observable<Persona> {
     const token = this.leerToken();

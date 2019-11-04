@@ -42,7 +42,7 @@ export class EgressPagePage implements OnInit {
       this.planillaEgreso.planillaVehiculo, this.planillaEgreso.planillaEmpresa,
       this.planillaEgreso.planillaAutorizador, this.planillaEgreso.planillaAcompaniantes).subscribe(data => {
       console.log(data);
-      this.presentToast('El registro de egreso se realizo correctamente');
+      this.presentToast('El registro de egreso se realizó correctamente');
       this.router.navigateByUrl('/startmenu');
     },
     (error) => {console.log(error);
