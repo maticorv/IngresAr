@@ -37,6 +37,7 @@ export class NewcompanionPage implements OnInit {
     });
   }
 
+
   crearPersona() {
     // tslint:disable-next-line: max-line-length
     this.service.postPersona(this.nombrePersona, this.apellidoPersona, this.dniPersona, this.telefonoPersona, this.personaEstado, null, null, null).subscribe(data => {

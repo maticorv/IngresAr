@@ -38,7 +38,8 @@ export class Newvehicle4Page implements OnInit {
   persona: Persona;
 
   constructor(private calendar: Calendar, private service: ServiceService, private router: Router,
-              private toastController: ToastController, private alertCtrl: AlertController, private personas: Personas) {
+              private toastController: ToastController, private alertCtrl: AlertController, private personas: Personas,
+              private vehic: Vehiculo) {
                 this.myDate = new Date().toISOString();
                 this.max = new Date(new Date().getFullYear() + 2, new Date().getMonth() , new Date().getDay()).toISOString();
                 this.calendar.createCalendar('MyCalendar').then(
@@ -52,6 +53,7 @@ export class Newvehicle4Page implements OnInit {
     this.getMarca();
     this.getColors();
     this.getSeguros();
+    this.dominio = this.vehic.dominio;
   }
   getAccount() {
     this.service.account().subscribe((resp) => {
