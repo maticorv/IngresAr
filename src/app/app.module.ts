@@ -40,7 +40,8 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { DemoMaterialModule } from './material-module';
 import { ModalPageModule } from './components/modal/modal.module';
 import { PlanillaAcompaniante } from './classes/planilla-acompaniante';
-
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 
 @NgModule({
@@ -59,7 +60,11 @@ import { PlanillaAcompaniante } from './classes/planilla-acompaniante';
     FormsModule,
     ReactiveFormsModule,
     DemoMaterialModule,
-    ModalPageModule
+    ModalPageModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
   ],
   providers: [
     StatusBar,

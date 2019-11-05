@@ -10,9 +10,104 @@
 <ion-content class="ion-padding" fullscreen>
     <ion-list>
         <ion-item>
-            <ion-label>Seleccione una fecha</ion-label>
-            <ion-datetime [(ngModel)]="myDate" (ngModelChange)="ObtenerEventos()" value="i" display-format="DD.MM.YYYY"></ion-datetime>
+            <ion-item>
+                <ion-label>Nombre
+                    <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input [(ngModel)]="nombre" required></ion-input>
+            </ion-item>
         </ion-item>
+        <ion-item>
+            <ion-item>
+                <ion-label>Selecciones listas de amigos</ion-label>
+                <ion-select [disabled]="listas?.length==0" multiple="true" [(ngModel)]="lists" (ionChange)="selectedItems(i)" placeholder="Seleccione amigos">
+                    <ion-select-option *ngFor="let lista of listas; let i=index" [value]="i">{{lista.nombreListaAmigos}}</ion-select-option>
+                </ion-select>
 
+            </ion-item>
+        </ion-item>
+        <!-- <ion-item>
+            <ion-label>Seleccione una fecha</ion-label>
+            <ion-datetime [(ngModel)]="viewDate" (ngModelChange)="ObtenerEventos()" value="i" display-format="DD.MM.YYYY"></ion-datetime>
+        </ion-item> -->
     </ion-list>
+    <div>
+        <!-- <div class="row text-center">
+            <div class="col-md-4">
+                <div class="btn-group">
+                    <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
+                        Previous
+                    </div>
+                    <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
+                        Today
+                    </div>
+                    <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">
+                        Next
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h3>{{ viewDate | calendarDate: view + 'ViewTitle':locale }}</h3>
+            </div>
+            <div class="col-md-4">
+                <div class="btn-group">
+                    <div class="btn btn-primary" (click)="viewChangeemit('month')" [class.active]="view === 'month'">
+                        Month
+                    </div>
+                    <div class="btn btn-primary" (click)="viewChangeemit('week')" [class.active]="view === 'week'">
+                        Week
+                    </div>
+                    <div class="btn btn-primary" (click)="viewChangeemit('day')" [class.active]="view === 'day'">
+                        Day
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <br />
+
+        <div class="alert alert-info">
+            Selecciona el horario en el que quieres tu evento.
+            <strong *ngIf="clickedDate">You clicked on this time: {{ clickedDate | date:'medium' }}</strong
+    >
+    <strong *ngIf="clickedColumn != null"
+      >You clicked on this column: {{ clickedColumn }}</strong
+    >
+  </div>
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="'month'"
+      [viewDate]="viewDate"
+      [events]="events"
+      [activeDayIsOpen]="true"
+      [refresh]="refresh"
+      (eventTimesChanged)="eventTimesChanged($event)"
+    >
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="'week'"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      (eventTimesChanged)="eventTimesChanged($event)"
+    >
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="'day'"
+      [viewDate]="viewDate"
+      [events]="events"
+      [dayStartHour]="8" 
+      [dayStartMinute]="0"
+      [dayEndHour]="24" 
+      [dayEndMinute]="0" 
+      [refresh]="refresh"
+      (eventTimesChanged)="eventTimesChanged($event)"
+    >
+    </mwl-calendar-day-view>
+</div>
+    </div>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="guardarEvento()">
+            <ion-icon name="save"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>
