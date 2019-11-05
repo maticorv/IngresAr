@@ -9,6 +9,7 @@ import { BackupService } from './backup.service';
 export class DataBasePage implements OnInit {
   entity = 99 ;
   Entidades = [
+    'Todos',
     'Art',
     'Aseguradora',
     'Barrio',
@@ -67,7 +68,6 @@ export class DataBasePage implements OnInit {
     'seguros',
     'users',
     'vehiculos',
-
   ];
   constructor(private service: BackupService) { }
 
@@ -75,7 +75,13 @@ export class DataBasePage implements OnInit {
   }
   onClick() {
     if (!(this.entity === 99)) {
-      this.service.descargar(this.endpoint[this.entity]);
+      if (this.entity === 0) {
+        for (const iterator of this.endpoint) {
+          this.service.descargar(iterator);
+        }
+      } else {
+        this.service.descargar(this.endpoint[this.entity - 1]);
+      }
     }
   }
 }
