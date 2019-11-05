@@ -16,7 +16,7 @@ export class QringressPage implements OnInit {
               private router: Router, private alertCtrl: AlertController) { }
 
   qr: IQr;
-  // codQR = 'GastonSilveyra2019-10-31T22:44:48.406Z';
+  // codQR = 'FrancoSbriglio2019-11-04T03:01:46.847Z';
 
   ngOnInit() {
   }
@@ -31,11 +31,15 @@ export class QringressPage implements OnInit {
   //   this.service.getQRByCodQR(this.codQR).subscribe(qr => {
   //     console.log('qr :', qr);
   //     this.qr = qr;
-  //     if (new Date(qr.fechaFinQR) >= hoy) {
-  //       this.service.setCodQR(this.qr.codigoQR);
-  //       this.qrExiste();
+  //     if (qr.qrAutorizado.personaEstado.nombreEstadoPersona === 'bloqueada') {
+  //       this.personaBloqueada();
   //     } else {
-  //       this.presentAlert();
+  //       if (new Date(qr.fechaFinQR) >= hoy) {
+  //         this.service.setCodQR(this.qr.codigoQR);
+  //         this.qrExiste();
+  //       } else {
+  //         this.presentAlert();
+  //       }
   //     }
   //   },
   //   (error) => {console.log(error);
@@ -48,11 +52,15 @@ export class QringressPage implements OnInit {
       const hoy = new Date( new Date().setHours(0, 0, 0, 0));
       this.service.getQRByCodQR(barcodeData.text).subscribe(data => {
         this.qr = data;
-        if (new Date(data.fechaFinQR) >= hoy) {
-          this.service.setCodQR(this.qr.codigoQR);
-          this.qrExiste();
+        if (data.qrAutorizado.personaEstado.nombreEstadoPersona === 'bloqueada') {
+          this.personaBloqueada();
         } else {
-          this.presentAlert();
+          if (new Date(data.fechaFinQR) >= hoy) {
+            this.service.setCodQR(this.qr.codigoQR);
+            this.qrExiste();
+          } else {
+            this.presentAlert();
+          }
         }
       },
       (error) => {console.log(error);
@@ -97,5 +105,14 @@ export class QringressPage implements OnInit {
 
     await alert.present();
   }
+
+  async personaBloqueada() {
+    const alert = await this.alertCtrl.create({
+      header: 'La persona se encuentra bloqueada',
+      buttons: ['Aceptar']
+    });
+    await alert.present();
+  }
+
 
 }

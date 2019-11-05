@@ -14,6 +14,7 @@ export class AddFriendPage implements OnInit {
 
   dni: number;
   persona: Persona;
+  propietario: Persona;
 
   constructor(private service: ServiceService, private router: Router,
               private alertCtrl: AlertController, private amigo: Amigo,
@@ -22,17 +23,36 @@ export class AddFriendPage implements OnInit {
   ngOnInit() {
   }
 
-  getpersona() {
-    this.service.getPersona(this.dni).subscribe((data) => {
-      this.persona = data;
-      console.log(data);
-      this.personaExiste();
-    },
-    (error) => { console.log(error);
-                 this.personaNoExiste('La persona no existe en la base de datos');
-    });
+  ionViewWillEnter() {
+    this.service.account().subscribe(data => {
+      this.service.getPersonUser(data.id).subscribe(pers => {
+        this.propietario = pers;
+      },
+      (error) => {console.log(error);
 
+      });
+    },
+    (error) => {console.log(error);
+    });
   }
+
+  getpersona() {
+    this.service.getPersonaEnListaAmigo(this.dni, this.propietario.id).subscribe(amigo => {
+      console.log(amigo);
+      this.amigoEnLista('La persona ya se ecuentra en la lista de amigos');
+    },
+    (err) => {console.log(err);
+              this.service.getPersona(this.dni).subscribe((data) => {
+        this.persona = data;
+        console.log(data);
+        this.personaExiste();
+      },
+      (error) => { console.log(error);
+                   this.personaNoExiste('La persona no existe en la base de datos');
+      });
+    });
+  }
+
 
   async personaExiste() {
     const alert = await this.alertCtrl.create({
@@ -62,6 +82,15 @@ export class AddFriendPage implements OnInit {
   }
 
   async personaNoExiste(msg) {
+    const alert = await this.alertCtrl.create({
+      header: msg,
+      buttons: ['Aceptar']
+    });
+    this.dni = null;
+    await alert.present();
+  }
+
+  async amigoEnLista(msg) {
     const alert = await this.alertCtrl.create({
       header: msg,
       buttons: ['Aceptar']

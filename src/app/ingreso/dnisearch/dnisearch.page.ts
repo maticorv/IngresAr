@@ -19,23 +19,24 @@ export class DnisearchPage implements OnInit {
 
   ngOnInit() {
   }
-
+  // Busca la persona con el dni inggreso
   getpersona() {
     this.service.getPersona(this.dni).subscribe((data) => {
-      this.persona = data;
-      console.log(data);
-      this.personaExiste();
+      if (data.personaEstado.nombreEstadoPersona === 'bloqueada') {
+        this.personaBloqueada('La persona se encuentra bloqueada');
+      } else {
+        this.persona = data;
+        console.log(data);
+        this.personaExiste();
+      }
     },
     (error) => { console.log(error);
                  this.personaNoExiste();
     });
-
   }
-
+  // muestra msj por pantalla si la persona existe
   async personaExiste() {
     const alert = await this.alertCtrl.create({
-      // header: this.persona.nombrePersona + ' ' + this.persona.apellidoPersona + ' ' + this.persona.dniPersona,
-      // tslint:disable-next-line: max-line-length
       message:  '<strong>Nombre: ' + this.persona.nombrePersona + '<br>' +
                 'Apellido: ' + this.persona.apellidoPersona + '<br>' +
                 'DNI: ' + this.persona.dniPersona + '<br>' +
@@ -66,7 +67,7 @@ export class DnisearchPage implements OnInit {
 
     await alert.present();
   }
-
+  // muestra ms por patalla si la persona no existe
   async personaNoExiste() {
     const alert = await this.alertCtrl.create({
       header: 'La persona con el dni ' + this.dni + ' no se encuentra en la base de datos',
@@ -94,9 +95,19 @@ export class DnisearchPage implements OnInit {
 
     await alert.present();
   }
+  // pone los datos en nullos para el proximo ingreso
   setNullData() {
     this.dni = null;
     this.persona = null;
+  }
+
+  async personaBloqueada(msg) {
+    const alert = await this.alertCtrl.create({
+      header: msg,
+      buttons: ['Aceptar']
+    });
+    this.setNullData();
+    await alert.present();
   }
 
 }

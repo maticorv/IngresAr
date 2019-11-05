@@ -52,12 +52,12 @@ export class AuthorizationPage implements OnInit {
   ngOnInit() {
     // this.getPersonasDomicilio();
   }
-
+  // obtiene la planilla de acompañantes y las personas en el domicilio al que va
   ionViewWillEnter() {
     this.planillaAcompaniantes = this.acompaniante.planillaAcompaniante;
     this.getPersonasDomicilio();
   }
-
+  // metodo para obtener las personas del domicilio al que se dirige
   getPersonasDomicilio() {
     this.service.getPersonasDomicilio(this.planillaDestino.casa, this.planillaDestino.manzana).subscribe(data => {
       this.planillaDestino.id = data.id;
@@ -67,7 +67,7 @@ export class AuthorizationPage implements OnInit {
     (error) => { console.log(error);
     });
   }
-
+  // metodo obtener los datos del autorizador y setear valores dependiendo del tipo de ingreso
   procesarIngreso() {
     return new Promise<any>((resolve, reject) => {
 
@@ -87,7 +87,7 @@ export class AuthorizationPage implements OnInit {
   });
     // this.acompañante.cantidadAcompañante = this.cantidad;
   }
-
+  // muestra msj cuando se proceso correctamente el ingreso
   async presentToast(me: string) {
     const toast = await this.toastController.create({
       position: 'middle',
@@ -100,7 +100,7 @@ export class AuthorizationPage implements OnInit {
       },
       2000);
   }
-
+  // metodo para procesar el ingreso de una persona
   postPlanillaIngresoEgreso() {
     this.autorizadoPrevio = false;
     this.acompaniantes = this.cantidad;
@@ -126,7 +126,8 @@ export class AuthorizationPage implements OnInit {
     // console.log(this.planillaEmpresa);
 
   }
-
+  // metodo global que llama a los diferentes metodos que van a procesar el ingreso
+  // y verifica si la persona ya se encuentra dentro de establecimiento
   global() {
     this.service.getPlanillaEgreso(this.planillaPersona.dniPersona).subscribe(data => {
       console.log(data);
@@ -138,14 +139,14 @@ export class AuthorizationPage implements OnInit {
                 });
     });
 }
-
+  // metodo para mostrar msj del ingreso
   procesarIngresoJson() {
   setTimeout(() => {
     this.presentToast('El ingreso se ha procesado correctamente');
     },
     2000);
 }
-
+  // metodo para agregar acompañantes
   buscarAcompaniante() {
     this.service.getPersona(this.dni).subscribe((data) => {
       this.persona = data;
@@ -156,7 +157,7 @@ export class AuthorizationPage implements OnInit {
                  this.personaNoExiste();
     });
   }
-
+  // msj si la persona que ingresa como acompañante existe
   async personaExiste() {
     const alert = await this.alertCtrl.create({
       header: this.persona.nombrePersona + ' ' + this.persona.apellidoPersona + ' ' + this.persona.dniPersona,
@@ -181,7 +182,7 @@ export class AuthorizationPage implements OnInit {
 
     await alert.present();
   }
-
+  // msj si la persona que ingresa como acompañante no existe
   async personaNoExiste() {
     const alert = await this.alertCtrl.create({
       header: 'La persona con el dni ' + this.dni + ' no se encuentra en la base de datos',
@@ -207,20 +208,16 @@ export class AuthorizationPage implements OnInit {
 
     await alert.present();
   }
-
-  mostrarAcompaniantes() {
-    console.log(this.planillaAcompaniantes);
-  }
-
+  // metodo para agregar acompañantes a la planilla
   agregarAcompaniante() {
     this.planillaAcompaniantes.push(this.acompañante);
   }
-
+  // metodo para ver la lista de acompañantes
   verListaAcom() {
     this.acompaniante.planillaAcompaniante = this.planillaAcompaniantes;
     this.router.navigateByUrl('view-planilla-acompaniante');
   }
-
+  // msj si la persona se encuentra dentro del establecimiento
   async personaIngreso() {
     const alert = await this.alertCtrl.create({
       header: 'La persona con el DNI:' + this.planillaPersona.dniPersona + ' se encuentra dentro del establecimiento',

@@ -27,13 +27,13 @@ export class TransportPage implements OnInit {
 
   ngOnInit() {
   }
-
+  // ejecuta los metodos obtener vehiculo y carnet cada vez q se accede a la pantalla
   ionViewWillEnter() {
     this.getVehiculo();
     this.hoy = new Date();
     this.getCarnet();
   }
-
+  // setea todos los valores en nulo cada vez q se sale de la pantalla
   ionViewWillLeave() {
     this.auto = null;
     this.vehiculo = null;
@@ -41,7 +41,7 @@ export class TransportPage implements OnInit {
     this.carnet = null;
     this.hoy = null;
   }
-
+  // metodo para obtener el carnet y saber si posee carnet, esta vencido o vigente
   getCarnet() {
     this.service.getCarnetByIdPerson(this.personas.id).subscribe(data => {
       if (new Date(data.fechaVencimiento) < this.hoy) {
@@ -56,7 +56,7 @@ export class TransportPage implements OnInit {
                 this.sinCarnet();
     });
   }
-
+  // guarda los datos del vehiculo obtenido y avanza a la siguiente pagina
   siguiente() {
     this.vehiculos.dominio = this.vehiculo[this.auto].dominio;
     this.vehiculos.vehiculoMarca = this.vehiculo[this.auto].vehiculomarca;
@@ -64,20 +64,16 @@ export class TransportPage implements OnInit {
     this.ingresoApie.ingresoAPie = false;
     this.router.navigateByUrl('/authorization');
   }
+  // metodo para obtener el vehiculo seleccionado
   selected(value: string) {
-    // console.log( value[`detail`].value);
     this.auto = value[`detail`].value;
-    // console.log(this.vehiculos[this.auto]);
   }
-  imprimir() {
-    console.log(this.auto);
-  }
-
+  // metodo para registrar que ingresa a pie
   ingresoAPie() {
     this.ingresoApie.ingresoAPie = true;
     this.router.navigateByUrl('/authorization');
   }
-
+  // metodo para obtener todos los vehiculos de una persona
   getVehiculo() {
     this.service.getVechiculo(this.personas.dniPersona).subscribe(dato => {
       this.vehiculo = dato;
@@ -87,7 +83,7 @@ export class TransportPage implements OnInit {
       console.log(error);
     });
   }
-
+  // muestra msj si el carnet esta vencido
   async carnetVencido() {
     const alert = await this.alertCtrl.create({
       header: 'La persona tiene vencido el carnet, por favor actualicelo',
@@ -96,7 +92,7 @@ export class TransportPage implements OnInit {
 
     await alert.present();
   }
-
+  // muestra msj si no tiene carnet
   async sinCarnet() {
     const alert = await this.alertCtrl.create({
       header: 'La persona no tiene asociado el carnet, por favor agreguelo',
