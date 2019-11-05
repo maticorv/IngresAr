@@ -5,6 +5,7 @@ import { ServiceService } from 'src/app/services/service.service';
 import { Router } from '@angular/router';
 import { Iaccount } from 'src/app/interfaces/account';
 import { Persona } from '../../../interfaces/persona';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-vehicles',
@@ -40,9 +41,32 @@ export class VehiclesPage implements OnInit {
     );
   }
   Eliminar(indx: number) {
+    Swal.fire({
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      type: 'info',
+      text: 'Espere por favor...',
+    });
     this.persona.vehiculos.splice(indx, 1);
     // tslint:disable-next-line: max-line-length
-    this.service.putPersona(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.personaEstado, this.persona.personaUser, this.persona.personabarrio, this.persona.vehiculos).subscribe();
+    this.service.putPersona(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.personaEstado, this.persona.personaUser, this.persona.personabarrio, this.persona.vehiculos).subscribe(() => {
+      Swal.fire({
+        position: 'center',
+        type: 'success',
+        title: 'El vehiculo se ha eliminado correctamente ha sido añadido',
+        showConfirmButton: false,
+        timer: 1500
+      }).then((result) => {
+        this.router.navigateByUrl('/menu-owner');
+    });
+    }, (error) => {
+      Swal.fire({
+        type: 'error',
+        title: 'Error al eliminar vehiculo',
+        confirmButtonText: 'Aceptar',
+      });
+    }
+    );
   }
   nuevoVehiculo() {
     this.router.navigateByUrl('newvehicle1');
