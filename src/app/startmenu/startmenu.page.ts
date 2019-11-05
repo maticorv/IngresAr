@@ -17,7 +17,7 @@ export class StartmenuPage implements OnInit {
   ngOnInit() {
     this.activarMenu();
   }
-
+  // activa el menu cada vez q se accede a la pantalla
   ionViewWillEnter() {
     this.activarMenu();
   }

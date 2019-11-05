@@ -90,17 +90,32 @@ export class GenerateQrPage implements OnInit {
 
 
 
+  // getpersona(stepper) {
+  //   this.service.getPersona(this.dni).subscribe((data) => {
+  //     this.personaAutorizada = data;
+  //     console.log(data);
+  //     this.fecha = new Date().toISOString();
+  //     this.personaExiste(stepper);
+  //   },
+  //   (error) => { console.log(error);
+  //                this.presentAlert('La persona no se encuentra en la Base de Datos');
+  //   });
+  // }
+
   getpersona(stepper) {
     this.service.getPersona(this.dni).subscribe((data) => {
-      this.personaAutorizada = data;
-      console.log(data);
-      this.fecha = new Date().toISOString();
-      this.personaExiste(stepper);
+      if (data.personaEstado.nombreEstadoPersona === 'bloqueada') {
+        this.personaBloqueada('La persona se encuentra bloqueada');
+      } else {
+        this.personaAutorizada = data;
+        this.fecha = new Date().toISOString();
+        console.log(data);
+        this.personaExiste(stepper);
+      }
     },
     (error) => { console.log(error);
                  this.presentAlert('La persona no se encuentra en la Base de Datos');
     });
-
   }
 
   getOwner() {
@@ -161,7 +176,6 @@ export class GenerateQrPage implements OnInit {
   enviarMail() {
 
     // this.createPdf();
-
     const email = {
       to: this.personaAutorizada.personaUser.email,
       attachments: [
@@ -177,26 +191,6 @@ export class GenerateQrPage implements OnInit {
       this.router.navigateByUrl('/authorizations/employee');
     }
   }
-
-//   public handleImage(Image: string): void {
-//     this.fileData = this.convertDataUrlToBlob(Image);
-//     console.log('this.fileData :', this.fileData);
-//   }
-
-//   convertDataUrlToBlob(dataUrl: string): Blob {
-//     console.log('dataUrl :', dataUrl);
-//     const arr = dataUrl.split(',');
-//     const mime = arr[0].match(/:(.*?);/)[1];
-//     const bstr = atob(arr[1]);
-//     let n = bstr.length;
-//     const u8arr = new Uint8Array(n);
-//     while (n--) {
-//         u8arr[n] = bstr.charCodeAt(n);
-//     }
-
-//     return new Blob([u8arr], {type: mime});
-// }
-
 
   goBack(stepper: MatStepper) {
       stepper.previous();
@@ -293,5 +287,15 @@ export class GenerateQrPage implements OnInit {
       },
       2000);
   }
+
+  async personaBloqueada(msg) {
+    const alert = await this.alertCtrl.create({
+      header: msg,
+      buttons: ['Aceptar']
+    });
+    this.dni = null;
+    await alert.present();
+  }
+
 
 }

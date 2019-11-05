@@ -16,12 +16,10 @@ export class DestinationPage implements OnInit {
 
   ngOnInit() {
   }
-
+  // guarda la manzana, casa y redirige a la siguiente pagina
   destination() {
-    // this.destino.tipoDestino = this.tipo;
     this.destino.casa = this.casa;
     this.destino.manzana = this.manzana;
-    // this.destino.id = 1;
     this.router.navigateByUrl('/typeofvisit');
   }
 

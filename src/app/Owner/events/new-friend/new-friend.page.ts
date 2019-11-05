@@ -23,6 +23,22 @@ export class NewFriendPage implements OnInit {
   ngOnInit() {
   }
 
+  verficarSiAmigoExiste() {
+    if (this.amigo.ListaAmigo.length === 0 ) {
+      this.getpersona();
+    }
+    this.amigo.ListaAmigo.forEach(element => {
+      console.log('Entro al for');
+      console.log('element.dniPersona :', element.dniPersona);
+      console.log('this.dni :', this.dni);
+      if (element.dniPersona.toString() === this.dni.toString()) {
+        this.amigoExisteEnLista('La persona ya se encuentra agregada en la lista');
+      } else {
+        this.getpersona();
+      }
+    });
+  }
+
   getpersona() {
     this.service.getPersona(this.dni).subscribe((data) => {
       this.persona = data;
@@ -63,6 +79,15 @@ export class NewFriendPage implements OnInit {
   }
 
   async personaNoExiste(msg) {
+    const alert = await this.alertCtrl.create({
+      header: msg,
+      buttons: ['Aceptar']
+    });
+    this.setNullData();
+    await alert.present();
+  }
+
+  async amigoExisteEnLista(msg) {
     const alert = await this.alertCtrl.create({
       header: msg,
       buttons: ['Aceptar']
