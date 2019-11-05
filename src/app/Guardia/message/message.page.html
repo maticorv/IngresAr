@@ -13,7 +13,7 @@
     <ng-template #elseTemplate>
         <ion-list>
             <ng-container *ngFor="let user of Users; let i=index">
-                <ng-container *ngIf="user?.id===account.id; else elseTemplate">
+                <ng-container *ngIf="user?.id===account.id || user.authorities[0]!=='ROLE_PROPIETARIO'; else elseTemplate">
                 </ng-container>
                 <ng-template #elseTemplate>
                     <ion-item (click)="onClick(user?.id)">

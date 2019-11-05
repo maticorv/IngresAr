@@ -52,7 +52,7 @@ export class LoginPage implements OnInit {
         this.account.imageUrl = resp.imageUrl;
         this.account.lastName = resp.lastName;
         this.account.login = resp.login;
-        this.presentToast('Successfully logged in!');
+        this.presentToast('Ha iniciado sesión correctamente!');
         this.router.navigateByUrl(this.hasAnyAuthority());
       });
     },

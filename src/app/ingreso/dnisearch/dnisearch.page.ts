@@ -25,9 +25,14 @@ export class DnisearchPage implements OnInit {
       if (data.personaEstado.nombreEstadoPersona === 'bloqueada') {
         this.personaBloqueada('La persona se encuentra bloqueada');
       } else {
-        this.persona = data;
-        console.log(data);
-        this.personaExiste();
+        this.service.getPlanillaEgreso(this.dni).subscribe(pers => {
+          this.personaBloqueada('La persona se ecnuentra dentro del establecimiento');
+        },
+        (error) => {
+          this.persona = data;
+          console.log(data);
+          this.personaExiste();
+        });
       }
     },
     (error) => { console.log(error);
