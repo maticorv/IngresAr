@@ -70,13 +70,13 @@ export class NewvehicleQRPage implements OnInit {
         };
         this.service.postSeguro(seguro).subscribe(() => {
           // tslint:disable-next-line: max-line-length
-          this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
+          this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.personaEstado, this.persona.personaUser, this.persona.personabarrio, this.persona.vehiculos).subscribe(() => {
              this.presentToast('Vehiculo creado satisfactoriamente');
           });
         });
       } else {
         // tslint:disable-next-line:max-line-length
-        this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
+        this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.personaEstado, this.persona.personaUser, this.persona.personabarrio, this.persona.vehiculos).subscribe(() => {
           this.presentToast('Vehiculo creado satisfactoriamente');
        });
       }
@@ -100,13 +100,13 @@ export class NewvehicleQRPage implements OnInit {
             };
             this.service.postSeguro(seguro).subscribe(() => {
               // tslint:disable-next-line: max-line-length
-              this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
+              this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.personaEstado, this.persona.personaUser, this.persona.personabarrio, this.persona.vehiculos).subscribe(() => {
                  this.presentToast('Vehiculo creado satisfactoriamente');
               });
             });
           } else {
               // tslint:disable-next-line:max-line-length
-              this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
+              this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.personaEstado, this.persona.personaUser, this.persona.personabarrio, this.persona.vehiculos).subscribe(() => {
                   this.presentToast('Vehiculo creado satisfactoriamente');
               });
           }
