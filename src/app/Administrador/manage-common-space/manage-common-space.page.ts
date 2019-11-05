@@ -37,7 +37,7 @@ export class ManageCommonSpacePage implements OnInit {
 
   async presentActionSheet(i) {
     const actionSheet = await this.actionSheetController.create({
-      header: this.espacioComun[`i`].titulonorma,
+      header: this.espacioComun[i].nombreEspacioComun,
       mode: 'ios',
       buttons: [ {
         text: 'Abrir',
@@ -46,7 +46,7 @@ export class ManageCommonSpacePage implements OnInit {
           this.router.navigate(['/edit-common-space', this.espacioComun[i].id]);
         }
       }, {
-        text: 'Borar',
+        text: 'Borrar',
         role: 'destructive',
         icon: 'trash',
         handler: () => {
@@ -58,7 +58,7 @@ export class ManageCommonSpacePage implements OnInit {
           });
         }
       }, {
-        text: 'Cancel',
+        text: 'Cancelar',
         icon: 'close',
         role: 'cancel',
         handler: () => {
