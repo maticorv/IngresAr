@@ -11,6 +11,7 @@ import { Persona } from '../../../interfaces/persona';
 import { IFriendsList } from 'src/app/interfaces/ifriends-list';
 import { Ievent } from 'src/app/interfaces/ievent';
 import { IDetalleEvento } from '../../../interfaces/idetalle-evento';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-newevent',
@@ -139,7 +140,7 @@ export class NeweventPage implements OnInit {
           }
         );
       }
-
+      this.refresh.next();
     }, (error: any) => {}
     );
   }
@@ -157,6 +158,12 @@ export class NeweventPage implements OnInit {
   }
 
   guardarEvento() {
+    Swal.fire({
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      type: 'info',
+      text: 'Espere por favor...',
+    });
     console.log('this.lists :', this.lists);
     this.evento.fecha = new Date();
     this.evento.nombreEvento = this.nombre;
@@ -176,7 +183,22 @@ export class NeweventPage implements OnInit {
     this.evento.eventoDetalles = detalles;
     this.service.putEvento(this.evento).subscribe(data => {
       console.log(data);
-    }, (error) => {}
+      Swal.fire({
+        position: 'center',
+        type: 'success',
+        title: 'El evento ha sido añadido',
+        showConfirmButton: false,
+        timer: 1500
+      }).then((result) => {
+        this.router.navigateByUrl('/menu-owner');
+    });
+    }, (error) => {
+      Swal.fire({
+        type: 'error',
+        title: 'Error al crear evento',
+        confirmButtonText: 'Aceptar',
+      });
+    }
     );
   }
   save() {
