@@ -7,6 +7,7 @@ import { Iaccount } from '../../../../interfaces/account';
 import Swal from 'sweetalert2';
 import { Button } from 'protractor';
 import { IVehiculo } from '../../../../interfaces/vehiculo';
+import { Vehiculo } from 'src/app/classes/vehiculo';
 
 @Component({
   selector: 'app-newvehicle1',
@@ -20,7 +21,7 @@ export class Newvehicle1Page implements OnInit {
   vehiculo: IVehiculo;
 
   constructor(private service: ServiceService, private router: Router,
-              private toastController: ToastController) { }
+              private toastController: ToastController, private vehiculos: Vehiculo) { }
 
   ngOnInit() {
     this.getAccount();
@@ -69,6 +70,7 @@ export class Newvehicle1Page implements OnInit {
         confirmButtonText: 'Crear Vehículo',
       }).then((result) => {
         if (result.value) {
+          this.vehiculos.dominio = this.dominio;
           this.CrearVehiculo();
         }
       });

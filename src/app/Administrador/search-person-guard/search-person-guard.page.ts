@@ -105,7 +105,7 @@ export class SearchPersonGuardPage implements OnInit {
           cssClass: 'secondary',
           handler: () => {
             this.personas.dniPersona = this.dni;
-            this.router.navigateByUrl('/new-person-homeowener');
+            this.router.navigateByUrl('/new-person-guard');
           }
         }, {
           text: 'Cancelar',

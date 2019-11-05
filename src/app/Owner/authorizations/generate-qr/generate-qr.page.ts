@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from 'src/app/services/service.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { Persona } from 'src/app/interfaces/persona';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -46,7 +46,8 @@ export class GenerateQrPage implements OnInit {
   constructor(private service: ServiceService, private router: Router,
               // tslint:disable-next-line: variable-name
               private alertCtrl: AlertController, private _formBuilder: FormBuilder,
-              private emailComposer: EmailComposer, private activatedRoute: ActivatedRoute) { }
+              private emailComposer: EmailComposer, private activatedRoute: ActivatedRoute,
+              private toastController: ToastController) { }
 
   ngOnInit() {
     this.tipoVisita = this.activatedRoute.snapshot.params.id;
@@ -80,6 +81,7 @@ export class GenerateQrPage implements OnInit {
     // tslint:disable-next-line: max-line-length
     this.service.postQR(this.codigoQR, this.fechaFinQR, this.fotoQR, this.fotoQRContentType, this.tipoVisita, this.personaAutorizador, this.personaAutorizada, this.domicilio).subscribe(data => {
       console.log(data);
+      this.presentToast('La autorización se ha creado con éxito');
       this.enviarMail();
     },
     (error) => {console.log(error);
@@ -277,6 +279,19 @@ export class GenerateQrPage implements OnInit {
     this.fotoQR = str.split(',')[1];
     console.log('this.fotoQRContentType :', this.fotoQRContentType);
     console.log('this.fotoQR :', this.fotoQR);
+  }
+
+  async presentToast(me: string) {
+    const toast = await this.toastController.create({
+      position: 'middle',
+      color: 'dark',
+      duration: 2000,
+      message: me,
+    });
+    toast.present();
+    setTimeout(() => {
+      },
+      2000);
   }
 
 }

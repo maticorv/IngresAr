@@ -11,12 +11,10 @@
 
     <ion-row class="ion-justify-content-around">
         <h3>¿Quien egresa?</h3>
-        <ion-item>
-            <ion-select class="select-DNI-size" placeholder="DNI" value="dni" okText="Seleccionar">DNI
-                <ion-select-option value="DNI">DNI</ion-select-option>
-            </ion-select>
-            <ion-input type="text" placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
-        </ion-item>
+            <ion-item>
+                <ion-label>DNI : </ion-label>
+                <ion-input class="ml-2" type="tel" minlength="7" maxlength="9" placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
+            </ion-item>
     </ion-row>
     <div style="text-align-last: right">
         <ion-button class="mt-4" (click)="getPlanillaEgreso()">Aceptar</ion-button>

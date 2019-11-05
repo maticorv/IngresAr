@@ -47,7 +47,7 @@ export class NewGuardPage implements OnInit {
         text: 'Aceptar',
         cssClass: 'secondary',
         handler: (blah) => {
-          this.router.navigateByUrl('/search-person-homeowener');
+          this.router.navigateByUrl('/search-person-guard');
         }
       }],
     });

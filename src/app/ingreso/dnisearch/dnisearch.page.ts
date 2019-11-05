@@ -34,8 +34,12 @@ export class DnisearchPage implements OnInit {
 
   async personaExiste() {
     const alert = await this.alertCtrl.create({
-      header: this.persona.nombrePersona + ' ' + this.persona.apellidoPersona + ' ' + this.persona.dniPersona,
-      message: '¿Los datos son correctos?</strong>',
+      // header: this.persona.nombrePersona + ' ' + this.persona.apellidoPersona + ' ' + this.persona.dniPersona,
+      // tslint:disable-next-line: max-line-length
+      message:  '<strong>Nombre: ' + this.persona.nombrePersona + '<br>' +
+                'Apellido: ' + this.persona.apellidoPersona + '<br>' +
+                'DNI: ' + this.persona.dniPersona + '<br>' +
+                '¿Los datos son  correctos?</strong>',
       buttons: [
         {
           text: 'Aceptar',

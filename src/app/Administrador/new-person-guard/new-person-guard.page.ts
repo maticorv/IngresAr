@@ -80,7 +80,7 @@ export class NewPersonGuardPage implements OnInit {
     });
     toast.present();
     setTimeout(() => {
-      this.router.navigateByUrl('/destination');
+      this.router.navigateByUrl('/manage-guard');
       },
       2000);
   }

@@ -128,8 +128,14 @@ export class AuthorizationPage implements OnInit {
   }
 
   global() {
-    this.procesarIngreso().then(res => {
-        this.postPlanillaIngresoEgreso();
+    this.service.getPlanillaEgreso(this.planillaPersona.dniPersona).subscribe(data => {
+      console.log(data);
+      this.personaIngreso();
+    },
+    (error) => {console.log(error);
+                this.procesarIngreso().then(res => {
+                this.postPlanillaIngresoEgreso();
+                });
     });
 }
 
@@ -213,6 +219,15 @@ export class AuthorizationPage implements OnInit {
   verListaAcom() {
     this.acompaniante.planillaAcompaniante = this.planillaAcompaniantes;
     this.router.navigateByUrl('view-planilla-acompaniante');
+  }
+
+  async personaIngreso() {
+    const alert = await this.alertCtrl.create({
+      header: 'La persona con el DNI:' + this.planillaPersona.dniPersona + ' se encuentra dentro del establecimiento',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
   }
 
 

@@ -42,28 +42,35 @@ export class ProcessingressPage implements OnInit {
   }
 
   procesarIngreso() {
-    // tslint:disable-next-line: max-line-length
-    if (this.ingresoApie) {
-      // tslint:disable-next-line: max-line-length
-      this.service.postPlanillaIngreso(true, 0, new Date(), null, this.qr.tipoVisira, true, null, this.qr.qrAutorizado, this.qr, this.qr.qrDomicilio, null, null, this.qr.qrAutorizador, null).subscribe(data => {
+
+    this.service.getPlanillaEgreso(this.qr.qrAutorizado.dniPersona).subscribe(data => {
       console.log(data);
-      this.presentToast('El ingreso se ha procesado correctamente');
-      this.router.navigateByUrl('/startmenu');
-      },
-      (error) => {console.log(error);
-                  this.presentToast('Hubo un error al procesar los datos, intente nuevamente');
-      });
-    } else {
-      // tslint:disable-next-line: max-line-length
-      this.service.postPlanillaIngreso(true, 0, new Date(), null, this.qr.tipoVisira, false, null, this.qr.qrAutorizado, this.qr, this.qr.qrDomicilio, this.vehiculo[this.auto], null, this.qr.qrAutorizador, null).subscribe(data => {
-        console.log(data);
-        this.presentToast('El ingreso se ha procesado correctamente');
-        this.router.navigateByUrl('/startmenu');
-      },
-      (error) => {console.log(error);
-                  this.presentToast('Hubo un error al procesar los datos, intente nuevamente');
-      });
-    }
+      this.personaIngreso();
+    },
+    (error) => {console.log(error);
+                // tslint:disable-next-line: max-line-length
+                if (this.ingresoApie) {
+                  // tslint:disable-next-line: max-line-length
+                  this.service.postPlanillaIngreso(true, 0, new Date(), null, this.qr.tipoVisira, true, null, this.qr.qrAutorizado, this.qr, this.qr.qrDomicilio, null, null, this.qr.qrAutorizador, null).subscribe(data => {
+                  console.log(data);
+                  this.presentToast('El ingreso se ha procesado correctamente');
+                  this.router.navigateByUrl('/startmenu');
+                  },
+                  (err) => {console.log(err);
+                            this.presentToast('Hubo un error al procesar los datos, intente nuevamente');
+                  });
+                } else {
+                  // tslint:disable-next-line: max-line-length
+                  this.service.postPlanillaIngreso(true, 0, new Date(), null, this.qr.tipoVisira, false, null, this.qr.qrAutorizado, this.qr, this.qr.qrDomicilio, this.vehiculo[this.auto], null, this.qr.qrAutorizador, null).subscribe(data => {
+                    console.log(data);
+                    this.presentToast('El ingreso se ha procesado correctamente');
+                    this.router.navigateByUrl('/startmenu');
+                  },
+                  (e) => {console.log(e);
+                          this.presentToast('Hubo un error al procesar los datos, intente nuevamente');
+                  });
+                }
+    });
   }
 
   getCarnet() {
@@ -155,6 +162,15 @@ export class ProcessingressPage implements OnInit {
   async sinCarnet() {
     const alert = await this.alertCtrl.create({
       header: 'La persona no tiene asociado el carnet, por favor agreguelo',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
+  }
+
+  async personaIngreso() {
+    const alert = await this.alertCtrl.create({
+      header: 'La persona con el DNI:' + this.qr.qrAutorizado.dniPersona + ' se encuentra dentro del establecimiento',
       buttons: ['Aceptar']
     });
 

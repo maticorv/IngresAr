@@ -63,7 +63,7 @@ export class LoginPage implements OnInit {
 
    async presentToast(me: string) {
     const toast = await this.toastController.create({
-      position: 'bottom',
+      position: 'middle',
       color: 'dark',
       duration: 2000,
       message: me,

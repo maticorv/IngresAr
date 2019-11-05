@@ -133,10 +133,11 @@ export class ServiceService {
     return this.http.get( this.url + 'persona/personarol/?role=' + rol, {headers}).pipe(map(data => data as Persona[]));
   }
 
-  postPersonaVehiculo(id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, vehiculos) {
+  // tslint:disable-next-line: max-line-length
+  postPersonaVehiculo(id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaEstado, personaUser, personabarrio, vehiculos) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token});
-    const params = {id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, vehiculos};
+    const params = {id, nombrePersona, apellidoPersona, dniPersona, telefonoPersona, personaEstado, personaUser, personabarrio, vehiculos};
     return this.http.put(this.url + 'personas', params, {headers}).pipe(map(data => data));
   }
 
@@ -446,7 +447,7 @@ export class ServiceService {
   getUser(email) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
-    return this.http.get(this.url + 'persona/useremail/' + email, {headers}).pipe(map(data => data as IUser));
+    return this.http.get(this.url + 'users/email/' + email, {headers}).pipe(map(data => data as IUser));
   }
   getPersonUser(id: number): Observable<Persona> {
     const token = this.leerToken();
