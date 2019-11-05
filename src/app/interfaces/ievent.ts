@@ -1,3 +1,6 @@
+import { IEspacioComun } from './espacio-comun';
+import { IDetalleEvento } from './idetalle-evento';
+import { Persona } from './persona';
 export interface Ievent {
     id: number;
     nombreEvento: string;
@@ -6,8 +9,8 @@ export interface Ievent {
     horaFin: Date;
     eventoPeriodo?: any;
     eventoDomicilio?: any;
-    eventoEspacio?: any;
-    eventoPersona?: any;
+    eventoEspacio: IEspacioComun;
+    eventoPersona: Persona;
     estadoEvento?: any;
-    eventoDetalles: any[];
+    eventoDetalles: IDetalleEvento[];
 }

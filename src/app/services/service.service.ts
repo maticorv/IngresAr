@@ -437,6 +437,11 @@ export class ServiceService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'espaciofecha/?fecha=' + fecha + '&id=' + id, {headers}).pipe(map(data => data as Ievent[]));
   }
+  getEventByEspacio(id: number): Observable<Ievent[]> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'eventosespacio/' + id, {headers}).pipe(map(data => data as Ievent[]));
+  }
 
   getUser(email) {
     const token = this.leerToken();
@@ -448,12 +453,18 @@ export class ServiceService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'persona/userperson/?id=' + id , {headers}).pipe(map(data => data as Persona));
   }
-
-
-  getListaAmigos(dni) {
+  putEvento(event: Ievent): Observable<Ievent> {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
-    return this.http.get(this.url + 'lista-amigos/dnilista/' + dni, {headers}).pipe(map(data => data as IFriendsList));
+    // tslint:disable-next-line: max-line-length
+    return this.http.post(this.url + 'eventos', event, {headers}).pipe(map(data => data as Ievent));
+  }
+
+
+  getListaAmigos(dni: number): Observable<IFriendsList[]> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.get(this.url + 'lista-amigos/dnilista/' + dni, {headers}).pipe(map(data => data as IFriendsList[]));
   }
   // tslint:disable-next-line: max-line-length
   putRegistroIngresoEvento(id, nombreEvento, fecha, horaInicio, horaFin, eventoPeriodo, eventoDomicilio, eventoEspacio, eventoPersona, estadoEvento, eventoDetalles) {
@@ -478,6 +489,11 @@ export class ServiceService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
     const params = {id, horaIngreso, horaEngreso, amigosevento, detallePersonaEvento, detalleEventoVehiculo};
     return this.http.put(this.url + 'detalle-eventos', params, {headers}).pipe(map( data => data as IDetalleEvento));
+  }
+  postDetalleEvento(detalleEvento: IDetalleEvento) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.post(this.url + 'detalle-eventos', detalleEvento, {headers}).pipe(map( data => data as IDetalleEvento));
   }
 
   deleteFriendList(id) {

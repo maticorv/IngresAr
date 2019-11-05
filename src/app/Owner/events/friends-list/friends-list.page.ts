@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class FriendsListPage implements OnInit {
 
-  listaAmigos: IFriendsList;
+  listaAmigos: IFriendsList[];
 
   constructor(private service: ServiceService, public actionSheetController: ActionSheetController,
               private router: Router) { }
