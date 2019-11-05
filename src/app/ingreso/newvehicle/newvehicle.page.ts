@@ -70,13 +70,13 @@ export class NewvehiclePage implements OnInit {
         };
         this.service.postSeguro(seguro).subscribe(() => {
           // tslint:disable-next-line: max-line-length
-          this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
+          this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, null, null, null, this.persona.vehiculos).subscribe(() => {
              this.presentToast('Vehiculo creado satisfactoriamente');
           });
         });
       } else {
         // tslint:disable-next-line:max-line-length
-        this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
+        this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, null, null, null, this.persona.vehiculos).subscribe(() => {
           this.presentToast('Vehiculo creado satisfactoriamente');
        });
       }
@@ -100,13 +100,13 @@ export class NewvehiclePage implements OnInit {
             };
             this.service.postSeguro(seguro).subscribe(() => {
               // tslint:disable-next-line: max-line-length
-              this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
+              this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, null, null, null, this.persona.vehiculos).subscribe(() => {
                  this.presentToast('Vehiculo creado satisfactoriamente');
               });
             });
           } else {
               // tslint:disable-next-line:max-line-length
-              this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, this.persona.vehiculos).subscribe(() => {
+              this.service.postPersonaVehiculo(this.persona.id, this.persona.nombrePersona, this.persona.apellidoPersona, this.persona.dniPersona, this.persona.telefonoPersona, null, null, null, this.persona.vehiculos).subscribe(() => {
                   this.presentToast('Vehiculo creado satisfactoriamente');
               });
           }
