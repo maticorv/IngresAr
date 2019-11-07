@@ -6,6 +6,7 @@ import { ServiceService } from 'src/app/services/service.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import Swal from 'sweetalert2';
+import { Vehiculo } from '../../classes/vehiculo';
 
 @Component({
   selector: 'app-newvehicle3',
@@ -19,7 +20,7 @@ export class Newvehicle3Page implements OnInit {
   vehiculo: IVehiculo;
 
   constructor(private service: ServiceService, private router: Router,
-              private toastController: ToastController) { }
+              private toastController: ToastController, private vehiculos: Vehiculo) { }
 
   ngOnInit() {
     this.getAccount();
@@ -68,6 +69,7 @@ export class Newvehicle3Page implements OnInit {
         confirmButtonText: 'Crear Vehículo',
       }).then((result) => {
         if (result.value) {
+          this.vehiculos.dominio = this.dominio;
           this.CrearVehiculo();
         }
       });

@@ -29,8 +29,8 @@ export class EditCommonSpacePage implements OnInit {
   obtenerEspacioComun() {
     this.service.getEspacioComun(this.activatedRoute.snapshot.params.id).subscribe(data => {
       this.espacioComun = data;
-      this.disponibilidadDesde = data.disponibilidadDesde;
-      this.disponibilidadHasta = data.disponibilidadHasta;
+      this.disponibilidadDesde = data.horaDesde;
+      this.disponibilidadHasta = data.horaHasta;
       this.nombreEspacioComun = data.nombreEspacioComun;
       this.fotoEspacioComun = data.fotoEspacioComun;
       this.fotoEspacioComunContentType = data.fotoEspacioComunContentType;

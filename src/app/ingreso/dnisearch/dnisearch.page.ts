@@ -25,9 +25,14 @@ export class DnisearchPage implements OnInit {
       if (data.personaEstado.nombreEstadoPersona === 'bloqueada') {
         this.personaBloqueada('La persona se encuentra bloqueada');
       } else {
-        this.persona = data;
-        console.log(data);
-        this.personaExiste();
+        this.service.getPlanillaEgreso(this.dni).subscribe(pers => {
+          this.personaBloqueada('La persona se ecnuentra dentro del establecimiento');
+        },
+        (error) => {
+          this.persona = data;
+          console.log(data);
+          this.personaExiste();
+        });
       }
     },
     (error) => { console.log(error);
@@ -53,6 +58,9 @@ export class DnisearchPage implements OnInit {
             this.personas.id = this.persona.id;
             this.personas.telefonoPersona = this.persona.telefonoPersona;
             this.personas.vehiculos = this.persona.vehiculos;
+            this.personas.personaEstado = this.persona.personaEstado;
+            this.personas.personaUser = this.persona.personaUser;
+            this.personas.personabarrio = this.persona.personabarrio;
             this.setNullData();
             this.router.navigateByUrl('/destination');
           }
