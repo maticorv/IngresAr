@@ -114,7 +114,8 @@ export class GenerateQrPage implements OnInit {
       }
     },
     (error) => { console.log(error);
-                 this.presentAlert('La persona no se encuentra en la Base de Datos');
+                 // tslint:disable-next-line: max-line-length
+                 this.presentAlert('Para crearle una autorización previa a la persona debe haber ingresado por lo menos una vez al establecimiento');
     });
   }
 
