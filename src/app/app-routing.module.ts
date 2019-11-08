@@ -161,7 +161,11 @@ const routes: Routes = [
   path: 'view-planilla-acompaniante',
   // tslint:disable-next-line:max-line-length
   loadChildren: () => import('./ingreso/authorization/view-planilla-acompaniante/view-planilla-acompaniante.module').then( m => m.ViewPlanillaAcompaniantePageModule)
+  },  {
+    path: 'my-events',
+    loadChildren: () => import('./Owner/events/my-events/my-events.module').then( m => m.MyEventsPageModule)
   },
+
 ];
 
 @NgModule({
