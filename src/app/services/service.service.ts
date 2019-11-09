@@ -443,6 +443,17 @@ export class ServiceService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'eventosespacio/' + id, {headers}).pipe(map(data => data as Ievent[]));
   }
+  getMyEvents(id: number): Observable<Ievent[]> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.get(this.url + 'eventospersona/' + id, {headers}).pipe(map(data => data as Ievent[]));
+  }
+  deleteEvent(id: number) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
+    return this.http.delete(this.url + 'eventos/' + id, {headers});
+  }
+
 
   getUser(email) {
     const token = this.leerToken();
