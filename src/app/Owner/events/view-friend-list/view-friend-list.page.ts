@@ -12,6 +12,7 @@ import { Amigo } from 'src/app/classes/amiigo';
 export class ViewFriendListPage implements OnInit {
 
   listaAmigo: IFriendsList;
+  idLista: number;
 
   constructor(private activatedRoute: ActivatedRoute, private service: ServiceService,
               private amigo: Amigo) { }
@@ -21,6 +22,7 @@ export class ViewFriendListPage implements OnInit {
 
   ionViewWillEnter() {
     this.obtenerListaAmigo();
+    this.idLista = this.activatedRoute.snapshot.params.id;
     if (this.amigo.sinDatos === true) {
       this.listaAmigo.amigos.push(this.amigo.ListaAmigo[0]);
       // tslint:disable-next-line: max-line-length

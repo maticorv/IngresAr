@@ -685,7 +685,7 @@ export class ServiceService {
   getPersonaEnListaAmigo(dni, id) {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
-    return this.http.get(this.url + 'listaexiste/?dni=' + dni + '&id=' + id, {headers}).pipe(map(data => data));
+    return this.http.get(this.url + 'listaexiste/?dni=' + dni + '&id=' + id, {headers}).pipe(map(data => data as []));
   }
 
 }
