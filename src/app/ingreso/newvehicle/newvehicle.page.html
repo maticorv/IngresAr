@@ -58,13 +58,9 @@
             <ion-datetime [disabled]="!check" [(ngModel)]="vencimiento" placeholder="myDate " [min]="myDate " [max]="max " displayFormat="DD MM YY " placeholder="Select Date "></ion-datetime>
         </ion-item>
     </ion-list>
-    <ion-row>
-        <ion-col>
-            <ion-button color="primary " routerLink="/carnet" routerLinkActive="router-link-active ">Agregar Carnet</ion-button>
-        </ion-col>
-        <ion-col>
-            <ion-button color="primary " (click)="postVehiculo() ">Crear Vehiculo</ion-button>
-        </ion-col>
+    <ion-row class="mt-3">
+            <ion-button size="" color="primary " routerLink="/carnet" routerLinkActive="router-link-active ">Agregar Carnet</ion-button>
+            <ion-button size="" color="primary " (click)="postVehiculo() ">Crear Vehiculo </ion-button>
     </ion-row>
 
 
