@@ -26,7 +26,7 @@ export class DnisearchPage implements OnInit {
         this.personaBloqueada('La persona se encuentra bloqueada');
       } else {
         this.service.getPlanillaEgreso(this.dni).subscribe(pers => {
-          this.personaBloqueada('La persona se ecnuentra dentro del establecimiento');
+          this.personaBloqueada('La persona se encuentra dentro del establecimiento');
         },
         (error) => {
           this.persona = data;
@@ -48,28 +48,29 @@ export class DnisearchPage implements OnInit {
                 '¿Los datos son  correctos?</strong>',
       buttons: [
         {
-          text: 'Aceptar',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            this.personas.nombrePersona = this.persona.nombrePersona;
-            this.personas.apellidoPersona = this.persona.apellidoPersona;
-            this.personas.dniPersona = this.persona.dniPersona;
-            this.personas.id = this.persona.id;
-            this.personas.telefonoPersona = this.persona.telefonoPersona;
-            this.personas.vehiculos = this.persona.vehiculos;
-            this.personas.personaEstado = this.persona.personaEstado;
-            this.personas.personaUser = this.persona.personaUser;
-            this.personas.personabarrio = this.persona.personabarrio;
-            this.setNullData();
-            this.router.navigateByUrl('/destination');
-          }
-        }, {
-          text: 'Cancelar',
-          handler: () => {
-            console.log('Confirm Okay');
-          }
+        text: 'Cancelar',
+        handler: () => {
+          console.log('Confirm Okay');
         }
+      },
+      {
+        text: 'Aceptar',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: () => {
+          this.personas.nombrePersona = this.persona.nombrePersona;
+          this.personas.apellidoPersona = this.persona.apellidoPersona;
+          this.personas.dniPersona = this.persona.dniPersona;
+          this.personas.id = this.persona.id;
+          this.personas.telefonoPersona = this.persona.telefonoPersona;
+          this.personas.vehiculos = this.persona.vehiculos;
+          this.personas.personaEstado = this.persona.personaEstado;
+          this.personas.personaUser = this.persona.personaUser;
+          this.personas.personabarrio = this.persona.personabarrio;
+          this.setNullData();
+          this.router.navigateByUrl('/destination');
+        }
+      },
       ]
     });
 

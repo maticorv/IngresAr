@@ -7,7 +7,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
 
     <ion-row class="ion-justify-content-around">
         <h3>Por favor ingrese el DNI</h3>
@@ -16,7 +16,7 @@
             <ion-input type="tel" minlength="7" maxlength="9" placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
         </ion-item>
     </ion-row>
-    <div style="text-align-last: right">
+    <div style="float: right;">
         <ion-button class="mt-4 ion-align-self-end" (click)="getpersona()">Aceptar</ion-button>
     </div>
 

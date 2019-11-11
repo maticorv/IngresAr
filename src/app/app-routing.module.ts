@@ -86,7 +86,7 @@ const routes: Routes = [
   { path: 'detalle-evento/:id', loadChildren: './funcionesMenu/eventos/detalle-evento/detalle-evento.module#DetalleEventoPageModule' },
   { path: 'generate-qr/:id', loadChildren: './Owner/authorizations/generate-qr/generate-qr.module#GenerateQrPageModule' },
   { path: 'view-friend-list/:id', loadChildren: './Owner/events/view-friend-list/view-friend-list.module#ViewFriendListPageModule' },
-  { path: 'add-friend/:id', loadChildren: './Owner/events/view-friend-list/add-friend/add-friend.module#AddFriendPageModule' },
+  { path: 'add-friend', loadChildren: './Owner/events/view-friend-list/add-friend/add-friend.module#AddFriendPageModule' },
   {
     path: 'processingress',
     loadChildren: () => import('./ingreso/qringress/processingress/processingress.module').then( m => m.ProcessingressPageModule)
@@ -162,6 +162,11 @@ const routes: Routes = [
   // tslint:disable-next-line:max-line-length
   loadChildren: () => import('./ingreso/authorization/view-planilla-acompaniante/view-planilla-acompaniante.module').then( m => m.ViewPlanillaAcompaniantePageModule)
   },
+  {
+    path: 'my-events',
+    loadChildren: () => import('./Owner/events/my-events/my-events.module').then( m => m.MyEventsPageModule)
+  },
+
 ];
 
 @NgModule({

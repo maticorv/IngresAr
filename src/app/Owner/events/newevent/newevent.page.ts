@@ -170,15 +170,19 @@ export class NeweventPage implements OnInit {
     const detalles: IDetalleEvento[] = [];
     this.evento.nombreEvento = this.nombre;
     for (const iterator of this.lists) {
-      const detalleEvento = {
-        id: null,
-        Amigosevento: this.listas[iterator],
-        detallePersonaEvento: null,
-      };
-      this.service.postDetalleEvento(detalleEvento).subscribe( detalle => {
-        detalles.push(detalle);
-      }, (error) => {}
-      );
+      console.log(this.listas[iterator]);
+      for (const iterator1 of this.listas[iterator].amigos) {
+        console.log(iterator1);
+        const detalleEvento = {
+          id: null,
+          Amigosevento: null,
+          detallePersonaEvento: iterator1,
+        };
+        this.service.postDetalleEvento(detalleEvento).subscribe( detalle => {
+          detalles.push(detalle);
+        }, (error) => {}
+        );
+      }
     }
     this.evento.eventoDetalles = detalles;
     this.service.putEvento(this.evento).subscribe(data => {
