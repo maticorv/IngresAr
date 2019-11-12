@@ -28,6 +28,10 @@
                       [value]="evento?.fecha"></ion-datetime>
                       <!-- [(ngModel)]="espacioComun.horaDesde"></ion-datetime> -->
     </ion-item>
+    <ion-label class="mt-2">Creador del evento: </ion-label>
+    <ion-item>
+      <ion-label>{{evento?.eventoPersona.apellidoPersona}},  {{evento?.eventoPersona.nombrePersona}}  {{evento?.eventoPersona.dniPersona}}</ion-label>
+    </ion-item>
   </ion-grid>
   <ion-grid>
     <ion-label>Invitados</ion-label>
