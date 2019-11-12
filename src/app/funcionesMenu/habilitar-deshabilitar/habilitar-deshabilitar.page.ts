@@ -62,7 +62,7 @@ export class HabilitarDeshabilitarPage implements OnInit {
           handler: () => {
             this.service.putPersonaEstado(this.persona.personaEstado.id, this.accion, new Date()).subscribe(data => {
               console.log(data);
-              this.presentToast('La persona ha sido' + this.accion + 'correctamente');
+              this.presentToast('La persona ha sido ' + this.accion + ' correctamente');
             },
             (error) => {console.log(error);
             });
