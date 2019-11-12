@@ -46,9 +46,15 @@ export class SearchGuardPage implements OnInit {
       message: '¿Desea continuar con este usuario?</strong>',
       buttons: [
         {
-          text: 'Aceptar',
+          text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
+          handler: () => {
+            this.email = null;
+          }
+        },
+        {
+          text: 'Aceptar',
           handler: () => {
             this.email = null;
             this.user.id = this.users.id;
@@ -66,12 +72,7 @@ export class SearchGuardPage implements OnInit {
             this.user.authorities = this.users.authorities;
             this.router.navigateByUrl('/search-person-guard');
           }
-        }, {
-          text: 'Cancelar',
-          handler: () => {
-            this.email = null;
-          }
-        }
+        },
       ]
     });
 
@@ -84,19 +85,20 @@ export class SearchGuardPage implements OnInit {
       message: '¿Desea crear un nuevo usuario?</strong>',
       buttons: [
         {
-          text: 'Aceptar',
+          text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
+          handler: () => {
+            this.email = null;
+          }
+        },
+        {
+          text: 'Aceptar',
           handler: () => {
             this.user.email = this.email;
             this.router.navigateByUrl('/new-guard');
           }
-        }, {
-          text: 'Cancelar',
-          handler: () => {
-            this.email = null;
-          }
-        }
+        },
       ]
     });
 

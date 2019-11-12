@@ -32,7 +32,6 @@ export class HabilitarDeshabilitarPage implements OnInit {
   }
 
   ionViewWillLeave() {
-    this.accion = null;
     this.persona = null;
     this.dni = null;
     this.PersonaEstado = null;
