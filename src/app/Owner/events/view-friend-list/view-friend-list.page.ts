@@ -29,8 +29,8 @@ export class ViewFriendListPage implements OnInit {
       this.service.putFriend(this.listaAmigo.id, this.listaAmigo.nombreListaAmigos, this.listaAmigo.pertenece, this.listaAmigo.amigos).subscribe(data => {
         console.log(data);
         this.obtenerListaAmigo();
-        // this.amigo.sinDatos = false;
-        // this.amigo.ListaAmigo.pop();
+        this.amigo.sinDatos = false;
+        this.amigo.ListaAmigo.pop();
       },
       (error) => {console.log(error);
       });

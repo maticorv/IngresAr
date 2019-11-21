@@ -15,7 +15,7 @@
                     <ion-label>Fecha Desde:</ion-label>
                     <ion-datetime displayFormat="DD-MM-YYYY"  
                                     picker-format="DD-MM-YYYY"
-                                    max="2030-12-31"
+                                    [max]="fechaMax | date: 'yyyy-MM-dd'"
                                     min="2015-01-01"
                                     [value]="fechaDesde"
                                     [(ngModel)]="fechaDesde"></ion-datetime>
