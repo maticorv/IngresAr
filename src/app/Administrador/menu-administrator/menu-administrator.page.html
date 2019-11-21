@@ -6,30 +6,32 @@
 
 <ion-content class="ion-padding">
     <ion-list>
-        <ion-item>
-            <ion-label (click)="irAAdministrarEspCom()">Administrar Espacion Comunes</ion-label>
-        </ion-item>
-        <ion-item>
-            <ion-label (click)="irAAdminGuardias()">Administrar Guardias</ion-label>
-        </ion-item>
-        <ion-item>
-            <ion-label (click)="irAAdminPropietario()">Administrar Propietarios</ion-label>
-        </ion-item>
-        <ion-item>
-            <ion-label (click)="irANovedades()">Novedades</ion-label>
-        </ion-item>
-        <ion-item>
-            <ion-label (click)="irAReportes()">Reportes</ion-label>
-        </ion-item>
-        <ion-item>
-            <ion-label (click)="irANormas()">Normas</ion-label>
-        </ion-item>
-        <ion-item>
-            <ion-label (click)="Backup()">Backup</ion-label>
-        </ion-item>
-        <ion-item>
-            <ion-label (click)="personasBloqueadas()">Reporte Personas Bloqueadas</ion-label>
-        </ion-item>
+        <ion-card>
+            <ion-item>
+                <ion-label (click)="irAAdministrarEspCom()">Administrar Espacion Comunes</ion-label>
+            </ion-item>
+            <ion-item class="even">
+                <ion-label (click)="irAAdminGuardias()">Administrar Guardias</ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label (click)="irAAdminPropietario()">Administrar Propietarios</ion-label>
+            </ion-item>
+            <ion-item class="even">
+                <ion-label (click)="irANovedades()">Novedades</ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label (click)="irAReportes()">Reportes</ion-label>
+            </ion-item>
+            <ion-item class="even">
+                <ion-label (click)="irANormas()">Normas</ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label (click)="Backup()">Backup</ion-label>
+            </ion-item>
+            <ion-item class="even">
+                <ion-label (click)="personasBloqueadas()">Reporte Personas Bloqueadas</ion-label>
+            </ion-item>
+        </ion-card>
     </ion-list>
 </ion-content>
 <ion-footer>
