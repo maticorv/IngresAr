@@ -9,69 +9,46 @@
 
 <ion-content>
 
-<ion-row>
-  <ion-list>
-    <ion-row>
-        <ion-col>
-            <ion-item>
-                <ion-label>
-                    Apellido
-                </ion-label>
-            </ion-item>
-        </ion-col>
-        <ion-col>
-            <ion-item>
-                <ion-label>
-                    Nombre
-                </ion-label>
-            </ion-item>
-        </ion-col>
-        <ion-col>
-            <ion-item>
-                <ion-label>
-                    DNI
-                </ion-label>
-            </ion-item>
-        </ion-col>
-        <ion-col>
-            <ion-item>
-                <ion-label>
-                    Destino
-                </ion-label>
-            </ion-item>
-        </ion-col>
-    </ion-row>
-    <ion-row *ngFor="let p of planiallaIngresoEgreso">
-        <ion-col>
-            <ion-item>
-                <ion-label>
-                    {{p.planillaPersona.apellidoPersona}}
-                </ion-label>
-            </ion-item>
-        </ion-col>
-        <ion-col>
-            <ion-item>
-                <ion-label>
-                    {{p.planillaPersona.nombrePersona}}
-                </ion-label>
-            </ion-item>
-        </ion-col>
-        <ion-col>
-            <ion-item>
-                <ion-label>
-                    {{p.planillaPersona.dniPersona}}
-                </ion-label>
-            </ion-item>
-        </ion-col>
-        <ion-col>
-            <ion-item>
-                <ion-label>
-                        C: {{p.planillaDestino?.casaDomicilio}} M: {{p.planillaDestino?.manzanaDomicilio}}
-                </ion-label>
-            </ion-item>
-        </ion-col>
-    </ion-row>
-</ion-list>
+
+<ion-row style="place-content: center;">
+    <ion-card>
+        <ion-item class="even">
+            <ion-list>
+                <ion-row>
+                <ion-col>
+                    <ion-label> Apellido </ion-label>
+                </ion-col>
+                <ion-col>
+                    <ion-label> Nombre </ion-label>
+                </ion-col>
+                <ion-col>
+                    <ion-label> DNI </ion-label>
+                </ion-col>
+                <ion-col>
+                    <ion-label> Destino </ion-label>
+                </ion-col>
+                </ion-row>
+            </ion-list>
+        </ion-item>
+        <ion-item *ngFor="let p of planiallaIngresoEgreso; let i = index" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'">
+            <ion-list>
+                <ion-row>
+                <ion-col>
+                    <ion-label> {{p.planillaPersona.apellidoPersona}} </ion-label>
+                </ion-col>
+                <ion-col>
+                    <ion-label> {{p.planillaPersona.nombrePersona}} </ion-label>
+                </ion-col>
+                <ion-col>
+                    <ion-label> {{p.planillaPersona.dniPersona}} </ion-label>
+                </ion-col>
+                <ion-col>
+                    <ion-label> C: {{p.planillaDestino?.casaDomicilio}} M: {{p.planillaDestino?.manzanaDomicilio}} </ion-label>
+                </ion-col>
+                </ion-row>
+            </ion-list>
+        </ion-item>
+    </ion-card>
 </ion-row>
 
 

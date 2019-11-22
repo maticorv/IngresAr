@@ -39,87 +39,51 @@
     </ion-row>
 
     <ion-row>
-        <ion-list>
-          <ion-row>
-              <ion-col>
-                  <ion-item>
-                      <ion-label>
-                          Apellido
-                      </ion-label>
-                  </ion-item>
-              </ion-col>
-              <ion-col>
-                  <ion-item>
-                      <ion-label>
-                          Nombre
-                      </ion-label>
-                  </ion-item>
-              </ion-col>
-              <ion-col>
-                  <ion-item>
-                      <ion-label>
-                          DNI
-                      </ion-label>
-                  </ion-item>
-              </ion-col>
-              <ion-col>
-                  <ion-item>
-                      <ion-label>
-                          Marca
-                      </ion-label>
-                  </ion-item>
-              </ion-col>
-              <ion-col>
-                  <ion-item>
-                      <ion-label>
-                          Dominio
-                      </ion-label>
-                  </ion-item>
-              </ion-col>
-          </ion-row>
-          <ion-row *ngFor="let p of planilla">
-              <ion-col>
-                  <ion-item>
-                      <ion-label>
-                          {{p.planillaPersona.apellidoPersona}}
-                      </ion-label>
-                  </ion-item>
-              </ion-col>
-              <ion-col>
-                  <ion-item>
-                      <ion-label>
-                          {{p.planillaPersona.nombrePersona}}
-                      </ion-label>
-                  </ion-item>
-              </ion-col>
-              <ion-col>
-                  <ion-item>
-                      <ion-label>
-                          {{p.planillaPersona.dniPersona}}
-                      </ion-label>
-                  </ion-item>
-              </ion-col>
-              <ion-col>
-                  <ion-item>
-                      <ion-label *ngIf="p.planillaVehiculo?.vehiculoMarca.nombreMarca !== null">
-                          {{p.planillaVehiculo.vehiculoMarca.nombreMarca}}
-                      </ion-label>
-                      <ion-label *ngIf="p.planillaVehiculo?.vehiculoMarca.nombreMarca === null">
-                      </ion-label>
-                  </ion-item>
-              </ion-col>
-              <ion-col>
-                  <ion-item>
-                      <ion-label *ngIf="p.planillaVehiculo?.dominio !== null">
-                          {{p.planillaVehiculo.dominio}}
-                      </ion-label>
-                      <ion-label *ngIf="p.planillaVehiculo?.dominio === null">
-                      </ion-label>
-                  </ion-item>
-              </ion-col>
-          </ion-row>
-      </ion-list>
-    </ion-row>
+            <ion-card>
+                <ion-item class="even">
+                    <ion-list>
+                        <ion-row>
+                        <ion-col>
+                            <ion-label> Apellido </ion-label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-label> Nombre </ion-label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-label> DNI </ion-label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-label> Marca </ion-label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-label> Dominio </ion-label>
+                        </ion-col>
+                        </ion-row>
+                    </ion-list>
+                </ion-item>
+                <ion-item *ngFor="let p of planilla; let i = index" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'">
+                    <ion-list>
+                        <ion-row>
+                        <ion-col>
+                            <ion-label> {{p.planillaPersona.apellidoPersona}} </ion-label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-label> {{p.planillaPersona.nombrePersona}} </ion-label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-label> {{p.planillaPersona.dniPersona}} </ion-label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-label *ngIf="p.planillaVehiculo?.vehiculoMarca.nombreMarca !== null"> {{p.planillaVehiculo.vehiculoMarca.nombreMarca}} </ion-label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-label *ngIf="p.planillaVehiculo?.vehiculoMarca.dominio !== null"> {{p.planillaVehiculo.dominio}} </ion-label>
+                        </ion-col>
+                        </ion-row>
+                    </ion-list>
+                </ion-item>
+            </ion-card>
+        </ion-row>
 
 
 </ion-content>

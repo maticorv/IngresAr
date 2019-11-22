@@ -10,6 +10,7 @@ import { ServiceService } from '../../../services/service.service';
 export class VisitPage implements OnInit {
 
   qrs = [];
+  qrListo = false;
 
   constructor(private router: Router, private service: ServiceService) { }
 
@@ -19,6 +20,7 @@ export class VisitPage implements OnInit {
 
   ionViewWillLeave() {
     this.qrs = [];
+    this.qrListo = false;
   }
 
   ionViewWillEnter() {
@@ -42,6 +44,7 @@ export class VisitPage implements OnInit {
                 this.qrs.push(element);
               }
             });
+            this.qrListo = true;
           },
           (error) => {console.log(error);
           });

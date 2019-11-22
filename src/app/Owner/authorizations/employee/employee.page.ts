@@ -10,6 +10,7 @@ import { ServiceService } from '../../../services/service.service';
 export class EmployeePage implements OnInit {
 
   qrs = [];
+  qrListo = false;
 
   constructor(private router: Router, private service: ServiceService) { }
 
@@ -23,6 +24,7 @@ export class EmployeePage implements OnInit {
 
   ionViewWillLeave() {
     this.qrs = [];
+    this.qrListo = false;
   }
 
   generarAutorizacion() {
@@ -43,6 +45,7 @@ export class EmployeePage implements OnInit {
                 this.qrs.push(element);
               }
             });
+            this.qrListo = true;
           },
           (error) => {console.log(error);
           });

@@ -9,40 +9,49 @@
 
 <ion-content>
 
-    <ion-row>
-        <ion-card>
-            <ion-item>
-                <ion-list>
-                    <ion-row>
-                        <ion-col>
-                            <ion-label> Apellido </ion-label>
-                        </ion-col>
-                        <ion-col>
-                            <ion-label> Nombre </ion-label>
-                        </ion-col>
-                        <ion-col>
-                            <ion-label> Fecha Hasta </ion-label>
-                        </ion-col>
-                    </ion-row>
-                </ion-list>
-            </ion-item>
-            <ion-item *ngFor="let qr of qrs">
-                <ion-list>
-                    <ion-row>
-                        <ion-col>
-                            <ion-label> {{qr?.qrAutorizado?.apellidoPersona}} </ion-label>
-                        </ion-col>
-                        <ion-col>
-                            <ion-label> {{qr?.qrAutorizado?.nombrePersona}} </ion-label>
-                        </ion-col>
-                        <ion-col>
-                            <ion-label> {{qr?.fechaFinQR | date: 'dd/MM/yyyy'}} </ion-label>
-                        </ion-col>
-                    </ion-row>
-                </ion-list>
-            </ion-item>
-        </ion-card>
-    </ion-row>
+    <ng-container *ngIf="qrListo === false;else elseTemplate">
+        <ion-row class="spinner">
+            <ion-spinner name="lines"></ion-spinner>
+        </ion-row>
+    </ng-container>
+
+    <ng-template #elseTemplate class="animated fadeIn">
+        <ion-row>
+            <ion-card>
+                <ion-item>
+                    <ion-list>
+                        <ion-row>
+                            <ion-col>
+                                <ion-label> Apellido </ion-label>
+                            </ion-col>
+                            <ion-col>
+                                <ion-label> Nombre </ion-label>
+                            </ion-col>
+                            <ion-col>
+                                <ion-label> Fecha Hasta </ion-label>
+                            </ion-col>
+                        </ion-row>
+                    </ion-list>
+                </ion-item>
+                <ion-item *ngFor="let qr of qrs">
+                    <ion-list>
+                        <ion-row>
+                            <ion-col>
+                                <ion-label> {{qr?.qrAutorizado?.apellidoPersona}} </ion-label>
+                            </ion-col>
+                            <ion-col>
+                                <ion-label> {{qr?.qrAutorizado?.nombrePersona}} </ion-label>
+                            </ion-col>
+                            <ion-col>
+                                <ion-label> {{qr?.fechaFinQR | date: 'dd/MM/yyyy'}} </ion-label>
+                            </ion-col>
+                        </ion-row>
+                    </ion-list>
+                </ion-item>
+            </ion-card>
+        </ion-row>
+    </ng-template>
+
 
 </ion-content>
 

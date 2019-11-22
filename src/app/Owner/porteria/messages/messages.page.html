@@ -8,25 +8,34 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-    <ion-list>
-        <ng-container *ngFor="let propietario of propietarios; let i=index">
-            <ng-container *ngIf="propietario?.id===account?.id; else elseTemplate">
+
+    <ng-container *ngIf="propietarios === undefined;else elseTemplate">
+        <ion-row class="spinner">
+            <ion-spinner name="lines"></ion-spinner>
+        </ion-row>
+    </ng-container>
+    
+    <ng-template #elseTemplate >
+        <ion-list class="animated fadeIn">
+            <ng-container *ngFor="let propietario of propietarios; let i=index">
+                <ng-container *ngIf="propietario?.id===account?.id; else elseTemplate">
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <ion-item (click)="onClick(propietario?.id)" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'">
+                        <ion-avatar slot="start">
+                            <ng-container *ngIf="propietario?.imageUrl; else elseTemplate">
+                                <img class="propietario-img" [src]="propietario.imageUrl" alt="../../../assets/image.png">
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                                <img class="propietario-img" src="../../../assets/image.png" alt="">
+                            </ng-template>
+                        </ion-avatar>
+                        <ion-label>
+                            <h2>{{propietario.nombrePersona}} {{propietario.apellidoPersona}}</h2>
+                        </ion-label>
+                    </ion-item>
+                </ng-template>
             </ng-container>
-            <ng-template #elseTemplate>
-                <ion-item (click)="onClick(propietario?.id)" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'">
-                    <ion-avatar slot="start">
-                        <ng-container *ngIf="propietario?.imageUrl; else elseTemplate">
-                            <img class="propietario-img" [src]="propietario.imageUrl" alt="../../../assets/image.png">
-                        </ng-container>
-                        <ng-template #elseTemplate>
-                            <img class="propietario-img" src="../../../assets/image.png" alt="">
-                        </ng-template>
-                    </ion-avatar>
-                    <ion-label>
-                        <h2>{{propietario.nombrePersona}} {{propietario.apellidoPersona}}</h2>
-                    </ion-label>
-                </ion-item>
-            </ng-template>
-        </ng-container>
-    </ion-list>
+        </ion-list>
+    </ng-template>
 </ion-content>

@@ -9,9 +9,16 @@
 
 <ion-content>
 
+  <ng-container *ngIf="qrListo === false;else elseTemplate">
+      <ion-row class="spinner">
+          <ion-spinner name="lines"></ion-spinner>
+      </ion-row>
+  </ng-container>
+
+  <ng-template #elseTemplate>
     <ion-row>
         <ion-card>
-          <ion-item>
+          <ion-item class="animated fadeIn">
             <ion-list>
               <ion-row>
                 <ion-col>
@@ -26,7 +33,7 @@
               </ion-row>
             </ion-list>
           </ion-item>
-          <ion-item *ngFor="let qr of qrs">
+          <ion-item *ngFor="let qr of qrs" class="animated fadeIn">
             <ion-list>
               <ion-row>
                 <ion-col>
@@ -43,6 +50,8 @@
           </ion-item>
         </ion-card>
       </ion-row>
+  </ng-template>
+
 
 </ion-content>
 

@@ -10,9 +10,18 @@
 
 <ion-content class="ion-padding">
 
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let l of listaAmigos; let i = index" (click)="presentActionSheet(i)"> {{l.nombreListaAmigos}} </li>
-    </ul>
+    <ng-container *ngIf="listaAmigos === undefined;else elseTemplate">
+        <ion-row class="spinner">
+            <ion-spinner name="lines"></ion-spinner>
+        </ion-row>
+    </ng-container>
+    
+    <ng-template #elseTemplate class="animated fadeIn">
+      <ul class="list-group animated fadeIn">
+        <li class="list-group-item" *ngFor="let l of listaAmigos; let i = index" (click)="presentActionSheet(i)"> {{l.nombreListaAmigos}} </li>
+      </ul>
+    </ng-template>
+
 
 </ion-content>
 

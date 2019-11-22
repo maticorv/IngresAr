@@ -14,11 +14,15 @@ export class ResidentPage implements OnInit {
   constructor(private service: ServiceService) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     this.obtenerResidentes();
   }
 
   obtenerResidentes() {
     this.service.account().subscribe(data => {
+      console.log(data);
       this.service.getPersonUser(data.id).subscribe(pers => {
         this.service.getPersonasDomicilioByIdPers(pers.id).subscribe(result => {
           this.persona = result;
