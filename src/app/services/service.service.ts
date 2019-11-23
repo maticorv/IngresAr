@@ -465,11 +465,18 @@ export class ServiceService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token});
     return this.http.get(this.url + 'persona/userperson/?id=' + id , {headers}).pipe(map(data => data as Persona));
   }
-  putEvento(event: Ievent): Observable<Ievent> {
+  postEvento(event: Ievent): Observable<Ievent> {
     const token = this.leerToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
     // tslint:disable-next-line: max-line-length
     return this.http.post(this.url + 'eventos', event, {headers}).pipe(map(data => data as Ievent));
+  }
+
+  putEvento(event: Ievent): Observable<Ievent> {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    // tslint:disable-next-line: max-line-length
+    return this.http.put(this.url + 'eventos', event, {headers}).pipe(map(data => data as Ievent));
   }
 
 
