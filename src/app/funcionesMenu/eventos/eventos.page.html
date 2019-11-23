@@ -9,26 +9,35 @@
 
 <ion-content class="ion-padding">
 
-    <ion-item>
-      <ion-label>Filtrar por fecha</ion-label>
-      <ion-icon mode="ios" name="calendar"></ion-icon>
-      <ion-datetime displayFormat="DD/MM/YYYY"
-                    [value]="fecha"
-                    [(ngModel)]="fecha"
-                    cancel-text='Cancelar'
-                    done-text="Seleccionar"
-                    [min]="fechaMin | date: 'yyyy-MM-dd'"
-                    max="2030"
-                    (ionChange)="filtrar()"></ion-datetime>
-                    <!-- (ionChange)="obtener($event)"></ion-datetime> -->
-    </ion-item>
-  
-    <ion-card style="background: gray;">
+    <ng-container *ngIf="evento === undefined;else elseTemplate">
+        <ion-row class="spinner">
+            <ion-spinner name="lines"></ion-spinner>
+        </ion-row>
+    </ng-container>
+    
+    <ng-template #elseTemplate>
+      <ion-item class="animated fadeIn">
+        <ion-label>Filtrar por fecha</ion-label>
+        <ion-icon mode="ios" name="calendar"></ion-icon>
+        <ion-datetime displayFormat="DD/MM/YYYY"
+                      [value]="fecha"
+                      [(ngModel)]="fecha"
+                      cancel-text='Cancelar'
+                      done-text="Seleccionar"
+                      [min]="fechaMin | date: 'yyyy-MM-dd'"
+                      max="2030"
+                      (ionChange)="filtrar()"></ion-datetime>
+                      <!-- (ionChange)="obtener($event)"></ion-datetime> -->
+      </ion-item>
+    
       <ion-list>
-        <ion-item *ngFor="let e of eventos; let i = index" (click)="verEvento(i)">
-          <label>{{e.nombreEvento}}</label>
-        </ion-item>
+      <ion-card class="animated fadeIn">
+          <ion-item *ngFor="let e of eventos; let i = index" (click)="verEvento(i)">
+            <label>{{e.nombreEvento}}</label>
+          </ion-item>
+        </ion-card>
       </ion-list>
-    </ion-card>
+    </ng-template>
+
   
   </ion-content>

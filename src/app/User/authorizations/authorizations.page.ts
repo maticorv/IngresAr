@@ -31,7 +31,7 @@ export class AuthorizationsPage implements OnInit {
     );
   }
   getAutorzaciones() {
-    this.service.getQrAutorizado(this.account.id).subscribe(data => {
+    this.service.getQrAutorizado(18).subscribe(data => {
       this.autorizaciones = data;
       // console.log('this.autorizaciones :', this.autorizaciones);
     });

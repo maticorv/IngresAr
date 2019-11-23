@@ -51,7 +51,7 @@ export class FriendsListPage implements OnInit {
           this.router.navigate(['/view-friend-list', this.listaAmigos[i].id]);
         }
       }, {
-        text: 'Borar',
+        text: 'Borrar',
         role: 'destructive',
         icon: 'trash',
         handler: () => {

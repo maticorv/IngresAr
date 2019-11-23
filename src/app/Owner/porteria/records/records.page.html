@@ -9,17 +9,20 @@
 
 
 <ion-content fullscreen class="ion-padding">
-    <ng-container *ngFor="let planilla of planillas; let i=index">
-        <ng-container *ngIf="planillas === undefined; else elseTemplate">
+            
 
+    <ng-container >
+        <ng-container *ngIf="planillas === undefined; else elseTemplate">
+            <ion-row class="spinner">
+                <ion-spinner name="lines"></ion-spinner>
+            </ion-row>
         </ng-container>
         <ng-template #elseTemplate>
-            <ion-item [ngClass]="(i % 2 == 0) ? 'odd' : 'even'">
+            <ion-item *ngFor="let planilla of planillas; let i=index" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'" class="animated fadeIn">
                 <ion-label>
                     <h2><b>Persona: </b>{{planilla.planillaPersona.nombrePersona}} {{planilla.planillaPersona.apellidoPersona}}</h2>
                     <h3><b>Vehiculo: </b> {{ planilla.planillaVehiculo.vehiculoMarca?.nombreMarca }} {{ planilla.planillaVehiculo.vehiculoModelo?.nombreModelo }} <b>Dominio:</b> {{planilla.planillaVehiculo?.dominio}} </h3>
                     <p><b>Color: </b>{{planilla.planillaVehiculo.vehiculoColor?.nombreColor}}</p>
-
                 </ion-label>
             </ion-item>
         </ng-template>

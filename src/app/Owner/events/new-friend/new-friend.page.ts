@@ -15,6 +15,7 @@ export class NewFriendPage implements OnInit {
 
   dni: number;
   persona: Persona;
+  propietario: Persona;
 
   constructor(private service: ServiceService, private router: Router,
               private alertCtrl: AlertController, private personas: Personas,
@@ -23,20 +24,42 @@ export class NewFriendPage implements OnInit {
   ngOnInit() {
   }
 
-  verficarSiAmigoExiste() {
-    if (this.amigo.ListaAmigo.length === 0 ) {
-      this.getpersona();
-    }
-    this.amigo.ListaAmigo.forEach(element => {
-      console.log('Entro al for');
-      console.log('element.dniPersona :', element.dniPersona);
-      console.log('this.dni :', this.dni);
-      if (element.dniPersona.toString() === this.dni.toString()) {
-        this.amigoExisteEnLista('La persona ya se encuentra agregada en la lista');
-      } else {
-        this.getpersona();
-      }
+  ionViewWillEnter() {
+    this.getPropietario();
+  }
+
+  getPropietario() {
+    this.service.account().subscribe(data => {
+      this.service.getPersonUser(data.id).subscribe(pers => {
+        this.propietario = pers;
+        console.log(this.propietario);
+      },
+      (error) => {console.log(error);
+      });
+    },
+    (error) => {console.log(error);
     });
+  }
+
+  verficarSiAmigoExiste() {
+    if (this.propietario.dniPersona.toString() === this.dni.toString()) {
+      this.amigoExisteEnLista('La persona que intenta agregar es el dueño de la lista');
+    } else {
+      if (this.amigo.ListaAmigo.length === 0 ) {
+        this.getpersona();
+      } else {
+        this.amigo.ListaAmigo.forEach(element => {
+          console.log('Entro al for');
+          console.log('element.dniPersona :', element.dniPersona);
+          console.log('this.dni :', this.dni);
+          if (element.dniPersona.toString() === this.dni.toString()) {
+            this.amigoExisteEnLista('La persona ya se encuentra agregada en la lista');
+          } else {
+            this.getpersona();
+          }
+        });
+      }
+    }
   }
 
   getpersona() {
@@ -46,7 +69,7 @@ export class NewFriendPage implements OnInit {
       this.personaExiste();
     },
     (error) => { console.log(error);
-                 this.personaNoExiste('La persona no se encuentra en la base de datos');
+                 this.personaNoExiste('La debe haber ingresado por lo menos una vez al establecimiento');
     });
 
   }
@@ -54,7 +77,7 @@ export class NewFriendPage implements OnInit {
   async personaExiste() {
     const alert = await this.alertCtrl.create({
       header: this.persona.nombrePersona + ' ' + this.persona.apellidoPersona + ' ' + this.persona.dniPersona,
-      message: '¿Los datos son correctos?</strong>',
+      message: '¿Los datos son correctos?',
       buttons: [
         {
           text: 'Aceptar',

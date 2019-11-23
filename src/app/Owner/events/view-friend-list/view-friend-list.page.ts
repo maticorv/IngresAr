@@ -18,10 +18,10 @@ export class ViewFriendListPage implements OnInit {
               private amigo: Amigo) { }
 
   ngOnInit() {
+    this.obtenerListaAmigo();
   }
 
   ionViewWillEnter() {
-    this.obtenerListaAmigo();
     this.idLista = this.activatedRoute.snapshot.params.id;
     if (this.amigo.sinDatos === true) {
       this.listaAmigo.amigos.push(this.amigo.ListaAmigo[0]);

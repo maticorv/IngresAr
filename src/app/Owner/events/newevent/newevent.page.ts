@@ -185,17 +185,25 @@ export class NeweventPage implements OnInit {
       }
     }
     this.evento.eventoDetalles = detalles;
-    this.service.putEvento(this.evento).subscribe(data => {
-      console.log(data);
-      Swal.fire({
-        position: 'center',
-        type: 'success',
-        title: 'El evento ha sido añadido',
-        showConfirmButton: false,
-        timer: 1500
-      }).then((result) => {
-        this.router.navigateByUrl('/menu-owner');
-    });
+    this.service.postEvento(this.evento).subscribe(data => {
+      console.log('data 1:', data);
+      data.eventoDetalles = detalles;
+      console.log('data 2:', data);
+      this.service.putEvento(data).subscribe(dat => {
+        console.log(dat);
+        Swal.fire({
+          position: 'center',
+          type: 'success',
+          title: 'El evento ha sido añadido',
+          showConfirmButton: false,
+          timer: 1500
+        }).then((result) => {
+          this.router.navigateByUrl('/menu-owner');
+      });
+      },
+      (error) => {
+        console.log(error);
+      });
     }, (error) => {
       Swal.fire({
         type: 'error',

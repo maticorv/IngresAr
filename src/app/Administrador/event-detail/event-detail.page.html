@@ -9,70 +9,83 @@
 
 <ion-content class="ion-padding">
 
-  <ion-grid>
-    <ion-col>
-      <ion-label>Ubicación :</ion-label>
-    </ion-col>
-    <ion-col *ngIf="evento?.eventoDomicilio">
-      <ion-label> C: {{evento?.eventoDomicilio.casaDomicilio}} M: {{evento?.eventoDomicilio.manzanaDomicilio}}</ion-label>
-    </ion-col>
-    <ion-col *ngIf="evento?.eventoEspacio">
-      <ion-label> {{evento?.eventoEspacio.nombreEspacioComun}}</ion-label>
-    </ion-col>
-  </ion-grid>
-  <ion-grid>
-    <ion-item>
-        <ion-label>Fecha :</ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY"
-                      readonly
-                      [value]="evento?.fecha"></ion-datetime>
-                      <!-- [(ngModel)]="espacioComun.horaDesde"></ion-datetime> -->
-    </ion-item>
-  </ion-grid>
-  <ion-grid>
-    <ion-label>Invitados</ion-label>
-  </ion-grid>
-  <!-- <ion-card>
-    <ion-list>
-      <ion-item *ngFor="let p of evento?.eventoDetalles">
-        <ion-label>{{p.detallePersonaEvento.apellidoPersona}} {{p.detallePersonaEvento.nombrePersona}} {{p.detallePersonaEvento.dniPersona}}</ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-card> -->
+  <ng-container *ngIf="evento === undefined;else elseTemplate">
+      <ion-row class="spinner">
+          <ion-spinner name="lines"></ion-spinner>
+      </ion-row>
+  </ng-container>
 
-  <ion-row>
-    <ion-card>
+  <ng-template #elseTemplate>
+    <ion-grid class="animated fadeIn">
+      <ion-col>
+        <ion-label>Ubicación :</ion-label>
+      </ion-col>
+      <ion-col *ngIf="evento?.eventoDomicilio">
+        <ion-label> C: {{evento?.eventoDomicilio.casaDomicilio}} M: {{evento?.eventoDomicilio.manzanaDomicilio}}</ion-label>
+      </ion-col>
+      <ion-col *ngIf="evento?.eventoEspacio">
+        <ion-label> {{evento?.eventoEspacio.nombreEspacioComun}}</ion-label>
+      </ion-col>
+    </ion-grid>
+    <ion-grid class="animated fadeIn">
       <ion-item>
-        <ion-list>
-          <ion-row>
-            <ion-col>
-              <ion-label> Apellido </ion-label>
-            </ion-col>
-            <ion-col>
-              <ion-label> Nombre </ion-label>
-            </ion-col>
-            <ion-col>
-              <ion-label> DNI </ion-label>
-            </ion-col>
-          </ion-row>
-        </ion-list>
+          <ion-label>Fecha :</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY"
+                        readonly
+                        [value]="evento?.fecha"></ion-datetime>
+                        <!-- [(ngModel)]="espacioComun.horaDesde"></ion-datetime> -->
       </ion-item>
-      <ion-item *ngFor="let p of evento?.eventoDetalles">
-        <ion-list>
-          <ion-row>
-            <ion-col>
-              <ion-label> {{p.detallePersonaEvento.apellidoPersona}} </ion-label>
-            </ion-col>
-            <ion-col>
-              <ion-label> {{p.detallePersonaEvento.nombrePersona}} </ion-label>
-            </ion-col>
-            <ion-col>
-              <ion-label> {{p.detallePersonaEvento.dniPersona}} </ion-label>
-            </ion-col>
-          </ion-row>
-        </ion-list>
+      <ion-label class="mt-2">Creador del evento: </ion-label>
+      <ion-item>
+        <ion-label>{{evento?.eventoPersona.apellidoPersona}},  {{evento?.eventoPersona.nombrePersona}}  {{evento?.eventoPersona.dniPersona}}</ion-label>
       </ion-item>
-    </ion-card>
-  </ion-row>
+    </ion-grid>
+    <ion-grid class="animated fadeIn">
+      <ion-label>Invitados</ion-label>
+    </ion-grid>
+    <!-- <ion-card>
+      <ion-list>
+        <ion-item *ngFor="let p of evento?.eventoDetalles">
+          <ion-label>{{p.detallePersonaEvento.apellidoPersona}} {{p.detallePersonaEvento.nombrePersona}} {{p.detallePersonaEvento.dniPersona}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card> -->
+  
+    <ion-row>
+      <ion-card class="animated fadeIn">
+        <ion-item>
+          <ion-list>
+            <ion-row>
+              <ion-col>
+                <ion-label> Apellido </ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-label> Nombre </ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-label> DNI </ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-list>
+        </ion-item>
+        <ion-item *ngFor="let p of evento?.eventoDetalles">
+          <ion-list>
+            <ion-row>
+              <ion-col>
+                <ion-label> {{p.detallePersonaEvento.apellidoPersona}} </ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-label> {{p.detallePersonaEvento.nombrePersona}} </ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-label> {{p.detallePersonaEvento.dniPersona}} </ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-list>
+        </ion-item>
+      </ion-card>
+    </ion-row>
+  </ng-template>
+
 
 </ion-content>

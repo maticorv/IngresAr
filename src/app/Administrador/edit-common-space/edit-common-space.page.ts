@@ -73,7 +73,9 @@ export class EditCommonSpacePage implements OnInit {
 
   getPictureAlbum() {
     const options: CameraOptions = {
-      destinationType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      saveToPhotoAlbum: false,
       targetWidth: 1000,
       targetHeight: 1000,
       quality: 100

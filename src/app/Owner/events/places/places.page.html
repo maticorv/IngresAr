@@ -9,9 +9,20 @@
 
 
 <ion-content fullscreen class="ion-padding">
-    <ion-list class="animated fadeIn">
-        <ion-item class="animated fadeIn" (click)="onClick(i)" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'" *ngFor="let n of espacioComun; let i = index">
-            <ion-label class="animated fadeIn" class="ml-2"> {{n.nombreEspacioComun}} </ion-label>
-        </ion-item>
-    </ion-list>
+
+    <ng-container *ngIf="espacioComun === undefined;else elseTemplate">
+        <ion-row class="spinner">
+            <ion-spinner name="lines"></ion-spinner>
+        </ion-row>
+    </ng-container>
+    
+    <ng-template #elseTemplate class="animated fadeIn">
+        <ion-list>
+            <ion-card class="animated fadeIn">
+                <ion-item class="animated fadeIn" (click)="onClick(i)" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'" *ngFor="let n of espacioComun; let i = index">
+                    <ion-label class="animated fadeIn" class="ml-2"> {{n.nombreEspacioComun}} </ion-label>
+                </ion-item>
+            </ion-card>
+        </ion-list>
+    </ng-template>
 </ion-content>

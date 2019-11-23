@@ -73,11 +73,11 @@ export class QringressPage implements OnInit {
 
   async qrExiste() {
     const alert = await this.alertCtrl.create({
-      header: 'Autorización para\n' +
-              'Nombre: ' + this.qr.qrAutorizado.nombrePersona + '\n' +
-              'Apellido: ' + this.qr.qrAutorizado.apellidoPersona + '\n' +
-              'DNI: ' + this.qr.qrAutorizado.dniPersona + '\n',
-      message: '¿Desea continuar con este usuario?</strong>',
+
+      message:  '<strong>Autorización para <br>' +
+      'Nombre: ' + this.qr.qrAutorizado.nombrePersona + ' <br>' +
+      'Apellido: ' + this.qr.qrAutorizado.apellidoPersona + ' <br>' +
+      'DNI: ' + this.qr.qrAutorizado.dniPersona + '</strong>',
       buttons: [
         {
           text: 'Aceptar',

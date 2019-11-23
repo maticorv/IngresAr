@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from 'src/app/services/service.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, ToastController, LoadingController } from '@ionic/angular';
 import { Persona } from 'src/app/interfaces/persona';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -47,7 +47,7 @@ export class GenerateQrPage implements OnInit {
               // tslint:disable-next-line: variable-name
               private alertCtrl: AlertController, private _formBuilder: FormBuilder,
               private emailComposer: EmailComposer, private activatedRoute: ActivatedRoute,
-              private toastController: ToastController) { }
+              private toastController: ToastController, public loadingController: LoadingController) { }
 
   ngOnInit() {
     this.tipoVisita = this.activatedRoute.snapshot.params.id;
@@ -78,14 +78,27 @@ export class GenerateQrPage implements OnInit {
   }
 
   crearQr() {
+    this.presentLoadingWithOptions();
     // tslint:disable-next-line: max-line-length
     this.service.postQR(this.codigoQR, this.fechaFinQR, this.fotoQR, this.fotoQRContentType, this.tipoVisita, this.personaAutorizador, this.personaAutorizada, this.domicilio).subscribe(data => {
       console.log(data);
+      this.loadingController.dismiss();
       this.presentToast('La autorización se ha creado con éxito');
       this.enviarMail();
     },
     (error) => {console.log(error);
     });
+  }
+
+  async presentLoadingWithOptions() {
+    const loading = await this.loadingController.create({
+      spinner: null,
+      duration: 5000,
+      message: 'Generando QR, espere por favor...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    return await loading.present();
   }
 
 

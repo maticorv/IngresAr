@@ -8,31 +8,42 @@
 </ion-header>
 
 <ion-content>
-    <ion-list>
-        <ion-list-header>
-            Propietarios
-        </ion-list-header>
 
-        <ion-item-sliding *ngFor="let propietario of propietarios; let i=index">
+    <ng-container *ngIf="propietarios === undefined;else elseTemplate">
+        <ion-row class="spinner">
+            <ion-spinner name="lines"></ion-spinner>
+        </ion-row>
+    </ng-container>
+    
+    <ng-template #elseTemplate>
+        <ion-list class="animated fadeIn">
+            <ion-list-header>
+                <h3>
+                    Propietarios: 
+                </h3>
+            </ion-list-header>
+    
+            <ion-item-sliding *ngFor="let propietario of propietarios; let i=index">
 
-            <ion-item>
-                <ion-avatar slot="start">
-                    <img src="../../../assets/image.png">
-                </ion-avatar>
-                <ion-label>
-                    <h2>{{propietario?.nombrePersona}} {{propietario?.apellidoPersona}}</h2>
-                </ion-label>
-            </ion-item>
+                <ion-item>
+                    <ion-avatar class="animated fadeIn" slot="start">
+                        <img src="../../../assets/image.png" alt="">
+                    </ion-avatar>
+                    <ion-label class="animated fadeIn">
+                        <h3> <b>Apellido: </b> {{propietario?.apellidoPersona}}</h3>
+                        <h3> <b>Nombre: </b> {{propietario?.nombrePersona}}</h3>
+                    </ion-label>
+                </ion-item>
 
-            <ion-item-options side="end">
-                <ion-item-option (click)="borrar(i)" color="danger" mode="ios">
-                    <ion-icon slot="icon-only" name="trash"></ion-icon>
-                </ion-item-option>
-            </ion-item-options>
-            
-        </ion-item-sliding>
-
-    </ion-list>
+                <ion-item-options side="end">
+                    <ion-item-option (click)="borrar(i)" color="danger" mode="ios">
+                        <ion-icon slot="icon-only" name="trash"></ion-icon>
+                    </ion-item-option>
+                </ion-item-options>
+            </ion-item-sliding>
+    
+        </ion-list>
+    </ng-template>
 
 </ion-content>
 

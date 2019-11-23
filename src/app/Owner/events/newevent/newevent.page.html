@@ -67,11 +67,8 @@
 
         <div class="alert alert-info">
             Selecciona el horario en el que quieres tu evento.
-            <strong *ngIf="clickedDate">You clicked on this time: {{ clickedDate | date:'medium' }}</strong
-    >
-    <strong *ngIf="clickedColumn != null"
-      >You clicked on this column: {{ clickedColumn }}</strong
-    >
+            <strong *ngIf="clickedDate">You clicked on this time: {{ clickedDate | date:'medium' }}</strong>
+    <strong *ngIf="clickedColumn != null">You clicked on this column: {{ clickedColumn }}</strong>
   </div>
   <div [ngSwitch]="view">
     <mwl-calendar-month-view

@@ -57,10 +57,9 @@ export class SearchPersonGuardPage implements OnInit {
 
   async personaExiste() {
     const alert = await this.alertCtrl.create({
-      header: 'Se ha encontrado el usuario con los siguientes dato' +
-              'Nombre: ' + this.persona.nombrePersona +
-              'Apellido: ' + this.persona.apellidoPersona,
-      message: '¿Desea continuar con este usuario?</strong>',
+      message: '<strong>Se ha encontrado el usuario con los siguientes dato <br>' +
+               'Nombre: ' + this.persona.nombrePersona + ' <br>' +
+               'Apellido: ' + this.persona.apellidoPersona + '</strong>',
       buttons: [
         {
           text: 'Aceptar',
@@ -100,6 +99,12 @@ export class SearchPersonGuardPage implements OnInit {
       message: '¿Desea crear la persona?</strong>',
       buttons: [
         {
+          text: 'Cancelar',
+          handler: () => {
+            this.dni = null;
+          }
+        },
+        {
           text: 'Aceptar',
           role: 'cancel',
           cssClass: 'secondary',
@@ -107,12 +112,7 @@ export class SearchPersonGuardPage implements OnInit {
             this.personas.dniPersona = this.dni;
             this.router.navigateByUrl('/new-person-guard');
           }
-        }, {
-          text: 'Cancelar',
-          handler: () => {
-            this.dni = null;
-          }
-        }
+        },
       ]
     });
 

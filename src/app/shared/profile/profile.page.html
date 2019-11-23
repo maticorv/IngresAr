@@ -9,46 +9,57 @@
 
 
 <ion-content class="ion-padding" fullscreen>
-    <div class="image">
-        <ion-avatar>
-            <ng-container *ngIf="account?.imageUrl; else elseTemplate">
-                <img class="user-img" [src]="account.imageUrl" alt="../../../assets/image.png">
-            </ng-container>
-            <ng-template #elseTemplate>
-                <img class="user-img" src="../../../assets/image.png" alt="">
-            </ng-template>
-        </ion-avatar>
-    </div>
 
-    <ng-container *ngIf="account!==undefined">
-        <ion-item-divider>
-            Información personal
-        </ion-item-divider>
-        <ion-item>
-            <ion-label position="floating">Nombre</ion-label>
-            <ion-input name="Nombre" [(ngModel)]="account.firstName" value="account.firstName"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label position="floating">Apellido</ion-label>
-            <ion-input name="Apellido" [(ngModel)]="account.lastName"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label position="floating">Correo electrónico</ion-label>
-            <ion-input name="email" [(ngModel)]="account.email"></ion-input>
-        </ion-item>
-        <ion-item-divider>
-            <ion-label>
-                Salir
-            </ion-label>
-        </ion-item-divider>
-        <ion-text (click)="cerrarSesion()">
-            <h6>Cerrar Sesión</h6>
-        </ion-text>
+    <ng-container *ngIf="account === undefined;else elseTemplate">
+        <ion-row class="spinner">
+            <ion-spinner name="lines"></ion-spinner>
+        </ion-row>
     </ng-container>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="postAccount()">
-        <ion-fab-button>
-            <ion-icon name="save"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
+
+    <ng-template #elseTemplate>
+
+        <div class="image animated fadeIn">
+            <ion-avatar>
+                <ng-container *ngIf="account?.imageUrl; else elseTemplate">
+                    <img class="user-img" [src]="account.imageUrl" alt="../../../assets/image.png">
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <img class="user-img" src="../../../assets/image.png" alt="">
+                </ng-template>
+            </ion-avatar>
+        </div>
+    
+        <ng-container *ngIf="account!==undefined" class="animated fadeIn">
+            <ion-item-divider class="animated fadeIn">
+                Información personal
+            </ion-item-divider>
+            <ion-item class="animated fadeIn">
+                <ion-label position="floating">Nombre</ion-label>
+                <ion-input name="Nombre" [(ngModel)]="account.firstName" value="account.firstName"></ion-input>
+            </ion-item>
+            <ion-item class="animated fadeIn">
+                <ion-label position="floating">Apellido</ion-label>
+                <ion-input name="Apellido" [(ngModel)]="account.lastName"></ion-input>
+            </ion-item>
+            <ion-item class="animated fadeIn">
+                <ion-label position="floating">Correo electrónico</ion-label>
+                <ion-input name="email" [(ngModel)]="account.email"></ion-input>
+            </ion-item>
+            <ion-item-divider class="animated fadeIn">
+                <ion-label>
+                    Salir
+                </ion-label>
+            </ion-item-divider>
+            <ion-text (click)="cerrarSesion()">
+                <h6>Cerrar Sesión</h6>
+            </ion-text>
+        </ng-container>
+        <ion-fab class="animated fadeIn" vertical="bottom" horizontal="end" slot="fixed" (click)="postAccount()">
+            <ion-fab-button>
+                <ion-icon name="save"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+    </ng-template>
+
 
 </ion-content>
