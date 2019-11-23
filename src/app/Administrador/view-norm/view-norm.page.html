@@ -8,13 +8,23 @@
 </ion-header>
 
 <ion-content fullscreen class="ion-padding">
-    <ion-card>
-        <ion-card-header style="text-align: center">
-            <ion-card-title>{{norma?.titulonorma}}</ion-card-title>
-        </ion-card-header>
-        
-        <ion-card-content>
-            {{norma?.descripcionnorma}}
-        </ion-card-content>
-    </ion-card>
+
+    <ng-container *ngIf="norma === undefined;else elseTemplate">
+        <ion-row class="spinner">
+            <ion-spinner name="lines"></ion-spinner>
+        </ion-row>
+    </ng-container>
+
+    <ng-template #elseTemplate>
+        <ion-card class="animated fadeIn">
+            <ion-card-header style="text-align: center">
+                <ion-card-title>{{norma?.titulonorma}}</ion-card-title>
+            </ion-card-header>
+            
+            <ion-card-content>
+                {{norma?.descripcionnorma}}
+            </ion-card-content>
+        </ion-card>
+    </ng-template>
+    
 </ion-content>

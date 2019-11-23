@@ -18,7 +18,6 @@ export class ManageGuardPage implements OnInit {
   constructor(private service: ServiceService, private router: Router) { }
 
   ngOnInit() {
-    this.getGuardias();
   }
 
   ionViewWillEnter() {
@@ -45,7 +44,7 @@ export class ManageGuardPage implements OnInit {
       this.getGuardias();
     },
     (error) => {console.log(error);
-    })
+    });
   }
 
 }

@@ -18,7 +18,7 @@
         </ion-row>
     </ng-container>
     
-    <ng-template #elseTemplate class="animated fadeIn">
+    <ng-template #elseTemplate>
         <div class="message-wrap animated fadeIn">
             <div class="message-wrap">
                 <div *ngFor="let mensaje of mensajes" [ngClass]="{'left': account.id!==mensaje.userOrigen.id, 'right': account.id==mensaje.userOrigen.id }" class="message">

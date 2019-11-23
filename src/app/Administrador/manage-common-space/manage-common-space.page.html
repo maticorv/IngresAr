@@ -8,11 +8,22 @@
 </ion-header>
 
 <ion-content>
-    <ion-list>
-      <ion-item *ngFor="let n of espacioComun; let i = index" (click)="presentActionSheet(i)">
-        <ion-label class="ml-2"> {{n.nombreEspacioComun}} </ion-label>
-      </ion-item>
-    </ion-list>
+    <ng-container *ngIf="espacioComun === undefined;else elseTemplate">
+        <ion-row class="spinner">
+            <ion-spinner name="lines"></ion-spinner>
+        </ion-row>
+    </ng-container>
+
+    <ng-template #elseTemplate>
+      <ion-list>
+        <ion-card class="animated fadeIn">
+          <ion-item *ngFor="let n of espacioComun; let i = index" (click)="presentActionSheet(i)">
+            <ion-label class="ml-2"> {{n.nombreEspacioComun}} </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-list>
+    </ng-template>
+
 </ion-content>
 
 <ion-footer>

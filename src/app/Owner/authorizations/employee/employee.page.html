@@ -17,8 +17,8 @@
 
   <ng-template #elseTemplate>
     <ion-row>
-        <ion-card>
-          <ion-item class="animated fadeIn">
+        <ion-card class="animated fadeIn">
+          <ion-item >
             <ion-list>
               <ion-row>
                 <ion-col>
@@ -33,7 +33,7 @@
               </ion-row>
             </ion-list>
           </ion-item>
-          <ion-item *ngFor="let qr of qrs" class="animated fadeIn">
+          <ion-item *ngFor="let qr of qrs">
             <ion-list>
               <ion-row>
                 <ion-col>

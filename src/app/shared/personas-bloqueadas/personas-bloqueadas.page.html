@@ -9,45 +9,54 @@
 
 <ion-content class="ion-padding">
 
-<ion-row style="place-content: center;">
-    <ion-card>
-        <ion-item class="even">
-            <ion-list>
-                <ion-row>
-                <ion-col>
-                    <ion-label> Apellido </ion-label>
-                </ion-col>
-                <ion-col>
-                    <ion-label> Nombre </ion-label>
-                </ion-col>
-                <ion-col>
-                    <ion-label> DNI </ion-label>
-                </ion-col>
-                <ion-col>
-                    <ion-label> Fecha </ion-label>
-                </ion-col>
-                </ion-row>
-            </ion-list>
-        </ion-item>
-        <ion-item *ngFor="let p of persona; let i = index" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'">
-            <ion-list>
-                <ion-row>
-                <ion-col>
-                    <ion-label> {{p.apellidoPersona}} </ion-label>
-                </ion-col>
-                <ion-col>
-                    <ion-label> {{p.nombrePersona}} </ion-label>
-                </ion-col>
-                <ion-col>
-                    <ion-label> {{p.dniPersona}} </ion-label>
-                </ion-col>
-                <ion-col>
-                    <ion-label> {{p.personaEstado.fecha | date: 'dd-MM-yyyy'}} </ion-label>
-                </ion-col>
-                </ion-row>
-            </ion-list>
-        </ion-item>
-    </ion-card>
-</ion-row>
+    <ng-container *ngIf="persona === undefined;else elseTemplate">
+        <ion-row class="spinner">
+            <ion-spinner name="lines"></ion-spinner>
+        </ion-row>
+    </ng-container>
+
+    <ng-template #elseTemplate>
+        <ion-row style="place-content: center;">
+            <ion-card class="animated fadeIn">
+                <ion-item class="even">
+                    <ion-list>
+                        <ion-row>
+                        <ion-col>
+                            <ion-label> Apellido </ion-label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-label> Nombre </ion-label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-label> DNI </ion-label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-label> Fecha </ion-label>
+                        </ion-col>
+                        </ion-row>
+                    </ion-list>
+                </ion-item>
+                <ion-item *ngFor="let p of persona; let i = index" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'">
+                    <ion-list>
+                        <ion-row>
+                        <ion-col>
+                            <ion-label> {{p.apellidoPersona}} </ion-label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-label> {{p.nombrePersona}} </ion-label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-label> {{p.dniPersona}} </ion-label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-label> {{p.personaEstado.fecha | date: 'dd-MM-yyyy'}} </ion-label>
+                        </ion-col>
+                        </ion-row>
+                    </ion-list>
+                </ion-item>
+            </ion-card>
+        </ion-row>
+    </ng-template>
+
 
 </ion-content>

@@ -17,7 +17,6 @@ export class ManageHomeownerPage implements OnInit {
   constructor(private service: ServiceService, private router: Router) { }
 
   ngOnInit() {
-    this.getPropietarios();
   }
 
   ionViewWillEnter() {

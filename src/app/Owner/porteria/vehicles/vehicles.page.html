@@ -16,15 +16,15 @@
         </ion-row>
     </ng-container>
     
-    <ng-template #elseTemplate class="animated fadeIn">
+    <ng-template #elseTemplate>
         <ng-container *ngIf="vehiculos?.length === 0 ; else elseTemplate">
-            <h2 style="text-align: center;"> Usted no posee vehiculos </h2>
+            <h2 style="text-align: center;" class="animated fadeIn"> Usted no posee vehiculos </h2>
         </ng-container>
         <ng-template #elseTemplate>
     
     
             <ng-container *ngFor="let vehiculo of vehiculos; let i=index">
-                <ion-item-sliding>
+                <ion-item-sliding class="animated fadeIn">
                     <ion-item [ngClass]="(i % 2 == 0) ? 'odd' : 'even'">
                         <ion-label>
                             <h2><b>Dominio: </b>{{vehiculo.dominio}}</h2>

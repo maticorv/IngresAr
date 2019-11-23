@@ -8,14 +8,25 @@
 </ion-header>
 
 <ion-content>
+
+  <ng-container *ngIf="normas === undefined;else elseTemplate">
+      <ion-row class="spinner">
+          <ion-spinner name="lines"></ion-spinner>
+      </ion-row>
+  </ng-container>
+
+  <ng-template #elseTemplate>
     <ion-list>
-      <ion-item *ngFor="let n of normas; let i = index"  (click)="presentActionSheet(i)">
-        <ion-icon slot="start" name="list-box"></ion-icon>
-        <ion-label class="ml-2">{{n.titulonorma}}</ion-label>
-      </ion-item>
+      <ion-card class="animated fadeIn">
+        <ion-item *ngFor="let n of normas; let i = index"  (click)="presentActionSheet(i)">
+          <ion-icon slot="start" name="list-box"></ion-icon>
+          <ion-label class="ml-2">{{n.titulonorma}}</ion-label>
+        </ion-item>
+      </ion-card>
     </ion-list>
+  </ng-template>
+  
 </ion-content>
-<!-- [routerLink]="['/view-norm', i+1]" -->
 
 <ion-footer>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">

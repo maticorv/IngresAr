@@ -15,12 +15,21 @@
         <ion-datetime displayFormat="DD/MM/YYYY" placeholder="01-01-19" cancel-text='Cancelar' done-text="Seleccionar" [(ngModel)]="fecha" min="2019" max="2030" (ionChange)="obtener()"></ion-datetime>
     </ion-item> -->
 
-    <ion-list>
-    <ion-card>
-            <ion-item *ngFor="let e of eventos; let i = index" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'" (click)="verEvento(i)">
-                <label>{{e.nombreEvento}}</label>
-            </ion-item>
-        </ion-card>
-    </ion-list>
+    <ng-container *ngIf="eventos === undefined;else elseTemplate">
+        <ion-row class="spinner">
+            <ion-spinner name="lines"></ion-spinner>
+        </ion-row>
+    </ng-container>
+
+    <ng-template #elseTemplate>
+        <ion-list>
+            <ion-card class="animated fadeIn">
+                <ion-item *ngFor="let e of eventos; let i = index" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'" (click)="verEvento(i)">
+                    <label>{{e.nombreEvento}}</label>
+                </ion-item>
+            </ion-card>
+        </ion-list>
+    </ng-template>
+
 
 </ion-content>
