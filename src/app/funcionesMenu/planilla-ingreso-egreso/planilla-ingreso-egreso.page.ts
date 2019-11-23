@@ -18,10 +18,19 @@ export class PlanillaIngresoEgresoPage implements OnInit {
 
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     this.fechaDesde = new Date( new Date().setHours(0, 0, 0, 0)).toString();
     this.fechaHasta = new Date( new Date().setHours(23, 59, 59, 0)).toString();
     this.getPlanillaIngresoEgreso();
   }
+
+  ionViewWillLeave() {
+    this.planilla = null;
+    this.planiallaIngresoEgreso = null;
+  }
+
 
   getPlanillaIngresoEgreso() {
     this.service.getHistorialIngresoEgreso().subscribe(data => {

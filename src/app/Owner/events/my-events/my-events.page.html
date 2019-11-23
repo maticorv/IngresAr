@@ -12,7 +12,7 @@
         </ion-row>
     </ng-container>
     
-    <ng-template #elseTemplate class="animated fadeIn">
+    <ng-template #elseTemplate>
         <ion-item-sliding class="animated fadeIn" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'" *ngFor="let evento of eventos; let i = index">
             <ion-item>
                 <ion-avatar class="animated fadeIn" slot="start">
