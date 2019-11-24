@@ -9,10 +9,19 @@
 
 
 <ion-content fullscreen class="ion-padding">
-    <ng-container *ngIf="vehiculos?.length === 0 ; else elseTemplate">
+    <ng-container *ngIf="vehiculos === undefined;else elseTemplate">
+        <ion-row class="spinner">
+            <ion-spinner name="lines"></ion-spinner>
+        </ion-row>
+    </ng-container>
+    <ng-template #thenTemplate>
+
+    </ng-template>
+
+    <ng-container *ngIf="vehiculos?.length === 0 ; else elseTemplat">
         <h2 style="text-align: center;"> Usted no posee vehiculos </h2>
     </ng-container>
-    <ng-template #elseTemplate>
+    <ng-template #elseTemplat>
 
 
         <ng-container *ngFor="let vehiculo of vehiculos; let i=index">
@@ -42,4 +51,5 @@
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
+
 </ion-content>
