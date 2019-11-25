@@ -4,6 +4,8 @@ import { Personas } from 'src/app/classes/persona';
 import { ServiceService } from '../../services/service.service';
 import { ToastController } from '@ionic/angular';
 import { IPersonaEstado } from 'src/app/interfaces/ipersona-estado';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { validateEvents } from 'calendar-utils';
 
 @Component({
   selector: 'app-newperson',
@@ -12,16 +14,22 @@ import { IPersonaEstado } from 'src/app/interfaces/ipersona-estado';
 })
 export class NewpersonPage implements OnInit {
 
-  nombrePersona: string;
-  apellidoPersona: string;
+  newPersona: FormGroup;
+
   dniPersona: number;
-  telefonoPersona: number;
   personaEstado: IPersonaEstado;
 
-  // tslint:disable-next-line: max-line-length
-  constructor(private router: Router, private persona: Personas, private service: ServiceService, private toastController: ToastController) { }
+  constructor(private router: Router, private persona: Personas, private service: ServiceService,
+              private toastController: ToastController, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.newPersona = this.formBuilder.group({
+      nombrePersona: ['', Validators.required],
+      apellidoPersona: ['', Validators.required],
+      dniPersona: ['', Validators.required],
+      telefonoPersona: ['', [Validators.required , Validators.min(1000000), Validators.max(9999999999)]],
+    });
+    console.log(this.newPersona.controls.dniPersona.value);
     this.dniPersona = this.persona.dniPersona;
     this.createPersonaEstado();
   }
@@ -36,8 +44,10 @@ export class NewpersonPage implements OnInit {
   }
 
   crearPersona() {
-    // tslint:disable-next-line: max-line-length
-    this.service.postPersona(this.nombrePersona, this.apellidoPersona, this.dniPersona, this.telefonoPersona, this.personaEstado, null, null, null).subscribe(data => {
+    this.service.postPersona(this.newPersona.controls.nombrePersona.value,
+                             this.newPersona.controls.apellidoPersona.value, this.dniPersona,
+                             this.newPersona.controls.telefonoPersona.value, this.personaEstado,
+                             null, null, null).subscribe(data => {
       console.log(data);
       this.persona.nombrePersona = data.nombrePersona;
       this.persona.apellidoPersona = data.apellidoPersona;
@@ -68,6 +78,10 @@ export class NewpersonPage implements OnInit {
       // this.router.navigateByUrl('/destination');
       },
       2000);
+  }
+
+  imprimir() {
+    console.log('persona', this.newPersona.controls);
   }
 
 }
