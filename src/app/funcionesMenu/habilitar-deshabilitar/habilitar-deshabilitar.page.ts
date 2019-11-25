@@ -40,9 +40,13 @@ export class HabilitarDeshabilitarPage implements OnInit {
 
   getpersona() {
     this.service.getPersona(this.dni).subscribe((data) => {
-      this.persona = data;
       console.log(data);
-      this.personaExiste();
+      if (data.personaEstado.nombreEstadoPersona === this.accion) {
+        this.msgPersonaHabilitadaBloqueada('La persona que desea ' + this.accionmsj + ' ya se encuentra ' + this.accion);
+      } else {
+        this.persona = data;
+        this.personaExiste();
+      }
     },
     (error) => { console.log(error);
                  this.presentAlert();
@@ -83,6 +87,16 @@ export class HabilitarDeshabilitarPage implements OnInit {
   async presentAlert() {
     const alert = await this.alertCtrl.create({
       header: 'La persona con el DNI:' + this.dni + 'no se encuentra en la base de datos',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
+  }
+
+
+  async msgPersonaHabilitadaBloqueada(msg: string) {
+    const alert = await this.alertCtrl.create({
+      header: msg,
       buttons: ['Aceptar']
     });
 

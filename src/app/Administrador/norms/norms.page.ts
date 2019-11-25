@@ -47,7 +47,7 @@ export class NormsPage implements OnInit {
           this.router.navigate(['/view-norm', this.normas[i].id]);
         }
       }, {
-        text: 'Borar',
+        text: 'Borrar',
         role: 'destructive',
         icon: 'trash',
         handler: () => {
