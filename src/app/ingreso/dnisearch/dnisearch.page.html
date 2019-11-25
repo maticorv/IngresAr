@@ -9,15 +9,17 @@
 
 <ion-content class="ion-padding">
 
-    <ion-row class="ion-justify-content-around">
-        <h3>Por favor ingrese el DNI</h3>
-        <ion-item>
-            <ion-label>DNI : </ion-label>
-            <ion-input type="tel" minlength="7" maxlength="9" placeholder="Ingrese DNI" [(ngModel)]="dni"></ion-input>
-        </ion-item>
-    </ion-row>
-    <div style="float: right;">
-        <ion-button class="mt-4 ion-align-self-end" (click)="getpersona()">Aceptar</ion-button>
-    </div>
+    <form [formGroup]="pers">
+        <ion-row class="ion-justify-content-around">
+            <h3>Por favor ingrese el DNI</h3>
+            <ion-item>
+                <ion-label>DNI : </ion-label>
+                <ion-input type="number" placeholder="Ingrese DNI" name="dni"  formControlName="dni"></ion-input>
+            </ion-item>
+        </ion-row>
+        <div style="float: right;">
+            <ion-button class="mt-4 ion-align-self-end" [disabled]="!pers.valid" (click)="getpersona()">Aceptar</ion-button>
+        </div>
+    </form>
 
 </ion-content>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Persona } from 'src/app/interfaces/persona';
 import { Personas } from 'src/app/classes/persona';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-dnisearch',
@@ -12,20 +13,25 @@ import { Personas } from 'src/app/classes/persona';
 })
 export class DnisearchPage implements OnInit {
 
-  dni: number;
   persona: Persona;
+  pers: FormGroup;
+  dni = new FormControl('', [Validators.required, Validators.min(10000000), Validators.max(999999999)]);
 
-  constructor(private service: ServiceService, private router: Router, private alertCtrl: AlertController, private personas: Personas) { }
+  constructor(private service: ServiceService, private router: Router, private alertCtrl: AlertController,
+              private personas: Personas, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.pers = this.formBuilder.group({
+      dni: ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]]
+    });
   }
   // Busca la persona con el dni inggreso
   getpersona() {
-    this.service.getPersona(this.dni).subscribe((data) => {
+    this.service.getPersona(this.pers.controls.dni.value).subscribe((data) => {
       if (data.personaEstado.nombreEstadoPersona === 'bloqueada') {
         this.personaBloqueada('La persona se encuentra bloqueada');
       } else {
-        this.service.getPlanillaEgreso(this.dni).subscribe(pers => {
+        this.service.getPlanillaEgreso(this.pers.controls.dni.value).subscribe(pers => {
           this.personaBloqueada('La persona se encuentra dentro del establecimiento');
         },
         (error) => {
@@ -79,7 +85,7 @@ export class DnisearchPage implements OnInit {
   // muestra ms por patalla si la persona no existe
   async personaNoExiste() {
     const alert = await this.alertCtrl.create({
-      header: 'La persona con el dni ' + this.dni + ' no se encuentra en la base de datos',
+      header: 'La persona con el dni ' + this.pers.controls.dni.value + ' no se encuentra en la base de datos',
       message: '¿Desea crearla?</strong>',
       buttons: [
          {
@@ -94,7 +100,7 @@ export class DnisearchPage implements OnInit {
           role: 'cancel',
           cssClass: 'primary',
           handler: () => {
-            this.personas.dniPersona = this.dni;
+            this.personas.dniPersona = this.pers.controls.dni.value;
             this.setNullData();
             this.router.navigateByUrl('/newperson');
           }
