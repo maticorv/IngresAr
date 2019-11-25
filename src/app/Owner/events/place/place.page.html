@@ -14,7 +14,7 @@
             <ion-spinner name="lines"></ion-spinner>
         </ion-row>
     </ng-container>
-    
+
     <ng-template #elseTemplate class="animated fadeIn">
         <ion-row>
             <ion-col style="text-align: center;">
@@ -23,14 +23,14 @@
                 </ng-container>
                 <ng-template #elseTemplate>
                     <img [src]="convertedImage" style="height: 318px; width: auto;" class="img-fluid animated fadeIn " alt="Responsive image">
-    
+
                 </ng-template>
-    
+
                 <ion-item>
                     <ion-label>Disponible Desde</ion-label>
                     <ion-label>{{espacioComun?.horaDesde | date:"shortTime"}}</ion-label>
                 </ion-item>
-    
+
                 <ion-list>
                     <ion-item>
                         <ion-label>Disponible Hasta</ion-label>

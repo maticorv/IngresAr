@@ -9,27 +9,30 @@
 
 
 <ion-content fullscreen class="ion-padding">
-    <ion-row>
-        <ion-col size="12">
-            <ng-container *ngIf="false; then thenTemplate; else elseTemplate"></ng-container>
-            <ng-template #thenTemplate>
-                <h2 style="text-align: center;"> Usted no posee autorizaciones </h2>
 
-            </ng-template>
-            <ng-template #elseTemplate>
-                <h1> Has sido autorizado a ingresar por:</h1>
-                <ion-list *ngFor="let autorizacion of autorizaciones; let i=index" class="animated fadeIn">
-                    <ion-item (click)="onClick(i)" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'" class="animated fadeIn">
-                        <ion-label><b>Te autorizó: </b>
-                            <h2>{{autorizacion.qrAutorizador.nombrePersona}} {{autorizacion.qrAutorizador.apellidoPersona}}</h2>
-                            <b> a ingresar a su domicilio </b>
-                            <p>Selecciona para mostrar el codigo al guardia</p>
-                        </ion-label>
-                    </ion-item>
-                </ion-list>
-            </ng-template>
+    <ng-container *ngIf="autorizaciones === undefined;else elseTemplate">
+        <ion-row class="spinner">
+            <ion-spinner name="lines"></ion-spinner>
+        </ion-row>
+    </ng-container>
+    <ng-template #elseTemplate>
 
-        </ion-col>
-    </ion-row>
+        <ng-container *ngIf="autorizaciones === []; else elseT">
+            <h2 style="text-align: center;"> Usted no posee autorizaciones </h2>
+        </ng-container>
+
+        <ng-template #elseT>
+            <h1> Has sido autorizado a ingresar por:</h1>
+            <ion-list *ngFor="let autorizacion of autorizaciones; let i=index" class="animated fadeIn">
+                <ion-item (click)="onClick(i)" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'" class="animated fadeIn">
+                    <ion-label><b>Te autorizó: </b>
+                        <h2>{{autorizacion.qrAutorizador.nombrePersona}} {{autorizacion.qrAutorizador.apellidoPersona}}</h2>
+                        <b> a ingresar a su domicilio </b>
+                        <p>Selecciona para mostrar el codigo al guardia</p>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </ng-template>
+    </ng-template>
 
 </ion-content>
