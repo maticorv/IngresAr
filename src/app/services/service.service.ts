@@ -45,6 +45,11 @@ export class ServiceService {
     // tslint:disable-next-line: max-line-length
     return this.http.post( this.url + 'authenticate', params, {headers} ).pipe(map(data => this.guardarToken(data[`id_token`])));
   }
+  resetPassword(email: string) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    // tslint:disable-next-line: max-line-length
+    return this.http.post( this.url + 'account/reset-password/init', email, {headers} );
+  }
   account(): Observable<Iaccount> {
     const token = this.leerToken();
     const headers = new HttpHeaders({ Authorization : 'Bearer ' + token });
