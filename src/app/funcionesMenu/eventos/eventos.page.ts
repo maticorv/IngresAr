@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Ievent } from 'src/app/interfaces/ievent';
 import { Router } from '@angular/router';
 import { ServiceService } from 'src/app/services/service.service';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-eventos',
@@ -15,12 +16,18 @@ export class EventosPage implements OnInit {
   fecha: string;
   fechaMin: string;
 
-  constructor(private router: Router, private service: ServiceService) { }
+  constructor(private router: Router, private service: ServiceService, private screenOrientation: ScreenOrientation) { }
 
   ngOnInit() {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     this.getAllEvents();
     this.fecha = new Date(new Date().setHours(0, 0, 0, 0)).toString();
     this.fechaMin = new Date(new Date().setHours(0, 0, 0, 0)).toString();
+  }
+
+  ionViewWillEnter() {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    this.getAllEvents();
   }
 
   ionViewWillLeave() {
