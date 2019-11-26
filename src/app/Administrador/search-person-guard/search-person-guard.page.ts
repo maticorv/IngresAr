@@ -6,6 +6,7 @@ import { AlertController } from '@ionic/angular';
 import { Persona } from 'src/app/interfaces/persona';
 import { User } from '../../classes/user';
 import { IPersonaEstado } from 'src/app/interfaces/ipersona-estado';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-search-person-guard',
@@ -14,7 +15,7 @@ import { IPersonaEstado } from 'src/app/interfaces/ipersona-estado';
 })
 export class SearchPersonGuardPage implements OnInit {
 
-  dni: number;
+  pers: FormGroup;
   personaEstado: IPersonaEstado;
   persona: Persona;
   authorities = [
@@ -23,15 +24,18 @@ export class SearchPersonGuardPage implements OnInit {
 
   constructor(private service: ServiceService, private router: Router,
               private alertCtrl: AlertController, private user: User,
-              private personas: Personas) { }
+              private personas: Personas, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.pers = this.formBuilder.group({
+      dni: ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]]
+    });
     console.log('this.user :', this.user);
     this.createPersonaEstado();
   }
 
   ionViewWillLeave() {
-    this.dni = null;
+    this.pers.reset();
     this.personaEstado = null;
   }
 
@@ -44,7 +48,7 @@ export class SearchPersonGuardPage implements OnInit {
   }
 
   getPersonGuardia() {
-    this.service.getPersona(this.dni).subscribe((data) => {
+    this.service.getPersona(this.pers.controls.dni.value).subscribe((data) => {
       this.persona = data;
       console.log(data);
       this.personaExiste();
@@ -57,10 +61,16 @@ export class SearchPersonGuardPage implements OnInit {
 
   async personaExiste() {
     const alert = await this.alertCtrl.create({
-      message: '<strong>Se ha encontrado el usuario con los siguientes dato <br>' +
+      message: '<strong>Se ha encontrado el usuario con los siguientes datos <br>' +
                'Nombre: ' + this.persona.nombrePersona + ' <br>' +
                'Apellido: ' + this.persona.apellidoPersona + '</strong>',
       buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+            this.pers.reset();
+          }
+        },
         {
           text: 'Aceptar',
           role: 'cancel',
@@ -78,15 +88,11 @@ export class SearchPersonGuardPage implements OnInit {
             },
             (error) => {console.log(error);
             });
-            this.dni = null;
+            this.pers.reset();
             this.router.navigateByUrl('/manage-guard');
           }
-        }, {
-          text: 'Cancelar',
-          handler: () => {
-            this.dni = null;
-          }
-        }
+        },
+
       ]
     });
 
@@ -95,13 +101,13 @@ export class SearchPersonGuardPage implements OnInit {
 
   async personaNoExiste() {
     const alert = await this.alertCtrl.create({
-      header: 'La persona con el DNI:' + this.dni + 'no se encuentra en la base de datos',
+      header: 'La persona con el DNI:' + this.pers.controls.dni.value + 'no se encuentra en la base de datos',
       message: '¿Desea crear la persona?</strong>',
       buttons: [
         {
           text: 'Cancelar',
           handler: () => {
-            this.dni = null;
+            this.pers.reset();
           }
         },
         {
@@ -109,7 +115,7 @@ export class SearchPersonGuardPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            this.personas.dniPersona = this.dni;
+            this.personas.dniPersona = this.pers.controls.dni.value;
             this.router.navigateByUrl('/new-person-guard');
           }
         },

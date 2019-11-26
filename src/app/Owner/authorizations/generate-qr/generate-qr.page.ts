@@ -18,7 +18,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class GenerateQrPage implements OnInit {
 
-  dni: number;
+  pers: FormGroup;
   tipoVisita: string;
   personaAutorizada: Persona;
   personaAutorizador: Persona;
@@ -47,9 +47,13 @@ export class GenerateQrPage implements OnInit {
               // tslint:disable-next-line: variable-name
               private alertCtrl: AlertController, private _formBuilder: FormBuilder,
               private emailComposer: EmailComposer, private activatedRoute: ActivatedRoute,
-              private toastController: ToastController, public loadingController: LoadingController) { }
+              private toastController: ToastController, public loadingController: LoadingController,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.pers = this.formBuilder.group({
+      dni: ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]]
+    });
     this.tipoVisita = this.activatedRoute.snapshot.params.id;
     console.log('tipoVisita :', this.activatedRoute.snapshot.params.id);
     this.getOwner();
@@ -59,9 +63,9 @@ export class GenerateQrPage implements OnInit {
     this.fechaFinQR = new Date().toISOString();
     console.log('fecha Max', this.fechaMax);
     // console.log(this.fechaFinQR);
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
+    // this.firstFormGroup = this._formBuilder.group({
+    //   firstCtrl: ['', Validators.required]
+    // });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
@@ -116,7 +120,7 @@ export class GenerateQrPage implements OnInit {
   // }
 
   getpersona(stepper) {
-    this.service.getPersona(this.dni).subscribe((data) => {
+    this.service.getPersona(this.pers.controls.dni.value).subscribe((data) => {
       if (data.personaEstado.nombreEstadoPersona === 'bloqueada') {
         this.personaBloqueada('La persona se encuentra bloqueada');
       } else {
@@ -153,9 +157,20 @@ export class GenerateQrPage implements OnInit {
 
   async personaExiste(stepper) {
     const alert = await this.alertCtrl.create({
-      header: this.personaAutorizada.nombrePersona + ' ' + this.personaAutorizada.apellidoPersona + ' ' + this.personaAutorizada.dniPersona,
-      message: '¿Los datos son correctos?</strong>',
+      // tslint:disable-next-line: max-line-length
+      // header: this.personaAutorizada.nombrePersona + ' ' + this.personaAutorizada.apellidoPersona + ' ' + this.personaAutorizada.dniPersona,
+      message: '<strong> Nombre: ' + this.personaAutorizada.nombrePersona + '<br>' +
+      'Apellido: ' + this.personaAutorizada.apellidoPersona + '<br>' +
+      'DNI: ' + this.personaAutorizada.dniPersona + '<br>' +
+      '¿Los datos son correctos?</strong>',
       buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+            this.pers.reset();
+            console.log('Confirm Okay');
+          }
+        },
         {
           text: 'Aceptar',
           role: 'cancel',
@@ -166,13 +181,7 @@ export class GenerateQrPage implements OnInit {
             this.goForward(stepper);
             // this.generarQr();
           }
-        }, {
-          text: 'Cancelar',
-          handler: () => {
-            this.dni = null;
-            console.log('Confirm Okay');
-          }
-        }
+        },
       ]
     });
 
@@ -307,7 +316,7 @@ export class GenerateQrPage implements OnInit {
       header: msg,
       buttons: ['Aceptar']
     });
-    this.dni = null;
+    this.pers.reset();
     await alert.present();
   }
 

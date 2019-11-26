@@ -15,7 +15,7 @@ export class DnisearchPage implements OnInit {
 
   persona: Persona;
   pers: FormGroup;
-  dni = new FormControl('', [Validators.required, Validators.min(10000000), Validators.max(999999999)]);
+
 
   constructor(private service: ServiceService, private router: Router, private alertCtrl: AlertController,
               private personas: Personas, private formBuilder: FormBuilder) { }
@@ -112,7 +112,7 @@ export class DnisearchPage implements OnInit {
   }
   // pone los datos en nullos para el proximo ingreso
   setNullData() {
-    this.dni = null;
+    this.pers.reset();
     this.persona = null;
   }
 

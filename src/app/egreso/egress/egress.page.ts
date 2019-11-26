@@ -4,6 +4,7 @@ import { PlanillaEgreso } from '../../classes/planillaEgreso';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Personas } from '../../classes/persona';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-egress',
@@ -12,16 +13,20 @@ import { Personas } from '../../classes/persona';
 })
 export class EgressPage implements OnInit {
 
-  dni: number;
+  pers: FormGroup;
 
   constructor(private service: ServiceService, private planillaEgreso: PlanillaEgreso,
-              private alertCtrl: AlertController, private router: Router, private persona: Personas) { }
+              private alertCtrl: AlertController, private router: Router, private persona: Personas,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.pers = this.formBuilder.group({
+      dni: ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]]
+    });
   }
 
   getPlanillaEgreso() {
-    this.service.getPlanillaEgreso(this.dni).subscribe(data => {
+    this.service.getPlanillaEgreso(this.pers.controls.dni.value).subscribe(data => {
       // this.planillaEgreso.id = data.id;
       // this.planillaEgreso.autorizadoPrevio = data.autorizadoPrevio;
       // this.planillaEgreso.acompaniantes = data.acompaniantes;
@@ -36,7 +41,7 @@ export class EgressPage implements OnInit {
       // this.planillaEgreso.planillavehiculo = data.planillavehiculo;
       // this.planillaEgreso.planillaempresa = data.planillaempresa;
       // this.planillaEgreso.planillaautorizador = data.planillaautorizador;
-      this.persona.dniPersona = this.dni;
+      this.persona.dniPersona = this.pers.controls.dni.value;
       this.setDataNull();
     },
     (error) => {console.log(error);
@@ -46,7 +51,7 @@ export class EgressPage implements OnInit {
 
   async personaNoIngreso() {
     const alert = await this.alertCtrl.create({
-      header: 'La persona con el dni ' + this.dni + ' no ha ingresado al establecimiento',
+      header: 'La persona con el dni ' + this.pers.controls.dni.value + ' no ha ingresado al establecimiento',
       buttons: [
         {
           text: 'Cancelar',
@@ -67,7 +72,7 @@ export class EgressPage implements OnInit {
   }
 
   setDataNull() {
-    this.dni = null;
+    this.pers.reset();
     this.router.navigateByUrl('/egress-page');
   }
 

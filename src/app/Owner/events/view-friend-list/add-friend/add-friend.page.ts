@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController, NavController } from '@ionic/angular';
 import { Amigo } from 'src/app/classes/amiigo';
 import { Persona } from 'src/app/interfaces/persona';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-friend',
@@ -12,18 +13,25 @@ import { Persona } from 'src/app/interfaces/persona';
 })
 export class AddFriendPage implements OnInit {
 
-  dni: number;
+  pers: FormGroup;
   persona: Persona;
   propietario: Persona;
 
   constructor(private service: ServiceService, private router: Router,
               private alertCtrl: AlertController, private amigo: Amigo,
-              private naveCrtl: NavController, private activatedRoute: ActivatedRoute) { }
+              private naveCrtl: NavController, private activatedRoute: ActivatedRoute,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.pers = this.formBuilder.group({
+      dni: ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]]
+    });
   }
 
   ionViewWillEnter() {
+    this.pers = this.formBuilder.group({
+      dni: ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]]
+    });
     this.service.account().subscribe(data => {
       this.service.getPersonUser(data.id).subscribe(pers => {
         this.propietario = pers;
@@ -37,12 +45,12 @@ export class AddFriendPage implements OnInit {
   }
 
   getpersona() {
-    this.service.getPersonaEnListaAmigo(this.dni, this.activatedRoute.snapshot.params.id).subscribe(amigo => {
+    this.service.getPersonaEnListaAmigo(this.pers.controls.dni.value, this.activatedRoute.snapshot.params.id).subscribe(amigo => {
       console.log('amigo :', amigo);
       if (amigo.length !== 0) {
         this.amigoEnLista('La persona ya se encuentra en la lista de amigos');
       } else {
-        this.service.getPersona(this.dni).subscribe(data => {
+        this.service.getPersona(this.pers.controls.dni.value).subscribe(data => {
           if (data.dniPersona === this.propietario.dniPersona) {
             this.personaNoExiste('La persona que intenta agregar es el dueño de la lista');
           } else {
@@ -63,9 +71,18 @@ export class AddFriendPage implements OnInit {
 
   async personaExiste() {
     const alert = await this.alertCtrl.create({
-      header: this.persona.nombrePersona + ' ' + this.persona.apellidoPersona + ' ' + this.persona.dniPersona,
-      message: '¿Los datos son correctos?</strong>',
+      // header: this.persona.nombrePersona + ' ' + this.persona.apellidoPersona + ' ' + this.persona.dniPersona,
+      message: '<strong> Nombre: ' + this.persona.nombrePersona + '<br>' +
+      'Apellido: ' + this.persona.apellidoPersona + '<br>' +
+      'DNI: ' + this.persona.dniPersona + '<br>' +
+      '¿Los datos son correctos?</strong>',
       buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+            this.pers.reset();
+          }
+        },
         {
           text: 'Aceptar',
           role: 'cancel',
@@ -73,15 +90,10 @@ export class AddFriendPage implements OnInit {
           handler: () => {
             this.amigo.sinDatos = true;
             this.amigo.ListaAmigo.push(this.persona);
-            this.dni = null;
+            this.pers.reset();
             this.naveCrtl.back();
           }
-        }, {
-          text: 'Cancelar',
-          handler: () => {
-            this.dni = null;
-          }
-        }
+        },
       ]
     });
 
@@ -93,7 +105,7 @@ export class AddFriendPage implements OnInit {
       header: msg,
       buttons: ['Aceptar']
     });
-    this.dni = null;
+    this.pers.reset();
     await alert.present();
   }
 
@@ -102,7 +114,7 @@ export class AddFriendPage implements OnInit {
       header: msg,
       buttons: ['Aceptar']
     });
-    this.dni = null;
+    this.pers.reset();
     await alert.present();
   }
 

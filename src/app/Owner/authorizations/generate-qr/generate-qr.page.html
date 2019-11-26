@@ -54,15 +54,15 @@
             {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
           </button> -->
           <mat-vertical-stepper linear="true" #stepper>
-            <mat-step [stepControl]="firstFormGroup">
-              <form [formGroup]="firstFormGroup">
+            <mat-step [stepControl]="pers">
+              <form [formGroup]="pers">
                 <ng-template matStepLabel>Ingrese el DNI de la persona</ng-template>
                 <mat-form-field>
-                  <input matInput placeholder="Ingrese DNI" formControlName="firstCtrl" required [(ngModel)]="dni">
+                  <input matInput  placeholder="Ingrese DNI" name="dni" formControlName="dni">
                 </mat-form-field>
                 <div>
                   <!-- <button mat-button color="primary" (click)="getpersona(stepper)" >Siguiente</button> -->
-                  <ion-button fill="clear" color="dark" (click)="getpersona(stepper)">Siguiente</ion-button>
+                  <ion-button fill="clear" color="dark" [disabled]="!pers.valid" (click)="getpersona(stepper)">Siguiente</ion-button>
                 </div>
               </form>
             </mat-step>

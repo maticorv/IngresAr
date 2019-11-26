@@ -6,6 +6,7 @@ import { AlertController } from '@ionic/angular';
 import { Persona } from 'src/app/interfaces/persona';
 import { User } from 'src/app/classes/user';
 import { IPersonaEstado } from 'src/app/interfaces/ipersona-estado';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-search-person-homeowener',
@@ -14,27 +15,30 @@ import { IPersonaEstado } from 'src/app/interfaces/ipersona-estado';
 })
 export class SearchPersonHomeowenerPage implements OnInit {
 
-  dni: number;
+  pers: FormGroup;
   persona: Persona;
   personaEstado: IPersonaEstado;
   authorities = [
       'ROLE_PROPIETARIO'
   ];
 
-  constructor(private service: ServiceService, private router: Router,
+  constructor(private service: ServiceService, private router: Router, private formBuilder: FormBuilder,
               private alertCtrl: AlertController, private user: User, private personas: Personas) { }
 
   ngOnInit() {
+    this.pers = this.formBuilder.group({
+      dni: ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]]
+    });
     this.createPersonaEstado();
   }
 
   ionViewWillLeave() {
-    this.dni = null;
+    this.pers.reset();
     this.personaEstado = null;
   }
 
   getPersonPropietario() {
-    this.service.getPersona(this.dni).subscribe((data) => {
+    this.service.getPersona(this.pers.controls.dni.value).subscribe((data) => {
       this.persona = data;
       console.log(data);
       this.personaExiste();
@@ -55,11 +59,16 @@ export class SearchPersonHomeowenerPage implements OnInit {
 
   async personaExiste() {
     const alert = await this.alertCtrl.create({
-      header: 'Se ha encontrado el usuario con los siguientes dato' +
-              'Nombre: ' + this.persona.nombrePersona +
-              'Apellido: ' + this.persona.apellidoPersona,
-      message: '¿Desea continuar con este usuario?</strong>',
+      message: '<strong>Se ha encontrado el usuario con los siguientes datos <br>' +
+               'Nombre: ' + this.persona.nombrePersona + ' <br>' +
+               'Apellido: ' + this.persona.apellidoPersona + '</strong>',
       buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+            this.pers.reset();
+          }
+        },
         {
           text: 'Aceptar',
           role: 'cancel',
@@ -77,15 +86,10 @@ export class SearchPersonHomeowenerPage implements OnInit {
             },
             (error) => {console.log(error);
             });
-            this.dni = null;
+            this.pers.reset();
             this.router.navigateByUrl('/manage-homeowner');
           }
-        }, {
-          text: 'Cancelar',
-          handler: () => {
-            this.dni = null;
-          }
-        }
+        },
       ]
     });
 
@@ -94,7 +98,7 @@ export class SearchPersonHomeowenerPage implements OnInit {
 
   async personaNoExiste() {
     const alert = await this.alertCtrl.create({
-      header: 'La persona con el DNI:' + this.dni + 'no se encuentra en la base de datos',
+      header: 'La persona con el DNI:' + this.pers.controls.dni.value + 'no se encuentra en la base de datos',
       message: '¿Desea crear la persona?</strong>',
       buttons: [
         {
@@ -102,13 +106,13 @@ export class SearchPersonHomeowenerPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            this.personas.dniPersona = this.dni;
+            this.personas.dniPersona = this.pers.controls.dni.value;
             this.router.navigateByUrl('/new-person-homeowener');
           }
         }, {
           text: 'Cancelar',
           handler: () => {
-            this.dni = null;
+            this.pers.reset();
           }
         }
       ]

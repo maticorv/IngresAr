@@ -5,6 +5,7 @@ import { Persona } from 'src/app/interfaces/persona';
 import { Personas } from 'src/app/classes/persona';
 import { ServiceService } from 'src/app/services/service.service';
 import { Amigo } from '../../../classes/amiigo';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-friend',
@@ -13,18 +14,24 @@ import { Amigo } from '../../../classes/amiigo';
 })
 export class NewFriendPage implements OnInit {
 
-  dni: number;
+  pers: FormGroup;
   persona: Persona;
   propietario: Persona;
 
   constructor(private service: ServiceService, private router: Router,
               private alertCtrl: AlertController, private personas: Personas,
-              private amigo: Amigo) { }
+              private amigo: Amigo, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.pers = this.formBuilder.group({
+      dni: ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]]
+    });
   }
 
   ionViewWillEnter() {
+    this.pers = this.formBuilder.group({
+      dni: ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]]
+    });
     this.getPropietario();
   }
 
@@ -42,7 +49,7 @@ export class NewFriendPage implements OnInit {
   }
 
   verficarSiAmigoExiste() {
-    if (this.propietario.dniPersona.toString() === this.dni.toString()) {
+    if (this.propietario.dniPersona.toString() === this.pers.controls.dni.value.toString()) {
       this.amigoExisteEnLista('La persona que intenta agregar es el dueño de la lista');
     } else {
       if (this.amigo.ListaAmigo.length === 0 ) {
@@ -51,8 +58,8 @@ export class NewFriendPage implements OnInit {
         this.amigo.ListaAmigo.forEach(element => {
           console.log('Entro al for');
           console.log('element.dniPersona :', element.dniPersona);
-          console.log('this.dni :', this.dni);
-          if (element.dniPersona.toString() === this.dni.toString()) {
+          console.log('this.dni :', this.pers.controls.dni.value);
+          if (element.dniPersona.toString() === this.pers.controls.dni.value.toString()) {
             this.amigoExisteEnLista('La persona ya se encuentra agregada en la lista');
           } else {
             this.getpersona();
@@ -63,7 +70,7 @@ export class NewFriendPage implements OnInit {
   }
 
   getpersona() {
-    this.service.getPersona(this.dni).subscribe((data) => {
+    this.service.getPersona(this.pers.controls.dni.value).subscribe((data) => {
       this.persona = data;
       console.log(data);
       this.personaExiste();
@@ -76,9 +83,18 @@ export class NewFriendPage implements OnInit {
 
   async personaExiste() {
     const alert = await this.alertCtrl.create({
-      header: this.persona.nombrePersona + ' ' + this.persona.apellidoPersona + ' ' + this.persona.dniPersona,
-      message: '¿Los datos son correctos?',
+      // header: this.persona.nombrePersona + ' ' + this.persona.apellidoPersona + ' ' + this.persona.dniPersona,
+      message: '<strong> Nombre: ' + this.persona.nombrePersona + '<br>' +
+      'Apellido: ' + this.persona.apellidoPersona + '<br>' +
+      'DNI: ' + this.persona.dniPersona + '<br>' +
+      '¿Los datos son correctos?</strong>',
       buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        },
         {
           text: 'Aceptar',
           role: 'cancel',
@@ -89,12 +105,7 @@ export class NewFriendPage implements OnInit {
             this.setNullData();
             this.router.navigateByUrl('/new-friend-list');
           }
-        }, {
-          text: 'Cancelar',
-          handler: () => {
-            console.log('Confirm Okay');
-          }
-        }
+        },
       ]
     });
 
@@ -120,7 +131,7 @@ export class NewFriendPage implements OnInit {
   }
 
   setNullData() {
-    this.dni = null;
+    this.pers.reset();
     this.persona = null;
   }
 

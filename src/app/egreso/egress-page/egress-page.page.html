@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content>
-    <!-- <ion-row> -->
-        <ion-list>
+
+        <!-- <ion-list>
           <ion-row>
               <ion-col>
                   <ion-item>
@@ -88,7 +88,62 @@
                   </ion-item>
               </ion-col>
           </ion-row>
-      </ion-list>
-    <!-- </ion-row> -->
-    <ion-button expand="full" (click)="registrarEgreso()">Procesar Egreso</ion-button>
+      </ion-list> -->
+
+      <ng-container *ngIf="planillaEgreso === undefined;else elseTemplate">
+            <ion-row class="spinner">
+                <ion-spinner name="lines"></ion-spinner>
+            </ion-row>
+        </ng-container>
+        
+        <ng-template #elseTemplate>
+            <ion-row style="place-content: center;">
+                <ion-card class="animated fadeIn">
+                    <ion-item>
+                        <ion-list>
+                            <ion-row>
+                            <ion-col>
+                                <ion-label> Apellido </ion-label>
+                            </ion-col>
+                            <ion-col>
+                                <ion-label> Nombre </ion-label>
+                            </ion-col>
+                            <ion-col>
+                                <ion-label> DNI </ion-label>
+                            </ion-col>
+                            <ion-col>
+                                <ion-label> Dominio </ion-label>
+                            </ion-col>
+                            <ion-col>
+                                <ion-label> Destino </ion-label>
+                            </ion-col>
+                            </ion-row>
+                        </ion-list>
+                    </ion-item>
+                    <ion-item class="even">
+                        <ion-list>
+                            <ion-row>
+                            <ion-col>
+                                <ion-label> {{planillaEgreso?.planillaPersona?.apellidoPersona}} </ion-label>
+                            </ion-col>
+                            <ion-col>
+                                <ion-label> {{planillaEgreso?.planillaPersona?.nombrePersona}} </ion-label>
+                            </ion-col>
+                            <ion-col>
+                                <ion-label> {{planillaEgreso?.planillaPersona?.dniPersona}} </ion-label>
+                            </ion-col>
+                            <ion-col>
+                                <ion-label *ngIf="planillaEgreso?.planillaVehiculo !== null"> {{planillaEgreso?.planillaVehiculo?.dominio}} </ion-label>
+                            </ion-col>
+                            <ion-col>
+                                <ion-label> C: {{planillaEgreso?.planillaDestino?.casaDomicilio}} M: {{planillaEgreso?.planillaDestino?.manzanaDomicilio}} </ion-label>
+                            </ion-col>
+                            </ion-row>
+                        </ion-list>
+                    </ion-item>
+                </ion-card>
+            </ion-row>
+            <ion-button class="animated fadeIn" expand="full" (click)="registrarEgreso()">Procesar Egreso</ion-button>
+        </ng-template>
+ 
 </ion-content>

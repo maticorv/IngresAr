@@ -16,7 +16,7 @@
         </ion-row>
     </ng-container>
     
-    <ng-template #elseTemplate class="animated fadeIn">
+    <ng-template #elseTemplate>
       <ul class="list-group animated fadeIn">
         <li class="list-group-item" *ngFor="let l of listaAmigos; let i = index" (click)="presentActionSheet(i)"> {{l.nombreListaAmigos}} </li>
       </ul>
