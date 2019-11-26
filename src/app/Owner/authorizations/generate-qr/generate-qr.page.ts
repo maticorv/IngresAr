@@ -96,7 +96,7 @@ export class GenerateQrPage implements OnInit {
 
   async presentLoadingWithOptions() {
     const loading = await this.loadingController.create({
-      spinner: null,
+      spinner: 'lines',
       duration: 5000,
       message: 'Generando QR, espere por favor...',
       translucent: true,

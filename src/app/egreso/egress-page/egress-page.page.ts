@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../../services/service.service';
 import { PlanillaEgreso } from '../../classes/planillaEgreso';
 import { Personas } from '../../classes/persona';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { getLocaleDateFormat } from '@angular/common';
 
@@ -14,7 +14,8 @@ import { getLocaleDateFormat } from '@angular/common';
 export class EgressPagePage implements OnInit {
 
   constructor(private service: ServiceService, private persona: Personas,
-              private toastController: ToastController, private router: Router) { }
+              private toastController: ToastController, private router: Router,
+              public loadingController: LoadingController) { }
 
   planillaEgreso: PlanillaEgreso;
 
@@ -32,6 +33,7 @@ export class EgressPagePage implements OnInit {
   }
 
   registrarEgreso() {
+    this.presentLoadingWithOptions();
     this.planillaEgreso.fechaEgreso = new Date();
     // tslint:disable-next-line: max-line-length
     this.service.postPlanillaEgreso(this.planillaEgreso.id, this.planillaEgreso.autorizadoPrevio, this.planillaEgreso.acompaniantes,
@@ -42,6 +44,7 @@ export class EgressPagePage implements OnInit {
       this.planillaEgreso.planillaVehiculo, this.planillaEgreso.planillaEmpresa,
       this.planillaEgreso.planillaAutorizador, this.planillaEgreso.planillaAcompaniantes).subscribe(data => {
       console.log(data);
+      this.dismissLoading();
       this.presentToast('El registro de egreso se realizó correctamente');
       this.router.navigateByUrl('/startmenu');
     },
@@ -61,6 +64,23 @@ export class EgressPagePage implements OnInit {
     setTimeout(() => {
       },
       2000);
+  }
+
+  async presentLoadingWithOptions() {
+    const loading = await this.loadingController.create({
+      spinner: 'lines',
+      // duration: 5000,
+      message: 'Procesando egreso, espere por favor...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    return await loading.present();
+  }
+
+  async dismissLoading() {
+    while (await this.loadingController.getTop() !== undefined) {
+      await this.loadingController.dismiss();
+    }
   }
 
 }

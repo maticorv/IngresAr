@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../../services/service.service';
 import { Router } from '@angular/router';
-import { ToastController, AlertController } from '@ionic/angular';
+import { ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { Acompaniante } from 'src/app/classes/acompañante';
 import { Personas } from 'src/app/classes/persona';
 import { Destino } from 'src/app/classes/destino';
@@ -47,7 +47,8 @@ export class AuthorizationPage implements OnInit {
               private acompañante: Acompaniante, private tipovisitas: Tipovisita,
               private planillaPersona: Personas, private planillaVehiculo: Vehiculo,
               private planillaEmpresa: Servicios, private ingresoaPie: IngresoAPie,
-              private alertCtrl: AlertController, private acompaniante: PlanillaAcompaniante) { }
+              private alertCtrl: AlertController, private acompaniante: PlanillaAcompaniante,
+              public loadingController: LoadingController) { }
 
   ngOnInit() {
     // this.getPersonasDomicilio();
@@ -134,17 +135,19 @@ export class AuthorizationPage implements OnInit {
       this.personaIngreso();
     },
     (error) => {console.log(error);
+                this.presentLoadingWithOptions();
                 this.procesarIngreso().then(res => {
                 this.postPlanillaIngresoEgreso();
+                this.dismissLoading();
                 });
     });
 }
   // metodo para mostrar msj del ingreso
   procesarIngresoJson() {
-  setTimeout(() => {
+    setTimeout(() => {
     this.presentToast('El ingreso se ha procesado correctamente');
     },
-    2000);
+    1000);
 }
   // metodo para agregar acompañantes
   buscarAcompaniante() {
@@ -225,6 +228,23 @@ export class AuthorizationPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async presentLoadingWithOptions() {
+    const loading = await this.loadingController.create({
+      spinner: 'lines',
+      // duration: 5000,
+      message: 'Procesando ingreso, espere por favor...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    return await loading.present();
+  }
+
+  async dismissLoading() {
+    while (await this.loadingController.getTop() !== undefined) {
+      await this.loadingController.dismiss();
+    }
   }
 
 
