@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { IQr } from '../../interfaces/iqr';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ModalPage } from 'src/app/components/modal/modal.page';
+import { isThisSecond } from 'date-fns';
+import { Persona } from '../../interfaces/persona';
 
 @Component({
   selector: 'app-authorizations',
@@ -15,6 +17,7 @@ export class AuthorizationsPage implements OnInit {
   account: Iaccount;
   autorizaciones: IQr[];
   convertedImage: string;
+  persona: Persona;
 
   constructor(private service: ServiceService, private router: Router, public modalController: ModalController) { }
 
@@ -26,12 +29,18 @@ export class AuthorizationsPage implements OnInit {
   getAccount() {
     this.service.account().subscribe((resp) => {
       this.account = resp;
-      this.getAutorzaciones();
+      this.service.getPersonUser(resp.id).subscribe((pers) => {
+        this.persona = pers;
+        this.getAutorzaciones();
+      },
+      (error) => {
+        console.log(error);
+      });
     }
     );
   }
   getAutorzaciones() {
-    this.service.getQrAutorizado(18).subscribe(data => {
+    this.service.getQrAutorizado(this.persona.id).subscribe(data => {
       this.autorizaciones = data;
       // console.log('this.autorizaciones :', this.autorizaciones);
     });

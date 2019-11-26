@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Ievent } from 'src/app/interfaces/ievent';
 import { Router } from '@angular/router';
 import { ServiceService } from '../../services/service.service';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-event-report',
@@ -13,9 +14,10 @@ export class EventReportPage implements OnInit {
   eventos: Ievent[];
   fecha: any;
 
-  constructor(private router: Router, private service: ServiceService) { }
+  constructor(private router: Router, private service: ServiceService, private screenOrientation: ScreenOrientation) { }
 
   ngOnInit() {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     this.getAllEvents();
   }
 

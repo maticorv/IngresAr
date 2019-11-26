@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../../services/service.service';
 import { IPlanillaIngresoEgreso } from 'src/app/interfaces/planilla-ingreso-egreso';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-report-ingreso-egreso',
@@ -15,10 +16,11 @@ export class ReportIngresoEgresoPage implements OnInit {
   planilla: IPlanillaIngresoEgreso[] = [];
   planiallaIngresoEgreso: IPlanillaIngresoEgreso[];
 
-  constructor(private service: ServiceService) { }
+  constructor(private service: ServiceService, private screenOrientation: ScreenOrientation) { }
 
 
   ngOnInit() {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
     this.fechaDesde = new Date( new Date().setHours(0, 0, 0, 0)).toString();
     this.fechaHasta = new Date( new Date().setHours(23, 59, 59, 0)).toString();
     this.fechaMax = new Date( new Date().setHours(23, 59, 59, 0)).toString();

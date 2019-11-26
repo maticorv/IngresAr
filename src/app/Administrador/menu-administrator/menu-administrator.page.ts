@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-menu-administrator',
@@ -8,9 +9,10 @@ import { Router } from '@angular/router';
 })
 export class MenuAdministratorPage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private screenOrientation: ScreenOrientation) { }
 
   ngOnInit() {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
   }
 
   mostrar() {

@@ -42,6 +42,7 @@ import { ModalPageModule } from './components/modal/modal.module';
 import { PlanillaAcompaniante } from './classes/planilla-acompaniante';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 
 @NgModule({
@@ -90,6 +91,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     FormBuilder,
     EmailComposer,
     PlanillaAcompaniante,
+    ScreenOrientation,
 
   ],
   bootstrap: [AppComponent]

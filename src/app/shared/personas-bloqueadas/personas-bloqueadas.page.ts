@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Persona } from '../../interfaces/persona';
 import { ServiceService } from '../../services/service.service';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-personas-bloqueadas',
@@ -11,10 +12,11 @@ export class PersonasBloqueadasPage implements OnInit {
 
   persona = [];
 
-  constructor(private service: ServiceService) { }
+  constructor(private service: ServiceService, private screenOrientation: ScreenOrientation) { }
 
   ngOnInit() {
     this.obtenerPersonas();
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
   }
 
   obtenerPersonas() {

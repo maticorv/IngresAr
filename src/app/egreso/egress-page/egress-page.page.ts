@@ -5,6 +5,7 @@ import { Personas } from '../../classes/persona';
 import { ToastController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { getLocaleDateFormat } from '@angular/common';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-egress-page',
@@ -15,11 +16,12 @@ export class EgressPagePage implements OnInit {
 
   constructor(private service: ServiceService, private persona: Personas,
               private toastController: ToastController, private router: Router,
-              public loadingController: LoadingController) { }
+              public loadingController: LoadingController, private screenOrientation: ScreenOrientation) { }
 
   planillaEgreso: PlanillaEgreso;
 
   ngOnInit() {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
     this.getPlanillaEgreso();
   }
 
