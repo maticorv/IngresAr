@@ -18,6 +18,10 @@ export class EventReportPage implements OnInit {
 
   ngOnInit() {
     this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+  }
+
+  ionViewWillEnter() {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     this.getAllEvents();
   }
 

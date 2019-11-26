@@ -15,6 +15,10 @@ export class MenuAdministratorPage implements OnInit {
     this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
   }
 
+  ionViewWillEnter() {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+  }
+
   mostrar() {
     this.router.navigateByUrl('/profile');
   }

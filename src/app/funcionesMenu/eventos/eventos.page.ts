@@ -20,7 +20,6 @@ export class EventosPage implements OnInit {
 
   ngOnInit() {
     this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
-    this.getAllEvents();
     this.fecha = new Date(new Date().setHours(0, 0, 0, 0)).toString();
     this.fechaMin = new Date(new Date().setHours(0, 0, 0, 0)).toString();
   }
@@ -32,6 +31,7 @@ export class EventosPage implements OnInit {
 
   ionViewWillLeave() {
     this.eventos = [];
+    this.evento = null;
   }
 
   getAllEvents() {
