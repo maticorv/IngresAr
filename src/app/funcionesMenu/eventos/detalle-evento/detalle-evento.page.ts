@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ServiceService } from 'src/app/services/service.service';
 import { Ievent } from '../../../interfaces/ievent';
 import { ActionSheetController, AlertController } from '@ionic/angular';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-detalle-evento',
@@ -15,9 +16,11 @@ export class DetalleEventoPage implements OnInit {
   evento: Ievent;
 
   constructor(private activatedRouter: ActivatedRoute, private service: ServiceService,
-              public actionSheetController: ActionSheetController, private alertCtrl: AlertController ) { }
+              public actionSheetController: ActionSheetController, private alertCtrl: AlertController,
+              private screenOrientation: ScreenOrientation ) { }
 
   ngOnInit() {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
     this.obtenerEvento();
   }
 

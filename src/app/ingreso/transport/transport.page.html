@@ -8,31 +8,41 @@
 </ion-header>
 
 <ion-content class="ion-padding" style="vertical-align: -webkit-baseline-middle">
-    <label >Vehículos:</label>
-    <form #f="ngForm">
-        <ion-list>
-            <ion-radio-group>
-                <ion-item *ngFor="let v of vehiculo, let i = index">
-                    <ion-radio slot="start" name="patente" [value]="i" (ionSelect)="selected($event)"></ion-radio>
-                    <ion-label>{{v.vehiculoMarca.nombreMarca}} {{v.dominio}}</ion-label>
-                </ion-item>
-            </ion-radio-group>
-        </ion-list>
-    </form>
-    <div>
-        <ion-button size="small" fill="clear" color="dark" strong="true" (click)="ingresoAPie()">Ingreso a Pie</ion-button>
-    </div>
-    <div>
-        <ion-button size="small" fill="clear" color="dark" strong="true" [routerLink]="['/newvehicle']">Agregar Vehiculo</ion-button>
-    </div>
-    <div *ngIf="carnet === 'crear'">
-        <ion-button size="small" fill="clear" color="dark" strong="true" routerLink="/carnet">Agregar Carnet</ion-button>
-    </div>
-    <div *ngIf="carnet === 'vencido'">
-        <ion-button size="small" fill="clear" color="dark" strong="true" routerLink="/actualizar-carnet">Actualizar Carnet</ion-button>
-    </div>
-    <div style="text-align-last: right">
-        <ion-button [disabled]="!(avanzar)" (click)="siguiente()">Aceptar</ion-button>
-    </div>
+
+    <ng-container *ngIf="vehiculo === undefined;else elseTemplate">
+        <ion-row class="spinner">
+            <ion-spinner name="lines"></ion-spinner>
+        </ion-row>
+    </ng-container>
+  
+    <ng-template #elseTemplate>
+        <label class="animated fadeIn">Vehículos:</label>
+        <form #f="ngForm" class="animated fadeIn">
+            <ion-list>
+                <ion-radio-group>
+                    <ion-item *ngFor="let v of vehiculo, let i = index">
+                        <ion-radio slot="start" name="patente" [value]="i" (ionSelect)="selected($event)"></ion-radio>
+                        <ion-label>{{v.vehiculoMarca.nombreMarca}} {{v.dominio}}</ion-label>
+                    </ion-item>
+                </ion-radio-group>
+            </ion-list>
+        </form>
+        <div class="animated fadeIn">
+            <ion-button size="small" fill="clear" color="dark" strong="true" (click)="ingresoAPie()">Ingreso a Pie</ion-button>
+        </div>
+        <div class="animated fadeIn">
+            <ion-button size="small" fill="clear" color="dark" strong="true" [routerLink]="['/newvehicle']">Agregar Vehiculo</ion-button>
+        </div>
+        <div *ngIf="carnet === 'crear'" class="animated fadeIn">
+            <ion-button size="small" fill="clear" color="dark" strong="true" routerLink="/carnet">Agregar Carnet</ion-button>
+        </div>
+        <div *ngIf="carnet === 'vencido'" class="animated fadeIn">
+            <ion-button size="small" fill="clear" color="dark" strong="true" routerLink="/actualizar-carnet">Actualizar Carnet</ion-button>
+        </div>
+        <div style="text-align-last: right" class="animated fadeIn">
+            <ion-button [disabled]="!(avanzar)" (click)="siguiente()">Aceptar</ion-button>
+        </div>
+    </ng-template>
+
 
 </ion-content>
