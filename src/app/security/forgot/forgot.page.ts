@@ -24,7 +24,7 @@ export class ForgotPage implements OnInit {
         this.router.navigateByUrl('/login');
     }, (error) => {
       console.log(error.error.title);
-      this.presentToast(error, 'bottom', 2000);
+      this.presentToast(error.error.title, 'bottom', 2000);
     }
     );
   }

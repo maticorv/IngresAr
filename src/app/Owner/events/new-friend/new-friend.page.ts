@@ -33,6 +33,7 @@ export class NewFriendPage implements OnInit {
       dni: ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]]
     });
     this.getPropietario();
+    console.log('this.amigo :', this.amigo.ListaAmigo);
   }
 
   getPropietario() {
@@ -50,7 +51,8 @@ export class NewFriendPage implements OnInit {
 
   verficarSiAmigoExiste() {
     if (this.propietario.dniPersona.toString() === this.pers.controls.dni.value.toString()) {
-      this.amigoExisteEnLista('La persona que intenta agregar es el dueño de la lista');
+      // tslint:disable-next-line: max-line-length
+      this.amigoExisteEnLista(this.propietario.apellidoPersona + ' ' + this. propietario.nombrePersona + ' ' + ' es el propietario de la lista');
     } else {
       if (this.amigo.ListaAmigo.length === 0 ) {
         this.getpersona();
@@ -60,7 +62,7 @@ export class NewFriendPage implements OnInit {
           console.log('element.dniPersona :', element.dniPersona);
           console.log('this.dni :', this.pers.controls.dni.value);
           if (element.dniPersona.toString() === this.pers.controls.dni.value.toString()) {
-            this.amigoExisteEnLista('La persona ya se encuentra agregada en la lista');
+            this.amigoExisteEnLista(element.apellidoPersona + ' ' + element.nombrePersona + ' ya se encuentra agregada en la lista');
           } else {
             this.getpersona();
           }
@@ -101,7 +103,7 @@ export class NewFriendPage implements OnInit {
           cssClass: 'secondary',
           handler: () => {
             this.amigo.ListaAmigo.push(this.persona);
-            this.amigo.sinDatos = true;
+            // this.amigo.sinDatos = true;
             this.setNullData();
             this.router.navigateByUrl('/new-friend-list');
           }
