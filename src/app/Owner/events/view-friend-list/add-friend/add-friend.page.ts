@@ -46,23 +46,29 @@ export class AddFriendPage implements OnInit {
 
   getpersona() {
     this.service.getPersonaEnListaAmigo(this.pers.controls.dni.value, this.activatedRoute.snapshot.params.id).subscribe(amigo => {
-      console.log('amigo :', amigo);
-      if (amigo.length !== 0) {
-        this.amigoEnLista('La persona ya se encuentra en la lista de amigos');
-      } else {
-        this.service.getPersona(this.pers.controls.dni.value).subscribe(data => {
-          if (data.dniPersona === this.propietario.dniPersona) {
-            this.personaNoExiste('La persona que intenta agregar es el dueño de la lista');
-          } else {
-              console.log(data);
-              this.persona = data;
-              this.personaExiste();
-            }
-        },
-        (error) => {console.log(error);
-                    this.personaNoExiste('Para agregar la persona a la lista debe haber ingresado por lo menos una vez al establecimiento');
-        });
-      }
+      this.service.getPersona(this.pers.controls.dni.value).subscribe(pers => {
+        console.log('amigo :', amigo);
+        if (amigo.length !== 0) {
+          this.amigoEnLista(pers.apellidoPersona + ' ' + pers.nombrePersona + ' ya se encuentra en la lista de amigos');
+        } else {
+          this.service.getPersona(this.pers.controls.dni.value).subscribe(data => {
+            if (data.dniPersona === this.propietario.dniPersona) {
+              this.personaNoExiste(data.apellidoPersona + ' ' + data.nombrePersona + ' es el propietario de la lista');
+            } else {
+                console.log(data);
+                this.persona = data;
+                this.personaExiste();
+              }
+          },
+          (error) => {console.log(error);
+                      // tslint:disable-next-line: max-line-length
+                      this.personaNoExiste('Para agregar la persona a la lista debe haber ingresado por lo menos una vez al establecimiento');
+          });
+        }
+      },
+      (error) => {
+        console.log(error);
+      });
     },
     (err) => {console.log(err);
     });

@@ -11,6 +11,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 export class PersonasBloqueadasPage implements OnInit {
 
   persona = [];
+  personas: Persona[];
 
   constructor(private service: ServiceService, private screenOrientation: ScreenOrientation) { }
 
@@ -19,9 +20,14 @@ export class PersonasBloqueadasPage implements OnInit {
     this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
   }
 
+  ionViewWillLeave() {
+    this.personas = null;
+  }
+
   obtenerPersonas() {
     this.service.getAllPersonas().subscribe( data => {
       console.log(data);
+      this.personas = data;
       data.forEach(element => {
         if (element.personaEstado.nombreEstadoPersona === 'bloqueada') {
           this.persona.push(element);

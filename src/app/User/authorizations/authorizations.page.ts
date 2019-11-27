@@ -28,8 +28,10 @@ export class AuthorizationsPage implements OnInit {
   }
   getAccount() {
     this.service.account().subscribe((resp) => {
+      console.log('acount :', resp);
       this.account = resp;
       this.service.getPersonUser(resp.id).subscribe((pers) => {
+        console.log('pers :', pers);
         this.persona = pers;
         this.getAutorzaciones();
       },

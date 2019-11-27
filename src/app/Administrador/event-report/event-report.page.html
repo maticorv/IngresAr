@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar color="primary">
         <ion-buttons slot="start">
-            <ion-back-button defaultHref='menu-administrator'></ion-back-button>
+            <ion-back-button defaultHref='/menu-administrator'></ion-back-button>
         </ion-buttons>
         <ion-title class="ion-text-capitalize ion-text-center">Eventos</ion-title>
     </ion-toolbar>
@@ -15,7 +15,7 @@
         <ion-datetime displayFormat="DD/MM/YYYY" placeholder="01-01-19" cancel-text='Cancelar' done-text="Seleccionar" [(ngModel)]="fecha" min="2019" max="2030" (ionChange)="obtener()"></ion-datetime>
     </ion-item> -->
 
-    <ng-container *ngIf="eventos === undefined;else elseTemplate">
+    <ng-container *ngIf="eventos === undefined || eventos === null;else elseTemplate">
         <ion-row class="spinner">
             <ion-spinner name="lines"></ion-spinner>
         </ion-row>

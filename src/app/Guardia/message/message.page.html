@@ -8,7 +8,11 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+
     <ng-container *ngIf="Users==null; else elseTemplate">
+        <ion-row class="spinner">
+            <ion-spinner name="lines"></ion-spinner>
+        </ion-row>
     </ng-container>
     <ng-template #elseTemplate>
         <ion-list>

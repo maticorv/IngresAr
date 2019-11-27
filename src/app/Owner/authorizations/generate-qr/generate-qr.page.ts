@@ -122,7 +122,7 @@ export class GenerateQrPage implements OnInit {
   getpersona(stepper) {
     this.service.getPersona(this.pers.controls.dni.value).subscribe((data) => {
       if (data.personaEstado.nombreEstadoPersona === 'bloqueada') {
-        this.personaBloqueada('La persona se encuentra bloqueada');
+        this.personaBloqueada(data.apellidoPersona + ' ' + data.nombrePersona + ' se encuentra bloqueado');
       } else {
         this.personaAutorizada = data;
         this.fecha = new Date().toISOString();

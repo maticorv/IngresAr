@@ -9,7 +9,7 @@
 
 <ion-content class="ion-padding">
 
-    <ng-container *ngIf="evento === undefined;else elseTemplate">
+    <ng-container *ngIf="evento === undefined || evento === null;else elseTemplate">
         <ion-row class="spinner">
             <ion-spinner name="lines"></ion-spinner>
         </ion-row>

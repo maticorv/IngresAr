@@ -86,7 +86,7 @@ export class HabilitarDeshabilitarPage implements OnInit {
 
   async presentAlert() {
     const alert = await this.alertCtrl.create({
-      header: 'La persona con el DNI:' + this.dni + 'no se encuentra en la base de datos',
+      header: 'La persona con el DNI: ' + this.dni + ' no se encuentra en la base de datos',
       buttons: ['Aceptar']
     });
 

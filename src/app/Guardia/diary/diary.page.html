@@ -6,28 +6,38 @@
         <ion-title>Parte Diario</ion-title>
     </ion-toolbar>
 </ion-header>
+
 <ion-content class="ion-padding">
-    <!-- <ion-spinner name="dots"></ion-spinner> -->
-    <div class="message-wrap">
-        <div *ngFor="let reporte of reportes" [ngClass]="{'left': account.id!==reporte.reportePersona.id, 'right': account.id==reporte.reportePersona.id }" class="message">
-            <ng-container *ngIf="reporte?.reportePersona.imageUrl; else elseTemplate">
-                <img class="user-img" [src]="reporte?.reportePersona.imageUrl" alt="../../../assets/image.png">
-            </ng-container>
-            <ng-template #elseTemplate>
-                <img class="user-img" src="../../../assets/image.png" alt="">
-            </ng-template>
-            <div class="msg-detail">
-                <div class="msg-info">
-                    <p>
-                        {{reporte?.reportePersona.firstName}}&nbsp;&nbsp;&nbsp;{{reporte.fecha | date:"MM/dd/yy" }}</p>
-                </div>
-                <div class="msg-content">
-                    <span class="triangle"></span>
-                    <p class="line-breaker ">{{reporte.descripcion}}</p>
+
+    <ng-container *ngIf="account === undefined;else elseTemplate">
+        <ion-row class="spinner">
+            <ion-spinner name="lines"></ion-spinner>
+        </ion-row>
+    </ng-container>
+    
+    <ng-template #elseTemplate>
+        <div class="message-wrap animated fadeIn">
+            <div *ngFor="let reporte of reportes" [ngClass]="{'left': account.id!==reporte.reportePersona.id, 'right': account.id==reporte.reportePersona.id }" class="message">
+                <ng-container *ngIf="reporte?.reportePersona.imageUrl; else elseTemplate">
+                    <img class="user-img" [src]="reporte?.reportePersona.imageUrl" alt="../../../assets/image.png">
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <img class="user-img" src="../../../assets/image.png" alt="">
+                </ng-template>
+                <div class="msg-detail">
+                    <div class="msg-info">
+                        <p>
+                            {{reporte?.reportePersona.firstName}}&nbsp;&nbsp;&nbsp;{{reporte.fecha | date:"MM/dd/yy" }}</p>
+                    </div>
+                    <div class="msg-content">
+                        <span class="triangle"></span>
+                        <p class="line-breaker ">{{reporte.descripcion}}</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </ng-template>
+
 </ion-content>
 <ion-footer no-border>
     <div class="input-wrap">
