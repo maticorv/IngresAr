@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../../services/service.service';
 import { IPlanillaIngresoEgreso } from 'src/app/interfaces/planilla-ingreso-egreso';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { ActionSheetController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-report-ingreso-egreso',
@@ -16,7 +18,8 @@ export class ReportIngresoEgresoPage implements OnInit {
   planilla: IPlanillaIngresoEgreso[] = [];
   planiallaIngresoEgreso: IPlanillaIngresoEgreso[];
 
-  constructor(private service: ServiceService, private screenOrientation: ScreenOrientation) { }
+  constructor(private service: ServiceService, private screenOrientation: ScreenOrientation,
+              public actionSheetController: ActionSheetController, private router: Router) { }
 
 
   ngOnInit() {
@@ -53,6 +56,29 @@ export class ReportIngresoEgresoPage implements OnInit {
       }
     });
     this.planilla = aux;
+  }
+
+  async presentActionSheet(i) {
+    const actionSheet = await this.actionSheetController.create({
+      // tslint:disable-next-line: max-line-length
+      header: this.planilla[i].planillaPersona.apellidoPersona + '  ' + this.planilla[i].planillaPersona.nombrePersona + ' ' + this.planilla[i].planillaPersona.dniPersona,
+      mode: 'ios',
+      buttons: [ {
+        text: 'Ver detalle',
+        icon: 'open',
+        handler: () => {
+          this.router.navigate(['/view-ingreso-egreso', this.planilla[i].id]);
+      }
+      },
+      {
+        text: 'Cancelar',
+        icon: 'close',
+        role: 'destructive',
+        handler: () => {
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 
 }

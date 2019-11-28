@@ -700,4 +700,10 @@ export class ServiceService {
     return this.http.get(this.url + 'listaexiste/?dni=' + dni + '&id=' + id, {headers}).pipe(map(data => data as []));
   }
 
+  getPlanillaIngresoEgresoByID(id) {
+    const token = this.leerToken();
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', Accept: 'application/json', Authorization : 'Bearer ' + token });
+    return this.http.get(this.url + 'planilla-ingreso-egresos/' + id, {headers}).pipe(map(data => data as IPlanillaIngresoEgreso));
+  }
+
 }

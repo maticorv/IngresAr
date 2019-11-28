@@ -166,6 +166,11 @@ const routes: Routes = [
     path: 'my-events',
     loadChildren: () => import('./Owner/events/my-events/my-events.module').then( m => m.MyEventsPageModule)
   },
+  {
+    path: 'view-ingreso-egreso/:id',
+    loadChildren: () => import('./shared/view-ingreso-egreso/view-ingreso-egreso.module').then( m => m.ViewIngresoEgresoPageModule)
+  },
+
 
 ];
 
