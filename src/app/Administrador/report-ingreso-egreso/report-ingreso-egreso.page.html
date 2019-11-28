@@ -69,7 +69,7 @@
                             </ion-row>
                         </ion-list>
                     </ion-item>
-                    <ion-item *ngFor="let p of planilla; let i = index" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'">
+                    <ion-item *ngFor="let p of planilla; let i = index" [ngClass]="(i % 2 == 0) ? 'odd' : 'even'" (click)="presentActionSheet(i)">
                         <ion-list>
                             <ion-row>
                             <ion-col>

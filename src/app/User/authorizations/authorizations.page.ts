@@ -45,6 +45,10 @@ export class AuthorizationsPage implements OnInit {
     this.service.getQrAutorizado(this.persona.id).subscribe(data => {
       this.autorizaciones = data;
       // console.log('this.autorizaciones :', this.autorizaciones);
+    },
+    (error) => {
+      console.log(error);
+      this.autorizaciones = [];
     });
   }
   async presentModal() {
