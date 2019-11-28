@@ -43,6 +43,7 @@ import { PlanillaAcompaniante } from './classes/planilla-acompaniante';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 
 @NgModule({
@@ -92,6 +93,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
     EmailComposer,
     PlanillaAcompaniante,
     ScreenOrientation,
+    OneSignal,
 
   ],
   bootstrap: [AppComponent]
